@@ -1,6 +1,12 @@
 """Millimetre geometry, fabrication diagnostics and bounded reversible repairs."""
 
+import copy
+import hashlib
+import threading
+from collections import OrderedDict
+
 import numpy as np
+from shapely import box as vector_boxes
 from shapely import contains_xy, make_valid, maximum_inscribed_circle
 from shapely.geometry import Polygon, box
 from shapely.ops import unary_union
@@ -8,6 +14,10 @@ from shapely.ops import unary_union
 from .models import DesignError, FabricationProfile
 
 CHECKER_VERSION = "frame-rooted-continuous-3"
+_CERTIFICATES = OrderedDict()
+_CERTIFICATE_LOCK = threading.RLock()
+_MASKS = OrderedDict()
+_MASK_BYTES = 0
 
 
 def polygon_parts(geometry):
@@ -28,10 +38,9 @@ def mask_to_geometry(mask, width_mm, height_mm):
     for y, row in enumerate(mask):
         changes = np.diff(np.pad(row.astype(np.int8), (1, 1)))
         starts, ends = np.where(changes == 1)[0], np.where(changes == -1)[0]
-        rectangles.extend(
-            box(x0 * sx, y * sy, x1 * sx, (y + 1) * sy) for x0, x1 in zip(starts, ends)
-        )
-    exact = unary_union(rectangles) if rectangles else Polygon()
+        if len(starts):
+            rectangles.append(vector_boxes(starts * sx, y * sy, ends * sx, (y + 1) * sy))
+    exact = unary_union(np.concatenate(rectangles)) if rectangles else Polygon()
     if exact.is_empty:
         return exact
     candidate = exact.simplify(min(sx, sy) * 0.7, preserve_topology=True)
@@ -48,10 +57,26 @@ def mask_to_geometry(mask, width_mm, height_mm):
 
 
 def geometry_to_mask(geometry, shape, width_mm, height_mm):
+    global _MASK_BYTES
+    key = (hashlib.sha256(geometry.wkb).digest(), tuple(shape), width_mm, height_mm)
+    with _CERTIFICATE_LOCK:
+        if key in _MASKS:
+            _MASKS.move_to_end(key)
+            return _MASKS[key].copy()
     h, w = shape
     xs = (np.arange(w) + 0.5) * width_mm / w
     ys = (np.arange(h) + 0.5) * height_mm / h
-    return contains_xy(geometry, xs[None, :], ys[:, None])
+    mask = contains_xy(geometry, xs[None, :], ys[:, None])
+    with _CERTIFICATE_LOCK:
+        if key not in _MASKS and mask.nbytes <= 16 * 1024 * 1024:
+            cached = mask.copy()
+            cached.setflags(write=False)
+            _MASKS[key] = cached
+            _MASK_BYTES += cached.nbytes
+            while _MASK_BYTES > 16 * 1024 * 1024:
+                _, previous = _MASKS.popitem(last=False)
+                _MASK_BYTES -= previous.nbytes
+    return mask
 
 
 def supported(part, sheet, width):
@@ -73,6 +98,31 @@ def finding(code, geometry, message, measured=None, required=None, severity="err
 
 
 def validate_geometry(
+    geometry, profile: FabricationProfile, dimensions, attachment=None, *, frame=None
+):
+    # Only exact continuous-geometry certificates are reused. Include every rule,
+    # dimension and frame parameter; never cache on raster topology or layer id.
+    key = (
+        CHECKER_VERSION,
+        hashlib.sha256(geometry.wkb).digest(),
+        profile.model_dump_json(),
+        tuple(dimensions),
+        getattr(frame, "spec", frame).model_dump_json() if frame is not None else None,
+        attachment,
+    )
+    with _CERTIFICATE_LOCK:
+        if key in _CERTIFICATES:
+            _CERTIFICATES.move_to_end(key)
+            return copy.deepcopy(_CERTIFICATES[key])
+    report = _validate_geometry_uncached(geometry, profile, dimensions, attachment, frame=frame)
+    with _CERTIFICATE_LOCK:
+        _CERTIFICATES[key] = copy.deepcopy(report)
+        while len(_CERTIFICATES) > 64:
+            _CERTIFICATES.popitem(last=False)
+    return report
+
+
+def _validate_geometry_uncached(
     geometry, profile: FabricationProfile, dimensions, attachment=None, *, frame=None
 ):
     from .fabrication.models import FrameSpec

@@ -54,7 +54,8 @@ def capabilities():
         "colorblock": "cpu_palette_regions",
         "splash_portrait": "requires_authored_style_target_or_scene",
         "portal": "requires_authored_scene",
-        "semantic_masks": "unavailable: local MobileSAM adapter not integrated",
-        "relative_depth": "unavailable: local depth model not integrated",
+        "semantic_masks": "optional local SAM2.1 Tiny; see /api/models",
+        "relative_depth": "optional local Depth Anything V2 Small; see /api/models",
+        "human_face_features": "optional local MediaPipe; human faces only",
         "generative_style": "unavailable: no image model configured",
     }

@@ -4,6 +4,7 @@ import heapq
 from dataclasses import dataclass, field
 
 import numpy as np
+from scipy import ndimage as ndi
 
 from .imaging import AbstractionResult
 from .models import DesignConfig, DesignError, hex_color
@@ -50,10 +51,21 @@ def order_constraints(ids, edges):
 
 
 def construct_layers(
-    result: AbstractionResult, config: DesignConfig, depths=None, region_groups=None
+    result: AbstractionResult,
+    config: DesignConfig,
+    depths=None,
+    region_groups=None,
+    *,
+    color_order=None,
 ) -> list[PaperLayer]:
     groups = []
-    if settings(config).family != "depth_scene":
+    color_depth = (
+        settings(config).family == "depth_scene"
+        and settings(config).lighting == "ambient"
+        and config.manufacturing_width_mm is not None
+        and depths is None
+    )
+    if settings(config).family != "depth_scene" or color_depth:
         if region_groups is not None:
             assigned = [i for group in region_groups for i in group]
             if sorted(assigned) != list(range(len(result.region_info))):
@@ -74,20 +86,39 @@ def construct_layers(
             colors, areas = np.unique(result.color_labels, return_counts=True)
             # Background/large regions in front provide a frame around the openings.
             # Hidden material behind front layers supports later color sheets.
-            for color in colors[np.argsort(-areas, kind="stable")]:
+            ordered = (
+                colors[np.argsort(-areas, kind="stable")] if color_order is None else color_order
+            )
+            if sorted(ordered) != sorted(colors):
+                raise DesignError("Color order must contain every used color exactly once")
+            for color in ordered:
                 ids = [r["id"] for r in result.region_info if r["color_index"] == color]
                 groups.append(
-                    (result.color_labels == color, ids, hex_color(result.palette[color]), None)
+                    (
+                        result.color_labels == color,
+                        ids,
+                        hex_color(result.palette[color]),
+                        "color_occlusion" if color_depth else None,
+                    )
                 )
     else:
         count = config.layers
+        model_depths = None
         if depths is None:
+            from .ai.perception import propose_depths
+
+            model_depths = propose_depths(result, count)
+        if model_depths is not None:
+            depths = model_depths
+            depth_source = "model_relative_depth"
+        elif depths is None:
             # Explicitly labeled heuristic, not a claimed physical depth estimate.
             depths = {}
             for region in result.region_info:
-                ys, _ = np.where(result.regions == region["id"])
+                x0, y0, x1, y1 = region["bbox_px"]
+                ys, _ = np.where(result.regions[y0:y1, x0:x1] == region["id"])
                 depths[region["id"]] = min(
-                    count - 1, int((1 - ys.mean() / len(result.regions)) * count)
+                    count - 1, int((1 - (ys.mean() + y0) / len(result.regions)) * count)
                 )
             depth_source = "heuristic_vertical_position"
         else:
@@ -100,6 +131,34 @@ def construct_layers(
         for depth in sorted(set(depths.values())):
             ids = sorted(k for k, value in depths.items() if value == depth)
             groups.append((np.isin(result.regions, ids), ids, "#f4eedf", depth_source))
+    if config.manufacturing_width_mm is not None and settings(config).lighting == "ambient":
+        # Put frame-rooted portions in front, and postpone isolated same-color
+        # details behind intervening colors. E.g. green leaves and green irises
+        # need not share one exposed support tree across the face.
+        early, deferred = [], []
+        spare = config.layers - len(groups)
+        for mask, ids, color, source in groups:
+            components, _ = ndi.label(mask)
+            border = np.unique(
+                np.concatenate([components[0], components[-1], components[:, 0], components[:, -1]])
+            )
+            rooted = mask & np.isin(components, border[border > 0])
+            remaining = mask & ~rooted
+            if spare > 0 and rooted.any() and remaining.any():
+                first_ids = [i for i in ids if np.any(rooted & (result.regions == i))]
+                later_ids = [i for i in ids if i not in first_ids]
+                early.append((rooted, first_ids, color, source))
+                deferred.append((remaining, later_ids, color, source))
+                spare -= 1
+            else:
+                early.append((mask, ids, color, source))
+        # Keep the final backing color last: a continuous rear sheet needs no
+        # visible support through all the foreground's detail openings.
+        groups = (
+            (early + deferred if len(early) == 2 else early[:-1] + deferred + early[-1:])
+            if deferred
+            else early
+        )
     if len(groups) > config.layers:
         raise DesignError(
             f"Need {len(groups)} sheets but layer limit is {config.layers}",
@@ -110,13 +169,11 @@ def construct_layers(
     for index, (visible_mask, ids, color, depth_source) in enumerate(groups):
         accumulated |= visible_mask
         mask = (
-            visible_mask.copy()
-            if config.assembly_mode == "mounted_pieces" or settings(config).family == "depth_scene"
-            else accumulated.copy()
+            visible_mask.copy() if config.assembly_mode == "mounted_pieces" else accumulated.copy()
         )
-        if settings(config).family == "depth_scene" and settings(config).lighting == "backlit":
-            # Bright source is a provisional aperture proposal, explicitly not object-aware depth.
-            mask &= np.mean(result.original, axis=2) < 225
+        # Rear depth sheets retain the foreground silhouettes too: N/ N-1/ .../1
+        # material intersections, rather than one disjoint sheet per image region.
+        # Source brightness never punches identical holes through the whole stack.
         mask.setflags(write=False)
         layers.append(
             PaperLayer(

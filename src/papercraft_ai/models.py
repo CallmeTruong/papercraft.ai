@@ -53,6 +53,8 @@ class DesignConfig(BaseModel):
     artwork_fit: Literal["contain", "cover"] = "contain"
     workflow: WorkflowSettings | None = None
     ai: AISettings | None = None
+    # Persisted physical abstraction scale; absent on legacy projects.
+    manufacturing_width_mm: float | None = Field(default=None, gt=0, le=2000)
 
     @field_validator("backing")
     @classmethod
@@ -111,7 +113,10 @@ class SnapshotLayer(BaseModel):
     spacing_mm: float = Field(ge=0, le=100)
     region_ids: list[int]
     attachment: str | None
-    depth_source: Literal["manual", "heuristic_vertical_position", "model_relative_depth"] | None
+    depth_source: (
+        Literal["manual", "heuristic_vertical_position", "model_relative_depth", "color_occlusion"]
+        | None
+    )
     geometry: dict
 
     @field_validator("color")

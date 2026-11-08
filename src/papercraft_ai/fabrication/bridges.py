@@ -13,14 +13,26 @@ from shapely.ops import nearest_points
 from .models import BridgeProposal
 
 
-def propose_bridge(island, rooted, frame, profile, protected=None, support_zones=None):
+def propose_bridge(
+    island,
+    rooted,
+    frame,
+    profile,
+    protected=None,
+    support_zones=None,
+    *,
+    endpoint_cores=None,
+    root_contact_test=None,
+):
     forbidden = protected if protected is not None else Polygon()
     width = max(profile.min_bridge_width_mm, profile.min_feature_width_mm * 1.5)
-    island_core, rooted_core = island.buffer(-width / 2), rooted.buffer(-width / 2)
-    a, b = nearest_points(
-        island_core if not island_core.is_empty else island,
-        rooted_core if not rooted_core.is_empty else rooted,
-    )
+    if endpoint_cores is None:
+        island_core, rooted_core = island.buffer(-width / 2), rooted.buffer(-width / 2)
+        endpoint_cores = (
+            island_core if not island_core.is_empty else island,
+            rooted_core if not rooted_core.is_empty else rooted,
+        )
+    a, b = nearest_points(*endpoint_cores)
     line = LineString([a, b])
 
     def accepted(candidate):
@@ -29,14 +41,21 @@ def propose_bridge(island, rooted, frame, profile, protected=None, support_zones
             frame.sheet.covers(footprint)
             and footprint.intersection(forbidden).area < 1e-9
             and footprint.intersection(island).area > 1e-8
-            and footprint.intersection(rooted).area > 1e-8
+            and (
+                root_contact_test(footprint)
+                if root_contact_test is not None
+                else footprint.intersection(rooted).area > 1e-8
+            )
         ), footprint
 
     ok, footprint = accepted(line)
     direct = (line, footprint, ok)
     strategy = "direct"
     preferred = support_zones is not None and not support_zones.is_empty
-    if not ok or preferred:
+    # If the valid straight route lies entirely in the cheapest support zone, no
+    # weighted grid route can beat its Euclidean length. Avoid building an A* grid.
+    needs_preference_search = preferred and not (ok and support_zones.covers(line))
+    if not ok or needs_preference_search:
         strategy = "astar"
         step = max(0.25, min(width / 3, 1.0), math.sqrt(frame.sheet.area / 1_000_000))
         nx = math.ceil(frame.spec.outer_width_mm / step)

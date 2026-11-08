@@ -1,9 +1,11 @@
-﻿"""Explicit model preparation. Generation never downloads weights or executes remote code."""
+"""Explicit model preparation. Generation never downloads weights or executes remote code."""
 
 import argparse
+import fnmatch
 import hashlib
 import json
 import os
+import shutil
 from pathlib import Path
 from urllib.request import urlopen
 
@@ -48,8 +50,15 @@ def availability():
     return result
 
 
-def prepare(kinds):
+def prepare(kinds, refresh=False):
     for kind in kinds:
+        if not refresh:
+            try:
+                _, data = manifest(kind, verify=True)
+                print(f"Already prepared {kind}: {data['revision']}", flush=True)
+                continue
+            except (OSError, ValueError, KeyError):
+                pass
         directory = root() / kind
         directory.mkdir(parents=True, exist_ok=True)
         if kind == "face_features":
@@ -58,17 +67,40 @@ def prepare(kinds):
                 target.write_bytes(response.read(30_000_000))
             revision = "float16/1"
         else:
-            from huggingface_hub import HfApi, snapshot_download
-
-            revision = HfApi().model_info(MODELS[kind]).sha
-            snapshot_download(
-                MODELS[kind], revision=revision, local_dir=directory,
-                allow_patterns=["*.json", "*.safetensors", "README.md", "LICENSE*"],
-            )
+            with urlopen(
+                f"https://huggingface.co/api/models/{MODELS[kind]}", timeout=60
+            ) as response:
+                info = json.load(response)
+            revision = info["sha"]
+            for entry in info["siblings"]:
+                name = entry["rfilename"]
+                if not any(
+                    fnmatch.fnmatch(name, pattern)
+                    for pattern in ("*.json", "*.safetensors", "README.md", "LICENSE*")
+                ):
+                    continue
+                target = (directory / name).resolve()
+                if not target.is_relative_to(directory.resolve()):
+                    raise ValueError("Invalid model repository path")
+                target.parent.mkdir(parents=True, exist_ok=True)
+                print(f"Downloading {kind}/{name}", flush=True)
+                partial = target.with_suffix(target.suffix + ".partial")
+                with (
+                    urlopen(
+                        f"https://huggingface.co/{MODELS[kind]}/resolve/{revision}/{name}",
+                        timeout=120,
+                    ) as response,
+                    partial.open("wb") as stream,
+                ):
+                    shutil.copyfileobj(response, stream, length=1024 * 1024)
+                partial.replace(target)
         files = {
             str(path.relative_to(directory)).replace("\\", "/"): file_hash(path)
             for path in directory.rglob("*")
-            if path.is_file() and ".cache" not in path.parts and path.name != "manifest.json"
+            if path.is_file()
+            and ".cache" not in path.parts
+            and path.name != "manifest.json"
+            and path.suffix != ".partial"
         }
         data = {"model_id": MODELS[kind], "revision": revision, "files": files}
         (directory / "manifest.json").write_text(json.dumps(data, indent=2), encoding="utf8")
@@ -78,5 +110,8 @@ def prepare(kinds):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("models", nargs="+", choices=[*MODELS, "all"])
+    parser.add_argument(
+        "--refresh", action="store_true", help="Download and pin current upstream revision"
+    )
     args = parser.parse_args()
-    prepare(list(MODELS) if "all" in args.models else args.models)
+    prepare(list(MODELS) if "all" in args.models else args.models, refresh=args.refresh)

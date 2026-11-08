@@ -41,12 +41,24 @@ def clear_image_cache():
         _IMAGE_CACHE.clear()
 
 
-def cached_abstraction(source, config):
+def cached_abstraction(source, config, perception=None):
+    from .ai.perception import cache_identity
+
     # Only actual image-stage dependencies; fitting changes the source bytes before this key.
     key = digest(
         {
-            "version": "abstraction-v2",
+            "version": "abstraction-v3",
+            "perception": perception if perception is not None else cache_identity(config.ai),
+            **({"depth_family": settings(config).family} if config.ai and config.ai.depth else {}),
             "source": hashlib.sha256(source).hexdigest(),
+            "physical_abstraction": [
+                config.manufacturing_width_mm,
+                config.width_mm,
+                config.height_mm,
+                config.frame_mm,
+            ]
+            if config.manufacturing_width_mm is not None
+            else None,
             **{
                 k: config.model_dump()[k]
                 for k in ("colors", "detail", "palette", "seed", "max_side", "backing")
@@ -58,8 +70,9 @@ def cached_abstraction(source, config):
         if hit:
             result = _IMAGE_CACHE.pop(key)
         else:
-            result = abstract_image(source, config)
-        _IMAGE_CACHE[key] = result
+            result = abstract_image(source, config, perception=perception)
+        if not any(item.get("retryable") for item in result.metrics.get("ai_diagnostics", [])):
+            _IMAGE_CACHE[key] = result
         while len(_IMAGE_CACHE) > 4:
             _IMAGE_CACHE.popitem(last=False)
     import copy
@@ -102,6 +115,7 @@ class Design:
     scene_plan: ScenePlan | None = None
     production_receipts: list[dict] = field(default_factory=list)
     light_plan: dict | None = None
+    feature_constraints: list[dict] = field(default_factory=list)
 
     @property
     def frame(self):
@@ -116,7 +130,14 @@ class Design:
     def fingerprint(self):
         return digest(
             {
-                "config": self.config.model_dump(),
+                "config": self.config.model_dump(
+                    exclude=({"ai"} if self.config.ai is None else set())
+                    | (
+                        {"manufacturing_width_mm"}
+                        if self.config.manufacturing_width_mm is None
+                        else set()
+                    )
+                ),
                 "profile": self.profile.model_dump(),
                 "dimensions": [self.width_mm, self.height_mm],
                 "legacy_requires_conversion": self.legacy_requires_conversion,
@@ -128,6 +149,16 @@ class Design:
                     else {}
                 ),
                 **({"light_plan": self.light_plan} if self.light_plan is not None else {}),
+                **(
+                    {"feature_constraints": self.feature_constraints}
+                    if self.feature_constraints
+                    else {}
+                ),
+                **(
+                    {"perception": self.abstraction.perception.snapshot()}
+                    if self.abstraction.perception is not None
+                    else {}
+                ),
                 "bridge_receipts": [
                     {
                         k: r.get(k)
@@ -185,7 +216,14 @@ class Design:
             "colors_used": len({l.color for l in self.layers}),
             "uncut_backing_count": 0 if wf.lighting == "backlit" else 1,
             "diffuser_count": 1 if wf.lighting == "backlit" else 0,
-            "colored_diffuser_count": 1 if self.light_plan else 0,
+            "colored_diffuser_count": 1
+            if self.light_plan and self.light_plan.get("planning_version") != 2
+            else 0,
+            "colored_source_filter_count": 1
+            if self.light_plan
+            and self.light_plan.get("planning_version") == 2
+            and self.light_plan.get("mode") == "source_color_filter"
+            else 0,
             "spacer_count": max(0, len(self.layers) - 1) if wf.assembly == "spaced" else 0,
             "status": "planned",
             "physical_test_status": "NOT_RUN",
@@ -229,8 +267,14 @@ class Design:
             "legacy_requires_conversion": self.legacy_requires_conversion,
             "depth_assignments": self.depth_assignments,
             "scene_plan": self.scene_plan.model_dump() if self.scene_plan else None,
+            "feature_constraints": self.feature_constraints,
             "production_receipts": self.production_receipts,
             "light_plan": self.light_plan,
+            **(
+                {"perception": self.abstraction.perception.snapshot()}
+                if self.abstraction.perception is not None
+                else {}
+            ),
         }
 
 
@@ -318,6 +362,13 @@ def validate_design(design, *, progress=None):
                     )
                 )
                 report["status"] = "FAIL"
+        from .ai.features import feature_findings
+
+        feature_issues, feature_metrics = feature_findings(design, layer.id, geometry)
+        report["findings"].extend(feature_issues)
+        report["important_features"] = feature_metrics
+        if feature_issues:
+            report["status"] = "FAIL"
         report["layer_id"] = layer.id
         for issue in report["findings"]:
             issue["layer_id"] = layer.id
@@ -370,7 +421,10 @@ def validate_design(design, *, progress=None):
         if (
             light_path_ratio < 1e-6
             and reports
-            and not (design.light_plan and design.light_plan.get("mode") == "source_color_filter")
+            and not (
+                design.light_plan
+                and design.light_plan.get("mode") in ("source_color_filter", "uniform_transmission")
+            )
         ):
             reports[0]["findings"].append(
                 finding(
@@ -381,6 +435,18 @@ def validate_design(design, *, progress=None):
             )
             reports[0]["status"] = "FAIL"
     statuses = [r["status"] for r in reports]
+    from .fabrication.fidelity import image_fidelity
+
+    fidelity = image_fidelity(design)
+    if fidelity["status"] == "FAIL" and reports:
+        reports[0]["findings"].append(
+            finding(
+                "IMAGE_FIDELITY_FAILED",
+                design.frame.artwork_window,
+                "Final physical polygons fail the independent appearance gate",
+            )
+        )
+        statuses.append("FAIL")
     status = (
         "FAIL"
         if not statuses or "FAIL" in statuses
@@ -395,8 +461,15 @@ def validate_design(design, *, progress=None):
         "layers": reports,
         "frame": design.frame.spec.model_dump(),
         "art_review_status": "pending_review",
+        "image_fidelity": fidelity,
         "light_path_ratio": light_path_ratio,
-        "material_policy": "translucent paper + color-printed diffuser; transmission is an uncalibrated assumption"
+        "material_policy": (
+            "translucent paper + neutral diffuser + uniform backlight; uncalibrated transmission"
+            if design.light_plan.get("mode") == "uniform_transmission"
+            else "translucent paper + neutral diffuser + separate broad color-source filter; uncalibrated transmission"
+            if design.light_plan.get("planning_version") == 2
+            else "translucent paper + legacy color-printed diffuser; uncalibrated transmission"
+        )
         if design.light_plan
         else "opaque cut sheets; separate translucent diffuser for backlit assembly",
         "light_plan": design.light_plan,
@@ -405,7 +478,7 @@ def validate_design(design, *, progress=None):
     }
 
 
-def fit_abstraction(source, config):
+def fit_abstraction(source, config, perception=None):
     from .imaging import normalize_image
 
     original = normalize_image(source, config.max_side)
@@ -418,7 +491,7 @@ def fit_abstraction(source, config):
     if config.height_mm:
         ratio = (config.width_mm - 2 * border) / (height - 2 * border)
         if math.isclose(ratio, w / h, rel_tol=1e-9):
-            return cached_abstraction(source, config), height
+            return cached_abstraction(source, config, perception), height
         size = (
             (config.max_side, max(1, round(config.max_side / ratio)))
             if ratio >= 1
@@ -430,8 +503,8 @@ def fit_abstraction(source, config):
             if config.artwork_fit == "cover"
             else ImageOps.pad(image, size, color=config.backing)
         )
-        return cached_abstraction(png_bytes(np.asarray(fitted)), config), height
-    return cached_abstraction(source, config), height
+        return cached_abstraction(png_bytes(np.asarray(fitted)), config, perception), height
+    return cached_abstraction(source, config, perception), height
 
 
 def generate_design(
@@ -446,6 +519,137 @@ def generate_design(
     production=False,
     source_lighting=True,
     paper_transmittance=0.55,
+    source_distance_mm=25,
+    light_diffusion_mm=6,
+    time_limit_seconds=180,
+):
+    if (
+        not isinstance(time_limit_seconds, (int, float))
+        or not math.isfinite(time_limit_seconds)
+        or not 30 <= time_limit_seconds <= 1800
+    ):
+        raise DesignError("Time limit must be between 30 and 1800 seconds")
+    started = time.perf_counter()
+    supplied_progress = progress
+
+    def deadline_progress(stage, fraction):
+        if time.perf_counter() - started > time_limit_seconds:
+            raise DesignError(
+                f"Processing exceeded the {time_limit_seconds:g}s limit at {stage}; previous revision retained",
+                "RESOURCE_LIMIT",
+            )
+        if supplied_progress:
+            supplied_progress(stage, fraction)
+
+    progress = deadline_progress
+    config = config or DesignConfig()
+    wf = settings(config)
+    if (
+        production
+        and scene_plan is None
+        and depths is None
+        and wf.family in ("multicolor", "depth_scene")
+    ):
+        profile = profile or FabricationProfile()
+        config = config.model_copy(
+            update={
+                "manufacturing_width_mm": max(
+                    profile.min_feature_width_mm, profile.min_bridge_width_mm
+                )
+            }
+        )
+    eligible = (
+        production
+        and scene_plan is None
+        and wf.family in ("multicolor", "depth_scene")
+        and wf.lighting == "ambient"
+        and (wf.style == "colorblock" or (wf.family == "depth_scene" and depths is None))
+    )
+    if not eligible:
+        design = _generate_candidate(
+            source,
+            config,
+            profile,
+            depths,
+            auto_repair,
+            scene_plan,
+            progress=progress,
+            production=production,
+            source_lighting=source_lighting,
+            paper_transmittance=paper_transmittance,
+            source_distance_mm=source_distance_mm,
+            light_diffusion_mm=light_diffusion_mm,
+        )
+        progress("complete", 1)
+        return design
+    from .fabrication.planning import color_orders
+
+    phase_started = time.perf_counter()
+    progress("image_abstraction", 0.01)
+    abstraction, fitted_height = fit_abstraction(source, config)
+    prepared = (abstraction, fitted_height, time.perf_counter() - phase_started)
+    progress("construct_layers", 0.05)
+    attempts = []
+    orders = color_orders(abstraction)
+    for index, order in enumerate(orders):
+        progress("construct_layers", index / len(orders))
+
+        def update(stage, fraction, index=index):
+            if progress:
+                progress(stage, (index + fraction) / len(orders))
+
+        try:
+            design = _generate_candidate(
+                source,
+                config,
+                profile,
+                depths,
+                auto_repair,
+                scene_plan,
+                progress=update,
+                production=production,
+                source_lighting=source_lighting,
+                paper_transmittance=paper_transmittance,
+                source_distance_mm=source_distance_mm,
+                light_diffusion_mm=light_diffusion_mm,
+                color_order=order,
+                prepared_abstraction=prepared,
+            )
+            design.abstraction.metrics["construction_plan"] = {
+                "version": "opaque-occlusion-1",
+                "color_order": list(order),
+                "attempts": [*attempts, {"order": list(order), "status": "PASS"}],
+                "elapsed_seconds": time.perf_counter() - started,
+            }
+            progress("complete", 1)
+            return design
+        except DesignError as exc:
+            if exc.code != "INFEASIBLE_CONSTRAINTS":
+                raise
+            attempts.append({"order": list(order), "status": "rejected", "reason": str(exc)})
+    raise DesignError(
+        "No certified design found in the bounded color-order search: "
+        + "; ".join(a["reason"] for a in attempts),
+        "SEARCH_EXHAUSTED",
+    )
+
+
+def _generate_candidate(
+    source,
+    config=None,
+    profile=None,
+    depths=None,
+    auto_repair=False,
+    scene_plan=None,
+    *,
+    progress=None,
+    production=False,
+    source_lighting=True,
+    paper_transmittance=0.55,
+    source_distance_mm=25,
+    light_diffusion_mm=6,
+    color_order=None,
+    prepared_abstraction=None,
 ):
     progress = progress or (lambda stage, value: None)
     timings = {}
@@ -468,15 +672,22 @@ def generate_design(
     config = config.model_copy(update={"assembly_mode": "frame_connected"})
     progress("image_abstraction", 0.05)
     phase_started = time.perf_counter()
-    abstraction, height = fit_abstraction(source, config)
-    timings["image_abstraction"] = time.perf_counter() - phase_started
+    if prepared_abstraction is None:
+        abstraction, height = fit_abstraction(source, config)
+        timings["image_abstraction"] = time.perf_counter() - phase_started
+    else:
+        abstraction, height, timings["image_abstraction"] = prepared_abstraction
     progress("construct_layers", 0.3)
     if wf.family == "stencil" and scene_plan is None:
         from .stencil import stencil_layer
 
         layers = stencil_layer(abstraction, config)
     else:
-        layers = construct_layers(abstraction, config, depths=depths) if scene_plan is None else []
+        layers = (
+            construct_layers(abstraction, config, depths=depths, color_order=color_order)
+            if scene_plan is None
+            else []
+        )
     frame = build_frame(
         FrameSpec(
             outer_width_mm=config.width_mm, outer_height_mm=height, border_width_mm=config.frame_mm
@@ -490,16 +701,36 @@ def generate_design(
         geometries = []
         for index, layer in enumerate(layers):
             progress(f"vectorize:{layer.id}", 0.4 + 0.2 * index / max(1, len(layers)))
-            geometries.append(material_from_mask(layer.mask, frame))
+            contour_tolerance = (
+                config.manufacturing_width_mm * 0.25
+                if config.manufacturing_width_mm is not None
+                else 0
+            )
+            geometries.append(
+                material_from_mask(layer.mask, frame, abstraction_tolerance_mm=contour_tolerance)
+            )
+        abstraction.metrics["contour_abstraction_tolerance_mm"] = contour_tolerance
     timings["vectorize"] = time.perf_counter() - phase_started
     design = Design(
         config, profile, abstraction, layers, geometries, config.width_mm, height, source
     )
     design.scene_plan = scene_plan
-    if production and wf.lighting == "backlit" and source_lighting:
-        from .fabrication.light import lighting_plan
+    from .ai.features import feature_constraints
 
-        design.light_plan = lighting_plan(design, transmittance=paper_transmittance)
+    design.feature_constraints = feature_constraints(design)
+    if production and wf.lighting == "backlit":
+        from .fabrication.light import lighting_plan, uniform_lighting_plan
+
+        design.light_plan = (
+            lighting_plan(
+                design,
+                transmittance=paper_transmittance,
+                source_distance_mm=source_distance_mm,
+                diffusion_mm=light_diffusion_mm,
+            )
+            if source_lighting
+            else uniform_lighting_plan(design, transmittance=paper_transmittance)
+        )
     design.depth_assignments = (
         {int(k): v for k, v in depths.items()} if depths is not None else None
     )
@@ -514,9 +745,13 @@ def generate_design(
         from .fabrication.scene import scene_index
 
         before_composite = design.composite()
+        occluded = Polygon()
+        hidden_support = wf.lighting == "ambient" and wf.family in ("multicolor", "depth_scene")
         for index, (layer, geometry) in enumerate(zip(design.layers, design.geometries)):
             progress(f"fabricate:{layer.id}", 0.61 + 0.27 * index / len(design.layers))
             scene_layer = scene_index(design.scene_plan, layer.id)
+            from .ai.features import feature_findings, feature_support_zones
+
             protected = protected_geometry(design.scene_plan, scene_layer)
             locked = (
                 unary_union(
@@ -536,14 +771,25 @@ def generate_design(
                 design.frame,
                 design.profile,
                 protected=protected,
+                occluded=occluded if hidden_support else None,
+                raster_first=config.manufacturing_width_mm is not None,
                 locked=locked,
                 support_zones=unary_union(
                     [shape(g) for g in design.scene_plan.allowed_support_zones]
                 )
                 if design.scene_plan
-                else None,
+                else feature_support_zones(design, layer.id),
+                candidate_check=lambda candidate, layer_id=layer.id: (
+                    not feature_findings(design, layer_id, candidate)[0]
+                ),
+                progress=lambda phase, fraction, layer_id=layer.id, index=index: progress(
+                    f"fabricate:{layer_id}:{phase}",
+                    0.61 + 0.27 * (index + fraction) / len(design.layers),
+                ),
             )
             design.geometries[index] = material
+            if hidden_support:
+                occluded = occluded.union(material).intersection(frame.artwork_window)
             design.production_receipts.append({"layer_id": layer.id, **receipt})
         impact = design.artwork_change_ratio(before_composite)
         if impact > 0.05:
@@ -552,6 +798,13 @@ def generate_design(
                 "INFEASIBLE_CONSTRAINTS",
             )
         design.abstraction.metrics["fabrication_visible_change_ratio"] = impact
+        if design.light_plan and source_lighting:
+            design.light_plan = lighting_plan(
+                design,
+                transmittance=paper_transmittance,
+                source_distance_mm=source_distance_mm,
+                diffusion_mm=light_diffusion_mm,
+            )
         design.report = validate_design(design)
         if design.report["status"] != "PASS":
             codes = sorted({f["code"] for l in design.report["layers"] for f in l["findings"]})
@@ -568,7 +821,9 @@ def generate_design(
         design = edit_design(design, "repair", {})
         timings["repair"] = time.perf_counter() - phase_started
     progress("save", 0.97)
-    timings["total"] = time.perf_counter() - started
+    timings["total"] = (
+        time.perf_counter() - started + (prepared_abstraction[2] if prepared_abstraction else 0)
+    )
     design.abstraction.metrics["stage_timings_seconds"] = timings
     return design
 
@@ -593,7 +848,14 @@ def restore_design(snapshot):
             raise DesignError("Project physical dimensions are invalid")
         if not 1 <= len(snapshot["layers"]) <= 24:
             raise DesignError("Project must contain between 1 and 24 layers")
-        abstraction, _ = fit_abstraction(source, config)
+        # Replay stored perception; opening a project must not require model availability.
+        if (
+            config.ai
+            and any((config.ai.segmentation, config.ai.depth, config.ai.face_features))
+            and "perception" not in snapshot
+        ):
+            raise DesignError("AI project is missing its persisted perception artifact")
+        abstraction, _ = fit_abstraction(source, config, snapshot.get("perception"))
         scene_plan = (
             ScenePlan.model_validate(snapshot["scene_plan"]) if snapshot.get("scene_plan") else None
         )
@@ -601,7 +863,9 @@ def restore_design(snapshot):
         if snapshot.get("light_plan") is not None:
             from .fabrication.light import SourceLightPlan
 
-            light_plan = SourceLightPlan.model_validate(snapshot["light_plan"]).model_dump()
+            light_plan = SourceLightPlan.model_validate(snapshot["light_plan"]).model_dump(
+                exclude_unset=True
+            )
             if (
                 light_plan["source_grid_sha256"] != abstraction.source_hash
                 or settings(config).lighting != "backlit"
@@ -609,6 +873,12 @@ def restore_design(snapshot):
                 raise DesignError(
                     "Color diffuser plan does not match the current source or lighting mode"
                 )
+            if light_plan.get("planning_version") == 2 and any(
+                not config.frame_mm <= z["x_mm"] <= dimensions[0] - config.frame_mm
+                or not config.frame_mm <= z["y_mm"] <= dimensions[1] - config.frame_mm
+                for z in light_plan["zones"]
+            ):
+                raise DesignError("Source-zone center is outside the artwork window")
         raw_depths = snapshot.get("depth_assignments")
         manual_depths = (
             {int(k): v for k, v in raw_depths.items()} if raw_depths is not None else None
@@ -708,6 +978,7 @@ def restore_design(snapshot):
             scene_plan,
             snapshot.get("production_receipts", []),
             light_plan,
+            snapshot.get("feature_constraints", []),
         )
         if snapshot["schema_version"] == 2 and design.fingerprint() != snapshot["fingerprint"]:
             raise DesignError("Project geometry/config fingerprint does not match")
@@ -785,6 +1056,11 @@ def edit_design(design, operation, payload):
         ).width_mm
         factor = new_width / updated.width_mm
         updated.geometries = [scale(g, factor, factor, origin=(0, 0)) for g in updated.geometries]
+        for constraint in updated.feature_constraints:
+            for key in ("roi", "retained"):
+                constraint[key] = mapping(
+                    scale(shape(constraint[key]), factor, factor, origin=(0, 0))
+                )
         if updated.scene_plan:
             plan = updated.scene_plan.model_dump()
             for obj in plan["objects"]:
@@ -812,8 +1088,26 @@ def edit_design(design, operation, payload):
                 "width_mm": new_width,
                 "height_mm": updated.height_mm,
                 "frame_mm": updated.config.frame_mm * factor,
+                "manufacturing_width_mm": updated.config.manufacturing_width_mm * factor
+                if updated.config.manufacturing_width_mm is not None
+                else None,
             }
         )
+        if updated.light_plan and updated.light_plan.get("planning_version") == 2:
+            from .fabrication.light import lighting_plan, uniform_lighting_plan
+
+            updated.light_plan = (
+                lighting_plan(
+                    updated,
+                    transmittance=updated.light_plan["paper_transmittance_assumption"],
+                    source_distance_mm=updated.light_plan["source_distance_mm"],
+                    diffusion_mm=updated.light_plan["diffusion_mm_assumption"],
+                )
+                if updated.light_plan.get("mode") == "source_color_filter"
+                else uniform_lighting_plan(
+                    updated, transmittance=updated.light_plan["paper_transmittance_assumption"]
+                )
+            )
     elif operation == "set_bridge":
         from shapely import from_wkt
         from shapely.geometry import box

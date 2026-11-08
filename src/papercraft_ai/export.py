@@ -69,6 +69,17 @@ def export_bundle(design, intent="draft", layout=None):
     from .pipeline import png_bytes
 
     assert_exportable(design, intent)
+    if (
+        intent == "cut_ready"
+        and design.light_plan
+        and design.light_plan.get("planning_version") != 2
+    ):
+        from .models import DesignError
+
+        raise DesignError(
+            "Regenerate this legacy photo-filter light plan before exporting the broad-zone diffuser",
+            "STALE_LIGHT_PLAN",
+        )
     from .fabrication.models import PrintLayout
     from .fabrication.printing import print_pdf, tile_layout
 
@@ -114,14 +125,37 @@ def export_bundle(design, intent="draft", layout=None):
         },
         indent=2,
     ).encode()
-    if design.light_plan:
+    if design.light_plan and design.light_plan.get("mode") == "source_color_filter":
         from .fabrication.light import color_diffuser_pdf, full_sheet_source
 
         files["light/source-color-diffuser.pdf"] = color_diffuser_pdf(design, layout)
         files["light/source-color-diffuser.png"] = png_bytes(
-            full_sheet_source(design, max_side=2400, high_resolution=True)
+            full_sheet_source(design, max_side=2400, high_resolution=True, emitter_plane=True)
         )
         files["light/materials.json"] = json.dumps(design.light_plan, indent=2).encode()
+        from .fabrication.light import resolved_light_plan
+
+        plan = resolved_light_plan(design)
+        files["light/zones.json"] = json.dumps(plan, indent=2).encode()
+        placement = [
+            "# Broad-area light placement",
+            "",
+            "Coordinates are millimeters from the outer sheet top-left; X right, Y down.",
+            f"Effective color source is {plan['source_distance_mm']:g} mm behind the rear diffuser.",
+            f"Additional diffuser spread sigma: {plan['diffusion_mm_assumption']:g} mm; angular assumption: {plan['spread_angle_degrees']:g} degrees.",
+            "Exported option: uniform white LED backlight and this broad printed color filter. Keep the filter/source plane behind a neutral spreading layer.",
+            "Alternative RGB emitters at the listed centers require a neutral diffuser and separate calibration; do not double-filter their colors.",
+            "Intensity is a relative model gain, not electrical power, lux or a calibrated LED setting.",
+            "Zone widths below are intrinsic 2-sigma widths before propagation. Physical calibration NOT_RUN.",
+            "",
+            "| Zone | Color | X | Y | Width | Height | Gain |",
+            "|---|---|---:|---:|---:|---:|---:|",
+        ]
+        placement += [
+            f"| {z['id']} | {z['color']} | {z['x_mm']:.1f} | {z['y_mm']:.1f} | {2 * z['sigma_x_mm']:.1f} | {2 * z['sigma_y_mm']:.1f} | {z['intensity']:.2f} |"
+            for z in plan["zones"]
+        ]
+        files["light/placement.md"] = "\n".join(placement).encode()
     files["original.png"] = png_bytes(design.abstraction.original)
     files["project.json"] = json.dumps(design.snapshot(), indent=2, allow_nan=False).encode()
     report = (
@@ -151,17 +185,19 @@ def export_bundle(design, intent="draft", layout=None):
         for i, item in enumerate(order)
     ]
     files["assembly.md"] = "\n".join(instructions).encode()
-    if design.light_plan:
+    if design.light_plan and design.light_plan.get("mode") == "source_color_filter":
         instructions += [
             "",
             "## Color light assembly",
-            "Print light/source-color-diffuser.pdf at 100% on a translucent color-printable diffuser.",
-            "Use white translucent cut paper, not opaque cardstock; mount the color diffuser behind the cut stack with a white backlight.",
+            "Print light/source-color-diffuser.pdf at 100% as the broad color-source filter, not as a photograph.",
+            "Use white translucent cut paper; place a neutral diffuser behind the stack and the printed source filter at the distance in light/placement.md, with white backlighting behind it.",
             f"Preview assumes per-sheet light transmission {design.light_plan['paper_transmittance_assumption']:.0%}; calibrate the actual paper/ink/light before matching colors.",
-            "The colored diffuser is one uncut part, already included in diffuser_count; colored_diffuser_count is its subtype, not an additional sheet.",
+            "Version2 uses one neutral diffuser plus one colored_source_filter, counted separately. Read light/placement.md for physical centers, spread assumptions and RGB-emitter alternative.",
             "Structural PASS does not certify optical color accuracy. Optical/physical tests: NOT_RUN.",
         ]
         files["assembly.md"] = "\n".join(instructions).encode()
+    elif design.light_plan:
+        files["light/materials.json"] = json.dumps(design.light_plan, indent=2).encode()
     manifest = {
         "schema_version": 1,
         "revision_id": design.revision_id,

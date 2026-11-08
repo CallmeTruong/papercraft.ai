@@ -3,6 +3,7 @@
 import base64
 import copy
 import json
+import re
 import threading
 import time
 from concurrent.futures import ThreadPoolExecutor
@@ -37,6 +38,9 @@ class GenerationRequest(BaseModel):
     source_lighting: bool = True
     paper_transmittance: float = Field(default=0.55, gt=0, le=1)
     scene_plan: ScenePlan | None = None
+    source_distance_mm: float = Field(default=25, ge=5, le=100)
+    light_diffusion_mm: float = Field(default=6, ge=0, le=30)
+    time_limit_seconds: int = Field(default=180, ge=30, le=1800, strict=True)
 
 
 class EditRequest(BaseModel):
@@ -58,7 +62,9 @@ class ExportRequest(BaseModel):
 def create_app(storage: Path | str = ".papercraft"):
     storage = Path(storage)
     storage.mkdir(parents=True, exist_ok=True)
-    pool = ThreadPoolExecutor(max_workers=2, thread_name_prefix="papercraft")
+    # Geometry and local inference both consume substantial CPU/RAM. Serialize
+    # heavy jobs on this local workstation; API reads remain responsive.
+    pool = ThreadPoolExecutor(max_workers=1, thread_name_prefix="papercraft")
     lock = threading.RLock()
     projects, jobs = {}, {}
 
@@ -72,6 +78,12 @@ def create_app(storage: Path | str = ".papercraft"):
     @app.get("/api/capabilities")
     def supported_capabilities():
         return capabilities()
+
+    @app.get("/api/models")
+    def model_status():
+        from .ai.setup import availability
+
+        return availability()
 
     @app.exception_handler(DesignError)
     async def design_error(request, exc):
@@ -142,6 +154,7 @@ def create_app(storage: Path | str = ".papercraft"):
             "layers": [],
             "report": None,
             "report_current": False,
+            "metrics": {},
             "can_undo": bool(project["history"]),
             "can_redo": bool(project["redo"]),
         }
@@ -365,6 +378,37 @@ def create_app(storage: Path | str = ".papercraft"):
             media_type="image/png",
         )
 
+    @app.get("/projects/{project_id}/light-plan")
+    def light_plan_preview(
+        project_id: str,
+        transmittance: float = 0.55,
+        visible: str | None = None,
+        overlap_only: bool = False,
+    ):
+        design = get_project(project_id)["design"]
+        if design is None:
+            raise DesignError("Generate a design first")
+        from .fabrication.light import overlap_profile, resolved_light_plan
+
+        overlap = overlap_profile(
+            design,
+            transmittance=transmittance,
+            visible=[item for item in visible.split(",") if item] if visible is not None else None,
+        )
+        if overlap_only:
+            return {"overlap": overlap}
+        plan = resolved_light_plan(design)
+        return {
+            **plan,
+            "overlap": overlap,
+            "preview_only": not design.light_plan or design.light_plan.get("planning_version") != 2,
+            "coordinate_origin": "top-left outer sheet; x right, y down",
+            "stack_depth_mm": sum(
+                layer.spacing_mm + design.profile.thickness_mm for layer in design.layers
+            ),
+            "hardware_note": "Zone centers refer to an effective colored source behind the rear diffuser. White LED panel plus broad printed filter is the exported option; RGB emitters require separate calibration and a neutral diffuser.",
+        }
+
     @app.get("/projects/{project_id}/light-preview/{layer_id}")
     def light_preview(
         project_id: str,
@@ -372,6 +416,9 @@ def create_app(storage: Path | str = ".papercraft"):
         transmittance: float = 0.55,
         visible: str | None = None,
         revision_id: str | None = None,
+        source_distance_mm: float | None = None,
+        diffusion_mm: float | None = None,
+        uniform_color: str | None = None,
     ):
         project = get_project(project_id)
         if revision_id:
@@ -382,7 +429,12 @@ def create_app(storage: Path | str = ".papercraft"):
         from .fabrication.light import cached_light_fields
 
         fields = cached_light_fields(
-            design, transmittance=transmittance, visible=visible.split(",") if visible else None
+            design,
+            transmittance=transmittance,
+            visible=[item for item in visible.split(",") if item] if visible is not None else None,
+            source_distance_mm=source_distance_mm,
+            diffusion_mm=diffusion_mm,
+            uniform_color=uniform_color,
         )
         if layer_id not in fields:
             raise DesignError("Unknown or hidden lighting layer")
@@ -390,7 +442,7 @@ def create_app(storage: Path | str = ".papercraft"):
             png_bytes(fields[layer_id]),
             media_type="image/png",
             headers={
-                "X-PaperCraft-Optics": "approximate-source-color-filter; material calibration NOT_RUN"
+                "X-PaperCraft-Optics": "approximate-broad-light-zones; material calibration NOT_RUN"
             },
         )
 
@@ -423,10 +475,133 @@ def create_app(storage: Path | str = ".papercraft"):
                     production=request.production,
                     source_lighting=request.source_lighting,
                     paper_transmittance=request.paper_transmittance,
+                    source_distance_mm=request.source_distance_mm,
+                    light_diffusion_mm=request.light_diffusion_mm,
+                    time_limit_seconds=request.time_limit_seconds,
                 ),
                 lambda design: commit(project, design, require_ready=request.production),
                 with_progress=True,
             )
+
+    @app.post("/projects/{project_id}/compare", status_code=202)
+    def compare_project(project_id: str, request: GenerationRequest):
+        from .comparison import compare, write_json
+
+        with lock:
+            project = get_project(project_id)
+            require_revision(project, request.expected_revision_id)
+            if request.scene_plan or (project["design"] and project["design"].scene_plan):
+                raise DesignError(
+                    "Photo comparison requires an image-generated project, not an authored ScenePlan"
+                )
+            if request.depths is not None or (
+                project["design"] and project["design"].depth_assignments is not None
+            ):
+                raise DesignError(
+                    "Manual region-depth assignments cannot be transferred across model region partitions; compare an unassigned image"
+                )
+            config = request.config or project["config"]
+            profile = request.profile or (
+                project["design"].profile if project["design"] else FabricationProfile()
+            )
+            comparison_id = uuid4().hex
+            directory = storage / "comparisons" / project_id / comparison_id
+            source = project["source"]
+            light_plan = project["design"].light_plan if project["design"] else None
+            generation_options = {
+                "source_lighting": request.source_lighting
+                if "source_lighting" in request.model_fields_set or not project["design"]
+                else bool(light_plan),
+                "paper_transmittance": request.paper_transmittance
+                if "paper_transmittance" in request.model_fields_set or not light_plan
+                else light_plan["paper_transmittance_assumption"],
+            }
+
+            for key, plan_key in (
+                ("source_distance_mm", "source_distance_mm"),
+                ("light_diffusion_mm", "diffusion_mm_assumption"),
+            ):
+                if key in request.model_fields_set:
+                    generation_options[key] = getattr(request, key)
+                elif light_plan and light_plan.get("planning_version") == 2:
+                    generation_options[key] = light_plan[plan_key]
+
+            def compute(progress):
+                report = compare(
+                    source,
+                    config,
+                    profile,
+                    directory,
+                    progress=progress,
+                    generation_options=generation_options,
+                    timeout=request.time_limit_seconds,
+                )
+                report.update(
+                    comparison_id=comparison_id,
+                    project_id=project_id,
+                    source_revision_id=request.expected_revision_id,
+                )
+                return report
+
+            def publish(report):
+                directory.mkdir(parents=True, exist_ok=True)
+                report["api_published"] = True
+                write_json(directory / "results.json", report)
+                write_json(directory.parent / "latest.json", {"comparison_id": comparison_id})
+
+            started = launch(
+                project, request.expected_revision_id, compute, publish, with_progress=True
+            )
+            return {**started, "comparison_id": comparison_id}
+
+    def comparison_directory(project_id, comparison_id):
+        project = get_project(project_id)
+        if not re.fullmatch(r"[a-f0-9]{32}", comparison_id):
+            raise HTTPException(404, "Comparison not found")
+        directory = storage / "comparisons" / project_id / comparison_id
+        if not (directory / "results.json").is_file():
+            raise HTTPException(404, "Comparison not found")
+        data = json.loads((directory / "results.json").read_text(encoding="utf8"))
+        if not data.get("api_published") or data.get("comparison_id") != comparison_id:
+            raise HTTPException(404, "Comparison has not been published")
+        return project, directory
+
+    @app.get("/projects/{project_id}/comparisons/latest")
+    def latest_comparison(project_id: str):
+        get_project(project_id)
+        path = storage / "comparisons" / project_id / "latest.json"
+        if not path.is_file():
+            raise HTTPException(404, "No comparison yet")
+        return comparison_result(project_id, json.loads(path.read_text())["comparison_id"])
+
+    @app.get("/projects/{project_id}/comparisons/{comparison_id}")
+    def comparison_result(project_id: str, comparison_id: str):
+        with lock:
+            project, directory = comparison_directory(project_id, comparison_id)
+            report = json.loads((directory / "results.json").read_text(encoding="utf8"))
+            return {**report, "stale": report["source_revision_id"] != project["revision_id"]}
+
+    @app.get("/projects/{project_id}/comparisons/{comparison_id}/{variant}/{artifact}")
+    def comparison_artifact(project_id: str, comparison_id: str, variant: str, artifact: str):
+        _, directory = comparison_directory(project_id, comparison_id)
+        if variant not in ("cpu", "model") or not re.fullmatch(
+            r"(?:(?:source|proposal|cut|sheets|sheet-[0-9]{2})\.png|project\.json|cut-ready\.zip)",
+            artifact,
+        ):
+            raise HTTPException(404, "Comparison artifact not found")
+        path = directory / variant / artifact
+        if not path.is_file():
+            raise HTTPException(404, "Comparison artifact not found")
+        if artifact.endswith(".png"):
+            return FileResponse(path, media_type="image/png")
+        result = json.loads((directory / variant / "result.json").read_text(encoding="utf8"))
+        if not result.get("cut_ready"):
+            raise DesignError("This comparison candidate is not cut-ready")
+        return FileResponse(
+            path,
+            media_type="application/zip" if artifact.endswith(".zip") else "application/json",
+            filename=f"{variant}-{artifact}",
+        )
 
     @app.post("/projects/{project_id}/edits")
     def edit(project_id: str, request: EditRequest):

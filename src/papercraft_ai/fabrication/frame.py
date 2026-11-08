@@ -23,11 +23,15 @@ def artwork_transform(spec: FrameSpec, raster_shape: tuple[int, int]) -> RasterT
     )
 
 
-def material_from_mask(mask, frame: FrameGeometry):
+def material_from_mask(mask, frame: FrameGeometry, *, abstraction_tolerance_mm=0):
     from ..geometry import mask_to_geometry
 
     b = frame.spec.border_width_mm
     content = mask_to_geometry(
         mask, frame.spec.outer_width_mm - 2 * b, frame.spec.outer_height_mm - 2 * b
     )
+    if abstraction_tolerance_mm:
+        # Artistic contour fitting is distinct from machine cut tolerance. The
+        # independent final color/structure gate still measures against the mask.
+        content = content.simplify(abstraction_tolerance_mm, preserve_topology=True)
     return frame.required_frame.union(translate(content, b, b))
