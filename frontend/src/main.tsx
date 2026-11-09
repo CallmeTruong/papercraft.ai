@@ -1,4 +1,11 @@
-import { lazy, Suspense, useEffect, useRef, useState } from "react";
+import {
+  lazy,
+  Suspense,
+  useEffect,
+  useRef,
+  useState,
+  type CSSProperties,
+} from "react";
 import { createRoot } from "react-dom/client";
 import {
   ArrowDown,
@@ -32,13 +39,14 @@ import "@fontsource/dm-sans/latin-ext-400.css";
 import "@fontsource/dm-sans/latin-600.css";
 import "@fontsource/dm-sans/latin-ext-600.css";
 import "@fontsource/manrope/latin-600.css";
-import "@fontsource/manrope/vietnamese-600.css";
 import "@fontsource/manrope/latin-800.css";
-import "@fontsource/manrope/vietnamese-800.css";
 import type { Config, Project, Finding, Workflow } from "./types";
 import "./style.css";
 import { ScenePlanner } from "./ScenePlanner";
 import { FlatPreview } from "./FlatPreview";
+import { framePalette, type FrameKind } from "./presentation";
+import { LightPalette, TransmissionPanel } from "./LightPalette";
+import { DetailRegions } from "./DetailRegions";
 
 const defaults: Config = {
   mode: "multicolor",
@@ -55,6 +63,12 @@ const defaults: Config = {
   backing: "#ffffff",
   frame_mm: 10,
   artwork_fit: "contain",
+  ai: {
+    segmentation: true,
+    face_features: true,
+    depth: true,
+    important_details: true,
+  },
   workflow: {
     family: "multicolor",
     style: "colorblock",
@@ -63,12 +77,35 @@ const defaults: Config = {
   },
 };
 
+function preferredAI() {
+  try {
+    const saved = JSON.parse(
+      localStorage.getItem("papercraft-ai-settings") || "null",
+    );
+    if (
+      saved &&
+      ["segmentation", "face_features", "depth"].every(
+        (key) => typeof saved[key] === "boolean",
+      )
+    )
+      return {
+        important_details: Boolean(
+          saved.segmentation || saved.face_features || saved.depth,
+        ),
+        ...saved,
+      } as NonNullable<Config["ai"]>;
+  } catch {
+    /* Use AI-first defaults when the local preference is invalid. */
+  }
+  return defaults.ai;
+}
+
 async function request(path: string, options: RequestInit = {}) {
   const response = await fetch(path, options);
   const data = await response.json();
   if (!response.ok)
     throw new Error(
-      data.error?.message || data.detail || "Không thể thực hiện thao tác.",
+      data.error?.message || data.detail || "Unable to complete this action.",
     );
   return data;
 }
@@ -78,9 +115,77 @@ const json = (value: unknown) => ({
   body: JSON.stringify(value),
 });
 
+const restartBackendMessage =
+  "Backend update required. Restart after active jobs finish, then refresh.";
+function supportsDetailConfig(capabilities: { config_fields?: string[] }) {
+  return ["detail_boxes", "detail_policy", "depth_paper"].every((key) =>
+    capabilities.config_fields?.includes(key),
+  );
+}
+
 function App() {
+  const [backendReady, setBackendReady] = useState<boolean | null>(null);
+  const [lightPreviewReady, setLightPreviewReady] = useState<boolean | null>(
+    null,
+  );
+  useEffect(() => {
+    request("/api/capabilities")
+      .then((c) => {
+        setBackendReady(supportsDetailConfig(c));
+        setLightPreviewReady(c.light_preview_version >= 3);
+      })
+      .catch(() => {});
+  }, []);
+  async function requireCurrentBackend() {
+    const capabilities = await request("/api/capabilities");
+    const supported = supportsDetailConfig(capabilities);
+    setBackendReady(supported);
+    if (!supported) throw new Error(restartBackendMessage);
+    if (
+      config.ai?.important_details &&
+      !capabilities.ai_config_fields?.includes("important_details")
+    )
+      throw new Error(
+        "Restart the backend to enable automatic detail protection.",
+      );
+  }
   const [project, setProject] = useState<Project | null>(null);
-  const [config, setConfig] = useState<Config>(defaults);
+  const [config, setConfig] = useState<Config>(() => ({
+    ...defaults,
+    ai: preferredAI(),
+  }));
+  useEffect(() => {
+    if (config.ai)
+      localStorage.setItem("papercraft-ai-settings", JSON.stringify(config.ai));
+  }, [config.ai]);
+  const [frameKind, setFrameKind] = useState<FrameKind>(() => {
+    const saved = localStorage.getItem("papercraft-display-frame");
+    return ["auto", "walnut", "oak", "white", "none"].includes(saved || "")
+      ? (saved as FrameKind)
+      : "auto";
+  });
+  const [timeLimit, setTimeLimit] = useState(() => {
+    const saved = Number(localStorage.getItem("papercraft-time-limit"));
+    return Number.isInteger(saved) && saved >= 30 && saved <= 1800
+      ? saved
+      : 180;
+  });
+  useEffect(
+    () => localStorage.setItem("papercraft-display-frame", frameKind),
+    [frameKind],
+  );
+  useEffect(() => {
+    if (Number.isInteger(timeLimit) && timeLimit >= 30 && timeLimit <= 1800)
+      localStorage.setItem("papercraft-time-limit", String(timeLimit));
+  }, [timeLimit]);
+  const [modelStatus, setModelStatus] = useState<
+    Record<string, { status: string }>
+  >({});
+  useEffect(() => {
+    request("/api/models")
+      .then(setModelStatus)
+      .catch(() => setModelStatus({}));
+  }, []);
   const [busy, setBusy] = useState("");
   const [jobId, setJobId] = useState("");
   const [jobDetail, setJobDetail] = useState("");
@@ -97,7 +202,22 @@ function App() {
   const [intensity, setIntensity] = useState(2);
   const [lightColor, setLightColor] = useState("#ffe0a3");
   const [lightMode, setLightMode] = useState("source");
+  const [photoOverlayReady, setPhotoOverlayReady] = useState(false);
+  const [photoOverlay, setPhotoOverlay] = useState(
+    () => localStorage.getItem("papercraft-photo-overlay-v2") !== "false",
+  );
+  const [photoStrength, setPhotoStrength] = useState(1);
+  useEffect(() => {
+    request("/api/capabilities")
+      .then((c) => setPhotoOverlayReady(c.photo_overlay_preview === true))
+      .catch(() => {});
+  }, []);
+  useEffect(() => {
+    localStorage.setItem("papercraft-photo-overlay-v2", String(photoOverlay));
+  }, [photoOverlay]);
   const [transmittance, setTransmittance] = useState(0.55);
+  const [sourceDistance, setSourceDistance] = useState(25);
+  const [lightDiffusion, setLightDiffusion] = useState(6);
   const [paletteText, setPaletteText] = useState("");
   const [printPaper, setPrintPaper] = useState("A4");
   const [printOrientation, setPrintOrientation] = useState("auto");
@@ -125,6 +245,10 @@ function App() {
     setConfig((prev) => ({
       ...prev,
       mode: family === "depth_scene" ? "lightbox" : "multicolor",
+      depth_paper:
+        family === "depth_scene"
+          ? prev.depth_paper || "multicolor"
+          : prev.depth_paper,
       workflow: {
         family,
         style:
@@ -153,13 +277,22 @@ function App() {
   function apply(data: Project) {
     setProject(data);
     if (data.light_plan) {
-      setLightMode("source");
+      setLightMode(
+        data.light_plan.mode === "uniform_transmission" ? "uniform" : "source",
+      );
       setTransmittance(data.light_plan.paper_transmittance_assumption);
+      if (data.light_plan.planning_version === 2) {
+        setSourceDistance(data.light_plan.source_distance_mm ?? 25);
+        setLightDiffusion(data.light_plan.diffusion_mm_assumption ?? 6);
+      }
     }
     setSceneText(
       data.scene_plan ? JSON.stringify(data.scene_plan, null, 2) : "",
     );
-    setConfig(data.config);
+    setConfig({
+      ...data.config,
+      ai: data.config.ai === undefined ? preferredAI() : data.config.ai,
+    });
     setVisible(new Set(data.layers.map((layer) => layer.id)));
     setPaletteText(data.config.palette?.join(", ") || "");
     localStorage.setItem("papercraft-project", data.id);
@@ -174,7 +307,13 @@ function App() {
   }
 
   useEffect(() => {
-    const id = localStorage.getItem("papercraft-project");
+    const requested = new URLSearchParams(window.location.search).get(
+      "project",
+    );
+    const id =
+      requested && /^[a-f0-9]{32}$/.test(requested)
+        ? requested
+        : localStorage.getItem("papercraft-project");
     if (id)
       request(`/projects/${id}`)
         .then(apply)
@@ -207,33 +346,55 @@ function App() {
     currentJob.current = id;
     while (true) {
       const job = await request(`/jobs/${id}`);
-      const [stage, layer] = String(job.stage || "starting").split(":");
+      const [stage, layer, substage] = String(job.stage || "starting").split(
+        ":",
+      );
       const stages: Record<string, string> = {
-        queued: "Chờ xử lý",
-        starting: "Bắt đầu",
-        image_abstraction: "Phân tích ảnh và gộp vùng",
-        construct_layers: "Dựng các lớp giấy",
-        vectorize: "Tạo đường cắt",
-        fabricate: "Gia cố và nối giấy về khung",
-        validate: "Kiểm tra liền khung và độ rộng",
-        repair: "Tìm cầu nối và sửa vật liệu",
-        save: "Lưu thiết kế",
-        complete: "Hoàn tất",
+        queued: "Queued",
+        starting: "Starting",
+        image_abstraction: "Analyzing image",
+        construct_layers: "Building layers",
+        vectorize: "Tracing cut paths",
+        fabricate: "Connecting sheets",
+        validate: "Checking geometry",
+        repair: "Repairing supports",
+        save: "Saving design",
+        complete: "Complete",
       };
+      const subdetail = substage?.startsWith("support-")
+        ? `Bridge ${substage.slice(8)}`
+        : substage?.startsWith("attempt-")
+          ? `Candidate ${substage.slice(8)}`
+          : substage === "check"
+            ? "Checking layer"
+            : "";
       setJobDetail(
-        `${stages[stage] || stage}${layer ? ` · ${layer}` : ""} · ${Math.round((job.progress || 0) * 100)}% · ${Math.floor(job.elapsed_seconds || 0)} giây`,
+        `${stages[stage] || stage}${layer ? ` · ${layer}` : ""}${subdetail ? ` · ${subdetail}` : ""} · ${Math.round((job.progress || 0) * 100)}% · ${Math.floor(job.elapsed_seconds || 0)} s`,
       );
       if (job.state === "succeeded") return job;
       if (job.state === "failed") throw new Error(job.error.message);
       if (job.state === "cancelled")
-        throw new Error("Đã hủy thao tác. Thiết kế trước được giữ lại.");
+        throw new Error("Cancelled. Previous design preserved.");
       await new Promise((resolve) => setTimeout(resolve, 250));
     }
   }
 
-  async function generate(data: Project) {
+  async function generate(
+    data: Project,
+    override?: Config,
+    freshUpload = false,
+  ) {
+    await requireCurrentBackend();
+    const current = override || config;
     const settings = {
-      ...config,
+      ...current,
+      depth_paper:
+        current.depth_paper ||
+        (workflow.family === "depth_scene"
+          ? workflow.lighting === "backlit"
+            ? "white"
+            : "multicolor"
+          : null),
       palette: paletteText.trim()
         ? paletteText.split(",").map((color) => color.trim())
         : null,
@@ -244,74 +405,38 @@ function App() {
         expected_revision_id: data.revision_id,
         config: settings,
         production: true,
+        time_limit_seconds: timeLimit,
         source_lighting: lightMode === "source",
         paper_transmittance: transmittance,
-        scene_plan: sceneText.trim() ? JSON.parse(sceneText) : null,
+        source_distance_mm: sourceDistance,
+        light_diffusion_mm: lightDiffusion,
+        scene_plan:
+          !freshUpload && sceneText.trim() ? JSON.parse(sceneText) : null,
         depths:
-          config.mode === "lightbox" && depthMode === "manual" ? depths : null,
+          !freshUpload && config.mode === "lightbox" && depthMode === "manual"
+            ? depths
+            : null,
       }),
     );
     await poll(job.job_id);
     apply(await request(`/projects/${data.id}`));
-    setNotice("Thiết kế đã tạo · Đã qua kiểm tra chế tác từng lớp");
+    setNotice("Design ready · Geometry checks passed");
     setSelected(null);
     setFocusedIssue(null);
   }
 
   async function upload(file: File) {
+    await requireCurrentBackend();
+    const fresh = { ...config, detail_boxes: [] };
     const form = new FormData();
     form.append("image", file);
-    form.append("config", JSON.stringify(config));
+    form.append("config", JSON.stringify(fresh));
     const data = await request("/projects", { method: "POST", body: form });
     apply(data);
-    await generate(data);
-  }
-
-  async function demo() {
-    const canvas = document.createElement("canvas");
-    canvas.width = 360;
-    canvas.height = 280;
-    const ctx = canvas.getContext("2d")!;
-    ctx.fillStyle = "#eee3cd";
-    ctx.fillRect(0, 0, 360, 280);
-    ctx.fillStyle = "#dcac77";
-    ctx.beginPath();
-    ctx.arc(238, 75, 36, 0, Math.PI * 2);
-    ctx.fill();
-    const mountain = (color: string, points: number[][]) => {
-      ctx.fillStyle = color;
-      ctx.beginPath();
-      ctx.moveTo(0, 280);
-      points.forEach(([x, y]) => ctx.lineTo(x, y));
-      ctx.lineTo(360, 280);
-      ctx.closePath();
-      ctx.fill();
-    };
-    mountain("#a0a399", [
-      [0, 170],
-      [72, 78],
-      [150, 174],
-      [220, 108],
-      [360, 182],
-    ]);
-    mountain("#6e857c", [
-      [0, 208],
-      [110, 146],
-      [218, 210],
-      [300, 145],
-      [360, 170],
-    ]);
-    mountain("#344f49", [
-      [0, 238],
-      [90, 207],
-      [190, 248],
-      [270, 208],
-      [360, 228],
-    ]);
-    const blob = await new Promise<Blob>((resolve) =>
-      canvas.toBlob((b) => resolve(b!), "image/png"),
-    );
-    await upload(new File([blob], "mountain-study.png", { type: "image/png" }));
+    setSceneText("");
+    setDepthMode("heuristic");
+    setDepths({});
+    await generate(data, fresh, true);
   }
 
   async function edit(operation: string, payload: object = {}) {
@@ -331,7 +456,7 @@ function App() {
     );
     await poll(job.job_id);
     apply(await request(`/projects/${project!.id}`));
-    setNotice("Đã cập nhật báo cáo kiểm tra");
+    setNotice("Validation updated");
   }
 
   async function download(format: string, intent = "draft") {
@@ -353,17 +478,17 @@ function App() {
     const a = document.createElement("a");
     a.href = `/jobs/${job.job_id}/download`;
     a.click();
-    setNotice("File đã sẵn sàng tải xuống");
+    setNotice("Download ready");
   }
 
   const layers = project?.layers || [];
   const findings =
     project?.report?.layers.flatMap((report) => report.findings) || [];
   const status = !layers.length
-    ? "Chưa có thiết kế"
+    ? "No design"
     : !project?.report_current
-      ? "Cần kiểm tra lại"
-      : project?.report?.status || "Chưa kiểm tra";
+      ? "Recheck required"
+      : project?.report?.status || "Not checked";
   const currentPass = project?.report_current && status === "PASS";
   const dirty =
     project && JSON.stringify(project.config) !== JSON.stringify(config);
@@ -371,6 +496,11 @@ function App() {
 
   return (
     <div className="app">
+      {backendReady === false && (
+        <div role="alert" className="notification error">
+          {restartBackendMessage}
+        </div>
+      )}
       <header className="topbar">
         <a className="brand" href="/" aria-label="PaperCraft AI">
           <span className="brand-mark">
@@ -382,25 +512,32 @@ function App() {
         </a>
         <div className="top-divider" />
         <span className="workspace-name">
-          Xưởng thiết kế <ChevronDown size={13} />
+          Design studio <ChevronDown size={13} />
         </span>
         <span className="cpu-chip">
-          <i /> CPU · Không cần AI
+          <i />{" "}
+          {config.ai &&
+          (config.ai.segmentation ||
+            config.ai.depth ||
+            config.ai.face_features ||
+            config.ai.important_details)
+            ? "AI enabled · Local processing"
+            : "CPU mode"}
         </span>
         <div className="header-actions">
           <button
             className="icon-button"
-            aria-label="Hoàn tác"
+            aria-label="Undo"
             disabled={disabled || !project?.can_undo}
-            onClick={() => run(() => edit("undo"), "Đang hoàn tác")}
+            onClick={() => run(() => edit("undo"), "Undoing")}
           >
             <Undo2 size={17} />
           </button>
           <button
             className="icon-button"
-            aria-label="Làm lại"
+            aria-label="Redo"
             disabled={disabled || !project?.can_redo}
-            onClick={() => run(() => edit("redo"), "Đang làm lại")}
+            onClick={() => run(() => edit("redo"), "Redoing")}
           >
             <Redo2 size={17} />
           </button>
@@ -410,15 +547,15 @@ function App() {
             onClick={() => projectInput.current?.click()}
           >
             <FileUp size={15} />
-            <span>Mở project</span>
+            <span>Open project</span>
           </button>
           <button
             className="button dark compact"
             disabled={disabled || !layers.length}
-            onClick={() => run(() => download("project"), "Đang lưu project")}
+            onClick={() => run(() => download("project"), "Saving project")}
           >
             <Download size={15} />
-            <span>Lưu project</span>
+            <span>Save project</span>
           </button>
         </div>
       </header>
@@ -429,20 +566,20 @@ function App() {
             <span className="eyebrow">
               <span /> PAPER, MEET POSSIBILITY
             </span>
-            <h1>Từ một bức ảnh, thành từng lớp giấy.</h1>
-            <p>Đơn giản hóa. Xếp lớp. Tạo nên điều bạn có thể chạm vào.</p>
+            <h1>Turn photos into paper art.</h1>
+            <p>Design. Layer. Cut.</p>
           </div>
           <div className="workflow">
             <span className={layers.length ? "done" : "active"}>
-              01 <small>Ảnh & cấu hình</small>
+              01 <small>Design settings</small>
             </span>
             <b>—</b>
             <span className={layers.length ? "active" : ""}>
-              02 <small>Thiết kế lớp</small>
+              02 <small>Layer design</small>
             </span>
             <b>—</b>
             <span>
-              03 <small>Cắt & lắp ráp</small>
+              03 <small>Cut & assemble</small>
             </span>
           </div>
         </section>
@@ -459,11 +596,25 @@ function App() {
             ) : (
               <Check size={16} />
             )}
-            <span>
-              {busy
-                ? `${busy}${jobDetail ? ` — ${jobDetail}` : ""}`
-                : error || notice}
-            </span>
+            <div className="notification-content">
+              {busy ? (
+                `${busy}${jobDetail ? ` — ${jobDetail}` : ""}`
+              ) : error.length > 240 ? (
+                <>
+                  <span>
+                    {error.includes("No certified design")
+                      ? "No cut-ready design found. Adjust the size or material profile and try again."
+                      : "Unable to complete this action."}
+                  </span>
+                  <details>
+                    <summary>Error details</summary>
+                    <p>{error}</p>
+                  </details>
+                </>
+              ) : (
+                error || notice
+              )}
+            </div>
             {busy && jobId && (
               <button
                 onClick={() =>
@@ -472,12 +623,12 @@ function App() {
                   })
                 }
               >
-                Hủy
+                Cancel
               </button>
             )}
             {!busy && (
               <button
-                aria-label="Đóng thông báo"
+                aria-label="Dismiss notification"
                 onClick={() => {
                   setError("");
                   setNotice("");
@@ -493,7 +644,7 @@ function App() {
           <aside className="configuration panel">
             <div className="panel-title">
               <span className="step">01</span>
-              <h2>Ảnh & cấu hình</h2>
+              <h2>Design settings</h2>
             </div>
             <button
               className={`upload-zone ${project ? "has-image" : ""}`}
@@ -503,17 +654,17 @@ function App() {
               onDrop={(event) => {
                 event.preventDefault();
                 const file = event.dataTransfer.files[0];
-                if (file && !busy) run(() => upload(file), "Đang tạo thiết kế");
+                if (file && !busy) run(() => upload(file), "Generating design");
               }}
             >
               {project ? (
                 <>
                   <img
                     src={`/projects/${project.id}/source`}
-                    alt="Ảnh đầu vào"
+                    alt="Source image"
                   />
                   <span>
-                    <ImagePlus size={14} /> Thay ảnh khác
+                    <ImagePlus size={14} /> Replace image
                   </span>
                 </>
               ) : (
@@ -521,9 +672,9 @@ function App() {
                   <span className="upload-icon">
                     <ImagePlus size={25} />
                   </span>
-                  <strong>Thả ảnh của bạn vào đây</strong>
-                  <small>hoặc nhấn để chọn ảnh</small>
-                  <em>PNG, JPG, WEBP · tối đa 30 MB</em>
+                  <strong>Drop an image here</strong>
+                  <small>or click to upload</small>
+                  <em>PNG, JPG, WEBP · up to 30 MB</em>
                 </>
               )}
             </button>
@@ -534,10 +685,27 @@ function App() {
               accept="image/*"
               onChange={(e) => {
                 const file = e.target.files?.[0];
-                if (file) run(() => upload(file), "Đang tạo thiết kế");
+                if (file) run(() => upload(file), "Generating design");
                 e.target.value = "";
               }}
             />
+            {project && (
+              <DetailRegions
+                projectId={project.id}
+                config={config}
+                disabled={disabled}
+                onChange={(boxes) => patch("detail_boxes", boxes)}
+                onPolicy={(policy) => patch("detail_policy", policy)}
+                automatic={
+                  project.metrics.ai_diagnostics?.find(
+                    (d) => d.component === "detail_selection",
+                  )?.regions || []
+                }
+                onAdopt={(box) =>
+                  patch("detail_boxes", [...(config.detail_boxes || []), box])
+                }
+              />
+            )}
             <input
               hidden
               ref={projectInput}
@@ -554,40 +722,13 @@ function App() {
                           json(JSON.parse(await file.text())),
                         ),
                       ),
-                    "Đang mở project",
+                    "Opening project",
                   );
                 e.target.value = "";
               }}
             />
-            <button
-              className="sample-link"
-              disabled={disabled}
-              onClick={() => run(demo, "Đang tạo thiết kế")}
-            >
-              <Sparkles size={13} /> Dùng ảnh mẫu
-            </button>
-            <button
-              className="sample-link"
-              disabled={disabled}
-              onClick={() =>
-                run(async () => {
-                  apply(
-                    await request(
-                      `/references/forest-deer?mode=${config.mode}`,
-                      { method: "POST" },
-                    ),
-                  );
-                  setNotice(
-                    "Mẫu rừng–hươu: 5 lớp liền khung, đã kiểm tra hình học.",
-                  );
-                }, "Đang tải mẫu cắt")
-              }
-            >
-              <Layers size={13} /> Mẫu rừng–hươu 5 lớp
-            </button>
-
             <div className="field-group">
-              <label>Loại tác phẩm</label>
+              <label>Design type</label>
               <div className="segmented">
                 <button
                   disabled={disabled}
@@ -613,7 +754,29 @@ function App() {
                   Depth Scene
                 </button>
               </div>
-              <label htmlFor="art-style">Phong cách</label>
+              {workflow.family === "depth_scene" && (
+                <>
+                  <label htmlFor="depth-paper">Depth Scene paper</label>
+                  <select
+                    id="depth-paper"
+                    disabled={disabled}
+                    value={
+                      config.depth_paper ||
+                      (workflow.lighting === "backlit" ? "white" : "multicolor")
+                    }
+                    onChange={(e) =>
+                      patch(
+                        "depth_paper",
+                        e.target.value as "white" | "multicolor",
+                      )
+                    }
+                  >
+                    <option value="white">White paper</option>
+                    <option value="multicolor">Colored paper</option>
+                  </select>
+                </>
+              )}
+              <label htmlFor="art-style">Style</label>
               <select
                 id="art-style"
                 disabled={disabled}
@@ -627,34 +790,27 @@ function App() {
               >
                 {workflow.family === "stencil" ? (
                   <>
-                    <option value="bold">Bold · mảng lớn</option>
-                    <option value="detailed">Detailed · chi tiết</option>
+                    <option value="bold">Bold</option>
+                    <option value="detailed">Detailed</option>
                   </>
                 ) : workflow.family === "multicolor" ? (
                   <>
                     <option value="colorblock">Colorblock</option>
                     <option value="splash_portrait">
-                      Splash Portrait · ScenePlan thủ công
+                      Splash Portrait · Custom scene
                     </option>
                   </>
                 ) : (
                   <>
                     <option value="landscape">Landscape</option>
-                    <option value="portal">Portal · ScenePlan thủ công</option>
+                    <option value="portal">Portal · Custom scene</option>
                   </>
                 )}
               </select>
-              <small>
-                {workflow.family === "depth_scene"
-                  ? "Gán depth thủ công hoặc dùng gợi ý bố cục; chưa có mô hình suy luận depth."
-                  : workflow.style === "splash_portrait"
-                    ? "Cần ScenePlan từ thiết kế Splash đã chuẩn bị. Chưa có mô hình tạo phong cách."
-                    : "Hình học cắt và chất lượng hình ảnh được đánh giá riêng."}
-              </small>
             </div>
             <div className="field-group">
               <label htmlFor="colors">
-                Số màu giấy <strong>{config.colors}</strong>
+                Paper colors <strong>{config.colors}</strong>
               </label>
               <input
                 id="colors"
@@ -666,13 +822,13 @@ function App() {
                 onChange={(e) => patch("colors", +e.target.value)}
               />
               <div className="range-labels">
-                <span>Đơn giản</span>
-                <span>Phong phú</span>
+                <span>Simple</span>
+                <span>Rich</span>
               </div>
             </div>
             <div className="field-group">
               <label htmlFor="layer-count">
-                Số lớp tối đa <strong>{config.layers}</strong>
+                Layer limit <strong>{config.layers}</strong>
               </label>
               <input
                 id="layer-count"
@@ -686,7 +842,7 @@ function App() {
             </div>
             <div className="field-group">
               <label htmlFor="detail">
-                Mức chi tiết <strong>{Math.round(config.detail * 100)}%</strong>
+                Detail <strong>{Math.round(config.detail * 100)}%</strong>
               </label>
               <input
                 id="detail"
@@ -701,7 +857,7 @@ function App() {
             </div>
             <div className="two-fields">
               <div className="field-group">
-                <label htmlFor="width">Chiều rộng</label>
+                <label htmlFor="width">Width</label>
                 <div className="unit-input">
                   <input
                     id="width"
@@ -716,7 +872,7 @@ function App() {
                 </div>
               </div>
               <div className="field-group">
-                <label htmlFor="spacing">Cách lớp</label>
+                <label htmlFor="spacing">Layer spacing</label>
                 <div className="unit-input">
                   <input
                     id="spacing"
@@ -734,7 +890,7 @@ function App() {
             </div>
             <div className="two-fields">
               <div className="field-group">
-                <label htmlFor="frame-width">Viền khung (mm)</label>
+                <label htmlFor="frame-width">Frame width (mm)</label>
                 <input
                   id="frame-width"
                   type="number"
@@ -746,12 +902,12 @@ function App() {
                 />
               </div>
               <div className="field-group">
-                <label htmlFor="sheet-height">Chiều cao (mm)</label>
+                <label htmlFor="sheet-height">Height (mm)</label>
                 <input
                   id="sheet-height"
                   type="number"
                   min="10"
-                  placeholder="Theo ảnh"
+                  placeholder="Auto"
                   value={config.height_mm ?? ""}
                   disabled={disabled}
                   onChange={(e) =>
@@ -761,7 +917,7 @@ function App() {
               </div>
             </div>
             <div className="field-group">
-              <label htmlFor="art-fit">Đặt ảnh trong khung</label>
+              <label htmlFor="art-fit">Image fit</label>
               <select
                 id="art-fit"
                 value={config.artwork_fit || "contain"}
@@ -770,13 +926,13 @@ function App() {
                   patch("artwork_fit", e.target.value as "contain" | "cover")
                 }
               >
-                <option value="contain">Đặt vừa · giữ đầy đủ ảnh</option>
-                <option value="cover">Cắt phủ · lấp đầy cửa sổ</option>
+                <option value="contain">Contain</option>
+                <option value="cover">Cover</option>
               </select>
             </div>
             <div className="two-fields">
               <div className="field-group">
-                <label htmlFor="assembly">Cách xếp lớp</label>
+                <label htmlFor="assembly">Assembly</label>
                 <select
                   id="assembly"
                   disabled={disabled || workflow.family === "depth_scene"}
@@ -788,12 +944,12 @@ function App() {
                     })
                   }
                 >
-                  <option value="flat">Xếp phẳng</option>
-                  <option value="spaced">Shadowbox · cách lớp</option>
+                  <option value="flat">Flat stack</option>
+                  <option value="spaced">Spaced layers</option>
                 </select>
               </div>
               <div className="field-group">
-                <label htmlFor="lighting">Chiếu sáng</label>
+                <label htmlFor="lighting">Lighting</label>
                 <select
                   id="lighting"
                   disabled={disabled}
@@ -805,42 +961,34 @@ function App() {
                     })
                   }
                 >
-                  <option value="ambient">Ánh sáng môi trường</option>
-                  <option value="backlit">Lightbox · đèn phía sau</option>
+                  <option value="ambient">Ambient</option>
+                  <option value="backlit">Backlit</option>
                 </select>
               </div>
             </div>
-            <small>
-              Mọi tấm giấy phải liền khung. Không có ngoại lệ dán các mảnh rời.
-            </small>
+
             <details>
               <summary>
-                Tùy chỉnh nâng cao <ChevronDown size={13} />
+                Advanced settings <ChevronDown size={13} />
               </summary>
               <div className="field-group">
-                <small>
-                  Tự động gia cố và nối về khung trước khi hoàn tất; chỉ nhận
-                  bản qua kiểm tra, thay đổi vật liệu tối đa 5% mỗi lớp.
-                </small>
                 <ScenePlanner
                   value={sceneText}
                   onChange={setSceneText}
                   disabled={disabled}
                 />
-                <label htmlFor="scene-plan">
-                  ScenePlan · vật thể và vùng khoét (JSON)
-                </label>
+                <label htmlFor="scene-plan">Scene JSON</label>
                 <textarea
                   id="scene-plan"
                   rows={6}
                   value={sceneText}
                   disabled={disabled}
                   onChange={(e) => setSceneText(e.target.value)}
-                  placeholder="Để trống để phân tích ảnh; có thể sửa ScenePlan của mẫu rừng–hươu."
+                  placeholder="Optional scene definition"
                 />
               </div>
               <div className="field-group">
-                <label htmlFor="palette">Palette tùy chọn</label>
+                <label htmlFor="palette">Custom palette</label>
                 <input
                   id="palette"
                   value={paletteText}
@@ -848,39 +996,179 @@ function App() {
                   placeholder="#efe4cf, #36564b"
                   onChange={(e) => setPaletteText(e.target.value)}
                 />
-                <small>Các mã màu cách nhau bằng dấu phẩy.</small>
+                <small>Comma-separated hex colors.</small>
               </div>
               <div className="field-group">
-                <label htmlFor="resolution">Độ phân giải xử lý</label>
+                <strong>AI assistance</strong>
+
+                {(
+                  [
+                    ["segmentation", "Object segmentation"],
+                    ["face_features", "Protect facial features"],
+                    ["important_details", "Protect important details"],
+                    ["depth", "Depth estimation"],
+                  ] as const
+                ).map(([key, label]) => (
+                  <label key={key} className="checkbox-row">
+                    <input
+                      type="checkbox"
+                      aria-label={label}
+                      disabled={disabled}
+                      checked={config.ai?.[key] ?? false}
+                      onChange={(e) =>
+                        patch("ai", {
+                          segmentation: false,
+                          depth: false,
+                          face_features: false,
+                          ...config.ai,
+                          [key]: e.target.checked,
+                        })
+                      }
+                    />{" "}
+                    <span>{label}</span>
+                    <small>
+                      {modelStatus[key]?.status === "prepared"
+                        ? "Available"
+                        : "Fallback"}
+                    </small>
+                  </label>
+                ))}
+                {config.ai?.important_details && (
+                  <>
+                    <label>
+                      Detail crops
+                      <select
+                        aria-label="AI detail crops"
+                        disabled={disabled}
+                        value={config.ai.detail_crops ?? 1}
+                        onChange={(e) =>
+                          patch("ai", {
+                            ...config.ai!,
+                            detail_crops: +e.target.value,
+                          })
+                        }
+                      >
+                        <option value={0}>0 · Full image</option>
+                        <option value={1}>1 · Balanced</option>
+                        <option value={2}>2 · Detailed</option>
+                      </select>
+                    </label>
+                    <label>
+                      Detail time budget (s)
+                      <input
+                        aria-label="AI detail budget"
+                        type="number"
+                        min={5}
+                        max={180}
+                        disabled={disabled}
+                        value={config.ai.detail_seconds ?? 45}
+                        onChange={(e) => {
+                          const value = +e.target.value;
+                          if (value >= 5 && value <= 180)
+                            patch("ai", {
+                              ...config.ai!,
+                              detail_seconds: value,
+                            });
+                        }}
+                      />
+                    </label>
+                  </>
+                )}
+                {config.ai?.segmentation && (
+                  <label>
+                    Subject bounds (0–1)
+                    <input
+                      aria-label="AI subject bounds"
+                      placeholder="Automatic"
+                      key={JSON.stringify(config.ai.subject_box ?? null)}
+                      defaultValue={config.ai.subject_box?.join(", ") ?? ""}
+                      disabled={disabled}
+                      onBlur={(e) => {
+                        const text = e.target.value.trim();
+                        const values = text.split(",").map(Number);
+                        if (
+                          !text ||
+                          (values.length === 4 &&
+                            values.every(Number.isFinite) &&
+                            values[0] >= 0 &&
+                            values[1] >= 0 &&
+                            values[2] <= 1 &&
+                            values[3] <= 1 &&
+                            values[0] < values[2] &&
+                            values[1] < values[3])
+                        ) {
+                          patch("ai", {
+                            ...config.ai!,
+                            subject_box: text
+                              ? (values as [number, number, number, number])
+                              : null,
+                          });
+                          e.target.setCustomValidity("");
+                        } else {
+                          e.target.setCustomValidity(
+                            "Enter valid x0,y0,x1,y1 coordinates within 0–1",
+                          );
+                          e.target.reportValidity();
+                        }
+                      }}
+                    />
+                  </label>
+                )}
+
+                {!!project?.metrics?.ai_diagnostics?.length && (
+                  <details className="processing-details">
+                    <summary>Processing details</summary>
+                    {project?.metrics?.ai_diagnostics?.map((item, i) => (
+                      <small key={i} role="status">
+                        {item.component}:{" "}
+                        {item.component === "detail_selection"
+                          ? `${item.region_count || 0} regions · ${item.method === "semantic+structure" ? "Model + structure" : "Structure only"}`
+                          : item.status === "applied"
+                            ? "Applied"
+                            : item.status === "no_detection"
+                              ? "No detection"
+                              : item.status === "not_applicable"
+                                ? "Not applicable"
+                                : "Fallback"}
+                        {item.reason && (
+                          <span title={item.reason}> · Unavailable</span>
+                        )}
+                      </small>
+                    ))}
+                  </details>
+                )}
+              </div>
+              <div className="field-group">
+                <label htmlFor="resolution">Resolution</label>
                 <select
                   id="resolution"
                   value={config.max_side}
                   disabled={disabled}
                   onChange={(e) => patch("max_side", +e.target.value)}
                 >
-                  <option value="256">256 px · Nhanh</option>
-                  <option value="384">384 px · Cân bằng</option>
-                  <option value="768">768 px · Chi tiết</option>
+                  <option value="256">256 px · Fast</option>
+                  <option value="384">384 px · Balanced</option>
+                  <option value="768">768 px · Detailed</option>
                 </select>
               </div>
               {config.mode === "lightbox" && (
                 <>
-                  <label htmlFor="depth-mode">Phân lớp chiều sâu</label>
+                  <label htmlFor="depth-mode">Depth assignment</label>
                   <select
                     id="depth-mode"
                     value={depthMode}
                     onChange={(e) => setDepthMode(e.target.value)}
                   >
-                    <option value="heuristic">Gợi ý theo bố cục dọc</option>
-                    <option value="manual">Gán thủ công theo vùng</option>
+                    <option value="heuristic">Automatic</option>
+                    <option value="manual">Manual</option>
                   </select>
                   {depthMode === "manual" && (
                     <div className="depth-assignments">
                       {project?.regions?.map((region) => (
                         <label key={region.id}>
-                          Vùng {region.id + 1}
+                          Region {region.id + 1}
                           <select
-                            aria-label={`Chiều sâu vùng ${region.id + 1}`}
+                            aria-label={`Region depth ${region.id + 1}`}
                             value={depths[region.id] ?? 0}
                             onChange={(e) =>
                               setDepths({
@@ -891,7 +1179,7 @@ function App() {
                           >
                             {Array.from({ length: config.layers }, (_, i) => (
                               <option key={i} value={i}>
-                                Lớp {i + 1}
+                                Layer {i + 1}
                               </option>
                             ))}
                           </select>
@@ -902,24 +1190,58 @@ function App() {
                 </>
               )}
             </details>
-            {dirty && (
-              <p className="small-note">Cấu hình đã đổi. Tạo lại để áp dụng.</p>
-            )}
-            <button
-              className="button primary generate"
-              disabled={disabled || !project}
-              onClick={() => run(() => generate(project!), "Đang tạo thiết kế")}
-            >
-              {busy === "Đang tạo thiết kế" ? (
-                <LoaderCircle size={16} className="spin" />
-              ) : (
-                <Sparkles size={16} />
-              )}{" "}
-              {layers.length ? "Tạo lại thiết kế" : "Tạo thiết kế"}
-            </button>
-            <p className="local-note">
-              <ShieldCheck size={12} /> Ảnh được xử lý trên máy của bạn
-            </p>
+            <div className="field-group">
+              <label htmlFor="display-frame">Display frame</label>
+              <select
+                id="display-frame"
+                value={frameKind}
+                onChange={(e) => setFrameKind(e.target.value as FrameKind)}
+              >
+                <option value="auto">Auto</option>
+                <option value="walnut">Walnut</option>
+                <option value="oak">Oak</option>
+                <option value="white">White</option>
+                <option value="none">None</option>
+              </select>
+            </div>
+            <div className="field-group">
+              <label htmlFor="time-limit">Time limit (s)</label>
+              <input
+                id="time-limit"
+                title="30–1800 seconds; checked between processing stages."
+                type="number"
+                min="30"
+                max="1800"
+                step="30"
+                value={timeLimit}
+                disabled={disabled}
+                onChange={(e) => {
+                  setTimeLimit(Number(e.target.value));
+                }}
+                onBlur={() =>
+                  setTimeLimit((value) =>
+                    Math.max(30, Math.min(1800, Math.round(value || 180))),
+                  )
+                }
+              />
+            </div>
+            <div className="generation-actions">
+              {dirty && <p className="small-note">Unsaved settings</p>}
+              <button
+                className="button primary generate"
+                disabled={disabled || !project}
+                onClick={() =>
+                  run(() => generate(project!), "Generating design")
+                }
+              >
+                {busy === "Generating design" ? (
+                  <LoaderCircle size={16} className="spin" />
+                ) : (
+                  <Sparkles size={16} />
+                )}{" "}
+                {layers.length ? "Regenerate" : "Generate design"}
+              </button>
+            </div>
           </aside>
 
           <section className="canvas-panel panel">
@@ -927,66 +1249,68 @@ function App() {
               project?.report_current &&
               status === "FAIL" && (
                 <div className="fabrication-warning" role="note">
-                  <strong>BẢN PHÂN TÍCH — CHƯA THỂ CHẾ TÁC</strong>
+                  <strong>DRAFT · NOT CUT-READY</strong>
                   <span>
-                    Các mảnh đang thấy chưa phải tấm cắt hoàn chỉnh. Cần nối về
-                    khung và xử lý chi tiết quá mảnh.
+                    Resolve disconnected or thin areas before cutting.
                   </span>
                   <button
                     className="button primary"
                     disabled={disabled}
                     onClick={() =>
-                      run(() => generate(project!), "Đang tạo bản chế tác")
+                      run(
+                        () => generate(project!),
+                        "Preparing cut-ready design",
+                      )
                     }
                   >
-                    Tạo bản chế tác đạt kiểm tra
+                    Make cut-ready
                   </button>
                 </div>
               )}
             <div className="canvas-toolbar">
               <div className="view-tabs">
                 <button
-                  aria-label="Xem phẳng"
+                  aria-label="Flat view"
                   className={view === "flat" ? "active" : ""}
                   onClick={() => setView("flat")}
                 >
                   <Layers size={14} />
-                  <span>Phẳng</span>
+                  <span>Flat</span>
                 </button>
                 <button
-                  aria-label="Xem lắp ráp"
+                  aria-label="Assembly view"
                   className={view === "assembled" ? "active" : ""}
                   onClick={() => setView("assembled")}
                 >
                   <Box size={14} />
-                  <span>Lắp ráp</span>
+                  <span>Assembled</span>
                 </button>
                 <button
-                  aria-label="Xem tách lớp"
+                  aria-label="Exploded view"
                   className={view === "exploded" ? "active" : ""}
                   onClick={() => setView("exploded")}
                 >
                   <Layers size={14} />
-                  <span>Tách lớp</span>
+                  <span>Exploded</span>
                 </button>
                 {(config.mode === "lightbox" ||
                   workflow.lighting === "backlit") && (
                   <button
-                    aria-label="Xem ánh sáng"
+                    aria-label="Light preview"
                     className={view === "lightbox" ? "active" : ""}
                     onClick={() => setView("lightbox")}
                   >
                     <Lightbulb size={14} />
-                    <span>Ánh sáng</span>
+                    <span>Light</span>
                   </button>
                 )}
                 <button
-                  aria-label="Xem ảnh gốc"
+                  aria-label="Original image"
                   className={view === "original" ? "active" : ""}
                   onClick={() => setView("original")}
                 >
                   <ImagePlus size={14} />
-                  <span>Ảnh gốc</span>
+                  <span>Original</span>
                 </button>
               </div>
               <span className="view-indicator">
@@ -1032,15 +1356,22 @@ function App() {
                       transform: `translate(${pan.x}px,${pan.y}px) scale(${zoom})`,
                     }}
                     src={`/projects/${project.id}/source`}
-                    alt="So sánh ảnh gốc"
+                    alt="Original image"
                   />
                 ) : view === "flat" ? (
                   <div
-                    className="paper"
-                    style={{
-                      aspectRatio: `${project.width_mm}/${project.height_mm}`,
-                      transform: `translate(${pan.x}px,${pan.y}px) scale(${zoom})`,
-                    }}
+                    className={`paper ${frameKind !== "none" && !selected && visible.size > 1 ? "display-surround" : ""}`}
+                    style={
+                      {
+                        ...Object.fromEntries(
+                          Object.entries(framePalette(project, frameKind))
+                            .filter(([k]) => k !== "material")
+                            .map(([key, value]) => [`--display-${key}`, value]),
+                        ),
+                        aspectRatio: `${project.width_mm}/${project.height_mm}`,
+                        transform: `translate(${pan.x}px,${pan.y}px) scale(${zoom})`,
+                      } as CSSProperties
+                    }
                   >
                     <FlatPreview
                       project={project}
@@ -1053,10 +1384,11 @@ function App() {
                 ) : (
                   <Suspense
                     fallback={
-                      <div className="canvas-empty">Đang mở không gian 3D…</div>
+                      <div className="canvas-empty">Loading 3D preview…</div>
                     }
                   >
                     <Scene
+                      frameKind={frameKind}
                       project={project}
                       view={view}
                       visible={visible}
@@ -1065,64 +1397,68 @@ function App() {
                       shadows={showShadows}
                       lightMode={lightMode}
                       transmittance={transmittance}
+                      sourceDistance={sourceDistance}
+                      diffusion={lightDiffusion}
+                      photoOverlay={photoOverlayReady && photoOverlay}
+                      photoStrength={photoStrength}
                     />
                   </Suspense>
                 )
               ) : (
-                <div className="welcome-art">
-                  <div className="art-sheet sheet-back" />
-                  <div className="art-sheet sheet-mid" />
-                  <div className="art-sheet sheet-front">
-                    <svg viewBox="0 0 340 270">
-                      <rect width="340" height="270" fill="#eee3cd" />
-                      <circle cx="238" cy="76" r="36" fill="#d5a16c" />
-                      <path
-                        d="M0 180 75 80 155 180 225 112 340 185V270H0Z"
-                        fill="#a5a99d"
-                      />
-                      <path
-                        d="M0 215 105 149 217 210 295 154 340 175V270H0Z"
-                        fill="#71877c"
-                      />
-                      <path
-                        d="M0 244 88 209 180 245 269 209 340 231V270H0Z"
-                        fill="#36564b"
-                      />
-                    </svg>
+                <div className="empty-preview">
+                  <div className="welcome-art">
+                    <div className="art-sheet sheet-back" />
+                    <div className="art-sheet sheet-mid" />
+                    <div className="art-sheet sheet-front">
+                      <svg viewBox="0 0 340 270">
+                        <rect width="340" height="270" fill="#eee3cd" />
+                        <circle cx="238" cy="76" r="36" fill="#d5a16c" />
+                        <path
+                          d="M0 180 75 80 155 180 225 112 340 185V270H0Z"
+                          fill="#a5a99d"
+                        />
+                        <path
+                          d="M0 215 105 149 217 210 295 154 340 175V270H0Z"
+                          fill="#71877c"
+                        />
+                        <path
+                          d="M0 244 88 209 180 245 269 209 340 231V270H0Z"
+                          fill="#36564b"
+                        />
+                      </svg>
+                    </div>
                   </div>
                   <span className="sample-caption">
-                    MOUNTAIN STUDY <i /> Mẫu minh họa
+                    MOUNTAIN STUDY <i /> Sample artwork
                   </span>
-                </div>
-              )}
-              {!layers.length && (
-                <div className="canvas-prompt">
-                  <span>Ý tưởng của bạn bắt đầu từ đây</span>
-                  <small>Tải ảnh lên hoặc thử ảnh mẫu để khám phá.</small>
+                  <div className="canvas-prompt">
+                    <span>Your next paper artwork</span>
+                    <small>Upload an image to get started.</small>
+                  </div>
                 </div>
               )}
               <span className="corner-label">
                 {layers.length
                   ? `${project?.width_mm.toFixed(0)} × ${project?.height_mm.toFixed(0)} mm`
-                  : "KHÔNG GIAN SÁNG TẠO"}
+                  : "PREVIEW"}
               </span>
               {(view === "flat" || view === "original") && (
                 <div className="zoom-controls">
                   <button
-                    aria-label="Thu nhỏ"
+                    aria-label="Zoom out"
                     onClick={() => setZoom((z) => Math.max(0.3, z - 0.1))}
                   >
                     <ZoomOut size={15} />
                   </button>
                   <span>{Math.round(zoom * 100)}%</span>
                   <button
-                    aria-label="Phóng to"
+                    aria-label="Zoom in"
                     onClick={() => setZoom((z) => Math.min(3, z + 0.1))}
                   >
                     <ZoomIn size={15} />
                   </button>
                   <button
-                    aria-label="Đặt lại góc nhìn"
+                    aria-label="Reset view"
                     onClick={() => {
                       setZoom(1);
                       setPan({ x: 0, y: 0 });
@@ -1135,79 +1471,142 @@ function App() {
             </div>
             {view === "lightbox" && (
               <div className="light-controls">
+                {lightPreviewReady === false && (
+                  <small role="alert">
+                    Restart the backend to update light preview.
+                  </small>
+                )}
                 <Lightbulb size={16} />
                 <label>
-                  Nguồn màu
+                  <input
+                    type="checkbox"
+                    aria-label="Original photo insert"
+                    disabled={!photoOverlayReady}
+                    checked={photoOverlay}
+                    onChange={(e) => setPhotoOverlay(e.target.checked)}
+                  />
+                  Original photo insert
+                </label>
+                {!photoOverlayReady && (
+                  <small>Restart the backend to enable photo insert.</small>
+                )}
+                {photoOverlay && photoOverlayReady && (
+                  <>
+                    <label>
+                      Photo strength
+                      <input
+                        aria-label="Photo strength"
+                        type="range"
+                        min="0"
+                        max="1"
+                        step=".05"
+                        value={photoStrength}
+                        onChange={(e) => setPhotoStrength(+e.target.value)}
+                      />
+                      <span>{Math.round(photoStrength * 100)}%</span>
+                    </label>
+                  </>
+                )}
+                <label>
+                  Source
                   <select
-                    aria-label="Nguồn màu ánh sáng"
+                    aria-label="Light source"
                     value={lightMode}
                     onChange={(e) => setLightMode(e.target.value)}
                   >
-                    <option value="source">Theo vùng màu ảnh gốc</option>
-                    <option value="uniform">Đèn một màu</option>
+                    <option value="source">Image color zones</option>
+                    <option value="uniform">Uniform light</option>
                   </select>
                 </label>
                 <label>
-                  Cường độ ánh sáng
+                  Light intensity
                   <input
-                    aria-label="Cường độ ánh sáng"
+                    aria-label="Light intensity"
                     type="range"
-                    min=".2"
-                    max="5"
-                    step=".1"
-                    value={intensity}
-                    onChange={(e) => setIntensity(+e.target.value)}
+                    min="-2"
+                    max="12"
+                    step=".25"
+                    value={Math.log2(intensity)}
+                    onChange={(e) => setIntensity(2 ** +e.target.value)}
                   />
+                  <span>
+                    {intensity < 10
+                      ? intensity.toFixed(2)
+                      : Math.round(intensity)}
+                    ×
+                  </span>
                 </label>
                 {lightMode === "uniform" && (
                   <label>
-                    Màu ánh sáng
+                    Light color
                     <input
-                      aria-label="Màu ánh sáng"
+                      aria-label="Light color"
                       type="color"
                       value={lightColor}
                       onChange={(e) => setLightColor(e.target.value)}
                     />
                   </label>
                 )}
-                {lightMode === "source" && (
+                {
                   <label>
-                    Độ xuyên sáng mỗi tấm (ước lượng)
+                    {project?.config.depth_paper === "multicolor"
+                      ? "Paper transmission"
+                      : "Paper transmission"}
                     <input
-                      aria-label="Độ xuyên sáng giấy"
+                      aria-label="Paper transmission"
                       type="range"
-                      min=".15"
-                      max=".95"
-                      step=".05"
+                      min=".01"
+                      max="1"
+                      step=".01"
                       value={transmittance}
                       onChange={(e) => setTransmittance(+e.target.value)}
                     />
-                    <span>{Math.round(transmittance * 100)}%</span>
+                    <span>
+                      {Math.round(transmittance * 100)}% transmission
+                      {project?.config.depth_paper === "multicolor"
+                        ? " backing"
+                        : ""}{" "}
+                      · {Math.round((1 - transmittance) * 100)}% blocked
+                    </span>
                   </label>
-                )}
-                <small>
-                  {lightMode === "source"
-                    ? "Mô phỏng tấm lọc màu theo ảnh + giấy xuyên sáng. Cần in tấm lọc màu và hiệu chuẩn vật liệu thực tế."
-                    : "Mô phỏng ánh sáng gần đúng"}
-                </small>
+                }
               </div>
             )}
+            {view === "lightbox" && project && layers.length > 0 && (
+              <TransmissionPanel
+                project={project}
+                transmittance={transmittance}
+                visible={visible}
+              />
+            )}
+            {view === "lightbox" &&
+              lightMode === "source" &&
+              project &&
+              layers.length > 0 && (
+                <LightPalette
+                  project={project}
+                  distance={sourceDistance}
+                  diffusion={lightDiffusion}
+                  onDistance={setSourceDistance}
+                  onDiffusion={setLightDiffusion}
+                />
+              )}
             {project && layers.length > 0 && view !== "original" && (
               <div className="preview-guides">
                 <span>
                   {view === "flat" && (selected || visible.size === 1)
-                    ? "Gạch chéo: phần bỏ · Màu giấy: phần giữ"
-                    : "Xem chồng lớp · Chọn một lớp để xem vùng bỏ"}
+                    ? "Hatched: remove · Solid: keep"
+                    : "Select a layer to inspect cutouts"}
                   {selected && view === "flat" ? ` · ${selected}` : ""}
                 </span>
                 <label>
                   <input
                     type="checkbox"
-                    aria-label="Đổ bóng giữa các lớp"
+                    aria-label="Layer shadows"
                     checked={showShadows}
                     onChange={(e) => setShowShadows(e.target.checked)}
                   />{" "}
-                  Đổ bóng
+                  Shadows
                 </label>
               </div>
             )}
@@ -1215,13 +1614,13 @@ function App() {
               <span>
                 <span className="tiny-square" />
                 {layers.length
-                  ? `${layers.length} lớp giấy · ${config.mode === "lightbox" ? "Lightbox" : "Multicolor papercut"}`
-                  : "Tạo từ ảnh của bạn"}
+                  ? `${layers.length} paper layers · ${config.mode === "lightbox" ? "Lightbox" : "Multicolor papercut"}`
+                  : "Image to paper"}
               </span>
               <span>
                 {view === "flat"
-                  ? "Cuộn để zoom · Kéo để di chuyển"
-                  : "Kéo để xoay · Cuộn để zoom"}
+                  ? "Scroll to zoom · Drag to pan"
+                  : "Drag to rotate · Scroll to zoom"}
               </span>
             </div>
           </section>
@@ -1229,7 +1628,7 @@ function App() {
           <aside className="layers-panel panel">
             <div className="panel-title">
               <span className="step">02</span>
-              <h2>Các lớp giấy</h2>
+              <h2>Paper layers</h2>
               <span className="count">{layers.length}</span>
             </div>
             <div className="right-tabs">
@@ -1237,20 +1636,20 @@ function App() {
                 className={tab === "layers" ? "active" : ""}
                 onClick={() => setTab("layers")}
               >
-                Lớp giấy
+                Layers
               </button>
               <button
                 className={tab === "issues" ? "active" : ""}
                 onClick={() => setTab("issues")}
               >
-                Kiểm tra {findings.length > 0 && <span>{findings.length}</span>}
+                Checks {findings.length > 0 && <span>{findings.length}</span>}
               </button>
             </div>
             <div className="layer-list">
               {tab === "layers" ? (
                 layers.length ? (
                   <>
-                    <p className="list-direction">PHÍA TRƯỚC → PHÍA SAU</p>
+                    <p className="list-direction">FRONT → BACK</p>
                     {layers.map((layer, index) => (
                       <div
                         key={layer.id}
@@ -1266,7 +1665,7 @@ function App() {
                             setVisible((prev) => new Set([...prev, layer.id]));
                             setView("flat");
                           }}
-                          aria-label={`Xem riêng ${layer.id}`}
+                          aria-label={`Isolate ${layer.id}`}
                         >
                           <svg
                             viewBox={`0 0 ${project!.width_mm} ${project!.height_mm}`}
@@ -1279,11 +1678,11 @@ function App() {
                           </svg>
                         </button>
                         <div className="layer-label">
-                          <strong>Lớp {index + 1}</strong>
+                          <strong>Layer {index + 1}</strong>
                           <span>{layer.color.toUpperCase()}</span>
                           <input
                             type="color"
-                            aria-label={`Màu lớp ${layer.id}`}
+                            aria-label={`Layer color ${layer.id}`}
                             value={layer.color}
                             disabled={disabled}
                             onChange={(e) =>
@@ -1293,14 +1692,14 @@ function App() {
                                     layer_id: layer.id,
                                     color: e.target.value,
                                   }),
-                                "Đang đổi màu",
+                                "Updating color",
                               )
                             }
                           />
                         </div>
                         <div className="layer-actions">
                           <button
-                            aria-label={`Ẩn hiện ${layer.id}`}
+                            aria-label={`Toggle ${layer.id}`}
                             onClick={() =>
                               setVisible((prev) => {
                                 const next = new Set(prev);
@@ -1317,7 +1716,7 @@ function App() {
                             )}
                           </button>
                           <button
-                            aria-label={`Đưa ${layer.id} lên trước`}
+                            aria-label={`Move ${layer.id} forward`}
                             disabled={disabled || index === 0}
                             onClick={() => {
                               const ids = layers.map((l) => l.id);
@@ -1327,14 +1726,14 @@ function App() {
                               ];
                               run(
                                 () => edit("reorder", { layer_ids: ids }),
-                                "Đang đổi thứ tự",
+                                "Reordering",
                               );
                             }}
                           >
                             <ArrowUp size={12} />
                           </button>
                           <button
-                            aria-label={`Đưa ${layer.id} ra sau`}
+                            aria-label={`Move ${layer.id} backward`}
                             disabled={disabled || index === layers.length - 1}
                             onClick={() => {
                               const ids = layers.map((l) => l.id);
@@ -1344,7 +1743,7 @@ function App() {
                               ];
                               run(
                                 () => edit("reorder", { layer_ids: ids }),
-                                "Đang đổi thứ tự",
+                                "Reordering",
                               );
                             }}
                           >
@@ -1360,29 +1759,24 @@ function App() {
                         setVisible(new Set(layers.map((l) => l.id)));
                       }}
                     >
-                      Hiện tất cả các lớp
+                      Show all layers
                     </button>
                   </>
                 ) : (
                   <div className="empty-layers">
                     <Layers size={30} strokeWidth={1} />
-                    <strong>Mỗi lớp, một câu chuyện.</strong>
-                    <p>
-                      Các tấm giấy sẽ xuất hiện ở đây sau khi bạn tạo thiết kế.
-                    </p>
+                    <strong>Your layers appear here</strong>
+                    <p>Generate a design to get started.</p>
                     <span>01 — 02 — 03</span>
                   </div>
                 )
               ) : (
                 <div className="issue-list">
                   {!project?.report_current ? (
-                    <p>
-                      Kiểm tra phiên bản hiện tại để xem các vấn đề chế tác.
-                    </p>
+                    <p>Validate this revision to see issues.</p>
                   ) : !findings.length ? (
                     <p className="all-clear">
-                      <ShieldCheck size={25} /> Không phát hiện vi phạm trong
-                      phạm vi kiểm tra phần mềm.
+                      <ShieldCheck size={25} /> No geometry issues found.
                     </p>
                   ) : (
                     findings.map((issue, index) => (
@@ -1412,7 +1806,7 @@ function App() {
             <div className="fabrication-box">
               <div>
                 <ShieldCheck size={17} />
-                <strong>Khả năng chế tác</strong>
+                <strong>Fabrication</strong>
                 <span
                   className={`status-dot ${currentPass ? "green" : layers.length ? "amber" : ""}`}
                 />
@@ -1422,25 +1816,63 @@ function App() {
               </p>
               <small>
                 {layers.length
-                  ? "Kiểm tra phần mềm · Chưa thử cắt thực tế"
-                  : "Tạo thiết kế để kiểm tra đường cắt và kết cấu."}
+                  ? "Geometry checked · Physical cut untested"
+                  : "Generate a design to validate."}
               </small>
+              {project?.report?.image_fidelity && layers.length > 0 && (
+                <small aria-label="Image quality">
+                  Fidelity:{" "}
+                  {project.report.image_fidelity.status === "PASS"
+                    ? "Checks passed"
+                    : project.report.image_fidelity.status === "WARNING"
+                      ? "Detail review needed"
+                      : project.report.image_fidelity.status === "FAIL"
+                        ? "Needs work"
+                        : "Not evaluated"}
+                  {project.report.image_fidelity.construction ===
+                    "color-occlusion relief" && " · Color relief"}
+                  {""}
+                </small>
+              )}
+              {!!project?.report?.image_fidelity?.automatic_detail_regions
+                ?.length && (
+                <details className="field-group">
+                  <summary>
+                    Detail checks (
+                    {
+                      project.report.image_fidelity.automatic_detail_regions
+                        .length
+                    }{" "}
+                    regions)
+                  </summary>
+                  {project.report.image_fidelity.automatic_detail_regions.map(
+                    (r) => (
+                      <small key={r.index}>
+                        Region {r.index} · {r.label}:{" "}
+                        {r.status === "PASS" ? "Passed" : "Review"} · Match{" "}
+                        {Math.round(r.color_agreement * 100)}% · Contrast{" "}
+                        {Math.round(r.contrast_ratio * 100)}%
+                      </small>
+                    ),
+                  )}
+                </details>
+              )}
               <button
                 className="button secondary"
                 disabled={disabled || !layers.length}
-                onClick={() => run(validate, "Đang kiểm tra")}
+                onClick={() => run(validate, "Validating")}
               >
-                <ScanLine size={14} /> Kiểm tra thiết kế
+                <ScanLine size={14} /> Validate design
               </button>
               <button
                 className="text-button"
                 disabled={disabled || !layers.length}
-                onClick={() => run(() => edit("repair"), "Đang sửa hình học")}
+                onClick={() => run(() => edit("repair"), "Repairing geometry")}
               >
-                Tự động nối đảo & sửa chi tiết mỏng
+                Repair geometry
               </button>
               <details>
-                <summary>Thông số vật liệu</summary>
+                <summary>Material profile</summary>
                 {[
                   "min_feature_width_mm",
                   "min_bridge_width_mm",
@@ -1451,10 +1883,10 @@ function App() {
                     {
                       (
                         {
-                          min_feature_width_mm: "Chi tiết tối thiểu",
-                          min_bridge_width_mm: "Cầu nối tối thiểu",
-                          min_hole_size_mm: "Lỗ cắt tối thiểu",
-                          thickness_mm: "Độ dày giấy",
+                          min_feature_width_mm: "Min. feature width",
+                          min_bridge_width_mm: "Min. bridge width",
+                          min_hole_size_mm: "Min. hole size",
+                          thickness_mm: "Paper thickness",
                         } as Record<string, string>
                       )[key]
                     }
@@ -1469,7 +1901,7 @@ function App() {
                       onChange={(e) =>
                         run(
                           () => edit("set_profile", { [key]: +e.target.value }),
-                          "Đang đổi vật liệu",
+                          "Updating material",
                         )
                       }
                     />
@@ -1481,7 +1913,7 @@ function App() {
                 (record) => record.operation === "bridge",
               ) && (
                 <details>
-                  <summary>Cầu nối tự động</summary>
+                  <summary>Supports</summary>
                   {project.repairs
                     .filter((record) => record.operation === "bridge")
                     .map((record) => (
@@ -1498,16 +1930,16 @@ function App() {
                                     repair_index: record.index,
                                     enabled: e.target.checked,
                                   }),
-                                "Đang chỉnh cầu nối",
+                                "Updating support",
                               )
                             }
                           />{" "}
-                          {record.layer_id} · cầu {record.index + 1}
+                          {record.layer_id} · support {record.index + 1}
                         </label>
                         <label>
-                          Độ rộng{" "}
+                          Width{" "}
                           <input
-                            aria-label={`Độ rộng cầu ${record.index + 1}`}
+                            aria-label={`Support width ${record.index + 1}`}
                             type="number"
                             min={Number(project.profile.min_bridge_width_mm)}
                             max="20"
@@ -1530,7 +1962,7 @@ function App() {
                                       enabled: true,
                                       width_mm: +e.target.value,
                                     }),
-                                  "Đang chỉnh cầu nối",
+                                  "Updating support",
                                 );
                             }}
                           />{" "}
@@ -1549,34 +1981,34 @@ function App() {
             <button
               disabled={disabled}
               onClick={() =>
-                run(() => edit("convert_legacy"), "Đang chuyển bản cũ")
+                run(() => edit("convert_legacy"), "Converting project")
               }
             >
-              Chuyển bản cũ sang lớp liền khung
+              Convert legacy project
             </button>
           )}
           <div className="export-icon">
             <Download size={20} />
           </div>
           <div>
-            <h3>Mang thiết kế ra đời thực.</h3>
-            <p>
-              PDF in 100% · kiểm tra thước trước khi cắt · chưa thử cắt giấy
-              thực tế.
-            </p>
+            <h3>Export your design</h3>
+            <p>Print at 100% scale. Verify the ruler before cutting.</p>
             {project?.material_accounting && (
               <small>
-                {project.material_accounting.cut_sheet_count} tấm cắt ·{" "}
-                {project.material_accounting.colors_used} màu ·{" "}
-                {project.material_accounting.uncut_backing_count} nền ·{" "}
-                {project.material_accounting.diffuser_count} tán sáng ·{" "}
-                {project.material_accounting.spacer_count} bộ cách lớp
+                {project.material_accounting.cut_sheet_count} cut sheets ·{" "}
+                {project.material_accounting.colors_used} colors ·{" "}
+                {project.material_accounting.uncut_backing_count} backing ·{" "}
+                {project.material_accounting.diffuser_count} diffusers ·{" "}
+                {project.material_accounting.colored_source_filter_count
+                  ? `${project.material_accounting.colored_source_filter_count} color filters · `
+                  : ""}
+                {project.material_accounting.spacer_count} spacer sets
               </small>
             )}
           </div>
           <div className="export-options">
             <select
-              aria-label="Khổ giấy in"
+              aria-label="Paper size"
               value={printPaper}
               onChange={(e) => setPrintPaper(e.target.value)}
             >
@@ -1584,67 +2016,64 @@ function App() {
               <option>A3</option>
             </select>
             <select
-              aria-label="Hướng giấy in"
+              aria-label="Page orientation"
               value={printOrientation}
               onChange={(e) => setPrintOrientation(e.target.value)}
             >
-              <option value="auto">Hướng tự động</option>
-              <option value="portrait">Dọc</option>
-              <option value="landscape">Ngang</option>
+              <option value="auto">Auto orientation</option>
+              <option value="portrait">Portrait</option>
+              <option value="landscape">Landscape</option>
             </select>
             <select
-              aria-label="Mặt in"
+              aria-label="Print side"
               value={printSide}
               onChange={(e) => setPrintSide(e.target.value)}
             >
-              <option value="front">In mặt trước</option>
-              <option value="back">In mặt sau · lật gương</option>
+              <option value="front">Front</option>
+              <option value="back">Back · mirrored</option>
             </select>
 
             <select
-              aria-label="Định dạng xuất thêm"
+              aria-label="More export formats"
               defaultValue=""
               disabled={disabled || !layers.length}
               onChange={(e) => {
                 if (e.target.value)
-                  run(() => download(e.target.value), "Đang chuẩn bị file");
+                  run(() => download(e.target.value), "Preparing download");
                 e.target.value = "";
               }}
             >
               <option value="" disabled>
-                Xuất riêng...
+                More formats…
               </option>
-              <option value="light_filter">PDF tấm lọc màu theo ảnh gốc</option>
-              <option value="pdf">PDF tất cả lớp · tỉ lệ 1:1</option>
-              <option value="cut_svg">SVG đường cắt lớp đang chọn</option>
-              <option value="svg">SVG vật liệu lớp đang chọn</option>
-              <option value="dxf">DXF lớp đang chọn</option>
+              <option value="light_filter">Light filter PDF</option>
+              <option value="pdf">All layers PDF · 1:1</option>
+              <option value="cut_svg">Selected layer · Cut SVG</option>
+              <option value="svg">Selected layer · Material SVG</option>
+              <option value="dxf">Selected layer · DXF</option>
               <option value="png">PNG preview</option>
               <option value="report">Validation report</option>
             </select>
             <button
               className="button secondary"
               disabled={disabled || !layers.length}
-              onClick={() => run(() => download("zip"), "Đang chuẩn bị ZIP")}
+              onClick={() => run(() => download("zip"), "Preparing ZIP")}
             >
-              <Download size={15} /> Tải ZIP bản nháp
+              <Download size={15} /> Download draft
             </button>
             <button
               className="button primary"
               disabled={disabled || !currentPass}
               onClick={() =>
-                run(
-                  () => download("zip", "cut_ready"),
-                  "Đang chuẩn bị file cắt",
-                )
+                run(() => download("zip", "cut_ready"), "Preparing cut files")
               }
             >
-              <ShieldCheck size={16} /> Xuất cut-ready
+              <ShieldCheck size={16} /> Download cut-ready
             </button>
           </div>
         </section>
         <footer>
-          <span>Được tạo nên từ hình học. Hoàn thiện bằng đôi tay.</span>
+          <span>Designed digitally. Made by hand.</span>
           <span>
             Geometry-first <i /> Local-first <i /> PaperCraft AI
           </span>

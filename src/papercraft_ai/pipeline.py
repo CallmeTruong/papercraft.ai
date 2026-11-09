@@ -52,6 +52,7 @@ def cached_abstraction(source, config, perception=None):
             **({"depth_family": settings(config).family} if config.ai and config.ai.depth else {}),
             "source": hashlib.sha256(source).hexdigest(),
             "detail_boxes": config.detail_boxes,
+            "abstraction_policy": config.abstraction_policy,
             "physical_abstraction": [
                 config.manufacturing_width_mm,
                 config.width_mm,
@@ -129,19 +130,20 @@ class Design:
         )
 
     def fingerprint(self):
+        config = self.config.model_dump(
+            exclude=({"ai"} if self.config.ai is None else set())
+            | ({"depth_paper"} if self.config.depth_paper is None else set())
+            | ({"detail_boxes"} if not self.config.detail_boxes else set())
+            | ({"detail_policy"} if self.config.detail_policy == "prefer" else set())
+            | ({"manufacturing_width_mm"} if self.config.manufacturing_width_mm is None else set())
+            | ({"abstraction_policy"} if self.config.abstraction_policy is None else set())
+        )
+        if config.get("ai") and not self.config.ai.important_details:
+            for field in ("important_details", "detail_crops", "detail_seconds"):
+                config["ai"].pop(field, None)
         return digest(
             {
-                "config": self.config.model_dump(
-                    exclude=({"ai"} if self.config.ai is None else set())
-                    | ({"depth_paper"} if self.config.depth_paper is None else set())
-                    | ({"detail_boxes"} if not self.config.detail_boxes else set())
-                    | ({"detail_policy"} if self.config.detail_policy == "prefer" else set())
-                    | (
-                        {"manufacturing_width_mm"}
-                        if self.config.manufacturing_width_mm is None
-                        else set()
-                    )
-                ),
+                "config": config,
                 "profile": self.profile.model_dump(),
                 "dimensions": [self.width_mm, self.height_mm],
                 "legacy_requires_conversion": self.legacy_requires_conversion,
@@ -496,12 +498,21 @@ def fit_abstraction(source, config, perception=None):
         ratio = (config.width_mm - 2 * border) / (height - 2 * border)
         if math.isclose(ratio, w / h, rel_tol=1e-9):
             return cached_abstraction(source, config, perception), height
-        size = (
-            (config.max_side, max(1, round(config.max_side / ratio)))
-            if ratio >= 1
-            else (max(1, round(config.max_side * ratio)), config.max_side)
+        fit_side = (
+            max(config.max_side, 768)
+            if config.ai and config.ai.important_details
+            else config.max_side
         )
-        image = Image.fromarray(original)
+        size = (
+            (fit_side, max(1, round(fit_side / ratio)))
+            if ratio >= 1
+            else (max(1, round(fit_side * ratio)), fit_side)
+        )
+        image = Image.fromarray(
+            normalize_image(source, fit_side, config.backing)
+            if config.ai and config.ai.important_details
+            else original
+        )
         fitted = (
             ImageOps.fit(image, size)
             if config.artwork_fit == "cover"
@@ -559,7 +570,8 @@ def generate_design(
             update={
                 "manufacturing_width_mm": max(
                     profile.min_feature_width_mm, profile.min_bridge_width_mm
-                )
+                ),
+                "abstraction_policy": "detail_aware_v3",
             }
         )
     eligible = (
@@ -864,7 +876,14 @@ def restore_design(snapshot):
         # Replay stored perception; opening a project must not require model availability.
         if (
             config.ai
-            and any((config.ai.segmentation, config.ai.depth, config.ai.face_features))
+            and any(
+                (
+                    config.ai.segmentation,
+                    config.ai.depth,
+                    config.ai.face_features,
+                    config.ai.important_details,
+                )
+            )
             and "perception" not in snapshot
         ):
             raise DesignError("AI project is missing its persisted perception artifact")

@@ -7,7 +7,7 @@ export default defineConfig({
   use: { baseURL: "http://127.0.0.1:8001", headless: true },
   webServer: {
     command:
-      "uv run papercraft-ai serve --port 8001 --storage .papercraft/test-browser",
+      "uv run --no-sync papercraft-ai serve --port 8001 --storage .papercraft/test-browser",
     cwd: "..",
     url: "http://127.0.0.1:8001",
     reuseExistingServer: false,

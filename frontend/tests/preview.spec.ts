@@ -1,5 +1,11 @@
 import { expect, test } from "@playwright/test";
 
+test.beforeEach(async ({ page }) => {
+  await page.addInitScript(() =>
+    localStorage.setItem("papercraft-photo-overlay-v2", "false"),
+  );
+});
+
 async function openDepthReference(page: any) {
   const response = await page.request.post(
     "/references/forest-deer?mode=lightbox",
@@ -59,7 +65,7 @@ test("single sheet shows hatched waste in UI without marking retained paper", as
 }) => {
   await openDepthReference(page);
   await page
-    .getByRole("button", { name: "Xem riêng layer-02", exact: true })
+    .getByRole("button", { name: "Isolate layer-02", exact: true })
     .click();
   const svg = page.getByTestId("flat-preview");
   await expect(svg).toHaveAttribute("data-display-mode", "layer");
@@ -81,10 +87,10 @@ test("same-color depth stack has visible shadows without changing material color
   const svg = page.getByTestId("flat-preview");
   await expect(svg).toHaveAttribute("data-display-mode", "stack");
   const shaded = await raster(page);
-  await page.getByRole("checkbox", { name: "Đổ bóng giữa các lớp" }).uncheck();
+  await page.getByRole("checkbox", { name: "Layer shadows" }).uncheck();
   const flat = await raster(page);
   expect(shaded.dark).toBeGreaterThan(flat.dark + 500);
-  await page.getByRole("checkbox", { name: "Đổ bóng giữa các lớp" }).check();
+  await page.getByRole("checkbox", { name: "Layer shadows" }).check();
   const current = await (
     await page.request.get(`/projects/${original.id}`)
   ).json();
@@ -96,7 +102,7 @@ test("same-color depth stack has visible shadows without changing material color
     path: "../docs/screenshots/ui-depth-shadows.png",
     fullPage: true,
   });
-  await page.getByRole("button", { name: "Xem lắp ráp" }).click();
+  await page.getByRole("button", { name: "Assembly view" }).click();
   await expect(page.locator("canvas")).toBeVisible();
   await page.locator("canvas").evaluate(
     () =>

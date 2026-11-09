@@ -28,6 +28,7 @@ class Perception:
     diagnostics: list[dict]
     key: str
     source_grid_sha256: str | None = None
+    important_regions: list[dict] | None = None
 
     def snapshot(self):
         return {
@@ -38,6 +39,7 @@ class Perception:
             "depth": self.depth.tolist() if self.depth is not None else None,
             "diagnostics": self.diagnostics,
             "key": self.key,
+            **({"important_regions": self.important_regions} if self.important_regions else {}),
         }
 
     @classmethod
@@ -59,6 +61,24 @@ class Perception:
             or (depth is not None and (depth.shape != shape or not np.isfinite(depth).all()))
         ):
             raise DesignError("Invalid perception artifact grid or values")
+        regions = data.get("important_regions", [])
+        if not isinstance(regions, list) or len(regions) > 12:
+            raise DesignError("Invalid automatic detail regions")
+        for region in regions:
+            try:
+                x0, y0, x1, y1 = region["box"]
+                valid = (
+                    0 <= x0 < x1 <= 1
+                    and 0 <= y0 < y1 <= 1
+                    and isinstance(region.get("label"), str)
+                    and len(region["label"]) <= 160
+                    and region.get("source") in ("model+structure", "structure")
+                    and np.isfinite(region.get("score", 0))
+                )
+            except (TypeError, ValueError, KeyError):
+                valid = False
+            if not valid:
+                raise DesignError("Invalid automatic detail coordinates")
         return cls(
             objects.astype(np.int32),
             features.astype(bool),
@@ -66,6 +86,7 @@ class Perception:
             data["diagnostics"],
             data["key"],
             data.get("source_grid_sha256"),
+            regions or None,
         )
 
 
@@ -73,14 +94,19 @@ def cache_identity(settings):
     if not settings:
         return None
     stamps = {}
-    for kind in ("segmentation", "depth", "face_features"):
+    for kind in ("segmentation", "depth", "face_features", "important_details"):
         if getattr(settings, kind):
             try:
                 _, data = manifest(kind)
                 stamps[kind] = data
             except (OSError, ValueError, KeyError):
                 stamps[kind] = "unavailable"
-    return {"version": VERSION, "settings": settings.model_dump(), "models": stamps}
+    return {
+        "version": VERSION,
+        "importance_version": "importance-1",
+        "settings": settings.model_dump(),
+        "models": stamps,
+    }
 
 
 def load(kind, device):
@@ -101,7 +127,9 @@ def load(kind, device):
         import psutil
 
         available = psutil.virtual_memory().available
-        reserve_mb = 192 if kind == "face_features" else 768
+        reserve_mb = (
+            192 if kind == "face_features" else 2048 if kind == "important_details" else 768
+        )
         if available < reserve_mb * 1024**2:
             raise MemoryError(
                 f"Not enough free RAM for {kind}: {available // 1024**2} MB available; reserve at least {reserve_mb} MB"
@@ -117,6 +145,15 @@ def load(kind, device):
                     num_faces=4,
                 )
             )
+        elif kind == "important_details":
+            import torch
+
+            from .importance import FlorenceDetector
+
+            if device == "cuda" and not torch.cuda.is_available():
+                raise RuntimeError("CUDA requested but not available")
+            torch.set_num_threads(min(4, torch.get_num_threads()))
+            model = FlorenceDetector(directory, device)
         else:
             import torch
             from transformers import pipeline
@@ -146,6 +183,9 @@ def load(kind, device):
 
 def infer_component(kind, image, settings):
     model, provenance = load(kind, settings.device)
+    if kind == "important_details":
+        regions, details = model(image, settings)
+        return regions, {**provenance, **details}
     if kind == "segmentation":
         # One image encoding, bounded automatic prompts; no semantic label claims.
         if settings.subject_box:
@@ -209,9 +249,15 @@ def component_inference(kind, original, settings, identity):
             "image": hashlib.sha256(original.tobytes()).hexdigest(),
             "version": VERSION,
             "component": kind,
+            **({"importance_version": "importance-1"} if kind == "important_details" else {}),
             "model": identity["models"].get(kind),
             "device": settings.device,
             "box": settings.subject_box if kind == "segmentation" else None,
+            **(
+                {"crops": settings.detail_crops, "seconds": settings.detail_seconds}
+                if kind == "important_details"
+                else {}
+            ),
         }
     )
     if key in _COMPONENT_RESULTS:
@@ -219,7 +265,9 @@ def component_inference(kind, original, settings, identity):
         output, provenance = _COMPONENT_RESULTS[key]
         return output, provenance, True
     output, provenance = infer_component(kind, Image.fromarray(original), settings)
-    if isinstance(output, list):
+    if kind == "important_details":
+        size = len(str(output).encode())
+    elif isinstance(output, list):
         output = sorted(output, key=np.sum, reverse=True)[:64]
         size = sum(value.nbytes for value in output)
     else:
@@ -231,12 +279,21 @@ def component_inference(kind, original, settings, identity):
     return output, provenance, False
 
 
-def analyze(original, settings):
+def analyze(original, settings, detail_source=None):
     from ..pipeline import digest
 
     shape = original.shape[:2]
     identity = cache_identity(settings)
-    key = digest({"image": hashlib.sha256(original.tobytes()).hexdigest(), "identity": identity})
+    detail_source = original if detail_source is None else detail_source
+    key = digest(
+        {
+            "image": hashlib.sha256(original.tobytes()).hexdigest(),
+            "identity": identity,
+            "detail_image": hashlib.sha256(detail_source.tobytes()).hexdigest()
+            if settings.important_details
+            else None,
+        }
+    )
     with _LOCK:
         if key in _RESULTS:
             _RESULTS.move_to_end(key)
@@ -245,13 +302,17 @@ def analyze(original, settings):
         features = np.zeros(shape, bool)
         depth = None
         diagnostics = []
-        for kind in ("segmentation", "face_features", "depth"):
+        semantic_regions = []
+        for kind in ("segmentation", "face_features", "depth", "important_details"):
             if not getattr(settings, kind):
                 continue
             started = time.perf_counter()
             try:
                 output, provenance, cache_hit = component_inference(
-                    kind, original, settings, identity
+                    kind,
+                    detail_source if kind == "important_details" else original,
+                    settings,
+                    identity,
                 )
                 if kind == "segmentation":
                     masks = []
@@ -269,6 +330,8 @@ def analyze(original, settings):
                     if output.shape != shape:
                         raise ValueError("Feature grid mismatch")
                     features = output.astype(bool)
+                elif kind == "important_details":
+                    semantic_regions = output
                 else:
                     if output.ndim != 2 or not np.isfinite(output).all():
                         raise ValueError("Invalid relative-depth map")
@@ -283,7 +346,8 @@ def analyze(original, settings):
                     {
                         "component": kind,
                         "status": "applied"
-                        if kind != "face_features" or features.any()
+                        if (kind != "face_features" or features.any())
+                        and (kind != "important_details" or semantic_regions)
                         else "no_detection",
                         **provenance,
                         "inference_cache_hit": cache_hit,
@@ -315,6 +379,26 @@ def analyze(original, settings):
                         "elapsed_seconds": time.perf_counter() - started,
                     }
                 )
+        important_regions = None
+        if settings.important_details:
+            from .importance import select_details
+
+            owners = cv2.resize(
+                objects,
+                (detail_source.shape[1], detail_source.shape[0]),
+                interpolation=cv2.INTER_NEAREST,
+            )
+            important_regions = select_details(detail_source, semantic_regions, owners)
+            diagnostics.append(
+                {
+                    "component": "detail_selection",
+                    "status": "applied" if important_regions else "no_detection",
+                    "method": "semantic+structure" if semantic_regions else "structure_only",
+                    "region_count": len(important_regions),
+                    "regions": important_regions,
+                    "importance_is_heuristic": True,
+                }
+            )
         result = Perception(
             objects,
             features,
@@ -322,6 +406,7 @@ def analyze(original, settings):
             diagnostics,
             key,
             hashlib.sha256(original.tobytes()).hexdigest(),
+            important_regions,
         )
         for array in (objects, features, depth):
             if array is not None:

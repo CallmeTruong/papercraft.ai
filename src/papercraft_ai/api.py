@@ -22,7 +22,7 @@ from .export import assert_exportable, dxf_document, export_bundle, geometry_pat
 from .fabrication.models import PrintLayout, ScenePlan
 from .fabrication.printing import print_pdf
 from .imaging import normalize_image
-from .models import DesignConfig, DesignError, FabricationProfile
+from .models import AISettings, DesignConfig, DesignError, FabricationProfile
 from .pipeline import edit_design, generate_design, png_bytes, restore_design, validate_design
 from .workflows import capabilities, settings
 
@@ -80,7 +80,9 @@ def create_app(storage: Path | str = ".papercraft"):
         return {
             **capabilities(),
             "config_fields": sorted(DesignConfig.model_fields),
+            "ai_config_fields": sorted(AISettings.model_fields),
             "light_preview_version": 3,
+            "photo_overlay_preview": True,
         }
 
     @app.get("/api/models")
@@ -424,6 +426,8 @@ def create_app(storage: Path | str = ".papercraft"):
         diffusion_mm: float | None = None,
         uniform_color: str | None = None,
         source_gain: float = 1.0,
+        photo_overlay: bool = False,
+        photo_strength: float = 1.0,
     ):
         project = get_project(project_id)
         if revision_id:
@@ -441,6 +445,8 @@ def create_app(storage: Path | str = ".papercraft"):
             diffusion_mm=diffusion_mm,
             uniform_color=uniform_color,
             source_gain=source_gain,
+            photo_overlay=photo_overlay,
+            photo_strength=photo_strength,
         )
         if layer_id not in fields:
             raise DesignError("Unknown or hidden lighting layer")

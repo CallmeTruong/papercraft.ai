@@ -66,12 +66,27 @@ def nearest_colors(lab, centers):
     return labels.reshape(lab.shape[:2])
 
 
-def quantize(image, config, features=None):
+def quantize(image, config, features=None, critical_features=None):
     original = image
     if config.manufacturing_width_mm is not None:
         # Flatten texture before palette fitting; preserve the original for quality metrics.
         image = cv2.pyrMeanShiftFiltering(image, sp=5 + 5 * (1 - config.detail), sr=25)
-        if config.detail_boxes and features is not None and features.any():
+        if (
+            config.abstraction_policy == "detail_aware_v3"
+            and features is not None
+            and features.any()
+        ):
+            # Large spatial texture flattening can erase an entire small eye before
+            # palette fitting. Keep local boundaries with a small bilateral kernel;
+            # categorical physical-core regularization still applies afterward.
+            local = cv2.bilateralFilter(original, 3, 15, 1)
+            image[features] = local[features]
+        if (
+            config.abstraction_policy is None
+            and (config.detail_boxes or (config.ai and config.ai.important_details))
+            and features is not None
+            and features.any()
+        ):
             image[features] = original[features]
     # A tiny spatial kernel avoids erasing one-pixel details at detail=1.
     smooth = (
@@ -117,6 +132,15 @@ def quantize(image, config, features=None):
                 )
             converted = cv2.cvtColor(centers[None, :, :], cv2.COLOR_LAB2RGB)[0]
             palette = np.unique(np.clip(np.rint(converted * 255), 0, 255).astype(np.uint8), axis=0)
+    if config.abstraction_policy == "detail_aware_v3" and not config.palette:
+        from .fabrication.detail_palette import reserve_detail_colors
+
+        priority = critical_features if critical_features is not None else features
+        if priority is not None:
+            pitch = (config.width_mm - 2 * config.frame_mm) / image.shape[1]
+            palette = reserve_detail_colors(
+                lab, priority, palette, (config.manufacturing_width_mm or 1.5) / pitch
+            )
     centers = cv2.cvtColor(palette[None].astype(np.float32) / 255, cv2.COLOR_RGB2LAB)[0]
     return palette, nearest_colors(lab, centers)
 
@@ -234,13 +258,29 @@ def abstract_image(
         perception = Perception.restore(
             perception, original.shape[:2], hashlib.sha256(original.tobytes()).hexdigest()
         )
-    elif config.ai and any((config.ai.segmentation, config.ai.depth, config.ai.face_features)):
+    elif config.ai and any(
+        (
+            config.ai.segmentation,
+            config.ai.depth,
+            config.ai.face_features,
+            config.ai.important_details,
+        )
+    ):
         from .ai.perception import analyze
         from .workflows import settings
 
         unused_depth = config.ai.depth and settings(config).family != "depth_scene"
         effective_ai = config.ai.model_copy(update={"depth": False}) if unused_depth else config.ai
-        perception = analyze(original, effective_ai)
+        detail_source = (
+            normalize_image(source, max(config.max_side, 768), config.backing)
+            if config.ai.important_details
+            else None
+        )
+        perception = (
+            analyze(original, effective_ai, detail_source)
+            if detail_source is not None
+            else analyze(original, effective_ai)
+        )
         if unused_depth:
             perception = replace(
                 perception,
@@ -257,8 +297,17 @@ def abstract_image(
     from .fabrication.abstraction import detail_mask
 
     features = detail_mask(original.shape[:2], config, perception)
-    palette, color_labels = quantize(original, config, features)
-    if features.any():
+    critical = (
+        detail_mask(original.shape[:2], config)
+        if config.detail_boxes
+        else (
+            detail_mask(original.shape[:2], config, perception, include_automatic=False)
+            if perception is not None and perception.features.any()
+            else features
+        )
+    )
+    palette, color_labels = quantize(original, config, features, critical)
+    if features.any() and config.abstraction_policy is None:
         # Avoid bilateral smoothing of protected features; retain the same finite paper palette.
         raw_lab = cv2.cvtColor(original.astype(np.float32) / 255, cv2.COLOR_RGB2LAB)
         centers = cv2.cvtColor(palette[None].astype(np.float32) / 255, cv2.COLOR_RGB2LAB)[0]
@@ -280,6 +329,9 @@ def abstract_image(
     )
     from .fabrication.abstraction import manufacturable_labels
 
+    regions_before_physical = (
+        int(connected_regions(color_labels).max()) + 1 if config.abstraction_policy else None
+    )
     color_labels = manufacturable_labels(color_labels, config, perception)
     flat = palette[color_labels]
     regions = guided_regions(color_labels, perception)
@@ -305,6 +357,13 @@ def abstract_image(
             }
         )
     metrics = visual_metrics(original, flat)
+    if config.abstraction_policy:
+        metrics["physical_abstraction"] = {
+            "policy": config.abstraction_policy,
+            "regions_before": regions_before_physical,
+            "regions_after": len(info),
+            "automatic_landmarks": "unverified_priority_and_final_review",
+        }
     if perception is not None:
         metrics["ai_diagnostics"] = perception.diagnostics
         metrics["ai_analysis_key"] = perception.key

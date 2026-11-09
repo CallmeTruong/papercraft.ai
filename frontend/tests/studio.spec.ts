@@ -1,6 +1,19 @@
 import { expect, test } from "@playwright/test";
 import { readFileSync, writeFileSync } from "node:fs";
 
+test.beforeEach(async ({ page }) => {
+  await page.addInitScript(() =>
+    localStorage.setItem(
+      "papercraft-ai-settings",
+      JSON.stringify({
+        segmentation: false,
+        depth: false,
+        face_features: false,
+      }),
+    ),
+  );
+});
+
 test("upload starts generation automatically and shows stage, progress and elapsed time", async ({
   page,
 }) => {
@@ -18,13 +31,14 @@ test("upload starts generation automatically and shows stage, progress and elaps
     } else await route.continue();
   });
   await page.goto("/");
-  await page.getByRole("button", { name: "Dùng ảnh mẫu" }).click();
-  await expect(page.getByRole("status")).toContainText(
-    "Kiểm tra liền khung và độ rộng",
-  );
+  await page
+    .locator('input[type="file"]')
+    .first()
+    .setInputFiles("../tests/fixtures/001-image-abstraction/two-objects.png");
+  await expect(page.getByRole("status")).toContainText("Checking geometry");
   await expect(page.getByRole("status")).toContainText("70%");
-  await expect(page.getByRole("status")).toContainText("12 giây");
-  await expect(page.getByText("Thiết kế đã tạo")).toBeVisible({
+  await expect(page.getByRole("status")).toContainText("12 s");
+  await expect(page.getByText("Design ready")).toBeVisible({
     timeout: 45000,
   });
 });
@@ -34,10 +48,13 @@ test("CPU workflow edits, invalidates, validates and downloads fabrication bundl
 }) => {
   await page.goto("/");
   await expect(
-    page.getByRole("heading", { name: "Từ một bức ảnh, thành từng lớp giấy." }),
+    page.getByRole("heading", { name: "Turn photos into paper art." }),
   ).toBeVisible();
-  await page.getByRole("button", { name: "Dùng ảnh mẫu" }).click();
-  await expect(page.getByText("Thiết kế đã tạo")).toBeVisible({
+  await page
+    .locator('input[type="file"]')
+    .first()
+    .setInputFiles("../tests/fixtures/001-image-abstraction/two-objects.png");
+  await expect(page.getByText("Design ready")).toBeVisible({
     timeout: 45000,
   });
   const layers = page.locator('[data-testid="layer-row"]');
@@ -48,21 +65,21 @@ test("CPU workflow edits, invalidates, validates and downloads fabrication bundl
     path: "../docs/screenshots/studio-desktop.png",
     fullPage: true,
   });
-  await page.getByLabel("Màu lớp layer-01").fill("#aabbcc");
-  await expect(page.getByText("Cần kiểm tra lại")).toBeVisible();
-  await page.getByRole("button", { name: "Kiểm tra thiết kế" }).click();
-  await expect(page.getByText("Đang kiểm tra")).not.toBeVisible({
+  await page.getByLabel("Layer color layer-01").fill("#aabbcc");
+  await expect(page.getByText("Recheck required")).toBeVisible();
+  await page.getByRole("button", { name: "Validate design" }).click();
+  await expect(page.getByText("Validating")).not.toBeVisible({
     timeout: 45000,
   });
-  await page.getByRole("button", { name: "Xem tách lớp" }).click();
+  await page.getByRole("button", { name: "Exploded view" }).click();
   await expect(page.locator("canvas")).toBeVisible();
-  await page.getByRole("button", { name: "Xem phẳng" }).click();
+  await page.getByRole("button", { name: "Flat view" }).click();
   const downloadPromise = page.waitForEvent("download");
-  await page.getByRole("button", { name: "Tải ZIP bản nháp" }).click();
+  await page.getByRole("button", { name: "Download draft" }).click();
   const download = await downloadPromise;
   expect(download.suggestedFilename()).toContain(".zip");
   await page.reload();
-  await expect(page.getByLabel("Màu lớp layer-01")).toHaveValue("#aabbcc");
+  await expect(page.getByLabel("Layer color layer-01")).toHaveValue("#aabbcc");
 });
 
 test("Lightbox runs without an AI dependency and supports mobile layout", async ({
@@ -71,12 +88,15 @@ test("Lightbox runs without an AI dependency and supports mobile layout", async 
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/");
   await page.getByRole("button", { name: "Depth Scene" }).click();
-  await page.getByRole("button", { name: "Dùng ảnh mẫu" }).click();
-  await expect(page.getByText("Thiết kế đã tạo")).toBeVisible({
+  await page
+    .locator('input[type="file"]')
+    .first()
+    .setInputFiles("../tests/fixtures/001-image-abstraction/two-objects.png");
+  await expect(page.getByText("Design ready")).toBeVisible({
     timeout: 45000,
   });
-  await page.getByRole("button", { name: "Xem ánh sáng" }).click();
-  await expect(page.getByLabel("Cường độ ánh sáng")).toBeVisible();
+  await page.getByRole("button", { name: "Light preview" }).click();
+  await expect(page.getByLabel("Light intensity")).toBeVisible();
   const overflowing = await page.evaluate(
     () => document.documentElement.scrollWidth > window.innerWidth,
   );
@@ -92,23 +112,26 @@ test("manual Lightbox assignments remain manual after reopening and regenerating
 }) => {
   await page.goto("/");
   await page.getByRole("button", { name: "Depth Scene", exact: true }).click();
-  await page.getByRole("button", { name: "Dùng ảnh mẫu" }).click();
-  await expect(page.getByText("Thiết kế đã tạo")).toBeVisible({
+  await page
+    .locator('input[type="file"]')
+    .first()
+    .setInputFiles("../tests/fixtures/001-image-abstraction/two-objects.png");
+  await expect(page.getByText("Design ready")).toBeVisible({
     timeout: 45000,
   });
-  await page.getByText("Tùy chỉnh nâng cao").click();
+  await page.getByText("Advanced settings").click();
   await page.locator("#depth-mode").selectOption("manual");
-  await page.getByLabel("Chiều sâu vùng 1", { exact: true }).selectOption("6");
-  await page.getByRole("button", { name: "Tạo lại thiết kế" }).click();
-  await expect(page.getByText("Thiết kế đã tạo")).toBeVisible({
+  await page.getByLabel("Region depth 1", { exact: true }).selectOption("6");
+  await page.getByRole("button", { name: "Regenerate" }).click();
+  await expect(page.getByText("Design ready")).toBeVisible({
     timeout: 45000,
   });
   await page.reload();
-  await page.getByText("Tùy chỉnh nâng cao").click();
+  await page.getByText("Advanced settings").click();
   await expect(page.locator("#depth-mode")).toHaveValue("manual");
-  await expect(
-    page.getByLabel("Chiều sâu vùng 1", { exact: true }),
-  ).toHaveValue("6");
+  await expect(page.getByLabel("Region depth 1", { exact: true })).toHaveValue(
+    "6",
+  );
 });
 
 test("exported SVG rasterizes back to the physical paper mask", async ({

@@ -1,4 +1,8 @@
 export type Config = {
+  abstraction_policy?: "cut_aware_v2" | "detail_aware_v3" | null;
+  depth_paper?: "white" | "multicolor" | null;
+  detail_boxes?: [number, number, number, number][];
+  detail_policy?: "prefer" | "strict";
   mode: "multicolor" | "lightbox";
   colors: number;
   layers: number;
@@ -14,6 +18,18 @@ export type Config = {
   frame_mm: number;
   artwork_fit?: "contain" | "cover";
   workflow?: Workflow | null;
+  ai?: {
+    segmentation: boolean;
+    depth: boolean;
+    face_features: boolean;
+    important_details?: boolean;
+    detail_crops?: number;
+    detail_seconds?: number;
+    device?: "cpu" | "cuda";
+    failure_policy?: "fallback" | "strict";
+    subject_box?: [number, number, number, number] | null;
+    max_feature_change?: number;
+  } | null;
 };
 export type Workflow = {
   workflow_schema?: 1;
@@ -53,7 +69,23 @@ export type Project = {
   report_current: boolean;
   can_undo: boolean;
   can_redo: boolean;
-  metrics: Record<string, number>;
+  metrics: {
+    [key: string]: unknown;
+    ai_diagnostics?: {
+      component: string;
+      status: string;
+      reason?: string;
+      model_id?: string;
+      revision?: string;
+      method?: string;
+      region_count?: number;
+      regions?: {
+        box: [number, number, number, number];
+        label: string;
+        source: string;
+      }[];
+    }[];
+  };
   profile: Record<string, string | number>;
   scene_plan?: object | null;
   production_receipts?: {
@@ -67,6 +99,9 @@ export type Project = {
     mode: string;
     paper_transmittance_assumption: number;
     optical_validation_status: string;
+    planning_version?: number;
+    source_distance_mm?: number;
+    diffusion_mm_assumption?: number;
   } | null;
   legacy_requires_conversion?: boolean;
   material_accounting?: {
@@ -75,6 +110,7 @@ export type Project = {
     uncut_backing_count: number;
     diffuser_count: number;
     colored_diffuser_count?: number;
+    colored_source_filter_count?: number;
     spacer_count: number;
   };
   regions: { id: number; area_px: number }[];
@@ -88,6 +124,24 @@ export type Project = {
   }[];
   report: null | {
     status: string;
+    image_fidelity?: {
+      status: string;
+      source_structure_similarity?: number;
+      recognition_review?: string;
+      construction?: string;
+      detail_regions?: {
+        index: number;
+        color_agreement: number;
+        status: string;
+      }[];
+      automatic_detail_regions?: {
+        index: number;
+        label: string;
+        color_agreement: number;
+        contrast_ratio: number;
+        status: string;
+      }[];
+    };
     layers: { layer_id: string; findings: Finding[] }[];
   };
 };

@@ -6,6 +6,7 @@ import threading
 from collections import OrderedDict
 from typing import Literal
 
+import cv2
 import numpy as np
 from PIL import Image
 from pydantic import BaseModel, ConfigDict, Field, model_validator
@@ -221,7 +222,11 @@ def source_light_fields(
     diffusion_mm=None,
     uniform_color=None,
     source_gain=1.0,
+    photo_overlay=False,
+    photo_strength=1.0,
 ):
+    if not math.isfinite(photo_strength) or not 0 <= photo_strength <= 1:
+        raise DesignError("Photo filter strength must be within 0..1")
     if not 0 < transmittance <= 1:
         raise DesignError("Paper transmittance must be within (0,1]")
     if not math.isfinite(source_gain) or not 0.01 <= source_gain <= 4096:
@@ -254,6 +259,25 @@ def source_light_fields(
             linear_output=True,
         )
     fields = {"diffuser": encode(linear * source_gain)}
+    if photo_overlay:
+        # A separate printed translucent image immediately in front of the rear
+        # source/diffuser. It filters incoming light before any cut sheet does.
+        h, w = linear.shape[:2]
+        border = design.config.frame_mm
+        xs = (np.arange(w) + 0.5) * design.width_mm / w
+        ys = (np.arange(h) + 0.5) * design.height_mm / h
+        source = design.abstraction.original
+        u = (xs - border) / (design.width_mm - 2 * border)
+        v = (ys - border) / (design.height_mm - 2 * border)
+        mx, my = np.meshgrid(
+            (u * source.shape[1] - 0.5).astype(np.float32),
+            (v * source.shape[0] - 0.5).astype(np.float32),
+        )
+        photo = cv2.remap(source, mx, my, cv2.INTER_LINEAR, borderMode=cv2.BORDER_REPLICATE)
+        inside = (u[None, :] >= 0) & (u[None, :] < 1) & (v[:, None] >= 0) & (v[:, None] < 1)
+        transmission = (1 - photo_strength) + photo_strength * linear_rgb(photo)
+        linear *= np.where(inside[..., None], transmission, 1)
+        fields["photo"] = encode(linear * source_gain)
     for layer, geometry in reversed(list(zip(design.layers, design.geometries))):
         # Spatial propagation between sheets, followed by local paper attenuation.
         sigma_y = max(0, layer.spacing_mm) * 0.18 * linear.shape[0] / design.height_mm
@@ -287,6 +311,8 @@ def cached_light_fields(
     diffusion_mm=None,
     uniform_color=None,
     source_gain=1.0,
+    photo_overlay=False,
+    photo_strength=1.0,
 ):
     key = (
         "light-zones-v3",
@@ -295,6 +321,8 @@ def cached_light_fields(
         diffusion_mm,
         uniform_color,
         source_gain,
+        photo_overlay,
+        photo_strength,
         transmittance,
         tuple(sorted(visible)) if visible is not None else None,
     )
@@ -308,6 +336,8 @@ def cached_light_fields(
                 diffusion_mm=diffusion_mm,
                 uniform_color=uniform_color,
                 source_gain=source_gain,
+                photo_overlay=photo_overlay,
+                photo_strength=photo_strength,
             )
         _CACHE.move_to_end(key)
         while len(_CACHE) > 3:

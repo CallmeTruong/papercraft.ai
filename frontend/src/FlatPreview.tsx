@@ -34,7 +34,7 @@ export function FlatPreview({
   return (
     <svg
       viewBox={`0 0 ${width} ${height}`}
-      aria-label="Thiết kế giấy phẳng"
+      aria-label="Flat paper design"
       data-testid="flat-preview"
       data-display-mode={single ? "layer" : "stack"}
       data-preview-layer={single?.id || ""}

@@ -19,6 +19,9 @@ class AISettings(BaseModel):
     segmentation: bool = False
     depth: bool = False
     face_features: bool = False
+    important_details: bool = False
+    detail_crops: int = Field(default=1, ge=0, le=2, strict=True)
+    detail_seconds: float = Field(default=45.0, ge=5, le=180)
     device: Literal["cpu", "cuda"] = "cpu"
     failure_policy: Literal["fallback", "strict"] = "fallback"
     # Normalized coordinates on the fitted artwork, not on the outer frame.
@@ -55,6 +58,7 @@ class DesignConfig(BaseModel):
     ai: AISettings | None = None
     # Persisted physical abstraction scale; absent on legacy projects.
     manufacturing_width_mm: float | None = Field(default=None, gt=0, le=2000)
+    abstraction_policy: Literal["cut_aware_v2", "detail_aware_v3"] | None = None
     depth_paper: Literal["white", "multicolor"] | None = None
     detail_policy: Literal["prefer", "strict"] = "prefer"
     detail_boxes: list[tuple[float, float, float, float]] = Field(

@@ -41,25 +41,25 @@ export function ScenePlanner({
   }
   return (
     <div className="scene-planner">
-      <p>Vật thể trong cảnh · các thay đổi áp dụng khi tạo lại thiết kế.</p>
+      <p>Scene objects</p>
       {scene.objects.map((object, index) => (
         <fieldset disabled={disabled} key={object.object_id}>
           <legend>{object.object_id}</legend>
           <label>
-            Giữ / khoét
+            Operation
             <select
-              aria-label={`Vai trò ${object.object_id}`}
+              aria-label={`Role ${object.object_id}`}
               value={object.role}
               onChange={(e) => update(index, "role", e.target.value)}
             >
-              <option value="retain">Giữ giấy</option>
-              <option value="cutout">Khoét bỏ</option>
+              <option value="retain">Keep paper</option>
+              <option value="cutout">Remove</option>
             </select>
           </label>
           <label>
-            Lớp (0 = trước)
+            Layer (0 = front)
             <input
-              aria-label={`Lớp vật thể ${object.object_id}`}
+              aria-label={`Object layer ${object.object_id}`}
               type="number"
               min="0"
               max="23"
@@ -68,9 +68,9 @@ export function ScenePlanner({
             />
           </label>
           <label>
-            Loại vật thể
+            Object type
             <select
-              aria-label={`Loại vật thể ${object.object_id}`}
+              aria-label={`Object type ${object.object_id}`}
               value={object.support_role}
               onChange={(e) => update(index, "support_role", e.target.value)}
             >
@@ -82,9 +82,9 @@ export function ScenePlanner({
             </select>
           </label>
           <label>
-            Màu giấy
+            Paper color
             <input
-              aria-label={`Màu vật thể ${object.object_id}`}
+              aria-label={`Object color ${object.object_id}`}
               type="color"
               value={object.color}
               onChange={(e) => update(index, "color", e.target.value)}
@@ -92,12 +92,12 @@ export function ScenePlanner({
           </label>
           <label>
             <input
-              aria-label={`Khóa vật thể ${object.object_id}`}
+              aria-label={`Lock object ${object.object_id}`}
               type="checkbox"
               checked={object.locked}
               onChange={(e) => update(index, "locked", e.target.checked)}
             />{" "}
-            Khóa giữ / khoét khi sửa cầu
+            Lock geometry
           </label>
         </fieldset>
       ))}

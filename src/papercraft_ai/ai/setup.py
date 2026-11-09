@@ -10,6 +10,7 @@ from pathlib import Path
 from urllib.request import urlopen
 
 MODELS = {
+    "important_details": "florence-community/Florence-2-base",
     "segmentation": "facebook/sam2.1-hiera-tiny",
     "depth": "depth-anything/Depth-Anything-V2-Small-hf",
     "face_features": "https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task",
@@ -76,7 +77,7 @@ def prepare(kinds, refresh=False):
                 name = entry["rfilename"]
                 if not any(
                     fnmatch.fnmatch(name, pattern)
-                    for pattern in ("*.json", "*.safetensors", "README.md", "LICENSE*")
+                    for pattern in ("*.json", "*.safetensors", "*.txt", "README.md", "LICENSE*")
                 ):
                     continue
                 target = (directory / name).resolve()

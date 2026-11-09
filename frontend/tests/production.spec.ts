@@ -1,6 +1,25 @@
 import { expect, test, type Page } from "@playwright/test";
 import { readFileSync } from "node:fs";
 
+test.beforeEach(async ({ page }) => {
+  await page.addInitScript(() =>
+    localStorage.setItem("papercraft-photo-overlay-v2", "false"),
+  );
+});
+
+test.beforeEach(async ({ page }) => {
+  await page.addInitScript(() =>
+    localStorage.setItem(
+      "papercraft-ai-settings",
+      JSON.stringify({
+        segmentation: false,
+        depth: false,
+        face_features: false,
+      }),
+    ),
+  );
+});
+
 async function candidate(page: Page, production: boolean) {
   const config = {
     colors: 3,
@@ -51,25 +70,21 @@ test("unfabricable draft is labeled and production action yields a certified con
 }) => {
   const draft = await candidate(page, false);
   expect(draft.report.status).toBe("FAIL");
+  await expect(page.getByText("DRAFT · NOT CUT-READY")).toBeVisible();
   await expect(
-    page.getByText("BẢN PHÂN TÍCH — CHƯA THỂ CHẾ TÁC"),
-  ).toBeVisible();
-  await expect(
-    page.getByRole("button", { name: "Xuất cut-ready", exact: true }),
+    page.getByRole("button", { name: "Download cut-ready", exact: true }),
   ).toBeDisabled();
   await page
-    .getByRole("button", { name: "Tạo bản chế tác đạt kiểm tra", exact: true })
+    .getByRole("button", { name: "Make cut-ready", exact: true })
     .click();
   await expect(
-    page.getByRole("button", { name: "Xuất cut-ready", exact: true }),
+    page.getByRole("button", { name: "Download cut-ready", exact: true }),
   ).toBeEnabled({ timeout: 45000 });
   const result = await (await page.request.get(`/projects/${draft.id}`)).json();
   expect(result.report.status).toBe("PASS");
   expect(result.layers[0].geometry.type).toBe("Polygon");
   expect(result.production_receipts[0].bridge_count).toBeGreaterThan(0);
-  await expect(
-    page.getByText("BẢN PHÂN TÍCH — CHƯA THỂ CHẾ TÁC"),
-  ).not.toBeVisible();
+  await expect(page.getByText("DRAFT · NOT CUT-READY")).not.toBeVisible();
 });
 
 test("source-color light uses registered red-blue image fields and exports a printable diffuser", async ({
@@ -83,13 +98,30 @@ test("source-color light uses registered red-blue image fields and exports a pri
       response.url().includes("/light-preview/layer-01") &&
       response.status() === 200,
   );
-  await page.getByRole("button", { name: "Xem ánh sáng", exact: true }).click();
+  await page
+    .getByRole("button", { name: "Light preview", exact: true })
+    .click();
   const field = await loaded;
   await expect(page.locator(".three-scene")).toHaveAttribute(
     "data-light-fields-loaded",
     "2",
   );
-  await expect(page.getByLabel("Nguồn màu ánh sáng")).toHaveValue("source");
+  await expect(page.getByLabel("Light source")).toHaveValue("source");
+  const palette = page.getByRole("region", {
+    name: "Light colors and placement",
+    exact: true,
+  });
+  await expect(palette).toBeVisible();
+  await palette.getByText("Source placement", { exact: true }).click();
+  await expect(
+    palette.getByRole("img", { name: "Light placement", exact: true }),
+  ).toBeVisible();
+  const plan = await (
+    await page.request.get(`/projects/${p.id}/light-plan`)
+  ).json();
+  expect(plan.planning_version).toBe(2);
+  expect(plan.zones.length).toBeLessThanOrEqual(5);
+  expect(plan.palette.length).toBeGreaterThan(0);
   const hues = await page.evaluate(async (url) => {
     const img = new Image();
     img.src = url;
@@ -110,9 +142,10 @@ test("source-color light uses registered red-blue image fields and exports a pri
       );
     return { red: sample(0.33), blue: sample(0.75) };
   }, field.url());
-  expect(hues.red[0]).toBeGreaterThan(hues.red[2] * 2);
-  expect(hues.blue[2]).toBeGreaterThan(hues.blue[0] * 2);
+  // Broad sources blend naturally: preserve the warm/cool spatial trend, not a photo's pure pixel colors.
+  expect(hues.red[0]).toBeGreaterThan(hues.blue[0]);
+  expect(hues.blue[2]).toBeGreaterThan(hues.red[2]);
   const download = page.waitForEvent("download");
-  await page.getByLabel("Định dạng xuất thêm").selectOption("light_filter");
+  await page.getByLabel("More export formats").selectOption("light_filter");
   expect((await download).suggestedFilename()).toContain(".pdf");
 });

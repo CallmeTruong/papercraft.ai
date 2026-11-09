@@ -9,6 +9,11 @@ from ..geometry import finding, mask_to_geometry, polygon_parts
 
 
 def feature_constraints(design):
+    # Automatic human landmarks are unverified proposals, particularly on animals.
+    # New physical targets use them for palette priority and final-composite review,
+    # never as exact photographic material/cutout locks on every sheet.
+    if design.config.abstraction_policy in ("cut_aware_v2", "detail_aware_v3"):
+        return []
     perception = design.abstraction.perception
     if perception is None or not perception.features.any():
         return []

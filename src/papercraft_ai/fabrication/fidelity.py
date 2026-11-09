@@ -2,6 +2,7 @@
 
 import cv2
 import numpy as np
+from scipy import ndimage
 from skimage.metrics import structural_similarity
 
 from ..models import rgb
@@ -67,9 +68,88 @@ def image_fidelity(design):
             }
         )
     detail_pass = all(r["status"] == "PASS" for r in regions)
+    automatic = []
+    perception = design.abstraction.perception
+    proposals = list((perception.important_regions or []) if perception else [])
+    if perception is not None and design.config.abstraction_policy in (
+        "cut_aware_v2",
+        "detail_aware_v3",
+    ):
+        labels, _ = ndimage.label(perception.features)
+        height, width = labels.shape
+        for slices in ndimage.find_objects(labels)[:8]:
+            if slices is None:
+                continue
+            sy, sx = slices
+            proposals.append(
+                {
+                    "box": [sx.start / width, sy.start / height, sx.stop / width, sy.stop / height],
+                    "label": "Unverified landmark proposal",
+                    "source": "landmark_priority",
+                }
+            )
+    for i, proposal in enumerate(proposals):
+        x0, y0, x1, y1 = proposal["box"]
+        selected = (
+            (vs[:, None] >= y0) & (vs[:, None] < y1) & (us[None, :] >= x0) & (us[None, :] < x1)
+        )
+        agreement = (
+            float(np.mean(np.all(actual[selected] == target[selected], axis=1)))
+            if selected.any()
+            else 0.0
+        )
+        source_local = design.abstraction.original[
+            int(y0 * design.abstraction.original.shape[0]) : max(
+                int(y0 * design.abstraction.original.shape[0]) + 1,
+                int(np.ceil(y1 * design.abstraction.original.shape[0])),
+            ),
+            int(x0 * design.abstraction.original.shape[1]) : max(
+                int(x0 * design.abstraction.original.shape[1]) + 1,
+                int(np.ceil(x1 * design.abstraction.original.shape[1])),
+            ),
+        ]
+        row, col = np.where(selected)
+        contrast_ratio = 0.0
+        source_detail_similarity = 0.0
+        if row.size:
+            local = actual[row.min() : row.max() + 1, col.min() : col.max() + 1]
+            source_detail_similarity = float(
+                structural_similarity(
+                    cv2.resize(source_local, (24, 24), interpolation=cv2.INTER_AREA),
+                    cv2.resize(local, (24, 24), interpolation=cv2.INTER_AREA),
+                    channel_axis=2,
+                    data_range=255,
+                )
+            )
+
+            # Lab variation checks that a colorful/high-contrast source detail did
+            # not collapse to one paper color. It does not certify semantic identity.
+            def contrast(pixels):
+                lab = cv2.cvtColor(pixels.astype(np.float32) / 255, cv2.COLOR_RGB2LAB)
+                return float(np.linalg.norm(lab.std(axis=(0, 1))))
+
+            contrast_ratio = contrast(local) / max(contrast(source_local), 1.0)
+        passed = agreement >= 0.90 and contrast_ratio >= 0.25
+        if design.config.abstraction_policy == "detail_aware_v3":
+            passed = passed and source_detail_similarity >= 0.45
+        automatic.append(
+            {
+                "index": i + 1,
+                "box": proposal["box"],
+                "label": proposal["label"],
+                "source": proposal["source"],
+                "color_agreement": agreement,
+                "contrast_ratio": contrast_ratio,
+                "source_detail_similarity": source_detail_similarity,
+                "status": "PASS" if passed else "WARNING",
+            }
+        )
+    automatic_pass = all(r["status"] == "PASS" for r in automatic)
     return {
         "status": (
             "PASS"
+            if detail_pass and automatic_pass
+            else "WARNING"
             if detail_pass
             else ("FAIL" if design.config.detail_policy == "strict" else "WARNING")
         )
@@ -81,6 +161,7 @@ def image_fidelity(design):
         "minimum_source_similarity": 0.40,
         "source_similarity_gate": not recolored and not design.config.palette,
         "detail_regions": regions,
+        "automatic_detail_regions": automatic,
         "recognition_review": "NOT_RUN",
         "scope": "automated coarse appearance checks; not semantic eye/nose recognition",
         "construction": "color-occlusion relief"

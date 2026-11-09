@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import type { Project } from "./types";
+import { framePalette, type FrameKind } from "./presentation";
 
 export function Scene({
   project,
@@ -12,6 +13,11 @@ export function Scene({
   shadows,
   lightMode,
   transmittance,
+  frameKind = "auto",
+  sourceDistance = 25,
+  diffusion = 6,
+  photoOverlay = false,
+  photoStrength = 1,
 }: {
   project: Project;
   view: string;
@@ -21,11 +27,27 @@ export function Scene({
   shadows: boolean;
   lightMode: string;
   transmittance: number;
+  frameKind?: FrameKind;
+  sourceDistance?: number;
+  diffusion?: number;
+  photoOverlay?: boolean;
+  photoStrength?: number;
 }) {
   const host = useRef<HTMLDivElement>(null);
   const [unsupported, setUnsupported] = useState(false);
   const [loadedFields, setLoadedFields] = useState(0);
   const [textureError, setTextureError] = useState(false);
+  const [previewGain, setPreviewGain] = useState(intensity);
+  const [previewPhotoStrength, setPreviewPhotoStrength] =
+    useState(photoStrength);
+  useEffect(() => {
+    const timer = setTimeout(() => setPreviewPhotoStrength(photoStrength), 150);
+    return () => clearTimeout(timer);
+  }, [photoStrength]);
+  useEffect(() => {
+    const timer = setTimeout(() => setPreviewGain(intensity), 150);
+    return () => clearTimeout(timer);
+  }, [intensity]);
   useEffect(() => {
     const element = host.current;
     if (!element) return;
@@ -44,7 +66,7 @@ export function Scene({
     const lightbox = view === "lightbox";
     const colorLight = lightbox && lightMode === "source";
     const previewUrl = (layer: string) =>
-      `/projects/${project.id}/light-preview/${layer}?revision_id=${project.revision_id}&transmittance=${transmittance}&visible=${encodeURIComponent([...visible].join(","))}`;
+      `/projects/${project.id}/light-preview/${layer}?revision_id=${project.revision_id}&transmittance=${transmittance}&source_distance_mm=${sourceDistance}&diffusion_mm=${diffusion}&source_gain=${previewGain}&photo_overlay=${photoOverlay}&photo_strength=${previewPhotoStrength}&visible=${encodeURIComponent([...visible].join(","))}${!colorLight ? `&uniform_color=${encodeURIComponent(lightColor)}` : ""}`;
     const loader = new THREE.TextureLoader();
     function loadField(
       layer: string,
@@ -75,15 +97,26 @@ export function Scene({
     renderer.setClearColor(0xf0eee9, 0);
     element.appendChild(renderer.domElement);
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(34, 1, 0.1, 5000);
     const size = Math.max(project.width_mm, project.height_mm);
-    camera.position.set(size * 0.8, size * 0.7, size * 1.75);
+    // Millimetre-thin touching sheets need a useful depth-buffer range. A0.1mm
+    // near plane at a several-hundred-mm camera distance causes surface fighting.
+    const camera = new THREE.PerspectiveCamera(
+      34,
+      1,
+      Math.max(1, size * 0.02),
+      size * 25,
+    );
+    camera.position.set(
+      size * (view === "exploded" ? 0.8 : 0.12),
+      size * (view === "exploded" ? 0.7 : 0.08),
+      size * 1.75,
+    );
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.minDistance = size * 0.3;
     controls.maxDistance = size * 6;
-    scene.add(new THREE.AmbientLight(0xffffff, colorLight ? 0.12 : 0.65));
-    const key = new THREE.DirectionalLight(0xffffff, colorLight ? 0.3 : 2.8);
+    scene.add(new THREE.AmbientLight(0xffffff, lightbox ? 0.06 : 0.65));
+    const key = new THREE.DirectionalLight(0xffffff, lightbox ? 0.15 : 2.8);
     key.castShadow = shadows;
     key.shadow.mapSize.set(2048, 2048);
     key.shadow.camera.left = -project.width_mm * 0.65;
@@ -93,13 +126,55 @@ export function Scene({
     key.shadow.camera.near = size * 0.4;
     key.shadow.camera.far = size * 4;
     key.shadow.normalBias = 0.18;
-    key.shadow.bias = -0.00015;
+    key.shadow.bias = -0.0008;
     key.shadow.radius = 2;
     key.position.set(-size * 0.8, size * 0.9, size * 1.3);
     scene.add(key);
     const meshes: THREE.Mesh[] = [];
     const thickness = Number(project.profile.thickness_mm);
     let offset = 0;
+    if (frameKind !== "none" && visible.size > 1 && view !== "exploded") {
+      const colors = framePalette(project, frameKind);
+      const mat = size * 0.022,
+        rail = size * 0.035;
+      function ring(
+        innerW: number,
+        innerH: number,
+        width: number,
+        color: string,
+        depth: number,
+      ) {
+        const material = new THREE.MeshStandardMaterial({
+          color,
+          roughness: 0.85,
+        });
+        for (const [w, h, x, y] of [
+          [innerW + 2 * width, width, 0, (innerH + width) / 2],
+          [innerW + 2 * width, width, 0, -(innerH + width) / 2],
+          [width, innerH, -(innerW + width) / 2, 0],
+          [width, innerH, (innerW + width) / 2, 0],
+        ]) {
+          const mesh = new THREE.Mesh(
+            new THREE.BoxGeometry(w, h, depth),
+            material.clone(),
+          );
+          mesh.position.set(x, y, 1);
+          mesh.castShadow = true;
+          mesh.receiveShadow = true;
+          meshes.push(mesh);
+          scene.add(mesh);
+        }
+        material.dispose();
+      }
+      ring(project.width_mm, project.height_mm, mat, colors.mat, 1);
+      ring(
+        project.width_mm + 2 * mat,
+        project.height_mm + 2 * mat,
+        rail,
+        colors.wood,
+        5,
+      );
+    }
     for (const [index, layer] of project.layers.entries()) {
       const layerZ = -offset;
       offset +=
@@ -141,7 +216,7 @@ export function Scene({
         depth: thickness,
         bevelEnabled: false,
       });
-      if (colorLight) {
+      if (lightbox) {
         const position = geometry.getAttribute("position");
         const uv = new Float32Array(position.count * 2);
         for (let i = 0; i < position.count; i++) {
@@ -156,22 +231,23 @@ export function Scene({
         color: layer.color,
         roughness: 0.9,
         metalness: 0,
-        emissive: colorLight ? "#ffffff" : lightbox ? lightColor : "#000000",
-        emissiveIntensity: colorLight
-          ? intensity * 1.5
-          : lightbox
-            ? intensity * 0.04 * (index + 1)
-            : 0,
+        emissive: lightbox ? "#ffffff" : "#000000",
+        emissiveIntensity: lightbox ? 1 : 0,
         side: THREE.DoubleSide,
         shadowSide: THREE.BackSide,
       });
-      if (colorLight) {
+      if (lightbox) {
         material.emissiveMap = loadField(layer.id, () => {
           material.needsUpdate = true;
         });
         material.needsUpdate = true;
       }
-      const mesh = new THREE.Mesh(geometry, material);
+      const edgeMaterial = new THREE.MeshStandardMaterial({
+        color: layer.color,
+        roughness: 1,
+        side: THREE.DoubleSide,
+      });
+      const mesh = new THREE.Mesh(geometry, [material, edgeMaterial]);
       mesh.position.z = layerZ;
       mesh.castShadow = shadows;
       mesh.receiveShadow = shadows;
@@ -198,26 +274,36 @@ export function Scene({
       const background = new THREE.Mesh(
         new THREE.PlaneGeometry(project.width_mm, project.height_mm),
         new THREE.MeshBasicMaterial({
-          color: new THREE.Color(
-            colorLight ? "#ffffff" : lightColor,
-          ).multiplyScalar(intensity / 2),
+          color: new THREE.Color("#ffffff"),
           side: THREE.DoubleSide,
         }),
       );
-      if (colorLight) {
+      if (lightbox) {
         background.material.map = loadField("diffuser", () => {
           background.material.needsUpdate = true;
         });
         background.material.needsUpdate = true;
       }
-      background.position.z = -offset;
+      background.position.z = -offset - (photoOverlay ? 1 : 0);
       scene.add(background);
       meshes.push(background);
-      const backlight = new THREE.PointLight(
-        lightColor,
-        colorLight ? 0 : intensity * size * size,
-        size * 6,
-      );
+      if (photoOverlay) {
+        const photoMaterial = new THREE.MeshBasicMaterial({
+          color: "#ffffff",
+          side: THREE.DoubleSide,
+        });
+        photoMaterial.map = loadField("photo", () => {
+          photoMaterial.needsUpdate = true;
+        });
+        const photo = new THREE.Mesh(
+          new THREE.PlaneGeometry(project.width_mm, project.height_mm),
+          photoMaterial,
+        );
+        photo.position.z = -offset + 0.1;
+        scene.add(photo);
+        meshes.push(photo);
+      }
+      const backlight = new THREE.PointLight(lightColor, 0, size * 6);
       backlight.position.set(0, 0, -size);
       scene.add(backlight);
     }
@@ -271,34 +357,41 @@ export function Scene({
     project,
     view,
     visible,
-    intensity,
+    previewGain,
     lightColor,
     shadows,
     lightMode,
     transmittance,
+    frameKind,
+    sourceDistance,
+    diffusion,
+    photoOverlay,
+    previewPhotoStrength,
   ]);
   return (
     <div
       ref={host}
       className="three-scene"
-      aria-label="Xem trước 3D"
+      aria-label="3D preview"
       data-light-mode={view === "lightbox" ? lightMode : undefined}
       data-light-fields-loaded={loadedFields}
+      data-photo-overlay={
+        view === "lightbox" && photoOverlay ? "true" : "false"
+      }
     >
       {!unsupported &&
         view === "lightbox" &&
-        lightMode === "source" &&
-        loadedFields < visible.size + 1 && (
+        loadedFields < visible.size + 1 + (photoOverlay ? 1 : 0) && (
           <div className="scene-loading">
             {textureError
-              ? "Không tải được vùng sáng. Hãy tải lại phiên dự án."
-              : "Đang dựng các vùng sáng theo ảnh gốc…"}
+              ? "Unable to load lighting. Refresh to retry."
+              : "Rendering light…"}
           </div>
         )}
       {unsupported && (
         <div className="canvas-empty">
-          <p>Thiết bị chưa hỗ trợ xem 3D.</p>
-          <p>Chuyển sang xem phẳng để tiếp tục thiết kế và xuất file.</p>
+          <p>3D preview unavailable.</p>
+          <p>Switch to Flat view to continue.</p>
         </div>
       )}
     </div>
