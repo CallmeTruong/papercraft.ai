@@ -1,0 +1,417 @@
+{
+  "status": "PASS",
+  "revision_id": "3fafef9ce81842d8bfcd9cfe1b0e6693",
+  "fingerprint": "e0242a39f7e60118897f5ba137482637c436aa31965d5b59c8cfc816ec58ebc5",
+  "checker_version": "frame-rooted-continuous-3",
+  "profile_hash": "cf245ff7dd8790c346d6aacf352e51e4f4144a604c304f5fe8bdf69dd837aff7",
+  "layers": [
+    {
+      "status": "PASS",
+      "findings": [],
+      "coverage": {
+        "checker_version": "frame-rooted-continuous-3",
+        "units": "mm",
+        "connectivity_method": "full-frame containment and positive-area polygon components",
+        "width_method": "continuous rooted inset core + geometric coverage",
+        "error_bound_mm": 0.01,
+        "required_feature_width_mm": 1.2,
+        "required_support_width_mm": 1.5,
+        "decorative_tip_policy": "bounded_convex",
+        "certified_convex_corners": [],
+        "physical_test_status": "NOT_RUN"
+      },
+      "metrics": {
+        "material_component_count": 1,
+        "missing_frame_area_mm2": 0.0,
+        "unsupported_island_count": 0,
+        "thin_feature_violation_count": 0,
+        "total_cut_length_mm": 2286.775779512551,
+        "cutting_path_count": 2,
+        "invalid_polygon_count": 0
+      },
+      "frame": {
+        "outer_width_mm": 260.0,
+        "outer_height_mm": 182.5,
+        "border_width_mm": 10.0
+      },
+      "important_features": [],
+      "layer_id": "layer-01"
+    },
+    {
+      "status": "PASS",
+      "findings": [],
+      "coverage": {
+        "checker_version": "frame-rooted-continuous-3",
+        "units": "mm",
+        "connectivity_method": "full-frame containment and positive-area polygon components",
+        "width_method": "continuous rooted inset core + geometric coverage",
+        "error_bound_mm": 0.01,
+        "required_feature_width_mm": 1.2,
+        "required_support_width_mm": 1.5,
+        "decorative_tip_policy": "bounded_convex",
+        "certified_convex_corners": [],
+        "physical_test_status": "NOT_RUN"
+      },
+      "metrics": {
+        "material_component_count": 1,
+        "missing_frame_area_mm2": 0.0,
+        "unsupported_island_count": 0,
+        "thin_feature_violation_count": 0,
+        "total_cut_length_mm": 2561.029569193674,
+        "cutting_path_count": 4,
+        "invalid_polygon_count": 0
+      },
+      "frame": {
+        "outer_width_mm": 260.0,
+        "outer_height_mm": 182.5,
+        "border_width_mm": 10.0
+      },
+      "important_features": [],
+      "layer_id": "layer-02"
+    },
+    {
+      "status": "PASS",
+      "findings": [],
+      "coverage": {
+        "checker_version": "frame-rooted-continuous-3",
+        "units": "mm",
+        "connectivity_method": "full-frame containment and positive-area polygon components",
+        "width_method": "continuous rooted inset core + geometric coverage",
+        "error_bound_mm": 0.01,
+        "required_feature_width_mm": 1.2,
+        "required_support_width_mm": 1.5,
+        "decorative_tip_policy": "bounded_convex",
+        "certified_convex_corners": [],
+        "physical_test_status": "NOT_RUN"
+      },
+      "metrics": {
+        "material_component_count": 1,
+        "missing_frame_area_mm2": 0.0,
+        "unsupported_island_count": 0,
+        "thin_feature_violation_count": 0,
+        "total_cut_length_mm": 2442.9053135251406,
+        "cutting_path_count": 4,
+        "invalid_polygon_count": 0
+      },
+      "frame": {
+        "outer_width_mm": 260.0,
+        "outer_height_mm": 182.5,
+        "border_width_mm": 10.0
+      },
+      "important_features": [],
+      "layer_id": "layer-03"
+    },
+    {
+      "status": "PASS",
+      "findings": [],
+      "coverage": {
+        "checker_version": "frame-rooted-continuous-3",
+        "units": "mm",
+        "connectivity_method": "full-frame containment and positive-area polygon components",
+        "width_method": "continuous rooted inset core + geometric coverage",
+        "error_bound_mm": 0.01,
+        "required_feature_width_mm": 1.2,
+        "required_support_width_mm": 1.5,
+        "decorative_tip_policy": "bounded_convex",
+        "certified_convex_corners": [],
+        "physical_test_status": "NOT_RUN"
+      },
+      "metrics": {
+        "material_component_count": 1,
+        "missing_frame_area_mm2": 0.0,
+        "unsupported_island_count": 0,
+        "thin_feature_violation_count": 0,
+        "total_cut_length_mm": 2526.633602475777,
+        "cutting_path_count": 4,
+        "invalid_polygon_count": 0
+      },
+      "frame": {
+        "outer_width_mm": 260.0,
+        "outer_height_mm": 182.5,
+        "border_width_mm": 10.0
+      },
+      "important_features": [],
+      "layer_id": "layer-04"
+    },
+    {
+      "status": "PASS",
+      "findings": [],
+      "coverage": {
+        "checker_version": "frame-rooted-continuous-3",
+        "units": "mm",
+        "connectivity_method": "full-frame containment and positive-area polygon components",
+        "width_method": "continuous rooted inset core + geometric coverage",
+        "error_bound_mm": 0.01,
+        "required_feature_width_mm": 1.2,
+        "required_support_width_mm": 1.5,
+        "decorative_tip_policy": "bounded_convex",
+        "certified_convex_corners": [],
+        "physical_test_status": "NOT_RUN"
+      },
+      "metrics": {
+        "material_component_count": 1,
+        "missing_frame_area_mm2": 0.0,
+        "unsupported_island_count": 0,
+        "thin_feature_violation_count": 0,
+        "total_cut_length_mm": 2417.597907368241,
+        "cutting_path_count": 2,
+        "invalid_polygon_count": 0
+      },
+      "frame": {
+        "outer_width_mm": 260.0,
+        "outer_height_mm": 182.5,
+        "border_width_mm": 10.0
+      },
+      "important_features": [],
+      "layer_id": "layer-05"
+    },
+    {
+      "status": "PASS",
+      "findings": [],
+      "coverage": {
+        "checker_version": "frame-rooted-continuous-3",
+        "units": "mm",
+        "connectivity_method": "full-frame containment and positive-area polygon components",
+        "width_method": "continuous rooted inset core + geometric coverage",
+        "error_bound_mm": 0.01,
+        "required_feature_width_mm": 1.2,
+        "required_support_width_mm": 1.5,
+        "decorative_tip_policy": "bounded_convex",
+        "certified_convex_corners": [],
+        "physical_test_status": "NOT_RUN"
+      },
+      "metrics": {
+        "material_component_count": 1,
+        "missing_frame_area_mm2": 0.0,
+        "unsupported_island_count": 0,
+        "thin_feature_violation_count": 0,
+        "total_cut_length_mm": 2465.2799609027397,
+        "cutting_path_count": 2,
+        "invalid_polygon_count": 0
+      },
+      "frame": {
+        "outer_width_mm": 260.0,
+        "outer_height_mm": 182.5,
+        "border_width_mm": 10.0
+      },
+      "important_features": [],
+      "layer_id": "layer-06"
+    },
+    {
+      "status": "PASS",
+      "findings": [],
+      "coverage": {
+        "checker_version": "frame-rooted-continuous-3",
+        "units": "mm",
+        "connectivity_method": "full-frame containment and positive-area polygon components",
+        "width_method": "continuous rooted inset core + geometric coverage",
+        "error_bound_mm": 0.01,
+        "required_feature_width_mm": 1.2,
+        "required_support_width_mm": 1.5,
+        "decorative_tip_policy": "bounded_convex",
+        "certified_convex_corners": [],
+        "physical_test_status": "NOT_RUN"
+      },
+      "metrics": {
+        "material_component_count": 1,
+        "missing_frame_area_mm2": 0.0,
+        "unsupported_island_count": 0,
+        "thin_feature_violation_count": 0,
+        "total_cut_length_mm": 2505.2016420458463,
+        "cutting_path_count": 6,
+        "invalid_polygon_count": 0
+      },
+      "frame": {
+        "outer_width_mm": 260.0,
+        "outer_height_mm": 182.5,
+        "border_width_mm": 10.0
+      },
+      "important_features": [],
+      "layer_id": "layer-07"
+    },
+    {
+      "status": "PASS",
+      "findings": [],
+      "coverage": {
+        "checker_version": "frame-rooted-continuous-3",
+        "units": "mm",
+        "connectivity_method": "full-frame containment and positive-area polygon components",
+        "width_method": "continuous rooted inset core + geometric coverage",
+        "error_bound_mm": 0.01,
+        "required_feature_width_mm": 1.2,
+        "required_support_width_mm": 1.5,
+        "decorative_tip_policy": "bounded_convex",
+        "certified_convex_corners": [],
+        "physical_test_status": "NOT_RUN"
+      },
+      "metrics": {
+        "material_component_count": 1,
+        "missing_frame_area_mm2": 0.0,
+        "unsupported_island_count": 0,
+        "thin_feature_violation_count": 0,
+        "total_cut_length_mm": 2278.413920393013,
+        "cutting_path_count": 9,
+        "invalid_polygon_count": 0
+      },
+      "frame": {
+        "outer_width_mm": 260.0,
+        "outer_height_mm": 182.5,
+        "border_width_mm": 10.0
+      },
+      "important_features": [],
+      "layer_id": "layer-08"
+    },
+    {
+      "status": "PASS",
+      "findings": [],
+      "coverage": {
+        "checker_version": "frame-rooted-continuous-3",
+        "units": "mm",
+        "connectivity_method": "full-frame containment and positive-area polygon components",
+        "width_method": "continuous rooted inset core + geometric coverage",
+        "error_bound_mm": 0.01,
+        "required_feature_width_mm": 1.2,
+        "required_support_width_mm": 1.5,
+        "decorative_tip_policy": "bounded_convex",
+        "certified_convex_corners": [],
+        "physical_test_status": "NOT_RUN"
+      },
+      "metrics": {
+        "material_component_count": 1,
+        "missing_frame_area_mm2": 0.0,
+        "unsupported_island_count": 0,
+        "thin_feature_violation_count": 0,
+        "total_cut_length_mm": 2012.9469447306474,
+        "cutting_path_count": 7,
+        "invalid_polygon_count": 0
+      },
+      "frame": {
+        "outer_width_mm": 260.0,
+        "outer_height_mm": 182.5,
+        "border_width_mm": 10.0
+      },
+      "important_features": [],
+      "layer_id": "layer-09"
+    },
+    {
+      "status": "PASS",
+      "findings": [],
+      "coverage": {
+        "checker_version": "frame-rooted-continuous-3",
+        "units": "mm",
+        "connectivity_method": "full-frame containment and positive-area polygon components",
+        "width_method": "continuous rooted inset core + geometric coverage",
+        "error_bound_mm": 0.01,
+        "required_feature_width_mm": 1.2,
+        "required_support_width_mm": 1.5,
+        "decorative_tip_policy": "bounded_convex",
+        "certified_convex_corners": [],
+        "physical_test_status": "NOT_RUN"
+      },
+      "metrics": {
+        "material_component_count": 1,
+        "missing_frame_area_mm2": 0.0,
+        "unsupported_island_count": 0,
+        "thin_feature_violation_count": 0,
+        "total_cut_length_mm": 885.0,
+        "cutting_path_count": 1,
+        "invalid_polygon_count": 0
+      },
+      "frame": {
+        "outer_width_mm": 260.0,
+        "outer_height_mm": 182.5,
+        "border_width_mm": 10.0
+      },
+      "important_features": [],
+      "layer_id": "layer-10"
+    }
+  ],
+  "frame": {
+    "outer_width_mm": 260.0,
+    "outer_height_mm": 182.5,
+    "border_width_mm": 10.0
+  },
+  "art_review_status": "pending_review",
+  "image_fidelity": {
+    "status": "NOT_EVALUATED",
+    "reason": "Requires versioned ambient color construction"
+  },
+  "light_path_ratio": 0.0,
+  "material_policy": "translucent paper + neutral diffuser + separate broad color-source filter; uncalibrated transmission",
+  "light_plan": {
+    "mode": "source_color_filter",
+    "source_grid_sha256": "453f7a9d5e54661e3b7d49158d790e8dad5264c509278c7a55439fdf3168bf5b",
+    "paper": "white translucent paper",
+    "paper_transmittance_assumption": 0.55,
+    "diffusion_mm_assumption": 6.0,
+    "diffuser": "neutral translucent diffuser",
+    "diffuser_pdf": "light/source-color-diffuser.pdf",
+    "light_source": "uniform white backlight",
+    "optical_validation_status": "NOT_RUN",
+    "model": "five broad Gaussian color zones; bounded NNLS strengths; angular Gaussian spread and per-gap transmission approximation",
+    "requires": [
+      "color printing on a translucent broad-area source filter",
+      "a separate neutral diffuser in front of the source filter",
+      "translucent paper for cut sheets",
+      "physical color/transmittance calibration"
+    ],
+    "planning_version": 2,
+    "zones": [
+      {
+        "id": "zone-01",
+        "color": "#ffb07a",
+        "x_mm": 72.10000000000001,
+        "y_mm": 57.58203124999999,
+        "sigma_x_mm": 43.204681820955464,
+        "sigma_y_mm": 37.87717988358064,
+        "intensity": 0.43172393522633945
+      },
+      {
+        "id": "zone-02",
+        "color": "#ffd0af",
+        "x_mm": 159.01737967914437,
+        "y_mm": 138.18871156417111,
+        "sigma_x_mm": 66.11213906400249,
+        "sigma_y_mm": 27.089092842164916,
+        "intensity": 0.5296304298038412
+      },
+      {
+        "id": "zone-03",
+        "color": "#ffb07a",
+        "x_mm": 193.44072164948454,
+        "y_mm": 43.740737757731964,
+        "sigma_x_mm": 45.51010665223869,
+        "sigma_y_mm": 23.35374242482189,
+        "intensity": 1.3562098400885476
+      },
+      {
+        "id": "zone-04",
+        "color": "#ffd0af",
+        "x_mm": 52.38013698630137,
+        "y_mm": 141.85734160958904,
+        "sigma_x_mm": 38.72168477706134,
+        "sigma_y_mm": 26.973466061564242,
+        "intensity": 0.7682216205021564
+      },
+      {
+        "id": "zone-05",
+        "color": "#ffd0af",
+        "x_mm": 185.6789340101523,
+        "y_mm": 107.24480488578679,
+        "sigma_x_mm": 39.56026184077939,
+        "sigma_y_mm": 33.069572142291065,
+        "intensity": 0.4767503038410388
+      }
+    ],
+    "palette": [
+      "#ffb07a",
+      "#ffd0af"
+    ],
+    "source_distance_mm": 25.0,
+    "spread_angle_degrees": 35.0,
+    "placement_plane": "effective color-source plane behind rear diffuser",
+    "source_filter": "broad printed translucent color filter behind neutral diffuser"
+  },
+  "physical_test_status": "NOT_RUN",
+  "disclaimer": "PASS covers the declared continuous geometry checks; physical cutting has not been tested."
+}

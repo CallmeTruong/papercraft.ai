@@ -1,0 +1,128 @@
+{
+  "results\\kittens\\depth-color\\assembled-art.png": [
+    150,
+    108,
+    801,
+    633
+  ],
+  "results\\kittens\\depth-color\\exploded-art.png": [
+    148,
+    140,
+    763,
+    679
+  ],
+  "results\\kittens\\depth-color\\light-no-insert-art.png": [
+    261,
+    65,
+    690,
+    414
+  ],
+  "results\\kittens\\depth-white\\assembled-art.png": [
+    156,
+    109,
+    799,
+    630
+  ],
+  "results\\kittens\\depth-white\\exploded-art.png": [
+    205,
+    199,
+    772,
+    654
+  ],
+  "results\\kittens\\depth-white\\light-no-insert-art.png": [
+    258,
+    68,
+    695,
+    424
+  ],
+  "results\\kittens\\depth-white\\light-photo-insert-art.png": [
+    258,
+    68,
+    695,
+    424
+  ],
+  "results\\lizard\\depth-color\\assembled-art.png": [
+    135,
+    127,
+    818,
+    615
+  ],
+  "results\\lizard\\depth-color\\exploded-art.png": [
+    138,
+    155,
+    771,
+    666
+  ],
+  "results\\lizard\\depth-color\\light-no-insert-art.png": [
+    251,
+    78,
+    701,
+    402
+  ],
+  "results\\lizard\\depth-white\\assembled-art.png": [
+    141,
+    127,
+    815,
+    614
+  ],
+  "results\\lizard\\depth-white\\exploded-art.png": [
+    188,
+    208,
+    781,
+    641
+  ],
+  "results\\lizard\\depth-white\\light-no-insert-art.png": [
+    248,
+    80,
+    706,
+    413
+  ],
+  "results\\lizard\\depth-white\\light-photo-insert-art.png": [
+    248,
+    80,
+    706,
+    413
+  ],
+  "results\\puppy\\depth-color\\assembled-art.png": [
+    140,
+    120,
+    812,
+    622
+  ],
+  "results\\puppy\\depth-color\\exploded-art.png": [
+    141,
+    150,
+    768,
+    671
+  ],
+  "results\\puppy\\depth-color\\light-no-insert-art.png": [
+    254,
+    73,
+    697,
+    407
+  ],
+  "results\\puppy\\depth-white\\assembled-art.png": [
+    146,
+    120,
+    810,
+    619
+  ],
+  "results\\puppy\\depth-white\\exploded-art.png": [
+    191,
+    201,
+    778,
+    646
+  ],
+  "results\\puppy\\depth-white\\light-no-insert-art.png": [
+    251,
+    76,
+    702,
+    417
+  ],
+  "results\\puppy\\depth-white\\light-photo-insert-art.png": [
+    251,
+    76,
+    702,
+    417
+  ]
+}

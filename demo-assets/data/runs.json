@@ -1,0 +1,5964 @@
+[
+  {
+    "case": "kittens",
+    "mode": "multicolor",
+    "status": "PASS",
+    "attempts": [
+      {
+        "config": {
+          "mode": "multicolor",
+          "colors": 10,
+          "layers": 14,
+          "detail": 0.78,
+          "palette": null,
+          "seed": 42,
+          "max_side": 384,
+          "width_mm": 260.0,
+          "height_mm": null,
+          "spacing_mm": 3.0,
+          "assembly_mode": "frame_connected",
+          "backing": "#ffffff",
+          "frame_mm": 10.0,
+          "artwork_fit": "contain",
+          "workflow": {
+            "workflow_schema": 1,
+            "family": "multicolor",
+            "style": "colorblock",
+            "assembly": "flat",
+            "lighting": "ambient",
+            "style_options": {
+              "polarity": "dark_paper",
+              "composition": "window_mat",
+              "background": "preserve"
+            }
+          },
+          "ai": {
+            "segmentation": true,
+            "depth": true,
+            "face_features": true,
+            "important_details": true,
+            "detail_crops": 1,
+            "detail_seconds": 35.0,
+            "device": "cpu",
+            "failure_policy": "fallback",
+            "subject_box": null,
+            "max_feature_change": 0.1
+          },
+          "manufacturing_width_mm": null,
+          "abstraction_policy": null,
+          "depth_paper": null,
+          "detail_policy": "prefer",
+          "detail_boxes": []
+        },
+        "profile": {
+          "name": "Draft paper profile",
+          "thickness_mm": 0.25,
+          "min_feature_width_mm": 1.2,
+          "min_bridge_width_mm": 1.5,
+          "min_hole_size_mm": 1.0,
+          "cut_tolerance_mm": 0.1,
+          "method": "manual craft knife",
+          "min_frame_width_mm": 3.0,
+          "validation_tolerance_mm": 0.01,
+          "decorative_tip_policy": "bounded_convex"
+        },
+        "status": "PASS",
+        "seconds": 32.3,
+        "layers": 14,
+        "fidelity": {
+          "status": "WARNING",
+          "target_color_agreement": 0.9764524037949046,
+          "source_structure_similarity": 0.6592208866019438,
+          "minimum_color_agreement": 0.94,
+          "minimum_source_similarity": 0.4,
+          "source_similarity_gate": true,
+          "detail_regions": [],
+          "automatic_detail_regions": [
+            {
+              "index": 1,
+              "box": [
+                0.0,
+                0.7743055555555556,
+                0.03515625,
+                0.8663194444444444
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.92,
+              "contrast_ratio": 0.7492484550484537,
+              "source_detail_similarity": 0.14824483468212826,
+              "status": "WARNING"
+            },
+            {
+              "index": 2,
+              "box": [
+                0.59375,
+                0.13541666666666666,
+                0.6627604166666666,
+                0.22743055555555555
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.9466666666666667,
+              "contrast_ratio": 1.0147388136167907,
+              "source_detail_similarity": 0.7600418609151797,
+              "status": "PASS"
+            },
+            {
+              "index": 3,
+              "box": [
+                0.16276041666666666,
+                0.7534722222222222,
+                0.23177083333333334,
+                0.8454861111111112
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.9016666666666666,
+              "contrast_ratio": 0.952485462406894,
+              "source_detail_similarity": 0.3833232322099265,
+              "status": "WARNING"
+            },
+            {
+              "index": 4,
+              "box": [
+                0.8932291666666666,
+                0.7274305555555556,
+                0.9622395833333334,
+                0.8194444444444444
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.94,
+              "contrast_ratio": 0.773665516541506,
+              "source_detail_similarity": 0.358007875688288,
+              "status": "WARNING"
+            },
+            {
+              "index": 5,
+              "box": [
+                0.7473958333333334,
+                0.3506944444444444,
+                0.81640625,
+                0.4427083333333333
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.953125,
+              "contrast_ratio": 0.9457563484054291,
+              "source_detail_similarity": 0.5315255109248117,
+              "status": "PASS"
+            },
+            {
+              "index": 6,
+              "box": [
+                0.37109375,
+                0.1371527777777778,
+                0.4401041666666667,
+                0.22916666666666666
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.9136,
+              "contrast_ratio": 0.9894929493256753,
+              "source_detail_similarity": 0.7345451893641651,
+              "status": "PASS"
+            },
+            {
+              "index": 7,
+              "box": [
+                0.6940104166666666,
+                0.7465277777777778,
+                0.7630208333333334,
+                0.8385416666666666
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.9253472222222222,
+              "contrast_ratio": 1.0164404386129944,
+              "source_detail_similarity": 0.352437329726782,
+              "status": "WARNING"
+            },
+            {
+              "index": 8,
+              "box": [
+                0.4752604166666667,
+                0.06597222222222222,
+                0.5442708333333334,
+                0.1579861111111111
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.9152,
+              "contrast_ratio": 1.1069239523008652,
+              "source_detail_similarity": 0.7460696919382129,
+              "status": "PASS"
+            },
+            {
+              "index": 9,
+              "box": [
+                0.55859375,
+                0.3350694444444444,
+                0.6276041666666666,
+                0.4270833333333333
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.9166666666666666,
+              "contrast_ratio": 0.8052246906317491,
+              "source_detail_similarity": 0.6434207907628288,
+              "status": "PASS"
+            },
+            {
+              "index": 10,
+              "box": [
+                0.78125,
+                0.21354166666666666,
+                0.8502604166666666,
+                0.3055555555555556
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.955,
+              "contrast_ratio": 1.0720509777049019,
+              "source_detail_similarity": 0.6737008668771433,
+              "status": "PASS"
+            },
+            {
+              "index": 11,
+              "box": [
+                0.3697916666666667,
+                0.7395833333333334,
+                0.4388020833333333,
+                0.8315972222222222
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.8916666666666667,
+              "contrast_ratio": 1.0113064802938714,
+              "source_detail_similarity": 0.6064857120726886,
+              "status": "WARNING"
+            },
+            {
+              "index": 12,
+              "box": [
+                0.2708333333333333,
+                0.2881944444444444,
+                0.33984375,
+                0.3802083333333333
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.97,
+              "contrast_ratio": 1.1159688416699391,
+              "source_detail_similarity": 0.575372724429302,
+              "status": "PASS"
+            }
+          ],
+          "recognition_review": "NOT_RUN",
+          "scope": "automated coarse appearance checks; not semantic eye/nose recognition",
+          "construction": "multicolor"
+        },
+        "ai": [
+          {
+            "component": "segmentation",
+            "status": "fallback",
+            "reason": "No usable object masks",
+            "retryable": false,
+            "elapsed_seconds": 17.097400999860838
+          },
+          {
+            "component": "face_features",
+            "status": "fallback",
+            "reason": "Not enough free RAM for face_features: 172 MB available; reserve at least 192 MB",
+            "retryable": true,
+            "elapsed_seconds": 0.4366259998641908
+          },
+          {
+            "component": "important_details",
+            "status": "fallback",
+            "reason": "Not enough free RAM for important_details: 1038 MB available; reserve at least 2048 MB",
+            "retryable": true,
+            "elapsed_seconds": 1.0250859002117068
+          },
+          {
+            "component": "detail_selection",
+            "status": "applied",
+            "method": "structure_only",
+            "region_count": 12,
+            "regions": [
+              {
+                "box": [
+                  0.0,
+                  0.7743055555555556,
+                  0.03515625,
+                  0.8663194444444444
+                ],
+                "score": 0.96174,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.59375,
+                  0.13541666666666666,
+                  0.6627604166666666,
+                  0.22743055555555555
+                ],
+                "score": 0.9506,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.16276041666666666,
+                  0.7534722222222222,
+                  0.23177083333333334,
+                  0.8454861111111112
+                ],
+                "score": 0.88973,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.8932291666666666,
+                  0.7274305555555556,
+                  0.9622395833333334,
+                  0.8194444444444444
+                ],
+                "score": 0.85644,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.7473958333333334,
+                  0.3506944444444444,
+                  0.81640625,
+                  0.4427083333333333
+                ],
+                "score": 0.8507,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.37109375,
+                  0.1371527777777778,
+                  0.4401041666666667,
+                  0.22916666666666666
+                ],
+                "score": 0.83912,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.6940104166666666,
+                  0.7465277777777778,
+                  0.7630208333333334,
+                  0.8385416666666666
+                ],
+                "score": 0.83446,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.4752604166666667,
+                  0.06597222222222222,
+                  0.5442708333333334,
+                  0.1579861111111111
+                ],
+                "score": 0.79448,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.55859375,
+                  0.3350694444444444,
+                  0.6276041666666666,
+                  0.4270833333333333
+                ],
+                "score": 0.77788,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.78125,
+                  0.21354166666666666,
+                  0.8502604166666666,
+                  0.3055555555555556
+                ],
+                "score": 0.77518,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.3697916666666667,
+                  0.7395833333333334,
+                  0.4388020833333333,
+                  0.8315972222222222
+                ],
+                "score": 0.7461,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.2708333333333333,
+                  0.2881944444444444,
+                  0.33984375,
+                  0.3802083333333333
+                ],
+                "score": 0.74348,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              }
+            ],
+            "importance_is_heuristic": true
+          },
+          {
+            "component": "depth",
+            "status": "not_applicable",
+            "elapsed_seconds": 0,
+            "reason": "Relative-depth inference is only used for Depth Scene"
+          }
+        ],
+        "source_sha256": "0455714780a14b0945e3c8aa70b7751c1b48d1b3899b98bbeb2df6be032fb4e6"
+      }
+    ],
+    "tuning": {
+      "status": "PASS",
+      "seconds": 42.24,
+      "manual_detail_boxes": [
+        [
+          0.52,
+          0.19,
+          0.59,
+          0.26
+        ],
+        [
+          0.6,
+          0.39,
+          0.67,
+          0.46
+        ],
+        [
+          0.75,
+          0.38,
+          0.81,
+          0.45
+        ],
+        [
+          0.71,
+          0.44,
+          0.77,
+          0.5
+        ]
+      ],
+      "colors": 16,
+      "layers": 20,
+      "width_mm": 300,
+      "perception": "Reused recorded baseline perception; no new inference",
+      "fidelity": {
+        "status": "WARNING",
+        "target_color_agreement": 0.9668348203118485,
+        "source_structure_similarity": 0.6963386783285888,
+        "minimum_color_agreement": 0.94,
+        "minimum_source_similarity": 0.4,
+        "source_similarity_gate": true,
+        "detail_regions": [
+          {
+            "index": 1,
+            "color_agreement": 0.751578947368421,
+            "minimum_agreement": 0.9,
+            "status": "WARNING"
+          },
+          {
+            "index": 2,
+            "color_agreement": 0.9094736842105263,
+            "minimum_agreement": 0.9,
+            "status": "PASS"
+          },
+          {
+            "index": 3,
+            "color_agreement": 0.9047619047619048,
+            "minimum_agreement": 0.9,
+            "status": "PASS"
+          },
+          {
+            "index": 4,
+            "color_agreement": 0.9346590909090909,
+            "minimum_agreement": 0.9,
+            "status": "PASS"
+          }
+        ],
+        "automatic_detail_regions": [
+          {
+            "index": 1,
+            "box": [
+              0.0,
+              0.7743055555555556,
+              0.03515625,
+              0.8663194444444444
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.9201388888888888,
+            "contrast_ratio": 0.8280128444215809,
+            "source_detail_similarity": 0.2134687245364509,
+            "status": "WARNING"
+          },
+          {
+            "index": 2,
+            "box": [
+              0.59375,
+              0.13541666666666666,
+              0.6627604166666666,
+              0.22743055555555555
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.4716666666666667,
+            "contrast_ratio": 1.108347436025072,
+            "source_detail_similarity": 0.15837743581434663,
+            "status": "WARNING"
+          },
+          {
+            "index": 3,
+            "box": [
+              0.16276041666666666,
+              0.7534722222222222,
+              0.23177083333333334,
+              0.8454861111111112
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.9344,
+            "contrast_ratio": 0.919741031295951,
+            "source_detail_similarity": 0.38382457738700054,
+            "status": "WARNING"
+          },
+          {
+            "index": 4,
+            "box": [
+              0.8932291666666666,
+              0.7274305555555556,
+              0.9622395833333334,
+              0.8194444444444444
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.96,
+            "contrast_ratio": 0.5222720914541495,
+            "source_detail_similarity": 0.2767465744540694,
+            "status": "WARNING"
+          },
+          {
+            "index": 5,
+            "box": [
+              0.7473958333333334,
+              0.3506944444444444,
+              0.81640625,
+              0.4427083333333333
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.92,
+            "contrast_ratio": 1.1674696594146106,
+            "source_detail_similarity": 0.5430627996556215,
+            "status": "PASS"
+          },
+          {
+            "index": 6,
+            "box": [
+              0.37109375,
+              0.1371527777777778,
+              0.4401041666666667,
+              0.22916666666666666
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.82,
+            "contrast_ratio": 0.9839710369939678,
+            "source_detail_similarity": 0.5346947532026517,
+            "status": "WARNING"
+          },
+          {
+            "index": 7,
+            "box": [
+              0.6940104166666666,
+              0.7465277777777778,
+              0.7630208333333334,
+              0.8385416666666666
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.9183333333333333,
+            "contrast_ratio": 0.9159200250538666,
+            "source_detail_similarity": 0.4283602517855205,
+            "status": "WARNING"
+          },
+          {
+            "index": 8,
+            "box": [
+              0.4752604166666667,
+              0.06597222222222222,
+              0.5442708333333334,
+              0.1579861111111111
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.96,
+            "contrast_ratio": 1.0213558132195528,
+            "source_detail_similarity": 0.70600602434653,
+            "status": "PASS"
+          },
+          {
+            "index": 9,
+            "box": [
+              0.55859375,
+              0.3350694444444444,
+              0.6276041666666666,
+              0.4270833333333333
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.8533333333333334,
+            "contrast_ratio": 0.9271953230567983,
+            "source_detail_similarity": 0.7516232615723167,
+            "status": "WARNING"
+          },
+          {
+            "index": 10,
+            "box": [
+              0.78125,
+              0.21354166666666666,
+              0.8502604166666666,
+              0.3055555555555556
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.912,
+            "contrast_ratio": 1.147096777576942,
+            "source_detail_similarity": 0.6979251744875544,
+            "status": "PASS"
+          },
+          {
+            "index": 11,
+            "box": [
+              0.3697916666666667,
+              0.7395833333333334,
+              0.4388020833333333,
+              0.8315972222222222
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.9168,
+            "contrast_ratio": 0.9838190469095756,
+            "source_detail_similarity": 0.6435338138235965,
+            "status": "PASS"
+          },
+          {
+            "index": 12,
+            "box": [
+              0.2708333333333333,
+              0.2881944444444444,
+              0.33984375,
+              0.3802083333333333
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.9136,
+            "contrast_ratio": 1.1481455345825897,
+            "source_detail_similarity": 0.6737079570652805,
+            "status": "PASS"
+          }
+        ],
+        "recognition_review": "NOT_RUN",
+        "scope": "automated coarse appearance checks; not semantic eye/nose recognition",
+        "construction": "multicolor"
+      }
+    }
+  },
+  {
+    "case": "kittens",
+    "mode": "stencil",
+    "status": "PASS",
+    "attempts": [
+      {
+        "config": {
+          "mode": "multicolor",
+          "colors": 10,
+          "layers": 14,
+          "detail": 0.78,
+          "palette": null,
+          "seed": 42,
+          "max_side": 384,
+          "width_mm": 260.0,
+          "height_mm": null,
+          "spacing_mm": 3.0,
+          "assembly_mode": "frame_connected",
+          "backing": "#ffffff",
+          "frame_mm": 10.0,
+          "artwork_fit": "contain",
+          "workflow": {
+            "workflow_schema": 1,
+            "family": "stencil",
+            "style": "detailed",
+            "assembly": "flat",
+            "lighting": "ambient",
+            "style_options": {
+              "polarity": "dark_paper",
+              "composition": "window_mat",
+              "background": "preserve"
+            }
+          },
+          "ai": {
+            "segmentation": true,
+            "depth": true,
+            "face_features": true,
+            "important_details": true,
+            "detail_crops": 1,
+            "detail_seconds": 35.0,
+            "device": "cpu",
+            "failure_policy": "fallback",
+            "subject_box": null,
+            "max_feature_change": 0.1
+          },
+          "manufacturing_width_mm": null,
+          "abstraction_policy": null,
+          "depth_paper": null,
+          "detail_policy": "prefer",
+          "detail_boxes": []
+        },
+        "profile": {
+          "name": "Draft paper profile",
+          "thickness_mm": 0.25,
+          "min_feature_width_mm": 1.2,
+          "min_bridge_width_mm": 1.5,
+          "min_hole_size_mm": 1.0,
+          "cut_tolerance_mm": 0.1,
+          "method": "manual craft knife",
+          "min_frame_width_mm": 3.0,
+          "validation_tolerance_mm": 0.01,
+          "decorative_tip_policy": "bounded_convex"
+        },
+        "status": "PASS",
+        "seconds": 17.35,
+        "layers": 1,
+        "fidelity": {
+          "status": "NOT_EVALUATED",
+          "reason": "Requires versioned ambient color construction"
+        },
+        "ai": [
+          {
+            "component": "segmentation",
+            "status": "fallback",
+            "reason": "No usable object masks",
+            "retryable": false,
+            "elapsed_seconds": 0.0006233998574316502
+          },
+          {
+            "component": "face_features",
+            "status": "no_detection",
+            "model_id": "https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task",
+            "revision": "float16/1",
+            "manifest_sha256": "3bd3689ac73cf7826ab2920d5ce46d83e47667a56750da265a0d92b1d2d34e84",
+            "device": "cpu",
+            "inference_cache_hit": false,
+            "elapsed_seconds": 4.052591799991205
+          },
+          {
+            "component": "important_details",
+            "status": "fallback",
+            "reason": "Not enough free RAM for important_details: 562 MB available; reserve at least 2048 MB",
+            "retryable": true,
+            "elapsed_seconds": 1.2974682000931352
+          },
+          {
+            "component": "detail_selection",
+            "status": "applied",
+            "method": "structure_only",
+            "region_count": 12,
+            "regions": [
+              {
+                "box": [
+                  0.0,
+                  0.7743055555555556,
+                  0.03515625,
+                  0.8663194444444444
+                ],
+                "score": 0.96174,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.59375,
+                  0.13541666666666666,
+                  0.6627604166666666,
+                  0.22743055555555555
+                ],
+                "score": 0.9506,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.16276041666666666,
+                  0.7534722222222222,
+                  0.23177083333333334,
+                  0.8454861111111112
+                ],
+                "score": 0.88973,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.8932291666666666,
+                  0.7274305555555556,
+                  0.9622395833333334,
+                  0.8194444444444444
+                ],
+                "score": 0.85644,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.7473958333333334,
+                  0.3506944444444444,
+                  0.81640625,
+                  0.4427083333333333
+                ],
+                "score": 0.8507,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.37109375,
+                  0.1371527777777778,
+                  0.4401041666666667,
+                  0.22916666666666666
+                ],
+                "score": 0.83912,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.6940104166666666,
+                  0.7465277777777778,
+                  0.7630208333333334,
+                  0.8385416666666666
+                ],
+                "score": 0.83446,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.4752604166666667,
+                  0.06597222222222222,
+                  0.5442708333333334,
+                  0.1579861111111111
+                ],
+                "score": 0.79448,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.55859375,
+                  0.3350694444444444,
+                  0.6276041666666666,
+                  0.4270833333333333
+                ],
+                "score": 0.77788,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.78125,
+                  0.21354166666666666,
+                  0.8502604166666666,
+                  0.3055555555555556
+                ],
+                "score": 0.77518,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.3697916666666667,
+                  0.7395833333333334,
+                  0.4388020833333333,
+                  0.8315972222222222
+                ],
+                "score": 0.7461,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.2708333333333333,
+                  0.2881944444444444,
+                  0.33984375,
+                  0.3802083333333333
+                ],
+                "score": 0.74348,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              }
+            ],
+            "importance_is_heuristic": true
+          },
+          {
+            "component": "depth",
+            "status": "not_applicable",
+            "elapsed_seconds": 0,
+            "reason": "Relative-depth inference is only used for Depth Scene"
+          }
+        ],
+        "source_sha256": "0455714780a14b0945e3c8aa70b7751c1b48d1b3899b98bbeb2df6be032fb4e6"
+      }
+    ]
+  },
+  {
+    "case": "kittens",
+    "mode": "depth-color",
+    "status": "PASS",
+    "attempts": [
+      {
+        "config": {
+          "mode": "lightbox",
+          "colors": 10,
+          "layers": 14,
+          "detail": 0.78,
+          "palette": null,
+          "seed": 42,
+          "max_side": 384,
+          "width_mm": 260.0,
+          "height_mm": null,
+          "spacing_mm": 3.0,
+          "assembly_mode": "frame_connected",
+          "backing": "#ffffff",
+          "frame_mm": 10.0,
+          "artwork_fit": "contain",
+          "workflow": {
+            "workflow_schema": 1,
+            "family": "depth_scene",
+            "style": "landscape",
+            "assembly": "spaced",
+            "lighting": "ambient",
+            "style_options": {
+              "polarity": "dark_paper",
+              "composition": "window_mat",
+              "background": "preserve"
+            }
+          },
+          "ai": {
+            "segmentation": true,
+            "depth": true,
+            "face_features": true,
+            "important_details": true,
+            "detail_crops": 1,
+            "detail_seconds": 35.0,
+            "device": "cpu",
+            "failure_policy": "fallback",
+            "subject_box": null,
+            "max_feature_change": 0.1
+          },
+          "manufacturing_width_mm": null,
+          "abstraction_policy": null,
+          "depth_paper": "multicolor",
+          "detail_policy": "prefer",
+          "detail_boxes": []
+        },
+        "profile": {
+          "name": "Draft paper profile",
+          "thickness_mm": 0.25,
+          "min_feature_width_mm": 1.2,
+          "min_bridge_width_mm": 1.5,
+          "min_hole_size_mm": 1.0,
+          "cut_tolerance_mm": 0.1,
+          "method": "manual craft knife",
+          "min_frame_width_mm": 3.0,
+          "validation_tolerance_mm": 0.01,
+          "decorative_tip_policy": "bounded_convex"
+        },
+        "status": "PASS",
+        "seconds": 11.41,
+        "layers": 14,
+        "fidelity": {
+          "status": "WARNING",
+          "target_color_agreement": 0.9764524037949046,
+          "source_structure_similarity": 0.6592208866019438,
+          "minimum_color_agreement": 0.94,
+          "minimum_source_similarity": 0.4,
+          "source_similarity_gate": true,
+          "detail_regions": [],
+          "automatic_detail_regions": [
+            {
+              "index": 1,
+              "box": [
+                0.0,
+                0.7743055555555556,
+                0.03515625,
+                0.8663194444444444
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.92,
+              "contrast_ratio": 0.7492484550484537,
+              "source_detail_similarity": 0.14824483468212826,
+              "status": "WARNING"
+            },
+            {
+              "index": 2,
+              "box": [
+                0.59375,
+                0.13541666666666666,
+                0.6627604166666666,
+                0.22743055555555555
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.9466666666666667,
+              "contrast_ratio": 1.0147388136167907,
+              "source_detail_similarity": 0.7600418609151797,
+              "status": "PASS"
+            },
+            {
+              "index": 3,
+              "box": [
+                0.16276041666666666,
+                0.7534722222222222,
+                0.23177083333333334,
+                0.8454861111111112
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.9016666666666666,
+              "contrast_ratio": 0.952485462406894,
+              "source_detail_similarity": 0.3833232322099265,
+              "status": "WARNING"
+            },
+            {
+              "index": 4,
+              "box": [
+                0.8932291666666666,
+                0.7274305555555556,
+                0.9622395833333334,
+                0.8194444444444444
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.94,
+              "contrast_ratio": 0.773665516541506,
+              "source_detail_similarity": 0.358007875688288,
+              "status": "WARNING"
+            },
+            {
+              "index": 5,
+              "box": [
+                0.7473958333333334,
+                0.3506944444444444,
+                0.81640625,
+                0.4427083333333333
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.953125,
+              "contrast_ratio": 0.9457563484054291,
+              "source_detail_similarity": 0.5315255109248117,
+              "status": "PASS"
+            },
+            {
+              "index": 6,
+              "box": [
+                0.37109375,
+                0.1371527777777778,
+                0.4401041666666667,
+                0.22916666666666666
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.9136,
+              "contrast_ratio": 0.9894929493256753,
+              "source_detail_similarity": 0.7345451893641651,
+              "status": "PASS"
+            },
+            {
+              "index": 7,
+              "box": [
+                0.6940104166666666,
+                0.7465277777777778,
+                0.7630208333333334,
+                0.8385416666666666
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.9253472222222222,
+              "contrast_ratio": 1.0164404386129944,
+              "source_detail_similarity": 0.352437329726782,
+              "status": "WARNING"
+            },
+            {
+              "index": 8,
+              "box": [
+                0.4752604166666667,
+                0.06597222222222222,
+                0.5442708333333334,
+                0.1579861111111111
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.9152,
+              "contrast_ratio": 1.1069239523008652,
+              "source_detail_similarity": 0.7460696919382129,
+              "status": "PASS"
+            },
+            {
+              "index": 9,
+              "box": [
+                0.55859375,
+                0.3350694444444444,
+                0.6276041666666666,
+                0.4270833333333333
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.9166666666666666,
+              "contrast_ratio": 0.8052246906317491,
+              "source_detail_similarity": 0.6434207907628288,
+              "status": "PASS"
+            },
+            {
+              "index": 10,
+              "box": [
+                0.78125,
+                0.21354166666666666,
+                0.8502604166666666,
+                0.3055555555555556
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.955,
+              "contrast_ratio": 1.0720509777049019,
+              "source_detail_similarity": 0.6737008668771433,
+              "status": "PASS"
+            },
+            {
+              "index": 11,
+              "box": [
+                0.3697916666666667,
+                0.7395833333333334,
+                0.4388020833333333,
+                0.8315972222222222
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.8916666666666667,
+              "contrast_ratio": 1.0113064802938714,
+              "source_detail_similarity": 0.6064857120726886,
+              "status": "WARNING"
+            },
+            {
+              "index": 12,
+              "box": [
+                0.2708333333333333,
+                0.2881944444444444,
+                0.33984375,
+                0.3802083333333333
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.97,
+              "contrast_ratio": 1.1159688416699391,
+              "source_detail_similarity": 0.575372724429302,
+              "status": "PASS"
+            }
+          ],
+          "recognition_review": "NOT_RUN",
+          "scope": "automated coarse appearance checks; not semantic eye/nose recognition",
+          "construction": "color-occlusion relief"
+        },
+        "ai": [
+          {
+            "component": "segmentation",
+            "status": "fallback",
+            "reason": "No usable object masks",
+            "retryable": false,
+            "elapsed_seconds": 0.0006367999594658613
+          },
+          {
+            "component": "face_features",
+            "status": "no_detection",
+            "model_id": "https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task",
+            "revision": "float16/1",
+            "manifest_sha256": "3bd3689ac73cf7826ab2920d5ce46d83e47667a56750da265a0d92b1d2d34e84",
+            "device": "cpu",
+            "inference_cache_hit": true,
+            "elapsed_seconds": 0.0003222001250833273
+          },
+          {
+            "component": "depth",
+            "status": "fallback",
+            "reason": "Not enough free RAM for depth: 495 MB available; reserve at least 768 MB",
+            "retryable": true,
+            "elapsed_seconds": 0.24797580018639565
+          },
+          {
+            "component": "important_details",
+            "status": "fallback",
+            "reason": "Not enough free RAM for important_details: 498 MB available; reserve at least 2048 MB",
+            "retryable": true,
+            "elapsed_seconds": 0.6656631000805646
+          },
+          {
+            "component": "detail_selection",
+            "status": "applied",
+            "method": "structure_only",
+            "region_count": 12,
+            "regions": [
+              {
+                "box": [
+                  0.0,
+                  0.7743055555555556,
+                  0.03515625,
+                  0.8663194444444444
+                ],
+                "score": 0.96174,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.59375,
+                  0.13541666666666666,
+                  0.6627604166666666,
+                  0.22743055555555555
+                ],
+                "score": 0.9506,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.16276041666666666,
+                  0.7534722222222222,
+                  0.23177083333333334,
+                  0.8454861111111112
+                ],
+                "score": 0.88973,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.8932291666666666,
+                  0.7274305555555556,
+                  0.9622395833333334,
+                  0.8194444444444444
+                ],
+                "score": 0.85644,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.7473958333333334,
+                  0.3506944444444444,
+                  0.81640625,
+                  0.4427083333333333
+                ],
+                "score": 0.8507,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.37109375,
+                  0.1371527777777778,
+                  0.4401041666666667,
+                  0.22916666666666666
+                ],
+                "score": 0.83912,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.6940104166666666,
+                  0.7465277777777778,
+                  0.7630208333333334,
+                  0.8385416666666666
+                ],
+                "score": 0.83446,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.4752604166666667,
+                  0.06597222222222222,
+                  0.5442708333333334,
+                  0.1579861111111111
+                ],
+                "score": 0.79448,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.55859375,
+                  0.3350694444444444,
+                  0.6276041666666666,
+                  0.4270833333333333
+                ],
+                "score": 0.77788,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.78125,
+                  0.21354166666666666,
+                  0.8502604166666666,
+                  0.3055555555555556
+                ],
+                "score": 0.77518,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.3697916666666667,
+                  0.7395833333333334,
+                  0.4388020833333333,
+                  0.8315972222222222
+                ],
+                "score": 0.7461,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.2708333333333333,
+                  0.2881944444444444,
+                  0.33984375,
+                  0.3802083333333333
+                ],
+                "score": 0.74348,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              }
+            ],
+            "importance_is_heuristic": true
+          }
+        ],
+        "source_sha256": "0455714780a14b0945e3c8aa70b7751c1b48d1b3899b98bbeb2df6be032fb4e6"
+      }
+    ],
+    "tuning": {
+      "status": "PASS",
+      "seconds": 40.92,
+      "manual_detail_boxes": [
+        [
+          0.52,
+          0.19,
+          0.59,
+          0.26
+        ],
+        [
+          0.6,
+          0.39,
+          0.67,
+          0.46
+        ],
+        [
+          0.75,
+          0.38,
+          0.81,
+          0.45
+        ],
+        [
+          0.71,
+          0.44,
+          0.77,
+          0.5
+        ]
+      ],
+      "colors": 16,
+      "layers": 20,
+      "width_mm": 300,
+      "perception": "Reused recorded baseline perception; no new inference",
+      "fidelity": {
+        "status": "WARNING",
+        "target_color_agreement": 0.9668348203118485,
+        "source_structure_similarity": 0.6963386783285888,
+        "minimum_color_agreement": 0.94,
+        "minimum_source_similarity": 0.4,
+        "source_similarity_gate": true,
+        "detail_regions": [
+          {
+            "index": 1,
+            "color_agreement": 0.751578947368421,
+            "minimum_agreement": 0.9,
+            "status": "WARNING"
+          },
+          {
+            "index": 2,
+            "color_agreement": 0.9094736842105263,
+            "minimum_agreement": 0.9,
+            "status": "PASS"
+          },
+          {
+            "index": 3,
+            "color_agreement": 0.9047619047619048,
+            "minimum_agreement": 0.9,
+            "status": "PASS"
+          },
+          {
+            "index": 4,
+            "color_agreement": 0.9346590909090909,
+            "minimum_agreement": 0.9,
+            "status": "PASS"
+          }
+        ],
+        "automatic_detail_regions": [
+          {
+            "index": 1,
+            "box": [
+              0.0,
+              0.7743055555555556,
+              0.03515625,
+              0.8663194444444444
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.9201388888888888,
+            "contrast_ratio": 0.8280128444215809,
+            "source_detail_similarity": 0.2134687245364509,
+            "status": "WARNING"
+          },
+          {
+            "index": 2,
+            "box": [
+              0.59375,
+              0.13541666666666666,
+              0.6627604166666666,
+              0.22743055555555555
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.4716666666666667,
+            "contrast_ratio": 1.108347436025072,
+            "source_detail_similarity": 0.15837743581434663,
+            "status": "WARNING"
+          },
+          {
+            "index": 3,
+            "box": [
+              0.16276041666666666,
+              0.7534722222222222,
+              0.23177083333333334,
+              0.8454861111111112
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.9344,
+            "contrast_ratio": 0.919741031295951,
+            "source_detail_similarity": 0.38382457738700054,
+            "status": "WARNING"
+          },
+          {
+            "index": 4,
+            "box": [
+              0.8932291666666666,
+              0.7274305555555556,
+              0.9622395833333334,
+              0.8194444444444444
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.96,
+            "contrast_ratio": 0.5222720914541495,
+            "source_detail_similarity": 0.2767465744540694,
+            "status": "WARNING"
+          },
+          {
+            "index": 5,
+            "box": [
+              0.7473958333333334,
+              0.3506944444444444,
+              0.81640625,
+              0.4427083333333333
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.92,
+            "contrast_ratio": 1.1674696594146106,
+            "source_detail_similarity": 0.5430627996556215,
+            "status": "PASS"
+          },
+          {
+            "index": 6,
+            "box": [
+              0.37109375,
+              0.1371527777777778,
+              0.4401041666666667,
+              0.22916666666666666
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.82,
+            "contrast_ratio": 0.9839710369939678,
+            "source_detail_similarity": 0.5346947532026517,
+            "status": "WARNING"
+          },
+          {
+            "index": 7,
+            "box": [
+              0.6940104166666666,
+              0.7465277777777778,
+              0.7630208333333334,
+              0.8385416666666666
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.9183333333333333,
+            "contrast_ratio": 0.9159200250538666,
+            "source_detail_similarity": 0.4283602517855205,
+            "status": "WARNING"
+          },
+          {
+            "index": 8,
+            "box": [
+              0.4752604166666667,
+              0.06597222222222222,
+              0.5442708333333334,
+              0.1579861111111111
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.96,
+            "contrast_ratio": 1.0213558132195528,
+            "source_detail_similarity": 0.70600602434653,
+            "status": "PASS"
+          },
+          {
+            "index": 9,
+            "box": [
+              0.55859375,
+              0.3350694444444444,
+              0.6276041666666666,
+              0.4270833333333333
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.8533333333333334,
+            "contrast_ratio": 0.9271953230567983,
+            "source_detail_similarity": 0.7516232615723167,
+            "status": "WARNING"
+          },
+          {
+            "index": 10,
+            "box": [
+              0.78125,
+              0.21354166666666666,
+              0.8502604166666666,
+              0.3055555555555556
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.912,
+            "contrast_ratio": 1.147096777576942,
+            "source_detail_similarity": 0.6979251744875544,
+            "status": "PASS"
+          },
+          {
+            "index": 11,
+            "box": [
+              0.3697916666666667,
+              0.7395833333333334,
+              0.4388020833333333,
+              0.8315972222222222
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.9168,
+            "contrast_ratio": 0.9838190469095756,
+            "source_detail_similarity": 0.6435338138235965,
+            "status": "PASS"
+          },
+          {
+            "index": 12,
+            "box": [
+              0.2708333333333333,
+              0.2881944444444444,
+              0.33984375,
+              0.3802083333333333
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.9136,
+            "contrast_ratio": 1.1481455345825897,
+            "source_detail_similarity": 0.6737079570652805,
+            "status": "PASS"
+          }
+        ],
+        "recognition_review": "NOT_RUN",
+        "scope": "automated coarse appearance checks; not semantic eye/nose recognition",
+        "construction": "color-occlusion relief"
+      }
+    }
+  },
+  {
+    "case": "kittens",
+    "mode": "depth-white",
+    "status": "PASS",
+    "attempts": [
+      {
+        "config": {
+          "mode": "lightbox",
+          "colors": 10,
+          "layers": 14,
+          "detail": 0.78,
+          "palette": null,
+          "seed": 42,
+          "max_side": 384,
+          "width_mm": 260.0,
+          "height_mm": null,
+          "spacing_mm": 3.0,
+          "assembly_mode": "frame_connected",
+          "backing": "#ffffff",
+          "frame_mm": 10.0,
+          "artwork_fit": "contain",
+          "workflow": {
+            "workflow_schema": 1,
+            "family": "depth_scene",
+            "style": "landscape",
+            "assembly": "spaced",
+            "lighting": "backlit",
+            "style_options": {
+              "polarity": "dark_paper",
+              "composition": "window_mat",
+              "background": "preserve"
+            }
+          },
+          "ai": {
+            "segmentation": true,
+            "depth": true,
+            "face_features": true,
+            "important_details": true,
+            "detail_crops": 1,
+            "detail_seconds": 35.0,
+            "device": "cpu",
+            "failure_policy": "fallback",
+            "subject_box": null,
+            "max_feature_change": 0.1
+          },
+          "manufacturing_width_mm": null,
+          "abstraction_policy": null,
+          "depth_paper": "white",
+          "detail_policy": "prefer",
+          "detail_boxes": []
+        },
+        "profile": {
+          "name": "Draft paper profile",
+          "thickness_mm": 0.25,
+          "min_feature_width_mm": 1.2,
+          "min_bridge_width_mm": 1.5,
+          "min_hole_size_mm": 1.0,
+          "cut_tolerance_mm": 0.1,
+          "method": "manual craft knife",
+          "min_frame_width_mm": 3.0,
+          "validation_tolerance_mm": 0.01,
+          "decorative_tip_policy": "bounded_convex"
+        },
+        "status": "PASS",
+        "seconds": 13.66,
+        "layers": 10,
+        "fidelity": {
+          "status": "NOT_EVALUATED",
+          "reason": "Requires versioned ambient color construction"
+        },
+        "ai": [
+          {
+            "component": "segmentation",
+            "status": "fallback",
+            "reason": "No usable object masks",
+            "retryable": false,
+            "elapsed_seconds": 0.0006643999367952347
+          },
+          {
+            "component": "face_features",
+            "status": "no_detection",
+            "model_id": "https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task",
+            "revision": "float16/1",
+            "manifest_sha256": "3bd3689ac73cf7826ab2920d5ce46d83e47667a56750da265a0d92b1d2d34e84",
+            "device": "cpu",
+            "inference_cache_hit": true,
+            "elapsed_seconds": 0.00034529995173215866
+          },
+          {
+            "component": "depth",
+            "status": "fallback",
+            "reason": "Not enough free RAM for depth: 553 MB available; reserve at least 768 MB",
+            "retryable": true,
+            "elapsed_seconds": 0.2618985997978598
+          },
+          {
+            "component": "important_details",
+            "status": "fallback",
+            "reason": "Not enough free RAM for important_details: 594 MB available; reserve at least 2048 MB",
+            "retryable": true,
+            "elapsed_seconds": 0.6449503998737782
+          },
+          {
+            "component": "detail_selection",
+            "status": "applied",
+            "method": "structure_only",
+            "region_count": 12,
+            "regions": [
+              {
+                "box": [
+                  0.0,
+                  0.7743055555555556,
+                  0.03515625,
+                  0.8663194444444444
+                ],
+                "score": 0.96174,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.59375,
+                  0.13541666666666666,
+                  0.6627604166666666,
+                  0.22743055555555555
+                ],
+                "score": 0.9506,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.16276041666666666,
+                  0.7534722222222222,
+                  0.23177083333333334,
+                  0.8454861111111112
+                ],
+                "score": 0.88973,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.8932291666666666,
+                  0.7274305555555556,
+                  0.9622395833333334,
+                  0.8194444444444444
+                ],
+                "score": 0.85644,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.7473958333333334,
+                  0.3506944444444444,
+                  0.81640625,
+                  0.4427083333333333
+                ],
+                "score": 0.8507,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.37109375,
+                  0.1371527777777778,
+                  0.4401041666666667,
+                  0.22916666666666666
+                ],
+                "score": 0.83912,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.6940104166666666,
+                  0.7465277777777778,
+                  0.7630208333333334,
+                  0.8385416666666666
+                ],
+                "score": 0.83446,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.4752604166666667,
+                  0.06597222222222222,
+                  0.5442708333333334,
+                  0.1579861111111111
+                ],
+                "score": 0.79448,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.55859375,
+                  0.3350694444444444,
+                  0.6276041666666666,
+                  0.4270833333333333
+                ],
+                "score": 0.77788,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.78125,
+                  0.21354166666666666,
+                  0.8502604166666666,
+                  0.3055555555555556
+                ],
+                "score": 0.77518,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.3697916666666667,
+                  0.7395833333333334,
+                  0.4388020833333333,
+                  0.8315972222222222
+                ],
+                "score": 0.7461,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.2708333333333333,
+                  0.2881944444444444,
+                  0.33984375,
+                  0.3802083333333333
+                ],
+                "score": 0.74348,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              }
+            ],
+            "importance_is_heuristic": true
+          }
+        ],
+        "source_sha256": "0455714780a14b0945e3c8aa70b7751c1b48d1b3899b98bbeb2df6be032fb4e6"
+      }
+    ]
+  },
+  {
+    "case": "puppy",
+    "mode": "multicolor",
+    "status": "PASS",
+    "attempts": [
+      {
+        "config": {
+          "mode": "multicolor",
+          "colors": 10,
+          "layers": 14,
+          "detail": 0.78,
+          "palette": null,
+          "seed": 42,
+          "max_side": 384,
+          "width_mm": 260.0,
+          "height_mm": null,
+          "spacing_mm": 3.0,
+          "assembly_mode": "frame_connected",
+          "backing": "#ffffff",
+          "frame_mm": 10.0,
+          "artwork_fit": "contain",
+          "workflow": {
+            "workflow_schema": 1,
+            "family": "multicolor",
+            "style": "colorblock",
+            "assembly": "flat",
+            "lighting": "ambient",
+            "style_options": {
+              "polarity": "dark_paper",
+              "composition": "window_mat",
+              "background": "preserve"
+            }
+          },
+          "ai": {
+            "segmentation": true,
+            "depth": true,
+            "face_features": true,
+            "important_details": true,
+            "detail_crops": 1,
+            "detail_seconds": 35.0,
+            "device": "cpu",
+            "failure_policy": "fallback",
+            "subject_box": null,
+            "max_feature_change": 0.1
+          },
+          "manufacturing_width_mm": null,
+          "abstraction_policy": null,
+          "depth_paper": null,
+          "detail_policy": "prefer",
+          "detail_boxes": []
+        },
+        "profile": {
+          "name": "Draft paper profile",
+          "thickness_mm": 0.25,
+          "min_feature_width_mm": 1.2,
+          "min_bridge_width_mm": 1.5,
+          "min_hole_size_mm": 1.0,
+          "cut_tolerance_mm": 0.1,
+          "method": "manual craft knife",
+          "min_frame_width_mm": 3.0,
+          "validation_tolerance_mm": 0.01,
+          "decorative_tip_policy": "bounded_convex"
+        },
+        "status": "PASS",
+        "seconds": 23.61,
+        "layers": 14,
+        "fidelity": {
+          "status": "WARNING",
+          "target_color_agreement": 0.9756944444444444,
+          "source_structure_similarity": 0.7866759210294042,
+          "minimum_color_agreement": 0.94,
+          "minimum_source_similarity": 0.4,
+          "source_similarity_gate": true,
+          "detail_regions": [],
+          "automatic_detail_regions": [
+            {
+              "index": 1,
+              "box": [
+                0.5911458333333334,
+                0.441233140655106,
+                0.65234375,
+                0.5317919075144508
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.71900826446281,
+              "contrast_ratio": 1.0161121799308603,
+              "source_detail_similarity": 0.44078595226464684,
+              "status": "WARNING"
+            },
+            {
+              "index": 2,
+              "box": [
+                0.4479166666666667,
+                0.3371868978805395,
+                0.5091145833333334,
+                0.4277456647398844
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.9177489177489178,
+              "contrast_ratio": 1.058454476641899,
+              "source_detail_similarity": 0.7006246568419771,
+              "status": "PASS"
+            },
+            {
+              "index": 3,
+              "box": [
+                0.3776041666666667,
+                0.6011560693641619,
+                0.4388020833333333,
+                0.6917148362235067
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.816017316017316,
+              "contrast_ratio": 1.1662508598528436,
+              "source_detail_similarity": 0.47585620892316083,
+              "status": "WARNING"
+            },
+            {
+              "index": 4,
+              "box": [
+                0.5026041666666666,
+                0.6917148362235067,
+                0.5638020833333334,
+                0.7822736030828517
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.7830578512396694,
+              "contrast_ratio": 1.134767147586044,
+              "source_detail_similarity": 0.5571191719664669,
+              "status": "WARNING"
+            },
+            {
+              "index": 5,
+              "box": [
+                0.6614583333333334,
+                0.5529865125240848,
+                0.72265625,
+                0.6435452793834296
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.7024793388429752,
+              "contrast_ratio": 1.8168779648187348,
+              "source_detail_similarity": 0.30334993108411556,
+              "status": "WARNING"
+            },
+            {
+              "index": 6,
+              "box": [
+                0.5143229166666666,
+                0.535645472061657,
+                0.5755208333333334,
+                0.626204238921002
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.8095238095238095,
+              "contrast_ratio": 1.0762742287734022,
+              "source_detail_similarity": 0.5889666707469616,
+              "status": "WARNING"
+            },
+            {
+              "index": 7,
+              "box": [
+                0.4322916666666667,
+                0.4701348747591522,
+                0.4934895833333333,
+                0.5606936416184971
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.9669421487603306,
+              "contrast_ratio": 1.0209891700746205,
+              "source_detail_similarity": 0.6400354438573012,
+              "status": "PASS"
+            },
+            {
+              "index": 8,
+              "box": [
+                0.6223958333333334,
+                0.6782273603082851,
+                0.68359375,
+                0.7687861271676301
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.8243801652892562,
+              "contrast_ratio": 1.4302675913976106,
+              "source_detail_similarity": 0.5578232252410729,
+              "status": "WARNING"
+            },
+            {
+              "index": 9,
+              "box": [
+                0.55078125,
+                0.19653179190751446,
+                0.6119791666666666,
+                0.28709055876685935
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.9442148760330579,
+              "contrast_ratio": 1.039488459020748,
+              "source_detail_similarity": 0.6916576844915944,
+              "status": "PASS"
+            },
+            {
+              "index": 10,
+              "box": [
+                0.6315104166666666,
+                0.2774566473988439,
+                0.6927083333333334,
+                0.36801541425818884
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.9653679653679653,
+              "contrast_ratio": 0.9255078855657045,
+              "source_detail_similarity": 0.8539385239799312,
+              "status": "PASS"
+            },
+            {
+              "index": 11,
+              "box": [
+                0.328125,
+                0.36416184971098264,
+                0.3893229166666667,
+                0.45472061657032753
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.9421487603305785,
+              "contrast_ratio": 1.4579065275023106,
+              "source_detail_similarity": 0.7295705115700604,
+              "status": "PASS"
+            },
+            {
+              "index": 12,
+              "box": [
+                0.3997395833333333,
+                0.20423892100192678,
+                0.4609375,
+                0.2947976878612717
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.878099173553719,
+              "contrast_ratio": 1.4285084345382877,
+              "source_detail_similarity": 0.7085716316029574,
+              "status": "WARNING"
+            },
+            {
+              "index": 13,
+              "box": [
+                0.4401041666666667,
+                0.3730769230769231,
+                0.515625,
+                0.4307692307692308
+              ],
+              "label": "Unverified landmark proposal",
+              "source": "landmark_priority",
+              "color_agreement": 0.9682539682539683,
+              "contrast_ratio": 1.001949759304254,
+              "source_detail_similarity": 0.658631485142947,
+              "status": "PASS"
+            },
+            {
+              "index": 14,
+              "box": [
+                0.4869791666666667,
+                0.4346153846153846,
+                0.5703125,
+                0.5923076923076923
+              ],
+              "label": "Unverified landmark proposal",
+              "source": "landmark_priority",
+              "color_agreement": 0.8964912280701754,
+              "contrast_ratio": 1.0081028166486037,
+              "source_detail_similarity": 0.7470490375181961,
+              "status": "WARNING"
+            },
+            {
+              "index": 15,
+              "box": [
+                0.5963541666666666,
+                0.4807692307692308,
+                0.65625,
+                0.5384615384615384
+              ],
+              "label": "Unverified landmark proposal",
+              "source": "landmark_priority",
+              "color_agreement": 0.6632653061224489,
+              "contrast_ratio": 0.9936695554232899,
+              "source_detail_similarity": 0.36433653804269683,
+              "status": "WARNING"
+            },
+            {
+              "index": 16,
+              "box": [
+                0.4244791666666667,
+                0.5692307692307692,
+                0.5572916666666666,
+                0.7538461538461538
+              ],
+              "label": "Unverified landmark proposal",
+              "source": "landmark_priority",
+              "color_agreement": 0.9206963249516441,
+              "contrast_ratio": 1.0435088963086336,
+              "source_detail_similarity": 0.7324840755931468,
+              "status": "PASS"
+            }
+          ],
+          "recognition_review": "NOT_RUN",
+          "scope": "automated coarse appearance checks; not semantic eye/nose recognition",
+          "construction": "multicolor"
+        },
+        "ai": [
+          {
+            "component": "segmentation",
+            "status": "applied",
+            "model_id": "facebook/sam2.1-hiera-tiny",
+            "revision": "de431c4043854a71d8101e17995dfe596bf101a5",
+            "manifest_sha256": "3734c68087d9a71e13a2deca6fa6a8b439972fcc864675c35cc19861667b57ff",
+            "device": "cpu",
+            "inference_cache_hit": false,
+            "elapsed_seconds": 7.376682499889284
+          },
+          {
+            "component": "face_features",
+            "status": "applied",
+            "model_id": "https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task",
+            "revision": "float16/1",
+            "manifest_sha256": "3bd3689ac73cf7826ab2920d5ce46d83e47667a56750da265a0d92b1d2d34e84",
+            "device": "cpu",
+            "inference_cache_hit": false,
+            "elapsed_seconds": 3.044280800037086
+          },
+          {
+            "component": "important_details",
+            "status": "fallback",
+            "reason": "Not enough free RAM for important_details: 630 MB available; reserve at least 2048 MB",
+            "retryable": true,
+            "elapsed_seconds": 1.0824595999438316
+          },
+          {
+            "component": "detail_selection",
+            "status": "applied",
+            "method": "structure_only",
+            "region_count": 12,
+            "regions": [
+              {
+                "box": [
+                  0.5911458333333334,
+                  0.441233140655106,
+                  0.65234375,
+                  0.5317919075144508
+                ],
+                "score": 1.14805,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.4479166666666667,
+                  0.3371868978805395,
+                  0.5091145833333334,
+                  0.4277456647398844
+                ],
+                "score": 0.91495,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.3776041666666667,
+                  0.6011560693641619,
+                  0.4388020833333333,
+                  0.6917148362235067
+                ],
+                "score": 0.90172,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.5026041666666666,
+                  0.6917148362235067,
+                  0.5638020833333334,
+                  0.7822736030828517
+                ],
+                "score": 0.89982,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.6614583333333334,
+                  0.5529865125240848,
+                  0.72265625,
+                  0.6435452793834296
+                ],
+                "score": 0.84479,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.5143229166666666,
+                  0.535645472061657,
+                  0.5755208333333334,
+                  0.626204238921002
+                ],
+                "score": 0.83919,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.4322916666666667,
+                  0.4701348747591522,
+                  0.4934895833333333,
+                  0.5606936416184971
+                ],
+                "score": 0.81567,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.6223958333333334,
+                  0.6782273603082851,
+                  0.68359375,
+                  0.7687861271676301
+                ],
+                "score": 0.81175,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.55078125,
+                  0.19653179190751446,
+                  0.6119791666666666,
+                  0.28709055876685935
+                ],
+                "score": 0.80925,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.6315104166666666,
+                  0.2774566473988439,
+                  0.6927083333333334,
+                  0.36801541425818884
+                ],
+                "score": 0.80742,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.328125,
+                  0.36416184971098264,
+                  0.3893229166666667,
+                  0.45472061657032753
+                ],
+                "score": 0.79894,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.3997395833333333,
+                  0.20423892100192678,
+                  0.4609375,
+                  0.2947976878612717
+                ],
+                "score": 0.78014,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              }
+            ],
+            "importance_is_heuristic": true
+          },
+          {
+            "component": "depth",
+            "status": "not_applicable",
+            "elapsed_seconds": 0,
+            "reason": "Relative-depth inference is only used for Depth Scene"
+          }
+        ],
+        "source_sha256": "5d2e300b09f554c61381cea57637caef813e86c091cf6e17576e74eb83332876"
+      }
+    ],
+    "tuning": {
+      "status": "PASS",
+      "seconds": 36.19,
+      "manual_detail_boxes": [
+        [
+          0.43,
+          0.34,
+          0.5,
+          0.43
+        ],
+        [
+          0.6,
+          0.45,
+          0.67,
+          0.53
+        ],
+        [
+          0.43,
+          0.47,
+          0.54,
+          0.6
+        ],
+        [
+          0.39,
+          0.65,
+          0.52,
+          0.77
+        ]
+      ],
+      "colors": 16,
+      "layers": 20,
+      "width_mm": 300,
+      "perception": "Reused recorded baseline perception; no new inference",
+      "fidelity": {
+        "status": "WARNING",
+        "target_color_agreement": 0.9811279375779122,
+        "source_structure_similarity": 0.8570065742256219,
+        "minimum_color_agreement": 0.94,
+        "minimum_source_similarity": 0.4,
+        "source_similarity_gate": true,
+        "detail_regions": [
+          {
+            "index": 1,
+            "color_agreement": 0.9545454545454546,
+            "minimum_agreement": 0.9,
+            "status": "PASS"
+          },
+          {
+            "index": 2,
+            "color_agreement": 0.8189473684210526,
+            "minimum_agreement": 0.9,
+            "status": "WARNING"
+          },
+          {
+            "index": 3,
+            "color_agreement": 0.9636062861869313,
+            "minimum_agreement": 0.9,
+            "status": "PASS"
+          },
+          {
+            "index": 4,
+            "color_agreement": 0.9640179910044977,
+            "minimum_agreement": 0.9,
+            "status": "PASS"
+          }
+        ],
+        "automatic_detail_regions": [
+          {
+            "index": 1,
+            "box": [
+              0.5911458333333334,
+              0.441233140655106,
+              0.65234375,
+              0.5317919075144508
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.8388429752066116,
+            "contrast_ratio": 1.0226867774758384,
+            "source_detail_similarity": 0.7131987863315813,
+            "status": "WARNING"
+          },
+          {
+            "index": 2,
+            "box": [
+              0.4479166666666667,
+              0.3371868978805395,
+              0.5091145833333334,
+              0.4277456647398844
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.9415584415584416,
+            "contrast_ratio": 1.0512068196436848,
+            "source_detail_similarity": 0.6872029939394221,
+            "status": "PASS"
+          },
+          {
+            "index": 3,
+            "box": [
+              0.3776041666666667,
+              0.6011560693641619,
+              0.4388020833333333,
+              0.6917148362235067
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.9653679653679653,
+            "contrast_ratio": 0.9007435792715507,
+            "source_detail_similarity": 0.656429512365137,
+            "status": "PASS"
+          },
+          {
+            "index": 4,
+            "box": [
+              0.5026041666666666,
+              0.6917148362235067,
+              0.5638020833333334,
+              0.7822736030828517
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.9276859504132231,
+            "contrast_ratio": 1.02461016430948,
+            "source_detail_similarity": 0.6429430737857437,
+            "status": "PASS"
+          },
+          {
+            "index": 5,
+            "box": [
+              0.6614583333333334,
+              0.5529865125240848,
+              0.72265625,
+              0.6435452793834296
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.890495867768595,
+            "contrast_ratio": 1.1977668147749136,
+            "source_detail_similarity": 0.6765067678834576,
+            "status": "WARNING"
+          },
+          {
+            "index": 6,
+            "box": [
+              0.5143229166666666,
+              0.535645472061657,
+              0.5755208333333334,
+              0.626204238921002
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.9400826446280992,
+            "contrast_ratio": 1.0035685279710453,
+            "source_detail_similarity": 0.6960262692387534,
+            "status": "PASS"
+          },
+          {
+            "index": 7,
+            "box": [
+              0.4322916666666667,
+              0.4701348747591522,
+              0.4934895833333333,
+              0.5606936416184971
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.9504132231404959,
+            "contrast_ratio": 1.0321652274403348,
+            "source_detail_similarity": 0.7297162880466338,
+            "status": "PASS"
+          },
+          {
+            "index": 8,
+            "box": [
+              0.6223958333333334,
+              0.6782273603082851,
+              0.68359375,
+              0.7687861271676301
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.9090909090909091,
+            "contrast_ratio": 1.061637123095255,
+            "source_detail_similarity": 0.750917642357971,
+            "status": "PASS"
+          },
+          {
+            "index": 9,
+            "box": [
+              0.55078125,
+              0.19653179190751446,
+              0.6119791666666666,
+              0.28709055876685935
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.9214876033057852,
+            "contrast_ratio": 1.0688787272192548,
+            "source_detail_similarity": 0.6919066375607604,
+            "status": "PASS"
+          },
+          {
+            "index": 10,
+            "box": [
+              0.6315104166666666,
+              0.2774566473988439,
+              0.6927083333333334,
+              0.36801541425818884
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.9731404958677686,
+            "contrast_ratio": 0.9979499709137212,
+            "source_detail_similarity": 0.8695194998025858,
+            "status": "PASS"
+          },
+          {
+            "index": 11,
+            "box": [
+              0.328125,
+              0.36416184971098264,
+              0.3893229166666667,
+              0.45472061657032753
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.9090909090909091,
+            "contrast_ratio": 1.089810953124245,
+            "source_detail_similarity": 0.7194614552420143,
+            "status": "PASS"
+          },
+          {
+            "index": 12,
+            "box": [
+              0.3997395833333333,
+              0.20423892100192678,
+              0.4609375,
+              0.2947976878612717
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.96900826446281,
+            "contrast_ratio": 1.1423075592452365,
+            "source_detail_similarity": 0.7226584449639876,
+            "status": "PASS"
+          },
+          {
+            "index": 13,
+            "box": [
+              0.4401041666666667,
+              0.3730769230769231,
+              0.515625,
+              0.4307692307692308
+            ],
+            "label": "Unverified landmark proposal",
+            "source": "landmark_priority",
+            "color_agreement": 0.9656084656084656,
+            "contrast_ratio": 1.0661231816073158,
+            "source_detail_similarity": 0.7120354761499984,
+            "status": "PASS"
+          },
+          {
+            "index": 14,
+            "box": [
+              0.4869791666666667,
+              0.4346153846153846,
+              0.5703125,
+              0.5923076923076923
+            ],
+            "label": "Unverified landmark proposal",
+            "source": "landmark_priority",
+            "color_agreement": 0.9675438596491228,
+            "contrast_ratio": 0.9974486924200802,
+            "source_detail_similarity": 0.8256497231357417,
+            "status": "PASS"
+          },
+          {
+            "index": 15,
+            "box": [
+              0.5963541666666666,
+              0.4807692307692308,
+              0.65625,
+              0.5384615384615384
+            ],
+            "label": "Unverified landmark proposal",
+            "source": "landmark_priority",
+            "color_agreement": 0.782312925170068,
+            "contrast_ratio": 1.007363556656752,
+            "source_detail_similarity": 0.4406666451281851,
+            "status": "WARNING"
+          },
+          {
+            "index": 16,
+            "box": [
+              0.4244791666666667,
+              0.5692307692307692,
+              0.5572916666666666,
+              0.7538461538461538
+            ],
+            "label": "Unverified landmark proposal",
+            "source": "landmark_priority",
+            "color_agreement": 0.9680555555555556,
+            "contrast_ratio": 1.0426878589866226,
+            "source_detail_similarity": 0.8594263959120091,
+            "status": "PASS"
+          }
+        ],
+        "recognition_review": "NOT_RUN",
+        "scope": "automated coarse appearance checks; not semantic eye/nose recognition",
+        "construction": "multicolor"
+      }
+    }
+  },
+  {
+    "case": "puppy",
+    "mode": "stencil",
+    "status": "PASS",
+    "attempts": [
+      {
+        "config": {
+          "mode": "multicolor",
+          "colors": 10,
+          "layers": 14,
+          "detail": 0.78,
+          "palette": null,
+          "seed": 42,
+          "max_side": 384,
+          "width_mm": 260.0,
+          "height_mm": null,
+          "spacing_mm": 3.0,
+          "assembly_mode": "frame_connected",
+          "backing": "#ffffff",
+          "frame_mm": 10.0,
+          "artwork_fit": "contain",
+          "workflow": {
+            "workflow_schema": 1,
+            "family": "stencil",
+            "style": "detailed",
+            "assembly": "flat",
+            "lighting": "ambient",
+            "style_options": {
+              "polarity": "dark_paper",
+              "composition": "window_mat",
+              "background": "preserve"
+            }
+          },
+          "ai": {
+            "segmentation": true,
+            "depth": true,
+            "face_features": true,
+            "important_details": true,
+            "detail_crops": 1,
+            "detail_seconds": 35.0,
+            "device": "cpu",
+            "failure_policy": "fallback",
+            "subject_box": null,
+            "max_feature_change": 0.1
+          },
+          "manufacturing_width_mm": null,
+          "abstraction_policy": null,
+          "depth_paper": null,
+          "detail_policy": "prefer",
+          "detail_boxes": []
+        },
+        "profile": {
+          "name": "Draft paper profile",
+          "thickness_mm": 0.25,
+          "min_feature_width_mm": 1.2,
+          "min_bridge_width_mm": 1.5,
+          "min_hole_size_mm": 1.0,
+          "cut_tolerance_mm": 0.1,
+          "method": "manual craft knife",
+          "min_frame_width_mm": 3.0,
+          "validation_tolerance_mm": 0.01,
+          "decorative_tip_policy": "bounded_convex"
+        },
+        "status": "FAILED",
+        "seconds": 12.57,
+        "code": "INFEASIBLE_CONSTRAINTS",
+        "error": "Cannot produce a frame-connected sheet within the current profile and change budget: Would remove more than 20% of a significant source component; IMPORTANT_FEATURE_CHANGED: local retained/cutout budget exceeded; Would remove more than 20% of a significant source component; IMPORTANT_FEATURE_CHANGED: local retained/cutout budget exceeded"
+      },
+      {
+        "config": {
+          "mode": "multicolor",
+          "colors": 12,
+          "layers": 14,
+          "detail": 0.78,
+          "palette": null,
+          "seed": 42,
+          "max_side": 384,
+          "width_mm": 300.0,
+          "height_mm": null,
+          "spacing_mm": 3.0,
+          "assembly_mode": "frame_connected",
+          "backing": "#ffffff",
+          "frame_mm": 10.0,
+          "artwork_fit": "contain",
+          "workflow": {
+            "workflow_schema": 1,
+            "family": "stencil",
+            "style": "detailed",
+            "assembly": "flat",
+            "lighting": "ambient",
+            "style_options": {
+              "polarity": "dark_paper",
+              "composition": "window_mat",
+              "background": "preserve"
+            }
+          },
+          "ai": {
+            "segmentation": true,
+            "depth": true,
+            "face_features": true,
+            "important_details": true,
+            "detail_crops": 1,
+            "detail_seconds": 35.0,
+            "device": "cpu",
+            "failure_policy": "fallback",
+            "subject_box": null,
+            "max_feature_change": 0.1
+          },
+          "manufacturing_width_mm": null,
+          "abstraction_policy": null,
+          "depth_paper": null,
+          "detail_policy": "prefer",
+          "detail_boxes": []
+        },
+        "profile": {
+          "name": "Draft paper profile",
+          "thickness_mm": 0.25,
+          "min_feature_width_mm": 1.2,
+          "min_bridge_width_mm": 1.5,
+          "min_hole_size_mm": 1.0,
+          "cut_tolerance_mm": 0.1,
+          "method": "manual craft knife",
+          "min_frame_width_mm": 3.0,
+          "validation_tolerance_mm": 0.01,
+          "decorative_tip_policy": "bounded_convex"
+        },
+        "status": "FAILED",
+        "seconds": 12.78,
+        "code": "INFEASIBLE_CONSTRAINTS",
+        "error": "Cannot produce a frame-connected sheet within the current profile and change budget: Would remove more than 20% of a significant source component; IMPORTANT_FEATURE_CHANGED: local retained/cutout budget exceeded; Would remove more than 20% of a significant source component; IMPORTANT_FEATURE_CHANGED: local retained/cutout budget exceeded"
+      },
+      {
+        "status": "PASS",
+        "seconds": 12.08,
+        "config": {
+          "mode": "multicolor",
+          "colors": 10,
+          "layers": 14,
+          "detail": 0.75,
+          "palette": null,
+          "seed": 42,
+          "max_side": 384,
+          "width_mm": 300.0,
+          "height_mm": null,
+          "spacing_mm": 3.0,
+          "assembly_mode": "frame_connected",
+          "backing": "#23473f",
+          "frame_mm": 10.0,
+          "artwork_fit": "contain",
+          "workflow": {
+            "workflow_schema": 1,
+            "family": "stencil",
+            "style": "bold",
+            "assembly": "flat",
+            "lighting": "ambient",
+            "style_options": {
+              "polarity": "light_paper",
+              "composition": "window_mat",
+              "background": "preserve"
+            }
+          },
+          "ai": null,
+          "manufacturing_width_mm": null,
+          "abstraction_policy": null,
+          "depth_paper": null,
+          "detail_policy": "prefer",
+          "detail_boxes": []
+        },
+        "layers": 1,
+        "tuning": "Light-paper polarity; no AI in this retry"
+      }
+    ]
+  },
+  {
+    "case": "puppy",
+    "mode": "depth-color",
+    "status": "PASS",
+    "attempts": [
+      {
+        "config": {
+          "mode": "lightbox",
+          "colors": 10,
+          "layers": 14,
+          "detail": 0.78,
+          "palette": null,
+          "seed": 42,
+          "max_side": 384,
+          "width_mm": 260.0,
+          "height_mm": null,
+          "spacing_mm": 3.0,
+          "assembly_mode": "frame_connected",
+          "backing": "#ffffff",
+          "frame_mm": 10.0,
+          "artwork_fit": "contain",
+          "workflow": {
+            "workflow_schema": 1,
+            "family": "depth_scene",
+            "style": "landscape",
+            "assembly": "spaced",
+            "lighting": "ambient",
+            "style_options": {
+              "polarity": "dark_paper",
+              "composition": "window_mat",
+              "background": "preserve"
+            }
+          },
+          "ai": {
+            "segmentation": true,
+            "depth": true,
+            "face_features": true,
+            "important_details": true,
+            "detail_crops": 1,
+            "detail_seconds": 35.0,
+            "device": "cpu",
+            "failure_policy": "fallback",
+            "subject_box": null,
+            "max_feature_change": 0.1
+          },
+          "manufacturing_width_mm": null,
+          "abstraction_policy": null,
+          "depth_paper": "multicolor",
+          "detail_policy": "prefer",
+          "detail_boxes": []
+        },
+        "profile": {
+          "name": "Draft paper profile",
+          "thickness_mm": 0.25,
+          "min_feature_width_mm": 1.2,
+          "min_bridge_width_mm": 1.5,
+          "min_hole_size_mm": 1.0,
+          "cut_tolerance_mm": 0.1,
+          "method": "manual craft knife",
+          "min_frame_width_mm": 3.0,
+          "validation_tolerance_mm": 0.01,
+          "decorative_tip_policy": "bounded_convex"
+        },
+        "status": "PASS",
+        "seconds": 10.64,
+        "layers": 14,
+        "fidelity": {
+          "status": "WARNING",
+          "target_color_agreement": 0.9756944444444444,
+          "source_structure_similarity": 0.7866759210294042,
+          "minimum_color_agreement": 0.94,
+          "minimum_source_similarity": 0.4,
+          "source_similarity_gate": true,
+          "detail_regions": [],
+          "automatic_detail_regions": [
+            {
+              "index": 1,
+              "box": [
+                0.5911458333333334,
+                0.441233140655106,
+                0.65234375,
+                0.5317919075144508
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.71900826446281,
+              "contrast_ratio": 1.0161121799308603,
+              "source_detail_similarity": 0.44078595226464684,
+              "status": "WARNING"
+            },
+            {
+              "index": 2,
+              "box": [
+                0.4479166666666667,
+                0.3371868978805395,
+                0.5091145833333334,
+                0.4277456647398844
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.9177489177489178,
+              "contrast_ratio": 1.058454476641899,
+              "source_detail_similarity": 0.7006246568419771,
+              "status": "PASS"
+            },
+            {
+              "index": 3,
+              "box": [
+                0.3776041666666667,
+                0.6011560693641619,
+                0.4388020833333333,
+                0.6917148362235067
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.816017316017316,
+              "contrast_ratio": 1.1662508598528436,
+              "source_detail_similarity": 0.47585620892316083,
+              "status": "WARNING"
+            },
+            {
+              "index": 4,
+              "box": [
+                0.5026041666666666,
+                0.6917148362235067,
+                0.5638020833333334,
+                0.7822736030828517
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.7830578512396694,
+              "contrast_ratio": 1.134767147586044,
+              "source_detail_similarity": 0.5571191719664669,
+              "status": "WARNING"
+            },
+            {
+              "index": 5,
+              "box": [
+                0.6614583333333334,
+                0.5529865125240848,
+                0.72265625,
+                0.6435452793834296
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.7024793388429752,
+              "contrast_ratio": 1.8168779648187348,
+              "source_detail_similarity": 0.30334993108411556,
+              "status": "WARNING"
+            },
+            {
+              "index": 6,
+              "box": [
+                0.5143229166666666,
+                0.535645472061657,
+                0.5755208333333334,
+                0.626204238921002
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.8095238095238095,
+              "contrast_ratio": 1.0762742287734022,
+              "source_detail_similarity": 0.5889666707469616,
+              "status": "WARNING"
+            },
+            {
+              "index": 7,
+              "box": [
+                0.4322916666666667,
+                0.4701348747591522,
+                0.4934895833333333,
+                0.5606936416184971
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.9669421487603306,
+              "contrast_ratio": 1.0209891700746205,
+              "source_detail_similarity": 0.6400354438573012,
+              "status": "PASS"
+            },
+            {
+              "index": 8,
+              "box": [
+                0.6223958333333334,
+                0.6782273603082851,
+                0.68359375,
+                0.7687861271676301
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.8243801652892562,
+              "contrast_ratio": 1.4302675913976106,
+              "source_detail_similarity": 0.5578232252410729,
+              "status": "WARNING"
+            },
+            {
+              "index": 9,
+              "box": [
+                0.55078125,
+                0.19653179190751446,
+                0.6119791666666666,
+                0.28709055876685935
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.9442148760330579,
+              "contrast_ratio": 1.039488459020748,
+              "source_detail_similarity": 0.6916576844915944,
+              "status": "PASS"
+            },
+            {
+              "index": 10,
+              "box": [
+                0.6315104166666666,
+                0.2774566473988439,
+                0.6927083333333334,
+                0.36801541425818884
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.9653679653679653,
+              "contrast_ratio": 0.9255078855657045,
+              "source_detail_similarity": 0.8539385239799312,
+              "status": "PASS"
+            },
+            {
+              "index": 11,
+              "box": [
+                0.328125,
+                0.36416184971098264,
+                0.3893229166666667,
+                0.45472061657032753
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.9421487603305785,
+              "contrast_ratio": 1.4579065275023106,
+              "source_detail_similarity": 0.7295705115700604,
+              "status": "PASS"
+            },
+            {
+              "index": 12,
+              "box": [
+                0.3997395833333333,
+                0.20423892100192678,
+                0.4609375,
+                0.2947976878612717
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.878099173553719,
+              "contrast_ratio": 1.4285084345382877,
+              "source_detail_similarity": 0.7085716316029574,
+              "status": "WARNING"
+            },
+            {
+              "index": 13,
+              "box": [
+                0.4401041666666667,
+                0.3730769230769231,
+                0.515625,
+                0.4307692307692308
+              ],
+              "label": "Unverified landmark proposal",
+              "source": "landmark_priority",
+              "color_agreement": 0.9682539682539683,
+              "contrast_ratio": 1.001949759304254,
+              "source_detail_similarity": 0.658631485142947,
+              "status": "PASS"
+            },
+            {
+              "index": 14,
+              "box": [
+                0.4869791666666667,
+                0.4346153846153846,
+                0.5703125,
+                0.5923076923076923
+              ],
+              "label": "Unverified landmark proposal",
+              "source": "landmark_priority",
+              "color_agreement": 0.8964912280701754,
+              "contrast_ratio": 1.0081028166486037,
+              "source_detail_similarity": 0.7470490375181961,
+              "status": "WARNING"
+            },
+            {
+              "index": 15,
+              "box": [
+                0.5963541666666666,
+                0.4807692307692308,
+                0.65625,
+                0.5384615384615384
+              ],
+              "label": "Unverified landmark proposal",
+              "source": "landmark_priority",
+              "color_agreement": 0.6632653061224489,
+              "contrast_ratio": 0.9936695554232899,
+              "source_detail_similarity": 0.36433653804269683,
+              "status": "WARNING"
+            },
+            {
+              "index": 16,
+              "box": [
+                0.4244791666666667,
+                0.5692307692307692,
+                0.5572916666666666,
+                0.7538461538461538
+              ],
+              "label": "Unverified landmark proposal",
+              "source": "landmark_priority",
+              "color_agreement": 0.9206963249516441,
+              "contrast_ratio": 1.0435088963086336,
+              "source_detail_similarity": 0.7324840755931468,
+              "status": "PASS"
+            }
+          ],
+          "recognition_review": "NOT_RUN",
+          "scope": "automated coarse appearance checks; not semantic eye/nose recognition",
+          "construction": "color-occlusion relief"
+        },
+        "ai": [
+          {
+            "component": "segmentation",
+            "status": "applied",
+            "model_id": "facebook/sam2.1-hiera-tiny",
+            "revision": "de431c4043854a71d8101e17995dfe596bf101a5",
+            "manifest_sha256": "3734c68087d9a71e13a2deca6fa6a8b439972fcc864675c35cc19861667b57ff",
+            "device": "cpu",
+            "inference_cache_hit": true,
+            "elapsed_seconds": 0.001959000015631318
+          },
+          {
+            "component": "face_features",
+            "status": "applied",
+            "model_id": "https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task",
+            "revision": "float16/1",
+            "manifest_sha256": "3bd3689ac73cf7826ab2920d5ce46d83e47667a56750da265a0d92b1d2d34e84",
+            "device": "cpu",
+            "inference_cache_hit": true,
+            "elapsed_seconds": 0.0004173999186605215
+          },
+          {
+            "component": "depth",
+            "status": "applied",
+            "model_id": "depth-anything/Depth-Anything-V2-Small-hf",
+            "revision": "5426e4f0f36572d16453bbda7a8389317b1bef99",
+            "manifest_sha256": "1da671abbd464bdfe27d596c55800a7ad4763eaab83697567a6fdefeab67e7e5",
+            "device": "cpu",
+            "inference_cache_hit": false,
+            "elapsed_seconds": 0.974990600021556
+          },
+          {
+            "component": "important_details",
+            "status": "fallback",
+            "reason": "Not enough free RAM for important_details: 1539 MB available; reserve at least 2048 MB",
+            "retryable": true,
+            "elapsed_seconds": 0.6242252998054028
+          },
+          {
+            "component": "detail_selection",
+            "status": "applied",
+            "method": "structure_only",
+            "region_count": 12,
+            "regions": [
+              {
+                "box": [
+                  0.5911458333333334,
+                  0.441233140655106,
+                  0.65234375,
+                  0.5317919075144508
+                ],
+                "score": 1.14805,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.4479166666666667,
+                  0.3371868978805395,
+                  0.5091145833333334,
+                  0.4277456647398844
+                ],
+                "score": 0.91495,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.3776041666666667,
+                  0.6011560693641619,
+                  0.4388020833333333,
+                  0.6917148362235067
+                ],
+                "score": 0.90172,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.5026041666666666,
+                  0.6917148362235067,
+                  0.5638020833333334,
+                  0.7822736030828517
+                ],
+                "score": 0.89982,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.6614583333333334,
+                  0.5529865125240848,
+                  0.72265625,
+                  0.6435452793834296
+                ],
+                "score": 0.84479,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.5143229166666666,
+                  0.535645472061657,
+                  0.5755208333333334,
+                  0.626204238921002
+                ],
+                "score": 0.83919,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.4322916666666667,
+                  0.4701348747591522,
+                  0.4934895833333333,
+                  0.5606936416184971
+                ],
+                "score": 0.81567,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.6223958333333334,
+                  0.6782273603082851,
+                  0.68359375,
+                  0.7687861271676301
+                ],
+                "score": 0.81175,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.55078125,
+                  0.19653179190751446,
+                  0.6119791666666666,
+                  0.28709055876685935
+                ],
+                "score": 0.80925,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.6315104166666666,
+                  0.2774566473988439,
+                  0.6927083333333334,
+                  0.36801541425818884
+                ],
+                "score": 0.80742,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.328125,
+                  0.36416184971098264,
+                  0.3893229166666667,
+                  0.45472061657032753
+                ],
+                "score": 0.79894,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.3997395833333333,
+                  0.20423892100192678,
+                  0.4609375,
+                  0.2947976878612717
+                ],
+                "score": 0.78014,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              }
+            ],
+            "importance_is_heuristic": true
+          }
+        ],
+        "source_sha256": "5d2e300b09f554c61381cea57637caef813e86c091cf6e17576e74eb83332876"
+      }
+    ],
+    "tuning": {
+      "status": "PASS",
+      "seconds": 35.18,
+      "manual_detail_boxes": [
+        [
+          0.43,
+          0.34,
+          0.5,
+          0.43
+        ],
+        [
+          0.6,
+          0.45,
+          0.67,
+          0.53
+        ],
+        [
+          0.43,
+          0.47,
+          0.54,
+          0.6
+        ],
+        [
+          0.39,
+          0.65,
+          0.52,
+          0.77
+        ]
+      ],
+      "colors": 16,
+      "layers": 20,
+      "width_mm": 300,
+      "perception": "Reused recorded baseline perception; no new inference",
+      "fidelity": {
+        "status": "WARNING",
+        "target_color_agreement": 0.9811279375779122,
+        "source_structure_similarity": 0.8570065742256219,
+        "minimum_color_agreement": 0.94,
+        "minimum_source_similarity": 0.4,
+        "source_similarity_gate": true,
+        "detail_regions": [
+          {
+            "index": 1,
+            "color_agreement": 0.9545454545454546,
+            "minimum_agreement": 0.9,
+            "status": "PASS"
+          },
+          {
+            "index": 2,
+            "color_agreement": 0.8189473684210526,
+            "minimum_agreement": 0.9,
+            "status": "WARNING"
+          },
+          {
+            "index": 3,
+            "color_agreement": 0.9636062861869313,
+            "minimum_agreement": 0.9,
+            "status": "PASS"
+          },
+          {
+            "index": 4,
+            "color_agreement": 0.9640179910044977,
+            "minimum_agreement": 0.9,
+            "status": "PASS"
+          }
+        ],
+        "automatic_detail_regions": [
+          {
+            "index": 1,
+            "box": [
+              0.5911458333333334,
+              0.441233140655106,
+              0.65234375,
+              0.5317919075144508
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.8388429752066116,
+            "contrast_ratio": 1.0226867774758384,
+            "source_detail_similarity": 0.7131987863315813,
+            "status": "WARNING"
+          },
+          {
+            "index": 2,
+            "box": [
+              0.4479166666666667,
+              0.3371868978805395,
+              0.5091145833333334,
+              0.4277456647398844
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.9415584415584416,
+            "contrast_ratio": 1.0512068196436848,
+            "source_detail_similarity": 0.6872029939394221,
+            "status": "PASS"
+          },
+          {
+            "index": 3,
+            "box": [
+              0.3776041666666667,
+              0.6011560693641619,
+              0.4388020833333333,
+              0.6917148362235067
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.9653679653679653,
+            "contrast_ratio": 0.9007435792715507,
+            "source_detail_similarity": 0.656429512365137,
+            "status": "PASS"
+          },
+          {
+            "index": 4,
+            "box": [
+              0.5026041666666666,
+              0.6917148362235067,
+              0.5638020833333334,
+              0.7822736030828517
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.9276859504132231,
+            "contrast_ratio": 1.02461016430948,
+            "source_detail_similarity": 0.6429430737857437,
+            "status": "PASS"
+          },
+          {
+            "index": 5,
+            "box": [
+              0.6614583333333334,
+              0.5529865125240848,
+              0.72265625,
+              0.6435452793834296
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.890495867768595,
+            "contrast_ratio": 1.1977668147749136,
+            "source_detail_similarity": 0.6765067678834576,
+            "status": "WARNING"
+          },
+          {
+            "index": 6,
+            "box": [
+              0.5143229166666666,
+              0.535645472061657,
+              0.5755208333333334,
+              0.626204238921002
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.9400826446280992,
+            "contrast_ratio": 1.0035685279710453,
+            "source_detail_similarity": 0.6960262692387534,
+            "status": "PASS"
+          },
+          {
+            "index": 7,
+            "box": [
+              0.4322916666666667,
+              0.4701348747591522,
+              0.4934895833333333,
+              0.5606936416184971
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.9504132231404959,
+            "contrast_ratio": 1.0321652274403348,
+            "source_detail_similarity": 0.7297162880466338,
+            "status": "PASS"
+          },
+          {
+            "index": 8,
+            "box": [
+              0.6223958333333334,
+              0.6782273603082851,
+              0.68359375,
+              0.7687861271676301
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.9090909090909091,
+            "contrast_ratio": 1.061637123095255,
+            "source_detail_similarity": 0.750917642357971,
+            "status": "PASS"
+          },
+          {
+            "index": 9,
+            "box": [
+              0.55078125,
+              0.19653179190751446,
+              0.6119791666666666,
+              0.28709055876685935
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.9214876033057852,
+            "contrast_ratio": 1.0688787272192548,
+            "source_detail_similarity": 0.6919066375607604,
+            "status": "PASS"
+          },
+          {
+            "index": 10,
+            "box": [
+              0.6315104166666666,
+              0.2774566473988439,
+              0.6927083333333334,
+              0.36801541425818884
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.9731404958677686,
+            "contrast_ratio": 0.9979499709137212,
+            "source_detail_similarity": 0.8695194998025858,
+            "status": "PASS"
+          },
+          {
+            "index": 11,
+            "box": [
+              0.328125,
+              0.36416184971098264,
+              0.3893229166666667,
+              0.45472061657032753
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.9090909090909091,
+            "contrast_ratio": 1.089810953124245,
+            "source_detail_similarity": 0.7194614552420143,
+            "status": "PASS"
+          },
+          {
+            "index": 12,
+            "box": [
+              0.3997395833333333,
+              0.20423892100192678,
+              0.4609375,
+              0.2947976878612717
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.96900826446281,
+            "contrast_ratio": 1.1423075592452365,
+            "source_detail_similarity": 0.7226584449639876,
+            "status": "PASS"
+          },
+          {
+            "index": 13,
+            "box": [
+              0.4401041666666667,
+              0.3730769230769231,
+              0.515625,
+              0.4307692307692308
+            ],
+            "label": "Unverified landmark proposal",
+            "source": "landmark_priority",
+            "color_agreement": 0.9656084656084656,
+            "contrast_ratio": 1.0661231816073158,
+            "source_detail_similarity": 0.7120354761499984,
+            "status": "PASS"
+          },
+          {
+            "index": 14,
+            "box": [
+              0.4869791666666667,
+              0.4346153846153846,
+              0.5703125,
+              0.5923076923076923
+            ],
+            "label": "Unverified landmark proposal",
+            "source": "landmark_priority",
+            "color_agreement": 0.9675438596491228,
+            "contrast_ratio": 0.9974486924200802,
+            "source_detail_similarity": 0.8256497231357417,
+            "status": "PASS"
+          },
+          {
+            "index": 15,
+            "box": [
+              0.5963541666666666,
+              0.4807692307692308,
+              0.65625,
+              0.5384615384615384
+            ],
+            "label": "Unverified landmark proposal",
+            "source": "landmark_priority",
+            "color_agreement": 0.782312925170068,
+            "contrast_ratio": 1.007363556656752,
+            "source_detail_similarity": 0.4406666451281851,
+            "status": "WARNING"
+          },
+          {
+            "index": 16,
+            "box": [
+              0.4244791666666667,
+              0.5692307692307692,
+              0.5572916666666666,
+              0.7538461538461538
+            ],
+            "label": "Unverified landmark proposal",
+            "source": "landmark_priority",
+            "color_agreement": 0.9680555555555556,
+            "contrast_ratio": 1.0426878589866226,
+            "source_detail_similarity": 0.8594263959120091,
+            "status": "PASS"
+          }
+        ],
+        "recognition_review": "NOT_RUN",
+        "scope": "automated coarse appearance checks; not semantic eye/nose recognition",
+        "construction": "color-occlusion relief"
+      }
+    }
+  },
+  {
+    "case": "puppy",
+    "mode": "depth-white",
+    "status": "PASS",
+    "attempts": [
+      {
+        "config": {
+          "mode": "lightbox",
+          "colors": 10,
+          "layers": 14,
+          "detail": 0.78,
+          "palette": null,
+          "seed": 42,
+          "max_side": 384,
+          "width_mm": 260.0,
+          "height_mm": null,
+          "spacing_mm": 3.0,
+          "assembly_mode": "frame_connected",
+          "backing": "#ffffff",
+          "frame_mm": 10.0,
+          "artwork_fit": "contain",
+          "workflow": {
+            "workflow_schema": 1,
+            "family": "depth_scene",
+            "style": "landscape",
+            "assembly": "spaced",
+            "lighting": "backlit",
+            "style_options": {
+              "polarity": "dark_paper",
+              "composition": "window_mat",
+              "background": "preserve"
+            }
+          },
+          "ai": {
+            "segmentation": true,
+            "depth": true,
+            "face_features": true,
+            "important_details": true,
+            "detail_crops": 1,
+            "detail_seconds": 35.0,
+            "device": "cpu",
+            "failure_policy": "fallback",
+            "subject_box": null,
+            "max_feature_change": 0.1
+          },
+          "manufacturing_width_mm": null,
+          "abstraction_policy": null,
+          "depth_paper": "white",
+          "detail_policy": "prefer",
+          "detail_boxes": []
+        },
+        "profile": {
+          "name": "Draft paper profile",
+          "thickness_mm": 0.25,
+          "min_feature_width_mm": 1.2,
+          "min_bridge_width_mm": 1.5,
+          "min_hole_size_mm": 1.0,
+          "cut_tolerance_mm": 0.1,
+          "method": "manual craft knife",
+          "min_frame_width_mm": 3.0,
+          "validation_tolerance_mm": 0.01,
+          "decorative_tip_policy": "bounded_convex"
+        },
+        "status": "PASS",
+        "seconds": 6.7,
+        "layers": 10,
+        "fidelity": {
+          "status": "NOT_EVALUATED",
+          "reason": "Requires versioned ambient color construction"
+        },
+        "ai": [
+          {
+            "component": "segmentation",
+            "status": "applied",
+            "model_id": "facebook/sam2.1-hiera-tiny",
+            "revision": "de431c4043854a71d8101e17995dfe596bf101a5",
+            "manifest_sha256": "3734c68087d9a71e13a2deca6fa6a8b439972fcc864675c35cc19861667b57ff",
+            "device": "cpu",
+            "inference_cache_hit": true,
+            "elapsed_seconds": 0.0015228001866489649
+          },
+          {
+            "component": "face_features",
+            "status": "applied",
+            "model_id": "https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task",
+            "revision": "float16/1",
+            "manifest_sha256": "3bd3689ac73cf7826ab2920d5ce46d83e47667a56750da265a0d92b1d2d34e84",
+            "device": "cpu",
+            "inference_cache_hit": true,
+            "elapsed_seconds": 0.00037649995647370815
+          },
+          {
+            "component": "depth",
+            "status": "applied",
+            "model_id": "depth-anything/Depth-Anything-V2-Small-hf",
+            "revision": "5426e4f0f36572d16453bbda7a8389317b1bef99",
+            "manifest_sha256": "1da671abbd464bdfe27d596c55800a7ad4763eaab83697567a6fdefeab67e7e5",
+            "device": "cpu",
+            "inference_cache_hit": true,
+            "elapsed_seconds": 0.0018573999404907227
+          },
+          {
+            "component": "important_details",
+            "status": "fallback",
+            "reason": "Not enough free RAM for important_details: 1358 MB available; reserve at least 2048 MB",
+            "retryable": true,
+            "elapsed_seconds": 0.5722447000443935
+          },
+          {
+            "component": "detail_selection",
+            "status": "applied",
+            "method": "structure_only",
+            "region_count": 12,
+            "regions": [
+              {
+                "box": [
+                  0.5911458333333334,
+                  0.441233140655106,
+                  0.65234375,
+                  0.5317919075144508
+                ],
+                "score": 1.14805,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.4479166666666667,
+                  0.3371868978805395,
+                  0.5091145833333334,
+                  0.4277456647398844
+                ],
+                "score": 0.91495,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.3776041666666667,
+                  0.6011560693641619,
+                  0.4388020833333333,
+                  0.6917148362235067
+                ],
+                "score": 0.90172,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.5026041666666666,
+                  0.6917148362235067,
+                  0.5638020833333334,
+                  0.7822736030828517
+                ],
+                "score": 0.89982,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.6614583333333334,
+                  0.5529865125240848,
+                  0.72265625,
+                  0.6435452793834296
+                ],
+                "score": 0.84479,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.5143229166666666,
+                  0.535645472061657,
+                  0.5755208333333334,
+                  0.626204238921002
+                ],
+                "score": 0.83919,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.4322916666666667,
+                  0.4701348747591522,
+                  0.4934895833333333,
+                  0.5606936416184971
+                ],
+                "score": 0.81567,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.6223958333333334,
+                  0.6782273603082851,
+                  0.68359375,
+                  0.7687861271676301
+                ],
+                "score": 0.81175,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.55078125,
+                  0.19653179190751446,
+                  0.6119791666666666,
+                  0.28709055876685935
+                ],
+                "score": 0.80925,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.6315104166666666,
+                  0.2774566473988439,
+                  0.6927083333333334,
+                  0.36801541425818884
+                ],
+                "score": 0.80742,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.328125,
+                  0.36416184971098264,
+                  0.3893229166666667,
+                  0.45472061657032753
+                ],
+                "score": 0.79894,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.3997395833333333,
+                  0.20423892100192678,
+                  0.4609375,
+                  0.2947976878612717
+                ],
+                "score": 0.78014,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              }
+            ],
+            "importance_is_heuristic": true
+          }
+        ],
+        "source_sha256": "5d2e300b09f554c61381cea57637caef813e86c091cf6e17576e74eb83332876"
+      }
+    ]
+  },
+  {
+    "case": "lizard",
+    "mode": "multicolor",
+    "status": "PASS",
+    "attempts": [
+      {
+        "config": {
+          "mode": "multicolor",
+          "colors": 10,
+          "layers": 14,
+          "detail": 0.78,
+          "palette": null,
+          "seed": 42,
+          "max_side": 384,
+          "width_mm": 260.0,
+          "height_mm": null,
+          "spacing_mm": 3.0,
+          "assembly_mode": "frame_connected",
+          "backing": "#ffffff",
+          "frame_mm": 10.0,
+          "artwork_fit": "contain",
+          "workflow": {
+            "workflow_schema": 1,
+            "family": "multicolor",
+            "style": "colorblock",
+            "assembly": "flat",
+            "lighting": "ambient",
+            "style_options": {
+              "polarity": "dark_paper",
+              "composition": "window_mat",
+              "background": "preserve"
+            }
+          },
+          "ai": {
+            "segmentation": true,
+            "depth": true,
+            "face_features": true,
+            "important_details": true,
+            "detail_crops": 1,
+            "detail_seconds": 35.0,
+            "device": "cpu",
+            "failure_policy": "fallback",
+            "subject_box": null,
+            "max_feature_change": 0.1
+          },
+          "manufacturing_width_mm": null,
+          "abstraction_policy": null,
+          "depth_paper": null,
+          "detail_policy": "prefer",
+          "detail_boxes": []
+        },
+        "profile": {
+          "name": "Draft paper profile",
+          "thickness_mm": 0.25,
+          "min_feature_width_mm": 1.2,
+          "min_bridge_width_mm": 1.5,
+          "min_hole_size_mm": 1.0,
+          "cut_tolerance_mm": 0.1,
+          "method": "manual craft knife",
+          "min_frame_width_mm": 3.0,
+          "validation_tolerance_mm": 0.01,
+          "decorative_tip_policy": "bounded_convex"
+        },
+        "status": "PASS",
+        "seconds": 28.08,
+        "layers": 14,
+        "fidelity": {
+          "status": "WARNING",
+          "target_color_agreement": 0.9793299982577963,
+          "source_structure_similarity": 0.6775018603190072,
+          "minimum_color_agreement": 0.94,
+          "minimum_source_similarity": 0.4,
+          "source_similarity_gate": true,
+          "detail_regions": [],
+          "automatic_detail_regions": [
+            {
+              "index": 1,
+              "box": [
+                0.57421875,
+                0.4847250509164969,
+                0.6328125,
+                0.5763747454175153
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.9433106575963719,
+              "contrast_ratio": 0.8883367418765532,
+              "source_detail_similarity": 0.4455387123824533,
+              "status": "WARNING"
+            },
+            {
+              "index": 2,
+              "box": [
+                0.65625,
+                0.3604887983706721,
+                0.71484375,
+                0.45213849287169044
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.9546485260770975,
+              "contrast_ratio": 0.9341681854637325,
+              "source_detail_similarity": 0.3688674233026445,
+              "status": "WARNING"
+            },
+            {
+              "index": 3,
+              "box": [
+                0.3033854166666667,
+                0.924643584521385,
+                0.3619791666666667,
+                1.0
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.9243697478991597,
+              "contrast_ratio": 1.0284647972683798,
+              "source_detail_similarity": 0.5911765533654226,
+              "status": "PASS"
+            },
+            {
+              "index": 4,
+              "box": [
+                0.4895833333333333,
+                0.1446028513238289,
+                0.5481770833333334,
+                0.23625254582484725
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.963718820861678,
+              "contrast_ratio": 0.9486165721704061,
+              "source_detail_similarity": 0.4841449986370492,
+              "status": "PASS"
+            },
+            {
+              "index": 5,
+              "box": [
+                0.6302083333333334,
+                0.7433808553971487,
+                0.6888020833333334,
+                0.835030549898167
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.909297052154195,
+              "contrast_ratio": 1.18777513682016,
+              "source_detail_similarity": 0.49040523278309517,
+              "status": "PASS"
+            },
+            {
+              "index": 6,
+              "box": [
+                0.4518229166666667,
+                0.29938900203665986,
+                0.5104166666666666,
+                0.3910386965376782
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.9229024943310657,
+              "contrast_ratio": 0.8229505524383511,
+              "source_detail_similarity": 0.4170471454092756,
+              "status": "WARNING"
+            },
+            {
+              "index": 7,
+              "box": [
+                0.5416666666666666,
+                0.25865580448065173,
+                0.6002604166666666,
+                0.35030549898167007
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.8904761904761904,
+              "contrast_ratio": 1.0899985316403618,
+              "source_detail_similarity": 0.11386728768236677,
+              "status": "WARNING"
+            },
+            {
+              "index": 8,
+              "box": [
+                0.4713541666666667,
+                0.560081466395112,
+                0.5299479166666666,
+                0.6517311608961304
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.8594104308390023,
+              "contrast_ratio": 0.9213123864265345,
+              "source_detail_similarity": 0.35728819248450555,
+              "status": "WARNING"
+            },
+            {
+              "index": 9,
+              "box": [
+                0.3645833333333333,
+                0.7739307535641547,
+                0.4231770833333333,
+                0.8655804480651731
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.9523809523809523,
+              "contrast_ratio": 0.94799961312646,
+              "source_detail_similarity": 0.43064087212795127,
+              "status": "WARNING"
+            },
+            {
+              "index": 10,
+              "box": [
+                0.3125,
+                0.639511201629328,
+                0.37109375,
+                0.7311608961303462
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.8690476190476191,
+              "contrast_ratio": 0.9451009549936459,
+              "source_detail_similarity": 0.5260442254721457,
+              "status": "WARNING"
+            },
+            {
+              "index": 11,
+              "box": [
+                0.6380208333333334,
+                0.22606924643584522,
+                0.6966145833333334,
+                0.31771894093686354
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.8956916099773242,
+              "contrast_ratio": 0.6487513110646684,
+              "source_detail_similarity": 0.2065207972032068,
+              "status": "WARNING"
+            },
+            {
+              "index": 12,
+              "box": [
+                0.4908854166666667,
+                0.7881873727087576,
+                0.5494791666666666,
+                0.879837067209776
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.9297052154195011,
+              "contrast_ratio": 1.0498918734818126,
+              "source_detail_similarity": 0.5731593377266652,
+              "status": "PASS"
+            }
+          ],
+          "recognition_review": "NOT_RUN",
+          "scope": "automated coarse appearance checks; not semantic eye/nose recognition",
+          "construction": "multicolor"
+        },
+        "ai": [
+          {
+            "component": "segmentation",
+            "status": "applied",
+            "model_id": "facebook/sam2.1-hiera-tiny",
+            "revision": "de431c4043854a71d8101e17995dfe596bf101a5",
+            "manifest_sha256": "3734c68087d9a71e13a2deca6fa6a8b439972fcc864675c35cc19861667b57ff",
+            "device": "cpu",
+            "inference_cache_hit": false,
+            "elapsed_seconds": 6.969947899924591
+          },
+          {
+            "component": "face_features",
+            "status": "no_detection",
+            "model_id": "https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task",
+            "revision": "float16/1",
+            "manifest_sha256": "3bd3689ac73cf7826ab2920d5ce46d83e47667a56750da265a0d92b1d2d34e84",
+            "device": "cpu",
+            "inference_cache_hit": false,
+            "elapsed_seconds": 2.9136328999884427
+          },
+          {
+            "component": "important_details",
+            "status": "fallback",
+            "reason": "Not enough free RAM for important_details: 1011 MB available; reserve at least 2048 MB",
+            "retryable": true,
+            "elapsed_seconds": 1.0867508000228554
+          },
+          {
+            "component": "detail_selection",
+            "status": "applied",
+            "method": "structure_only",
+            "region_count": 12,
+            "regions": [
+              {
+                "box": [
+                  0.57421875,
+                  0.4847250509164969,
+                  0.6328125,
+                  0.5763747454175153
+                ],
+                "score": 1.0,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.65625,
+                  0.3604887983706721,
+                  0.71484375,
+                  0.45213849287169044
+                ],
+                "score": 0.92925,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.3033854166666667,
+                  0.924643584521385,
+                  0.3619791666666667,
+                  1.0
+                ],
+                "score": 0.89203,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.4895833333333333,
+                  0.1446028513238289,
+                  0.5481770833333334,
+                  0.23625254582484725
+                ],
+                "score": 0.88449,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.6302083333333334,
+                  0.7433808553971487,
+                  0.6888020833333334,
+                  0.835030549898167
+                ],
+                "score": 0.83982,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.4518229166666667,
+                  0.29938900203665986,
+                  0.5104166666666666,
+                  0.3910386965376782
+                ],
+                "score": 0.82238,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.5416666666666666,
+                  0.25865580448065173,
+                  0.6002604166666666,
+                  0.35030549898167007
+                ],
+                "score": 0.82152,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.4713541666666667,
+                  0.560081466395112,
+                  0.5299479166666666,
+                  0.6517311608961304
+                ],
+                "score": 0.81183,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.3645833333333333,
+                  0.7739307535641547,
+                  0.4231770833333333,
+                  0.8655804480651731
+                ],
+                "score": 0.80323,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.3125,
+                  0.639511201629328,
+                  0.37109375,
+                  0.7311608961303462
+                ],
+                "score": 0.80041,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.6380208333333334,
+                  0.22606924643584522,
+                  0.6966145833333334,
+                  0.31771894093686354
+                ],
+                "score": 0.79671,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.4908854166666667,
+                  0.7881873727087576,
+                  0.5494791666666666,
+                  0.879837067209776
+                ],
+                "score": 0.7886,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              }
+            ],
+            "importance_is_heuristic": true
+          },
+          {
+            "component": "depth",
+            "status": "not_applicable",
+            "elapsed_seconds": 0,
+            "reason": "Relative-depth inference is only used for Depth Scene"
+          }
+        ],
+        "source_sha256": "2d28d901bdc3b9a71568bc9e7cf6452429ac2d0ad7a95bcfb40e29231417f698"
+      }
+    ],
+    "tuning": {
+      "status": "PASS",
+      "seconds": 31.77,
+      "manual_detail_boxes": [
+        [
+          0.54,
+          0.14,
+          0.62,
+          0.24
+        ],
+        [
+          0.66,
+          0.19,
+          0.78,
+          0.31
+        ]
+      ],
+      "colors": 16,
+      "layers": 20,
+      "width_mm": 300,
+      "perception": "Reused recorded baseline perception; no new inference",
+      "fidelity": {
+        "status": "WARNING",
+        "target_color_agreement": 0.9837891244419507,
+        "source_structure_similarity": 0.7010562723898358,
+        "minimum_color_agreement": 0.94,
+        "minimum_source_similarity": 0.4,
+        "source_similarity_gate": true,
+        "detail_regions": [
+          {
+            "index": 1,
+            "color_agreement": 0.8710644677661169,
+            "minimum_agreement": 0.9,
+            "status": "WARNING"
+          },
+          {
+            "index": 2,
+            "color_agreement": 0.9393687707641196,
+            "minimum_agreement": 0.9,
+            "status": "PASS"
+          }
+        ],
+        "automatic_detail_regions": [
+          {
+            "index": 1,
+            "box": [
+              0.57421875,
+              0.4847250509164969,
+              0.6328125,
+              0.5763747454175153
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.9387755102040817,
+            "contrast_ratio": 0.8869015501292661,
+            "source_detail_similarity": 0.5019051673854563,
+            "status": "PASS"
+          },
+          {
+            "index": 2,
+            "box": [
+              0.65625,
+              0.3604887983706721,
+              0.71484375,
+              0.45213849287169044
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.9675324675324676,
+            "contrast_ratio": 0.9199970754959825,
+            "source_detail_similarity": 0.5822583476208684,
+            "status": "PASS"
+          },
+          {
+            "index": 3,
+            "box": [
+              0.3033854166666667,
+              0.924643584521385,
+              0.3619791666666667,
+              1.0
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.957983193277311,
+            "contrast_ratio": 1.0018334003759797,
+            "source_detail_similarity": 0.6503460847591475,
+            "status": "PASS"
+          },
+          {
+            "index": 4,
+            "box": [
+              0.4895833333333333,
+              0.1446028513238289,
+              0.5481770833333334,
+              0.23625254582484725
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.9523809523809523,
+            "contrast_ratio": 0.9168963368834062,
+            "source_detail_similarity": 0.4077399200557363,
+            "status": "WARNING"
+          },
+          {
+            "index": 5,
+            "box": [
+              0.6302083333333334,
+              0.7433808553971487,
+              0.6888020833333334,
+              0.835030549898167
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.9297052154195011,
+            "contrast_ratio": 0.9631443815850779,
+            "source_detail_similarity": 0.6337496568159193,
+            "status": "PASS"
+          },
+          {
+            "index": 6,
+            "box": [
+              0.4518229166666667,
+              0.29938900203665986,
+              0.5104166666666666,
+              0.3910386965376782
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.9242424242424242,
+            "contrast_ratio": 0.9962454722003143,
+            "source_detail_similarity": 0.5834936235370797,
+            "status": "PASS"
+          },
+          {
+            "index": 7,
+            "box": [
+              0.5416666666666666,
+              0.25865580448065173,
+              0.6002604166666666,
+              0.35030549898167007
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.9455782312925171,
+            "contrast_ratio": 1.0073108720148714,
+            "source_detail_similarity": 0.3359822178989855,
+            "status": "WARNING"
+          },
+          {
+            "index": 8,
+            "box": [
+              0.4713541666666667,
+              0.560081466395112,
+              0.5299479166666666,
+              0.6517311608961304
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.8253968253968254,
+            "contrast_ratio": 0.9910927119120445,
+            "source_detail_similarity": 0.29760800466965004,
+            "status": "WARNING"
+          },
+          {
+            "index": 9,
+            "box": [
+              0.3645833333333333,
+              0.7739307535641547,
+              0.4231770833333333,
+              0.8655804480651731
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.9206349206349206,
+            "contrast_ratio": 1.0097052972519607,
+            "source_detail_similarity": 0.5411376636393063,
+            "status": "PASS"
+          },
+          {
+            "index": 10,
+            "box": [
+              0.3125,
+              0.639511201629328,
+              0.37109375,
+              0.7311608961303462
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.909297052154195,
+            "contrast_ratio": 0.8790617449221927,
+            "source_detail_similarity": 0.5850078710912188,
+            "status": "PASS"
+          },
+          {
+            "index": 11,
+            "box": [
+              0.6380208333333334,
+              0.22606924643584522,
+              0.6966145833333334,
+              0.31771894093686354
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.9546485260770975,
+            "contrast_ratio": 0.706127205806297,
+            "source_detail_similarity": 0.21098665125937208,
+            "status": "WARNING"
+          },
+          {
+            "index": 12,
+            "box": [
+              0.4908854166666667,
+              0.7881873727087576,
+              0.5494791666666666,
+              0.879837067209776
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.9523809523809523,
+            "contrast_ratio": 0.8953496251611771,
+            "source_detail_similarity": 0.6240091060223779,
+            "status": "PASS"
+          }
+        ],
+        "recognition_review": "NOT_RUN",
+        "scope": "automated coarse appearance checks; not semantic eye/nose recognition",
+        "construction": "multicolor"
+      }
+    },
+    "palette_refinement": {
+      "status": "PASS",
+      "seconds": 54.97,
+      "palette": [
+        "#3a4a1e",
+        "#664e3e",
+        "#5b7218",
+        "#514a0e",
+        "#362a1a",
+        "#661c1a",
+        "#979c25",
+        "#c6d62b",
+        "#b0be2f",
+        "#7c9134",
+        "#2e3c32",
+        "#dedfcd",
+        "#988337",
+        "#cfcf64",
+        "#d0d094",
+        "#8b211d",
+        "#101820",
+        "#f0e5c7"
+      ],
+      "width_mm": 360,
+      "layers": 24,
+      "note": "Curated paper palette with explicit dark and light slots; not a new detector"
+    }
+  },
+  {
+    "case": "lizard",
+    "mode": "stencil",
+    "status": "PASS",
+    "attempts": [
+      {
+        "config": {
+          "mode": "multicolor",
+          "colors": 10,
+          "layers": 14,
+          "detail": 0.78,
+          "palette": null,
+          "seed": 42,
+          "max_side": 384,
+          "width_mm": 260.0,
+          "height_mm": null,
+          "spacing_mm": 3.0,
+          "assembly_mode": "frame_connected",
+          "backing": "#ffffff",
+          "frame_mm": 10.0,
+          "artwork_fit": "contain",
+          "workflow": {
+            "workflow_schema": 1,
+            "family": "stencil",
+            "style": "detailed",
+            "assembly": "flat",
+            "lighting": "ambient",
+            "style_options": {
+              "polarity": "dark_paper",
+              "composition": "window_mat",
+              "background": "preserve"
+            }
+          },
+          "ai": {
+            "segmentation": true,
+            "depth": true,
+            "face_features": true,
+            "important_details": true,
+            "detail_crops": 1,
+            "detail_seconds": 35.0,
+            "device": "cpu",
+            "failure_policy": "fallback",
+            "subject_box": null,
+            "max_feature_change": 0.1
+          },
+          "manufacturing_width_mm": null,
+          "abstraction_policy": null,
+          "depth_paper": null,
+          "detail_policy": "prefer",
+          "detail_boxes": []
+        },
+        "profile": {
+          "name": "Draft paper profile",
+          "thickness_mm": 0.25,
+          "min_feature_width_mm": 1.2,
+          "min_bridge_width_mm": 1.5,
+          "min_hole_size_mm": 1.0,
+          "cut_tolerance_mm": 0.1,
+          "method": "manual craft knife",
+          "min_frame_width_mm": 3.0,
+          "validation_tolerance_mm": 0.01,
+          "decorative_tip_policy": "bounded_convex"
+        },
+        "status": "PASS",
+        "seconds": 9.98,
+        "layers": 1,
+        "fidelity": {
+          "status": "NOT_EVALUATED",
+          "reason": "Requires versioned ambient color construction"
+        },
+        "ai": [
+          {
+            "component": "segmentation",
+            "status": "applied",
+            "model_id": "facebook/sam2.1-hiera-tiny",
+            "revision": "de431c4043854a71d8101e17995dfe596bf101a5",
+            "manifest_sha256": "3734c68087d9a71e13a2deca6fa6a8b439972fcc864675c35cc19861667b57ff",
+            "device": "cpu",
+            "inference_cache_hit": true,
+            "elapsed_seconds": 0.0006291000172495842
+          },
+          {
+            "component": "face_features",
+            "status": "no_detection",
+            "model_id": "https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task",
+            "revision": "float16/1",
+            "manifest_sha256": "3bd3689ac73cf7826ab2920d5ce46d83e47667a56750da265a0d92b1d2d34e84",
+            "device": "cpu",
+            "inference_cache_hit": true,
+            "elapsed_seconds": 0.0002911998890340328
+          },
+          {
+            "component": "important_details",
+            "status": "fallback",
+            "reason": "Not enough free RAM for important_details: 1170 MB available; reserve at least 2048 MB",
+            "retryable": true,
+            "elapsed_seconds": 0.5571145000867546
+          },
+          {
+            "component": "detail_selection",
+            "status": "applied",
+            "method": "structure_only",
+            "region_count": 12,
+            "regions": [
+              {
+                "box": [
+                  0.57421875,
+                  0.4847250509164969,
+                  0.6328125,
+                  0.5763747454175153
+                ],
+                "score": 1.0,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.65625,
+                  0.3604887983706721,
+                  0.71484375,
+                  0.45213849287169044
+                ],
+                "score": 0.92925,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.3033854166666667,
+                  0.924643584521385,
+                  0.3619791666666667,
+                  1.0
+                ],
+                "score": 0.89203,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.4895833333333333,
+                  0.1446028513238289,
+                  0.5481770833333334,
+                  0.23625254582484725
+                ],
+                "score": 0.88449,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.6302083333333334,
+                  0.7433808553971487,
+                  0.6888020833333334,
+                  0.835030549898167
+                ],
+                "score": 0.83982,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.4518229166666667,
+                  0.29938900203665986,
+                  0.5104166666666666,
+                  0.3910386965376782
+                ],
+                "score": 0.82238,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.5416666666666666,
+                  0.25865580448065173,
+                  0.6002604166666666,
+                  0.35030549898167007
+                ],
+                "score": 0.82152,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.4713541666666667,
+                  0.560081466395112,
+                  0.5299479166666666,
+                  0.6517311608961304
+                ],
+                "score": 0.81183,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.3645833333333333,
+                  0.7739307535641547,
+                  0.4231770833333333,
+                  0.8655804480651731
+                ],
+                "score": 0.80323,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.3125,
+                  0.639511201629328,
+                  0.37109375,
+                  0.7311608961303462
+                ],
+                "score": 0.80041,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.6380208333333334,
+                  0.22606924643584522,
+                  0.6966145833333334,
+                  0.31771894093686354
+                ],
+                "score": 0.79671,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.4908854166666667,
+                  0.7881873727087576,
+                  0.5494791666666666,
+                  0.879837067209776
+                ],
+                "score": 0.7886,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              }
+            ],
+            "importance_is_heuristic": true
+          },
+          {
+            "component": "depth",
+            "status": "not_applicable",
+            "elapsed_seconds": 0,
+            "reason": "Relative-depth inference is only used for Depth Scene"
+          }
+        ],
+        "source_sha256": "2d28d901bdc3b9a71568bc9e7cf6452429ac2d0ad7a95bcfb40e29231417f698"
+      }
+    ]
+  },
+  {
+    "case": "lizard",
+    "mode": "depth-color",
+    "status": "PASS",
+    "attempts": [
+      {
+        "config": {
+          "mode": "lightbox",
+          "colors": 10,
+          "layers": 14,
+          "detail": 0.78,
+          "palette": null,
+          "seed": 42,
+          "max_side": 384,
+          "width_mm": 260.0,
+          "height_mm": null,
+          "spacing_mm": 3.0,
+          "assembly_mode": "frame_connected",
+          "backing": "#ffffff",
+          "frame_mm": 10.0,
+          "artwork_fit": "contain",
+          "workflow": {
+            "workflow_schema": 1,
+            "family": "depth_scene",
+            "style": "landscape",
+            "assembly": "spaced",
+            "lighting": "ambient",
+            "style_options": {
+              "polarity": "dark_paper",
+              "composition": "window_mat",
+              "background": "preserve"
+            }
+          },
+          "ai": {
+            "segmentation": true,
+            "depth": true,
+            "face_features": true,
+            "important_details": true,
+            "detail_crops": 1,
+            "detail_seconds": 35.0,
+            "device": "cpu",
+            "failure_policy": "fallback",
+            "subject_box": null,
+            "max_feature_change": 0.1
+          },
+          "manufacturing_width_mm": null,
+          "abstraction_policy": null,
+          "depth_paper": "multicolor",
+          "detail_policy": "prefer",
+          "detail_boxes": []
+        },
+        "profile": {
+          "name": "Draft paper profile",
+          "thickness_mm": 0.25,
+          "min_feature_width_mm": 1.2,
+          "min_bridge_width_mm": 1.5,
+          "min_hole_size_mm": 1.0,
+          "cut_tolerance_mm": 0.1,
+          "method": "manual craft knife",
+          "min_frame_width_mm": 3.0,
+          "validation_tolerance_mm": 0.01,
+          "decorative_tip_policy": "bounded_convex"
+        },
+        "status": "PASS",
+        "seconds": 15.34,
+        "layers": 14,
+        "fidelity": {
+          "status": "WARNING",
+          "target_color_agreement": 0.9793299982577963,
+          "source_structure_similarity": 0.6775018603190072,
+          "minimum_color_agreement": 0.94,
+          "minimum_source_similarity": 0.4,
+          "source_similarity_gate": true,
+          "detail_regions": [],
+          "automatic_detail_regions": [
+            {
+              "index": 1,
+              "box": [
+                0.57421875,
+                0.4847250509164969,
+                0.6328125,
+                0.5763747454175153
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.9433106575963719,
+              "contrast_ratio": 0.8883367418765532,
+              "source_detail_similarity": 0.4455387123824533,
+              "status": "WARNING"
+            },
+            {
+              "index": 2,
+              "box": [
+                0.65625,
+                0.3604887983706721,
+                0.71484375,
+                0.45213849287169044
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.9546485260770975,
+              "contrast_ratio": 0.9341681854637325,
+              "source_detail_similarity": 0.3688674233026445,
+              "status": "WARNING"
+            },
+            {
+              "index": 3,
+              "box": [
+                0.3033854166666667,
+                0.924643584521385,
+                0.3619791666666667,
+                1.0
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.9243697478991597,
+              "contrast_ratio": 1.0284647972683798,
+              "source_detail_similarity": 0.5911765533654226,
+              "status": "PASS"
+            },
+            {
+              "index": 4,
+              "box": [
+                0.4895833333333333,
+                0.1446028513238289,
+                0.5481770833333334,
+                0.23625254582484725
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.963718820861678,
+              "contrast_ratio": 0.9486165721704061,
+              "source_detail_similarity": 0.4841449986370492,
+              "status": "PASS"
+            },
+            {
+              "index": 5,
+              "box": [
+                0.6302083333333334,
+                0.7433808553971487,
+                0.6888020833333334,
+                0.835030549898167
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.909297052154195,
+              "contrast_ratio": 1.18777513682016,
+              "source_detail_similarity": 0.49040523278309517,
+              "status": "PASS"
+            },
+            {
+              "index": 6,
+              "box": [
+                0.4518229166666667,
+                0.29938900203665986,
+                0.5104166666666666,
+                0.3910386965376782
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.9229024943310657,
+              "contrast_ratio": 0.8229505524383511,
+              "source_detail_similarity": 0.4170471454092756,
+              "status": "WARNING"
+            },
+            {
+              "index": 7,
+              "box": [
+                0.5416666666666666,
+                0.25865580448065173,
+                0.6002604166666666,
+                0.35030549898167007
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.8904761904761904,
+              "contrast_ratio": 1.0899985316403618,
+              "source_detail_similarity": 0.11386728768236677,
+              "status": "WARNING"
+            },
+            {
+              "index": 8,
+              "box": [
+                0.4713541666666667,
+                0.560081466395112,
+                0.5299479166666666,
+                0.6517311608961304
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.8594104308390023,
+              "contrast_ratio": 0.9213123864265345,
+              "source_detail_similarity": 0.35728819248450555,
+              "status": "WARNING"
+            },
+            {
+              "index": 9,
+              "box": [
+                0.3645833333333333,
+                0.7739307535641547,
+                0.4231770833333333,
+                0.8655804480651731
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.9523809523809523,
+              "contrast_ratio": 0.94799961312646,
+              "source_detail_similarity": 0.43064087212795127,
+              "status": "WARNING"
+            },
+            {
+              "index": 10,
+              "box": [
+                0.3125,
+                0.639511201629328,
+                0.37109375,
+                0.7311608961303462
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.8690476190476191,
+              "contrast_ratio": 0.9451009549936459,
+              "source_detail_similarity": 0.5260442254721457,
+              "status": "WARNING"
+            },
+            {
+              "index": 11,
+              "box": [
+                0.6380208333333334,
+                0.22606924643584522,
+                0.6966145833333334,
+                0.31771894093686354
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.8956916099773242,
+              "contrast_ratio": 0.6487513110646684,
+              "source_detail_similarity": 0.2065207972032068,
+              "status": "WARNING"
+            },
+            {
+              "index": 12,
+              "box": [
+                0.4908854166666667,
+                0.7881873727087576,
+                0.5494791666666666,
+                0.879837067209776
+              ],
+              "label": "local structure",
+              "source": "structure",
+              "color_agreement": 0.9297052154195011,
+              "contrast_ratio": 1.0498918734818126,
+              "source_detail_similarity": 0.5731593377266652,
+              "status": "PASS"
+            }
+          ],
+          "recognition_review": "NOT_RUN",
+          "scope": "automated coarse appearance checks; not semantic eye/nose recognition",
+          "construction": "color-occlusion relief"
+        },
+        "ai": [
+          {
+            "component": "segmentation",
+            "status": "applied",
+            "model_id": "facebook/sam2.1-hiera-tiny",
+            "revision": "de431c4043854a71d8101e17995dfe596bf101a5",
+            "manifest_sha256": "3734c68087d9a71e13a2deca6fa6a8b439972fcc864675c35cc19861667b57ff",
+            "device": "cpu",
+            "inference_cache_hit": true,
+            "elapsed_seconds": 0.0005882999394088984
+          },
+          {
+            "component": "face_features",
+            "status": "no_detection",
+            "model_id": "https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task",
+            "revision": "float16/1",
+            "manifest_sha256": "3bd3689ac73cf7826ab2920d5ce46d83e47667a56750da265a0d92b1d2d34e84",
+            "device": "cpu",
+            "inference_cache_hit": true,
+            "elapsed_seconds": 0.0002778999041765928
+          },
+          {
+            "component": "depth",
+            "status": "applied",
+            "model_id": "depth-anything/Depth-Anything-V2-Small-hf",
+            "revision": "5426e4f0f36572d16453bbda7a8389317b1bef99",
+            "manifest_sha256": "1da671abbd464bdfe27d596c55800a7ad4763eaab83697567a6fdefeab67e7e5",
+            "device": "cpu",
+            "inference_cache_hit": false,
+            "elapsed_seconds": 0.7554402998648584
+          },
+          {
+            "component": "important_details",
+            "status": "fallback",
+            "reason": "Not enough free RAM for important_details: 1459 MB available; reserve at least 2048 MB",
+            "retryable": true,
+            "elapsed_seconds": 0.6072360000107437
+          },
+          {
+            "component": "detail_selection",
+            "status": "applied",
+            "method": "structure_only",
+            "region_count": 12,
+            "regions": [
+              {
+                "box": [
+                  0.57421875,
+                  0.4847250509164969,
+                  0.6328125,
+                  0.5763747454175153
+                ],
+                "score": 1.0,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.65625,
+                  0.3604887983706721,
+                  0.71484375,
+                  0.45213849287169044
+                ],
+                "score": 0.92925,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.3033854166666667,
+                  0.924643584521385,
+                  0.3619791666666667,
+                  1.0
+                ],
+                "score": 0.89203,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.4895833333333333,
+                  0.1446028513238289,
+                  0.5481770833333334,
+                  0.23625254582484725
+                ],
+                "score": 0.88449,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.6302083333333334,
+                  0.7433808553971487,
+                  0.6888020833333334,
+                  0.835030549898167
+                ],
+                "score": 0.83982,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.4518229166666667,
+                  0.29938900203665986,
+                  0.5104166666666666,
+                  0.3910386965376782
+                ],
+                "score": 0.82238,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.5416666666666666,
+                  0.25865580448065173,
+                  0.6002604166666666,
+                  0.35030549898167007
+                ],
+                "score": 0.82152,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.4713541666666667,
+                  0.560081466395112,
+                  0.5299479166666666,
+                  0.6517311608961304
+                ],
+                "score": 0.81183,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.3645833333333333,
+                  0.7739307535641547,
+                  0.4231770833333333,
+                  0.8655804480651731
+                ],
+                "score": 0.80323,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.3125,
+                  0.639511201629328,
+                  0.37109375,
+                  0.7311608961303462
+                ],
+                "score": 0.80041,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.6380208333333334,
+                  0.22606924643584522,
+                  0.6966145833333334,
+                  0.31771894093686354
+                ],
+                "score": 0.79671,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.4908854166666667,
+                  0.7881873727087576,
+                  0.5494791666666666,
+                  0.879837067209776
+                ],
+                "score": 0.7886,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              }
+            ],
+            "importance_is_heuristic": true
+          }
+        ],
+        "source_sha256": "2d28d901bdc3b9a71568bc9e7cf6452429ac2d0ad7a95bcfb40e29231417f698"
+      }
+    ],
+    "tuning": {
+      "status": "PASS",
+      "seconds": 29.07,
+      "manual_detail_boxes": [
+        [
+          0.54,
+          0.14,
+          0.62,
+          0.24
+        ],
+        [
+          0.66,
+          0.19,
+          0.78,
+          0.31
+        ]
+      ],
+      "colors": 16,
+      "layers": 20,
+      "width_mm": 300,
+      "perception": "Reused recorded baseline perception; no new inference",
+      "fidelity": {
+        "status": "WARNING",
+        "target_color_agreement": 0.9837891244419507,
+        "source_structure_similarity": 0.7010562723898358,
+        "minimum_color_agreement": 0.94,
+        "minimum_source_similarity": 0.4,
+        "source_similarity_gate": true,
+        "detail_regions": [
+          {
+            "index": 1,
+            "color_agreement": 0.8710644677661169,
+            "minimum_agreement": 0.9,
+            "status": "WARNING"
+          },
+          {
+            "index": 2,
+            "color_agreement": 0.9393687707641196,
+            "minimum_agreement": 0.9,
+            "status": "PASS"
+          }
+        ],
+        "automatic_detail_regions": [
+          {
+            "index": 1,
+            "box": [
+              0.57421875,
+              0.4847250509164969,
+              0.6328125,
+              0.5763747454175153
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.9387755102040817,
+            "contrast_ratio": 0.8869015501292661,
+            "source_detail_similarity": 0.5019051673854563,
+            "status": "PASS"
+          },
+          {
+            "index": 2,
+            "box": [
+              0.65625,
+              0.3604887983706721,
+              0.71484375,
+              0.45213849287169044
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.9675324675324676,
+            "contrast_ratio": 0.9199970754959825,
+            "source_detail_similarity": 0.5822583476208684,
+            "status": "PASS"
+          },
+          {
+            "index": 3,
+            "box": [
+              0.3033854166666667,
+              0.924643584521385,
+              0.3619791666666667,
+              1.0
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.957983193277311,
+            "contrast_ratio": 1.0018334003759797,
+            "source_detail_similarity": 0.6503460847591475,
+            "status": "PASS"
+          },
+          {
+            "index": 4,
+            "box": [
+              0.4895833333333333,
+              0.1446028513238289,
+              0.5481770833333334,
+              0.23625254582484725
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.9523809523809523,
+            "contrast_ratio": 0.9168963368834062,
+            "source_detail_similarity": 0.4077399200557363,
+            "status": "WARNING"
+          },
+          {
+            "index": 5,
+            "box": [
+              0.6302083333333334,
+              0.7433808553971487,
+              0.6888020833333334,
+              0.835030549898167
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.9297052154195011,
+            "contrast_ratio": 0.9631443815850779,
+            "source_detail_similarity": 0.6337496568159193,
+            "status": "PASS"
+          },
+          {
+            "index": 6,
+            "box": [
+              0.4518229166666667,
+              0.29938900203665986,
+              0.5104166666666666,
+              0.3910386965376782
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.9242424242424242,
+            "contrast_ratio": 0.9962454722003143,
+            "source_detail_similarity": 0.5834936235370797,
+            "status": "PASS"
+          },
+          {
+            "index": 7,
+            "box": [
+              0.5416666666666666,
+              0.25865580448065173,
+              0.6002604166666666,
+              0.35030549898167007
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.9455782312925171,
+            "contrast_ratio": 1.0073108720148714,
+            "source_detail_similarity": 0.3359822178989855,
+            "status": "WARNING"
+          },
+          {
+            "index": 8,
+            "box": [
+              0.4713541666666667,
+              0.560081466395112,
+              0.5299479166666666,
+              0.6517311608961304
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.8253968253968254,
+            "contrast_ratio": 0.9910927119120445,
+            "source_detail_similarity": 0.29760800466965004,
+            "status": "WARNING"
+          },
+          {
+            "index": 9,
+            "box": [
+              0.3645833333333333,
+              0.7739307535641547,
+              0.4231770833333333,
+              0.8655804480651731
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.9206349206349206,
+            "contrast_ratio": 1.0097052972519607,
+            "source_detail_similarity": 0.5411376636393063,
+            "status": "PASS"
+          },
+          {
+            "index": 10,
+            "box": [
+              0.3125,
+              0.639511201629328,
+              0.37109375,
+              0.7311608961303462
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.909297052154195,
+            "contrast_ratio": 0.8790617449221927,
+            "source_detail_similarity": 0.5850078710912188,
+            "status": "PASS"
+          },
+          {
+            "index": 11,
+            "box": [
+              0.6380208333333334,
+              0.22606924643584522,
+              0.6966145833333334,
+              0.31771894093686354
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.9546485260770975,
+            "contrast_ratio": 0.706127205806297,
+            "source_detail_similarity": 0.21098665125937208,
+            "status": "WARNING"
+          },
+          {
+            "index": 12,
+            "box": [
+              0.4908854166666667,
+              0.7881873727087576,
+              0.5494791666666666,
+              0.879837067209776
+            ],
+            "label": "local structure",
+            "source": "structure",
+            "color_agreement": 0.9523809523809523,
+            "contrast_ratio": 0.8953496251611771,
+            "source_detail_similarity": 0.6240091060223779,
+            "status": "PASS"
+          }
+        ],
+        "recognition_review": "NOT_RUN",
+        "scope": "automated coarse appearance checks; not semantic eye/nose recognition",
+        "construction": "color-occlusion relief"
+      }
+    },
+    "palette_refinement": {
+      "status": "PASS",
+      "seconds": 82.11,
+      "palette": [
+        "#3a4a1e",
+        "#664e3e",
+        "#5b7218",
+        "#514a0e",
+        "#362a1a",
+        "#661c1a",
+        "#979c25",
+        "#c6d62b",
+        "#b0be2f",
+        "#7c9134",
+        "#2e3c32",
+        "#dedfcd",
+        "#988337",
+        "#cfcf64",
+        "#d0d094",
+        "#8b211d",
+        "#101820",
+        "#f0e5c7"
+      ],
+      "width_mm": 360,
+      "layers": 24,
+      "note": "Curated paper palette with explicit dark and light slots; not a new detector"
+    }
+  },
+  {
+    "case": "lizard",
+    "mode": "depth-white",
+    "status": "PASS",
+    "attempts": [
+      {
+        "config": {
+          "mode": "lightbox",
+          "colors": 10,
+          "layers": 14,
+          "detail": 0.78,
+          "palette": null,
+          "seed": 42,
+          "max_side": 384,
+          "width_mm": 260.0,
+          "height_mm": null,
+          "spacing_mm": 3.0,
+          "assembly_mode": "frame_connected",
+          "backing": "#ffffff",
+          "frame_mm": 10.0,
+          "artwork_fit": "contain",
+          "workflow": {
+            "workflow_schema": 1,
+            "family": "depth_scene",
+            "style": "landscape",
+            "assembly": "spaced",
+            "lighting": "backlit",
+            "style_options": {
+              "polarity": "dark_paper",
+              "composition": "window_mat",
+              "background": "preserve"
+            }
+          },
+          "ai": {
+            "segmentation": true,
+            "depth": true,
+            "face_features": true,
+            "important_details": true,
+            "detail_crops": 1,
+            "detail_seconds": 35.0,
+            "device": "cpu",
+            "failure_policy": "fallback",
+            "subject_box": null,
+            "max_feature_change": 0.1
+          },
+          "manufacturing_width_mm": null,
+          "abstraction_policy": null,
+          "depth_paper": "white",
+          "detail_policy": "prefer",
+          "detail_boxes": []
+        },
+        "profile": {
+          "name": "Draft paper profile",
+          "thickness_mm": 0.25,
+          "min_feature_width_mm": 1.2,
+          "min_bridge_width_mm": 1.5,
+          "min_hole_size_mm": 1.0,
+          "cut_tolerance_mm": 0.1,
+          "method": "manual craft knife",
+          "min_frame_width_mm": 3.0,
+          "validation_tolerance_mm": 0.01,
+          "decorative_tip_policy": "bounded_convex"
+        },
+        "status": "PASS",
+        "seconds": 6.5,
+        "layers": 10,
+        "fidelity": {
+          "status": "NOT_EVALUATED",
+          "reason": "Requires versioned ambient color construction"
+        },
+        "ai": [
+          {
+            "component": "segmentation",
+            "status": "applied",
+            "model_id": "facebook/sam2.1-hiera-tiny",
+            "revision": "de431c4043854a71d8101e17995dfe596bf101a5",
+            "manifest_sha256": "3734c68087d9a71e13a2deca6fa6a8b439972fcc864675c35cc19861667b57ff",
+            "device": "cpu",
+            "inference_cache_hit": true,
+            "elapsed_seconds": 0.00059710000641644
+          },
+          {
+            "component": "face_features",
+            "status": "no_detection",
+            "model_id": "https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task",
+            "revision": "float16/1",
+            "manifest_sha256": "3bd3689ac73cf7826ab2920d5ce46d83e47667a56750da265a0d92b1d2d34e84",
+            "device": "cpu",
+            "inference_cache_hit": true,
+            "elapsed_seconds": 0.000273300101980567
+          },
+          {
+            "component": "depth",
+            "status": "applied",
+            "model_id": "depth-anything/Depth-Anything-V2-Small-hf",
+            "revision": "5426e4f0f36572d16453bbda7a8389317b1bef99",
+            "manifest_sha256": "1da671abbd464bdfe27d596c55800a7ad4763eaab83697567a6fdefeab67e7e5",
+            "device": "cpu",
+            "inference_cache_hit": true,
+            "elapsed_seconds": 0.0011207000352442265
+          },
+          {
+            "component": "important_details",
+            "status": "fallback",
+            "reason": "Not enough free RAM for important_details: 1381 MB available; reserve at least 2048 MB",
+            "retryable": true,
+            "elapsed_seconds": 0.5851963001769036
+          },
+          {
+            "component": "detail_selection",
+            "status": "applied",
+            "method": "structure_only",
+            "region_count": 12,
+            "regions": [
+              {
+                "box": [
+                  0.57421875,
+                  0.4847250509164969,
+                  0.6328125,
+                  0.5763747454175153
+                ],
+                "score": 1.0,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.65625,
+                  0.3604887983706721,
+                  0.71484375,
+                  0.45213849287169044
+                ],
+                "score": 0.92925,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.3033854166666667,
+                  0.924643584521385,
+                  0.3619791666666667,
+                  1.0
+                ],
+                "score": 0.89203,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.4895833333333333,
+                  0.1446028513238289,
+                  0.5481770833333334,
+                  0.23625254582484725
+                ],
+                "score": 0.88449,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.6302083333333334,
+                  0.7433808553971487,
+                  0.6888020833333334,
+                  0.835030549898167
+                ],
+                "score": 0.83982,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.4518229166666667,
+                  0.29938900203665986,
+                  0.5104166666666666,
+                  0.3910386965376782
+                ],
+                "score": 0.82238,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.5416666666666666,
+                  0.25865580448065173,
+                  0.6002604166666666,
+                  0.35030549898167007
+                ],
+                "score": 0.82152,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.4713541666666667,
+                  0.560081466395112,
+                  0.5299479166666666,
+                  0.6517311608961304
+                ],
+                "score": 0.81183,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.3645833333333333,
+                  0.7739307535641547,
+                  0.4231770833333333,
+                  0.8655804480651731
+                ],
+                "score": 0.80323,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.3125,
+                  0.639511201629328,
+                  0.37109375,
+                  0.7311608961303462
+                ],
+                "score": 0.80041,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.6380208333333334,
+                  0.22606924643584522,
+                  0.6966145833333334,
+                  0.31771894093686354
+                ],
+                "score": 0.79671,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              },
+              {
+                "box": [
+                  0.4908854166666667,
+                  0.7881873727087576,
+                  0.5494791666666666,
+                  0.879837067209776
+                ],
+                "score": 0.7886,
+                "label": "local structure",
+                "source": "structure",
+                "semantic_grounded": false
+              }
+            ],
+            "importance_is_heuristic": true
+          }
+        ],
+        "source_sha256": "2d28d901bdc3b9a71568bc9e7cf6452429ac2d0ad7a95bcfb40e29231417f698"
+      }
+    ]
+  }
+]

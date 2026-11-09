@@ -1,0 +1,10 @@
+{
+  "source": "Image color zones",
+  "source_gain": 2,
+  "paper_transmittance": 0.8,
+  "source_distance_mm": 25,
+  "diffusion_mm": 6,
+  "comparison_photo_insert": false,
+  "photo_insert_demo": "Only light-photo-insert files and walkthrough segment 08",
+  "calibration": "Approximate visualization; physical calibration NOT_RUN"
+}

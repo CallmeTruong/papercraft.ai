@@ -1,0 +1,2418 @@
+[
+  {
+    "case": "kittens",
+    "mode": "multicolor",
+    "geometry": "PASS",
+    "fidelity": "WARNING",
+    "source_structure_similarity": 0.6963386783285888,
+    "cut_sheets": 20,
+    "width_mm": 300,
+    "paper_colors_budget": 16,
+    "selected_generation_seconds": 42.24,
+    "manual_detail_boxes": [
+      [
+        0.52,
+        0.19,
+        0.59,
+        0.26
+      ],
+      [
+        0.6,
+        0.39,
+        0.67,
+        0.46
+      ],
+      [
+        0.75,
+        0.38,
+        0.81,
+        0.45
+      ],
+      [
+        0.71,
+        0.44,
+        0.77,
+        0.5
+      ]
+    ],
+    "custom_palette": null,
+    "photo_insert_in_comparison": false,
+    "ai_diagnostics": [
+      {
+        "component": "segmentation",
+        "status": "fallback",
+        "reason": "No usable object masks",
+        "retryable": false,
+        "elapsed_seconds": 17.097400999860838
+      },
+      {
+        "component": "face_features",
+        "status": "fallback",
+        "reason": "Not enough free RAM for face_features: 172 MB available; reserve at least 192 MB",
+        "retryable": true,
+        "elapsed_seconds": 0.4366259998641908
+      },
+      {
+        "component": "important_details",
+        "status": "fallback",
+        "reason": "Not enough free RAM for important_details: 1038 MB available; reserve at least 2048 MB",
+        "retryable": true,
+        "elapsed_seconds": 1.0250859002117068
+      },
+      {
+        "component": "detail_selection",
+        "status": "applied",
+        "method": "structure_only",
+        "region_count": 12,
+        "regions": [
+          {
+            "box": [
+              0.0,
+              0.7743055555555556,
+              0.03515625,
+              0.8663194444444444
+            ],
+            "score": 0.96174,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.59375,
+              0.13541666666666666,
+              0.6627604166666666,
+              0.22743055555555555
+            ],
+            "score": 0.9506,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.16276041666666666,
+              0.7534722222222222,
+              0.23177083333333334,
+              0.8454861111111112
+            ],
+            "score": 0.88973,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.8932291666666666,
+              0.7274305555555556,
+              0.9622395833333334,
+              0.8194444444444444
+            ],
+            "score": 0.85644,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.7473958333333334,
+              0.3506944444444444,
+              0.81640625,
+              0.4427083333333333
+            ],
+            "score": 0.8507,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.37109375,
+              0.1371527777777778,
+              0.4401041666666667,
+              0.22916666666666666
+            ],
+            "score": 0.83912,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.6940104166666666,
+              0.7465277777777778,
+              0.7630208333333334,
+              0.8385416666666666
+            ],
+            "score": 0.83446,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.4752604166666667,
+              0.06597222222222222,
+              0.5442708333333334,
+              0.1579861111111111
+            ],
+            "score": 0.79448,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.55859375,
+              0.3350694444444444,
+              0.6276041666666666,
+              0.4270833333333333
+            ],
+            "score": 0.77788,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.78125,
+              0.21354166666666666,
+              0.8502604166666666,
+              0.3055555555555556
+            ],
+            "score": 0.77518,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.3697916666666667,
+              0.7395833333333334,
+              0.4388020833333333,
+              0.8315972222222222
+            ],
+            "score": 0.7461,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.2708333333333333,
+              0.2881944444444444,
+              0.33984375,
+              0.3802083333333333
+            ],
+            "score": 0.74348,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          }
+        ],
+        "importance_is_heuristic": true
+      },
+      {
+        "component": "depth",
+        "status": "not_applicable",
+        "elapsed_seconds": 0,
+        "reason": "Relative-depth inference is only used for Depth Scene"
+      }
+    ],
+    "physical_test_status": "NOT_RUN"
+  },
+  {
+    "case": "kittens",
+    "mode": "stencil",
+    "geometry": "PASS",
+    "fidelity": "NOT_EVALUATED",
+    "source_structure_similarity": null,
+    "cut_sheets": 1,
+    "width_mm": 260.0,
+    "paper_colors_budget": 10,
+    "selected_generation_seconds": 17.35,
+    "manual_detail_boxes": [],
+    "custom_palette": null,
+    "photo_insert_in_comparison": false,
+    "ai_diagnostics": [
+      {
+        "component": "segmentation",
+        "status": "fallback",
+        "reason": "No usable object masks",
+        "retryable": false,
+        "elapsed_seconds": 0.0006233998574316502
+      },
+      {
+        "component": "face_features",
+        "status": "no_detection",
+        "model_id": "https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task",
+        "revision": "float16/1",
+        "manifest_sha256": "3bd3689ac73cf7826ab2920d5ce46d83e47667a56750da265a0d92b1d2d34e84",
+        "device": "cpu",
+        "inference_cache_hit": false,
+        "elapsed_seconds": 4.052591799991205
+      },
+      {
+        "component": "important_details",
+        "status": "fallback",
+        "reason": "Not enough free RAM for important_details: 562 MB available; reserve at least 2048 MB",
+        "retryable": true,
+        "elapsed_seconds": 1.2974682000931352
+      },
+      {
+        "component": "detail_selection",
+        "status": "applied",
+        "method": "structure_only",
+        "region_count": 12,
+        "regions": [
+          {
+            "box": [
+              0.0,
+              0.7743055555555556,
+              0.03515625,
+              0.8663194444444444
+            ],
+            "score": 0.96174,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.59375,
+              0.13541666666666666,
+              0.6627604166666666,
+              0.22743055555555555
+            ],
+            "score": 0.9506,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.16276041666666666,
+              0.7534722222222222,
+              0.23177083333333334,
+              0.8454861111111112
+            ],
+            "score": 0.88973,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.8932291666666666,
+              0.7274305555555556,
+              0.9622395833333334,
+              0.8194444444444444
+            ],
+            "score": 0.85644,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.7473958333333334,
+              0.3506944444444444,
+              0.81640625,
+              0.4427083333333333
+            ],
+            "score": 0.8507,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.37109375,
+              0.1371527777777778,
+              0.4401041666666667,
+              0.22916666666666666
+            ],
+            "score": 0.83912,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.6940104166666666,
+              0.7465277777777778,
+              0.7630208333333334,
+              0.8385416666666666
+            ],
+            "score": 0.83446,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.4752604166666667,
+              0.06597222222222222,
+              0.5442708333333334,
+              0.1579861111111111
+            ],
+            "score": 0.79448,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.55859375,
+              0.3350694444444444,
+              0.6276041666666666,
+              0.4270833333333333
+            ],
+            "score": 0.77788,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.78125,
+              0.21354166666666666,
+              0.8502604166666666,
+              0.3055555555555556
+            ],
+            "score": 0.77518,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.3697916666666667,
+              0.7395833333333334,
+              0.4388020833333333,
+              0.8315972222222222
+            ],
+            "score": 0.7461,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.2708333333333333,
+              0.2881944444444444,
+              0.33984375,
+              0.3802083333333333
+            ],
+            "score": 0.74348,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          }
+        ],
+        "importance_is_heuristic": true
+      },
+      {
+        "component": "depth",
+        "status": "not_applicable",
+        "elapsed_seconds": 0,
+        "reason": "Relative-depth inference is only used for Depth Scene"
+      }
+    ],
+    "physical_test_status": "NOT_RUN"
+  },
+  {
+    "case": "kittens",
+    "mode": "depth-color",
+    "geometry": "PASS",
+    "fidelity": "WARNING",
+    "source_structure_similarity": 0.6963386783285888,
+    "cut_sheets": 20,
+    "width_mm": 300,
+    "paper_colors_budget": 16,
+    "selected_generation_seconds": 40.92,
+    "manual_detail_boxes": [
+      [
+        0.52,
+        0.19,
+        0.59,
+        0.26
+      ],
+      [
+        0.6,
+        0.39,
+        0.67,
+        0.46
+      ],
+      [
+        0.75,
+        0.38,
+        0.81,
+        0.45
+      ],
+      [
+        0.71,
+        0.44,
+        0.77,
+        0.5
+      ]
+    ],
+    "custom_palette": null,
+    "photo_insert_in_comparison": false,
+    "ai_diagnostics": [
+      {
+        "component": "segmentation",
+        "status": "fallback",
+        "reason": "No usable object masks",
+        "retryable": false,
+        "elapsed_seconds": 0.0006367999594658613
+      },
+      {
+        "component": "face_features",
+        "status": "no_detection",
+        "model_id": "https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task",
+        "revision": "float16/1",
+        "manifest_sha256": "3bd3689ac73cf7826ab2920d5ce46d83e47667a56750da265a0d92b1d2d34e84",
+        "device": "cpu",
+        "inference_cache_hit": true,
+        "elapsed_seconds": 0.0003222001250833273
+      },
+      {
+        "component": "depth",
+        "status": "fallback",
+        "reason": "Not enough free RAM for depth: 495 MB available; reserve at least 768 MB",
+        "retryable": true,
+        "elapsed_seconds": 0.24797580018639565
+      },
+      {
+        "component": "important_details",
+        "status": "fallback",
+        "reason": "Not enough free RAM for important_details: 498 MB available; reserve at least 2048 MB",
+        "retryable": true,
+        "elapsed_seconds": 0.6656631000805646
+      },
+      {
+        "component": "detail_selection",
+        "status": "applied",
+        "method": "structure_only",
+        "region_count": 12,
+        "regions": [
+          {
+            "box": [
+              0.0,
+              0.7743055555555556,
+              0.03515625,
+              0.8663194444444444
+            ],
+            "score": 0.96174,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.59375,
+              0.13541666666666666,
+              0.6627604166666666,
+              0.22743055555555555
+            ],
+            "score": 0.9506,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.16276041666666666,
+              0.7534722222222222,
+              0.23177083333333334,
+              0.8454861111111112
+            ],
+            "score": 0.88973,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.8932291666666666,
+              0.7274305555555556,
+              0.9622395833333334,
+              0.8194444444444444
+            ],
+            "score": 0.85644,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.7473958333333334,
+              0.3506944444444444,
+              0.81640625,
+              0.4427083333333333
+            ],
+            "score": 0.8507,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.37109375,
+              0.1371527777777778,
+              0.4401041666666667,
+              0.22916666666666666
+            ],
+            "score": 0.83912,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.6940104166666666,
+              0.7465277777777778,
+              0.7630208333333334,
+              0.8385416666666666
+            ],
+            "score": 0.83446,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.4752604166666667,
+              0.06597222222222222,
+              0.5442708333333334,
+              0.1579861111111111
+            ],
+            "score": 0.79448,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.55859375,
+              0.3350694444444444,
+              0.6276041666666666,
+              0.4270833333333333
+            ],
+            "score": 0.77788,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.78125,
+              0.21354166666666666,
+              0.8502604166666666,
+              0.3055555555555556
+            ],
+            "score": 0.77518,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.3697916666666667,
+              0.7395833333333334,
+              0.4388020833333333,
+              0.8315972222222222
+            ],
+            "score": 0.7461,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.2708333333333333,
+              0.2881944444444444,
+              0.33984375,
+              0.3802083333333333
+            ],
+            "score": 0.74348,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          }
+        ],
+        "importance_is_heuristic": true
+      }
+    ],
+    "physical_test_status": "NOT_RUN"
+  },
+  {
+    "case": "kittens",
+    "mode": "depth-white",
+    "geometry": "PASS",
+    "fidelity": "NOT_EVALUATED",
+    "source_structure_similarity": null,
+    "cut_sheets": 10,
+    "width_mm": 260.0,
+    "paper_colors_budget": 10,
+    "selected_generation_seconds": 13.66,
+    "manual_detail_boxes": [],
+    "custom_palette": null,
+    "photo_insert_in_comparison": false,
+    "ai_diagnostics": [
+      {
+        "component": "segmentation",
+        "status": "fallback",
+        "reason": "No usable object masks",
+        "retryable": false,
+        "elapsed_seconds": 0.0006643999367952347
+      },
+      {
+        "component": "face_features",
+        "status": "no_detection",
+        "model_id": "https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task",
+        "revision": "float16/1",
+        "manifest_sha256": "3bd3689ac73cf7826ab2920d5ce46d83e47667a56750da265a0d92b1d2d34e84",
+        "device": "cpu",
+        "inference_cache_hit": true,
+        "elapsed_seconds": 0.00034529995173215866
+      },
+      {
+        "component": "depth",
+        "status": "fallback",
+        "reason": "Not enough free RAM for depth: 553 MB available; reserve at least 768 MB",
+        "retryable": true,
+        "elapsed_seconds": 0.2618985997978598
+      },
+      {
+        "component": "important_details",
+        "status": "fallback",
+        "reason": "Not enough free RAM for important_details: 594 MB available; reserve at least 2048 MB",
+        "retryable": true,
+        "elapsed_seconds": 0.6449503998737782
+      },
+      {
+        "component": "detail_selection",
+        "status": "applied",
+        "method": "structure_only",
+        "region_count": 12,
+        "regions": [
+          {
+            "box": [
+              0.0,
+              0.7743055555555556,
+              0.03515625,
+              0.8663194444444444
+            ],
+            "score": 0.96174,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.59375,
+              0.13541666666666666,
+              0.6627604166666666,
+              0.22743055555555555
+            ],
+            "score": 0.9506,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.16276041666666666,
+              0.7534722222222222,
+              0.23177083333333334,
+              0.8454861111111112
+            ],
+            "score": 0.88973,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.8932291666666666,
+              0.7274305555555556,
+              0.9622395833333334,
+              0.8194444444444444
+            ],
+            "score": 0.85644,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.7473958333333334,
+              0.3506944444444444,
+              0.81640625,
+              0.4427083333333333
+            ],
+            "score": 0.8507,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.37109375,
+              0.1371527777777778,
+              0.4401041666666667,
+              0.22916666666666666
+            ],
+            "score": 0.83912,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.6940104166666666,
+              0.7465277777777778,
+              0.7630208333333334,
+              0.8385416666666666
+            ],
+            "score": 0.83446,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.4752604166666667,
+              0.06597222222222222,
+              0.5442708333333334,
+              0.1579861111111111
+            ],
+            "score": 0.79448,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.55859375,
+              0.3350694444444444,
+              0.6276041666666666,
+              0.4270833333333333
+            ],
+            "score": 0.77788,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.78125,
+              0.21354166666666666,
+              0.8502604166666666,
+              0.3055555555555556
+            ],
+            "score": 0.77518,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.3697916666666667,
+              0.7395833333333334,
+              0.4388020833333333,
+              0.8315972222222222
+            ],
+            "score": 0.7461,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.2708333333333333,
+              0.2881944444444444,
+              0.33984375,
+              0.3802083333333333
+            ],
+            "score": 0.74348,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          }
+        ],
+        "importance_is_heuristic": true
+      }
+    ],
+    "physical_test_status": "NOT_RUN"
+  },
+  {
+    "case": "puppy",
+    "mode": "multicolor",
+    "geometry": "PASS",
+    "fidelity": "WARNING",
+    "source_structure_similarity": 0.8570065742256219,
+    "cut_sheets": 20,
+    "width_mm": 300,
+    "paper_colors_budget": 16,
+    "selected_generation_seconds": 36.19,
+    "manual_detail_boxes": [
+      [
+        0.43,
+        0.34,
+        0.5,
+        0.43
+      ],
+      [
+        0.6,
+        0.45,
+        0.67,
+        0.53
+      ],
+      [
+        0.43,
+        0.47,
+        0.54,
+        0.6
+      ],
+      [
+        0.39,
+        0.65,
+        0.52,
+        0.77
+      ]
+    ],
+    "custom_palette": null,
+    "photo_insert_in_comparison": false,
+    "ai_diagnostics": [
+      {
+        "component": "segmentation",
+        "status": "applied",
+        "model_id": "facebook/sam2.1-hiera-tiny",
+        "revision": "de431c4043854a71d8101e17995dfe596bf101a5",
+        "manifest_sha256": "3734c68087d9a71e13a2deca6fa6a8b439972fcc864675c35cc19861667b57ff",
+        "device": "cpu",
+        "inference_cache_hit": false,
+        "elapsed_seconds": 7.376682499889284
+      },
+      {
+        "component": "face_features",
+        "status": "applied",
+        "model_id": "https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task",
+        "revision": "float16/1",
+        "manifest_sha256": "3bd3689ac73cf7826ab2920d5ce46d83e47667a56750da265a0d92b1d2d34e84",
+        "device": "cpu",
+        "inference_cache_hit": false,
+        "elapsed_seconds": 3.044280800037086
+      },
+      {
+        "component": "important_details",
+        "status": "fallback",
+        "reason": "Not enough free RAM for important_details: 630 MB available; reserve at least 2048 MB",
+        "retryable": true,
+        "elapsed_seconds": 1.0824595999438316
+      },
+      {
+        "component": "detail_selection",
+        "status": "applied",
+        "method": "structure_only",
+        "region_count": 12,
+        "regions": [
+          {
+            "box": [
+              0.5911458333333334,
+              0.441233140655106,
+              0.65234375,
+              0.5317919075144508
+            ],
+            "score": 1.14805,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.4479166666666667,
+              0.3371868978805395,
+              0.5091145833333334,
+              0.4277456647398844
+            ],
+            "score": 0.91495,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.3776041666666667,
+              0.6011560693641619,
+              0.4388020833333333,
+              0.6917148362235067
+            ],
+            "score": 0.90172,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.5026041666666666,
+              0.6917148362235067,
+              0.5638020833333334,
+              0.7822736030828517
+            ],
+            "score": 0.89982,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.6614583333333334,
+              0.5529865125240848,
+              0.72265625,
+              0.6435452793834296
+            ],
+            "score": 0.84479,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.5143229166666666,
+              0.535645472061657,
+              0.5755208333333334,
+              0.626204238921002
+            ],
+            "score": 0.83919,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.4322916666666667,
+              0.4701348747591522,
+              0.4934895833333333,
+              0.5606936416184971
+            ],
+            "score": 0.81567,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.6223958333333334,
+              0.6782273603082851,
+              0.68359375,
+              0.7687861271676301
+            ],
+            "score": 0.81175,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.55078125,
+              0.19653179190751446,
+              0.6119791666666666,
+              0.28709055876685935
+            ],
+            "score": 0.80925,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.6315104166666666,
+              0.2774566473988439,
+              0.6927083333333334,
+              0.36801541425818884
+            ],
+            "score": 0.80742,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.328125,
+              0.36416184971098264,
+              0.3893229166666667,
+              0.45472061657032753
+            ],
+            "score": 0.79894,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.3997395833333333,
+              0.20423892100192678,
+              0.4609375,
+              0.2947976878612717
+            ],
+            "score": 0.78014,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          }
+        ],
+        "importance_is_heuristic": true
+      },
+      {
+        "component": "depth",
+        "status": "not_applicable",
+        "elapsed_seconds": 0,
+        "reason": "Relative-depth inference is only used for Depth Scene"
+      }
+    ],
+    "physical_test_status": "NOT_RUN"
+  },
+  {
+    "case": "puppy",
+    "mode": "stencil",
+    "geometry": "PASS",
+    "fidelity": "NOT_EVALUATED",
+    "source_structure_similarity": null,
+    "cut_sheets": 1,
+    "width_mm": 300.0,
+    "paper_colors_budget": 10,
+    "selected_generation_seconds": 12.08,
+    "manual_detail_boxes": [],
+    "custom_palette": null,
+    "photo_insert_in_comparison": false,
+    "ai_diagnostics": [],
+    "physical_test_status": "NOT_RUN"
+  },
+  {
+    "case": "puppy",
+    "mode": "depth-color",
+    "geometry": "PASS",
+    "fidelity": "WARNING",
+    "source_structure_similarity": 0.8570065742256219,
+    "cut_sheets": 20,
+    "width_mm": 300,
+    "paper_colors_budget": 16,
+    "selected_generation_seconds": 35.18,
+    "manual_detail_boxes": [
+      [
+        0.43,
+        0.34,
+        0.5,
+        0.43
+      ],
+      [
+        0.6,
+        0.45,
+        0.67,
+        0.53
+      ],
+      [
+        0.43,
+        0.47,
+        0.54,
+        0.6
+      ],
+      [
+        0.39,
+        0.65,
+        0.52,
+        0.77
+      ]
+    ],
+    "custom_palette": null,
+    "photo_insert_in_comparison": false,
+    "ai_diagnostics": [
+      {
+        "component": "segmentation",
+        "status": "applied",
+        "model_id": "facebook/sam2.1-hiera-tiny",
+        "revision": "de431c4043854a71d8101e17995dfe596bf101a5",
+        "manifest_sha256": "3734c68087d9a71e13a2deca6fa6a8b439972fcc864675c35cc19861667b57ff",
+        "device": "cpu",
+        "inference_cache_hit": true,
+        "elapsed_seconds": 0.001959000015631318
+      },
+      {
+        "component": "face_features",
+        "status": "applied",
+        "model_id": "https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task",
+        "revision": "float16/1",
+        "manifest_sha256": "3bd3689ac73cf7826ab2920d5ce46d83e47667a56750da265a0d92b1d2d34e84",
+        "device": "cpu",
+        "inference_cache_hit": true,
+        "elapsed_seconds": 0.0004173999186605215
+      },
+      {
+        "component": "depth",
+        "status": "applied",
+        "model_id": "depth-anything/Depth-Anything-V2-Small-hf",
+        "revision": "5426e4f0f36572d16453bbda7a8389317b1bef99",
+        "manifest_sha256": "1da671abbd464bdfe27d596c55800a7ad4763eaab83697567a6fdefeab67e7e5",
+        "device": "cpu",
+        "inference_cache_hit": false,
+        "elapsed_seconds": 0.974990600021556
+      },
+      {
+        "component": "important_details",
+        "status": "fallback",
+        "reason": "Not enough free RAM for important_details: 1539 MB available; reserve at least 2048 MB",
+        "retryable": true,
+        "elapsed_seconds": 0.6242252998054028
+      },
+      {
+        "component": "detail_selection",
+        "status": "applied",
+        "method": "structure_only",
+        "region_count": 12,
+        "regions": [
+          {
+            "box": [
+              0.5911458333333334,
+              0.441233140655106,
+              0.65234375,
+              0.5317919075144508
+            ],
+            "score": 1.14805,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.4479166666666667,
+              0.3371868978805395,
+              0.5091145833333334,
+              0.4277456647398844
+            ],
+            "score": 0.91495,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.3776041666666667,
+              0.6011560693641619,
+              0.4388020833333333,
+              0.6917148362235067
+            ],
+            "score": 0.90172,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.5026041666666666,
+              0.6917148362235067,
+              0.5638020833333334,
+              0.7822736030828517
+            ],
+            "score": 0.89982,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.6614583333333334,
+              0.5529865125240848,
+              0.72265625,
+              0.6435452793834296
+            ],
+            "score": 0.84479,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.5143229166666666,
+              0.535645472061657,
+              0.5755208333333334,
+              0.626204238921002
+            ],
+            "score": 0.83919,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.4322916666666667,
+              0.4701348747591522,
+              0.4934895833333333,
+              0.5606936416184971
+            ],
+            "score": 0.81567,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.6223958333333334,
+              0.6782273603082851,
+              0.68359375,
+              0.7687861271676301
+            ],
+            "score": 0.81175,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.55078125,
+              0.19653179190751446,
+              0.6119791666666666,
+              0.28709055876685935
+            ],
+            "score": 0.80925,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.6315104166666666,
+              0.2774566473988439,
+              0.6927083333333334,
+              0.36801541425818884
+            ],
+            "score": 0.80742,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.328125,
+              0.36416184971098264,
+              0.3893229166666667,
+              0.45472061657032753
+            ],
+            "score": 0.79894,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.3997395833333333,
+              0.20423892100192678,
+              0.4609375,
+              0.2947976878612717
+            ],
+            "score": 0.78014,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          }
+        ],
+        "importance_is_heuristic": true
+      }
+    ],
+    "physical_test_status": "NOT_RUN"
+  },
+  {
+    "case": "puppy",
+    "mode": "depth-white",
+    "geometry": "PASS",
+    "fidelity": "NOT_EVALUATED",
+    "source_structure_similarity": null,
+    "cut_sheets": 10,
+    "width_mm": 260.0,
+    "paper_colors_budget": 10,
+    "selected_generation_seconds": 6.7,
+    "manual_detail_boxes": [],
+    "custom_palette": null,
+    "photo_insert_in_comparison": false,
+    "ai_diagnostics": [
+      {
+        "component": "segmentation",
+        "status": "applied",
+        "model_id": "facebook/sam2.1-hiera-tiny",
+        "revision": "de431c4043854a71d8101e17995dfe596bf101a5",
+        "manifest_sha256": "3734c68087d9a71e13a2deca6fa6a8b439972fcc864675c35cc19861667b57ff",
+        "device": "cpu",
+        "inference_cache_hit": true,
+        "elapsed_seconds": 0.0015228001866489649
+      },
+      {
+        "component": "face_features",
+        "status": "applied",
+        "model_id": "https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task",
+        "revision": "float16/1",
+        "manifest_sha256": "3bd3689ac73cf7826ab2920d5ce46d83e47667a56750da265a0d92b1d2d34e84",
+        "device": "cpu",
+        "inference_cache_hit": true,
+        "elapsed_seconds": 0.00037649995647370815
+      },
+      {
+        "component": "depth",
+        "status": "applied",
+        "model_id": "depth-anything/Depth-Anything-V2-Small-hf",
+        "revision": "5426e4f0f36572d16453bbda7a8389317b1bef99",
+        "manifest_sha256": "1da671abbd464bdfe27d596c55800a7ad4763eaab83697567a6fdefeab67e7e5",
+        "device": "cpu",
+        "inference_cache_hit": true,
+        "elapsed_seconds": 0.0018573999404907227
+      },
+      {
+        "component": "important_details",
+        "status": "fallback",
+        "reason": "Not enough free RAM for important_details: 1358 MB available; reserve at least 2048 MB",
+        "retryable": true,
+        "elapsed_seconds": 0.5722447000443935
+      },
+      {
+        "component": "detail_selection",
+        "status": "applied",
+        "method": "structure_only",
+        "region_count": 12,
+        "regions": [
+          {
+            "box": [
+              0.5911458333333334,
+              0.441233140655106,
+              0.65234375,
+              0.5317919075144508
+            ],
+            "score": 1.14805,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.4479166666666667,
+              0.3371868978805395,
+              0.5091145833333334,
+              0.4277456647398844
+            ],
+            "score": 0.91495,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.3776041666666667,
+              0.6011560693641619,
+              0.4388020833333333,
+              0.6917148362235067
+            ],
+            "score": 0.90172,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.5026041666666666,
+              0.6917148362235067,
+              0.5638020833333334,
+              0.7822736030828517
+            ],
+            "score": 0.89982,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.6614583333333334,
+              0.5529865125240848,
+              0.72265625,
+              0.6435452793834296
+            ],
+            "score": 0.84479,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.5143229166666666,
+              0.535645472061657,
+              0.5755208333333334,
+              0.626204238921002
+            ],
+            "score": 0.83919,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.4322916666666667,
+              0.4701348747591522,
+              0.4934895833333333,
+              0.5606936416184971
+            ],
+            "score": 0.81567,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.6223958333333334,
+              0.6782273603082851,
+              0.68359375,
+              0.7687861271676301
+            ],
+            "score": 0.81175,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.55078125,
+              0.19653179190751446,
+              0.6119791666666666,
+              0.28709055876685935
+            ],
+            "score": 0.80925,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.6315104166666666,
+              0.2774566473988439,
+              0.6927083333333334,
+              0.36801541425818884
+            ],
+            "score": 0.80742,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.328125,
+              0.36416184971098264,
+              0.3893229166666667,
+              0.45472061657032753
+            ],
+            "score": 0.79894,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.3997395833333333,
+              0.20423892100192678,
+              0.4609375,
+              0.2947976878612717
+            ],
+            "score": 0.78014,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          }
+        ],
+        "importance_is_heuristic": true
+      }
+    ],
+    "physical_test_status": "NOT_RUN"
+  },
+  {
+    "case": "lizard",
+    "mode": "multicolor",
+    "geometry": "PASS",
+    "fidelity": "WARNING",
+    "source_structure_similarity": 0.7460160793315723,
+    "cut_sheets": 24,
+    "width_mm": 360,
+    "paper_colors_budget": 18,
+    "selected_generation_seconds": 54.97,
+    "manual_detail_boxes": [
+      [
+        0.54,
+        0.14,
+        0.62,
+        0.24
+      ],
+      [
+        0.66,
+        0.19,
+        0.78,
+        0.31
+      ]
+    ],
+    "custom_palette": [
+      "#3a4a1e",
+      "#664e3e",
+      "#5b7218",
+      "#514a0e",
+      "#362a1a",
+      "#661c1a",
+      "#979c25",
+      "#c6d62b",
+      "#b0be2f",
+      "#7c9134",
+      "#2e3c32",
+      "#dedfcd",
+      "#988337",
+      "#cfcf64",
+      "#d0d094",
+      "#8b211d",
+      "#101820",
+      "#f0e5c7"
+    ],
+    "photo_insert_in_comparison": false,
+    "ai_diagnostics": [
+      {
+        "component": "segmentation",
+        "status": "applied",
+        "model_id": "facebook/sam2.1-hiera-tiny",
+        "revision": "de431c4043854a71d8101e17995dfe596bf101a5",
+        "manifest_sha256": "3734c68087d9a71e13a2deca6fa6a8b439972fcc864675c35cc19861667b57ff",
+        "device": "cpu",
+        "inference_cache_hit": false,
+        "elapsed_seconds": 6.969947899924591
+      },
+      {
+        "component": "face_features",
+        "status": "no_detection",
+        "model_id": "https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task",
+        "revision": "float16/1",
+        "manifest_sha256": "3bd3689ac73cf7826ab2920d5ce46d83e47667a56750da265a0d92b1d2d34e84",
+        "device": "cpu",
+        "inference_cache_hit": false,
+        "elapsed_seconds": 2.9136328999884427
+      },
+      {
+        "component": "important_details",
+        "status": "fallback",
+        "reason": "Not enough free RAM for important_details: 1011 MB available; reserve at least 2048 MB",
+        "retryable": true,
+        "elapsed_seconds": 1.0867508000228554
+      },
+      {
+        "component": "detail_selection",
+        "status": "applied",
+        "method": "structure_only",
+        "region_count": 12,
+        "regions": [
+          {
+            "box": [
+              0.57421875,
+              0.4847250509164969,
+              0.6328125,
+              0.5763747454175153
+            ],
+            "score": 1.0,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.65625,
+              0.3604887983706721,
+              0.71484375,
+              0.45213849287169044
+            ],
+            "score": 0.92925,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.3033854166666667,
+              0.924643584521385,
+              0.3619791666666667,
+              1.0
+            ],
+            "score": 0.89203,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.4895833333333333,
+              0.1446028513238289,
+              0.5481770833333334,
+              0.23625254582484725
+            ],
+            "score": 0.88449,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.6302083333333334,
+              0.7433808553971487,
+              0.6888020833333334,
+              0.835030549898167
+            ],
+            "score": 0.83982,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.4518229166666667,
+              0.29938900203665986,
+              0.5104166666666666,
+              0.3910386965376782
+            ],
+            "score": 0.82238,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.5416666666666666,
+              0.25865580448065173,
+              0.6002604166666666,
+              0.35030549898167007
+            ],
+            "score": 0.82152,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.4713541666666667,
+              0.560081466395112,
+              0.5299479166666666,
+              0.6517311608961304
+            ],
+            "score": 0.81183,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.3645833333333333,
+              0.7739307535641547,
+              0.4231770833333333,
+              0.8655804480651731
+            ],
+            "score": 0.80323,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.3125,
+              0.639511201629328,
+              0.37109375,
+              0.7311608961303462
+            ],
+            "score": 0.80041,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.6380208333333334,
+              0.22606924643584522,
+              0.6966145833333334,
+              0.31771894093686354
+            ],
+            "score": 0.79671,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.4908854166666667,
+              0.7881873727087576,
+              0.5494791666666666,
+              0.879837067209776
+            ],
+            "score": 0.7886,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          }
+        ],
+        "importance_is_heuristic": true
+      },
+      {
+        "component": "depth",
+        "status": "not_applicable",
+        "elapsed_seconds": 0,
+        "reason": "Relative-depth inference is only used for Depth Scene"
+      }
+    ],
+    "physical_test_status": "NOT_RUN"
+  },
+  {
+    "case": "lizard",
+    "mode": "stencil",
+    "geometry": "PASS",
+    "fidelity": "NOT_EVALUATED",
+    "source_structure_similarity": null,
+    "cut_sheets": 1,
+    "width_mm": 260.0,
+    "paper_colors_budget": 10,
+    "selected_generation_seconds": 9.98,
+    "manual_detail_boxes": [],
+    "custom_palette": null,
+    "photo_insert_in_comparison": false,
+    "ai_diagnostics": [
+      {
+        "component": "segmentation",
+        "status": "applied",
+        "model_id": "facebook/sam2.1-hiera-tiny",
+        "revision": "de431c4043854a71d8101e17995dfe596bf101a5",
+        "manifest_sha256": "3734c68087d9a71e13a2deca6fa6a8b439972fcc864675c35cc19861667b57ff",
+        "device": "cpu",
+        "inference_cache_hit": true,
+        "elapsed_seconds": 0.0006291000172495842
+      },
+      {
+        "component": "face_features",
+        "status": "no_detection",
+        "model_id": "https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task",
+        "revision": "float16/1",
+        "manifest_sha256": "3bd3689ac73cf7826ab2920d5ce46d83e47667a56750da265a0d92b1d2d34e84",
+        "device": "cpu",
+        "inference_cache_hit": true,
+        "elapsed_seconds": 0.0002911998890340328
+      },
+      {
+        "component": "important_details",
+        "status": "fallback",
+        "reason": "Not enough free RAM for important_details: 1170 MB available; reserve at least 2048 MB",
+        "retryable": true,
+        "elapsed_seconds": 0.5571145000867546
+      },
+      {
+        "component": "detail_selection",
+        "status": "applied",
+        "method": "structure_only",
+        "region_count": 12,
+        "regions": [
+          {
+            "box": [
+              0.57421875,
+              0.4847250509164969,
+              0.6328125,
+              0.5763747454175153
+            ],
+            "score": 1.0,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.65625,
+              0.3604887983706721,
+              0.71484375,
+              0.45213849287169044
+            ],
+            "score": 0.92925,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.3033854166666667,
+              0.924643584521385,
+              0.3619791666666667,
+              1.0
+            ],
+            "score": 0.89203,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.4895833333333333,
+              0.1446028513238289,
+              0.5481770833333334,
+              0.23625254582484725
+            ],
+            "score": 0.88449,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.6302083333333334,
+              0.7433808553971487,
+              0.6888020833333334,
+              0.835030549898167
+            ],
+            "score": 0.83982,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.4518229166666667,
+              0.29938900203665986,
+              0.5104166666666666,
+              0.3910386965376782
+            ],
+            "score": 0.82238,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.5416666666666666,
+              0.25865580448065173,
+              0.6002604166666666,
+              0.35030549898167007
+            ],
+            "score": 0.82152,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.4713541666666667,
+              0.560081466395112,
+              0.5299479166666666,
+              0.6517311608961304
+            ],
+            "score": 0.81183,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.3645833333333333,
+              0.7739307535641547,
+              0.4231770833333333,
+              0.8655804480651731
+            ],
+            "score": 0.80323,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.3125,
+              0.639511201629328,
+              0.37109375,
+              0.7311608961303462
+            ],
+            "score": 0.80041,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.6380208333333334,
+              0.22606924643584522,
+              0.6966145833333334,
+              0.31771894093686354
+            ],
+            "score": 0.79671,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.4908854166666667,
+              0.7881873727087576,
+              0.5494791666666666,
+              0.879837067209776
+            ],
+            "score": 0.7886,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          }
+        ],
+        "importance_is_heuristic": true
+      },
+      {
+        "component": "depth",
+        "status": "not_applicable",
+        "elapsed_seconds": 0,
+        "reason": "Relative-depth inference is only used for Depth Scene"
+      }
+    ],
+    "physical_test_status": "NOT_RUN"
+  },
+  {
+    "case": "lizard",
+    "mode": "depth-color",
+    "geometry": "PASS",
+    "fidelity": "WARNING",
+    "source_structure_similarity": 0.7460160793315723,
+    "cut_sheets": 24,
+    "width_mm": 360,
+    "paper_colors_budget": 18,
+    "selected_generation_seconds": 82.11,
+    "manual_detail_boxes": [
+      [
+        0.54,
+        0.14,
+        0.62,
+        0.24
+      ],
+      [
+        0.66,
+        0.19,
+        0.78,
+        0.31
+      ]
+    ],
+    "custom_palette": [
+      "#3a4a1e",
+      "#664e3e",
+      "#5b7218",
+      "#514a0e",
+      "#362a1a",
+      "#661c1a",
+      "#979c25",
+      "#c6d62b",
+      "#b0be2f",
+      "#7c9134",
+      "#2e3c32",
+      "#dedfcd",
+      "#988337",
+      "#cfcf64",
+      "#d0d094",
+      "#8b211d",
+      "#101820",
+      "#f0e5c7"
+    ],
+    "photo_insert_in_comparison": false,
+    "ai_diagnostics": [
+      {
+        "component": "segmentation",
+        "status": "applied",
+        "model_id": "facebook/sam2.1-hiera-tiny",
+        "revision": "de431c4043854a71d8101e17995dfe596bf101a5",
+        "manifest_sha256": "3734c68087d9a71e13a2deca6fa6a8b439972fcc864675c35cc19861667b57ff",
+        "device": "cpu",
+        "inference_cache_hit": true,
+        "elapsed_seconds": 0.0005882999394088984
+      },
+      {
+        "component": "face_features",
+        "status": "no_detection",
+        "model_id": "https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task",
+        "revision": "float16/1",
+        "manifest_sha256": "3bd3689ac73cf7826ab2920d5ce46d83e47667a56750da265a0d92b1d2d34e84",
+        "device": "cpu",
+        "inference_cache_hit": true,
+        "elapsed_seconds": 0.0002778999041765928
+      },
+      {
+        "component": "depth",
+        "status": "applied",
+        "model_id": "depth-anything/Depth-Anything-V2-Small-hf",
+        "revision": "5426e4f0f36572d16453bbda7a8389317b1bef99",
+        "manifest_sha256": "1da671abbd464bdfe27d596c55800a7ad4763eaab83697567a6fdefeab67e7e5",
+        "device": "cpu",
+        "inference_cache_hit": false,
+        "elapsed_seconds": 0.7554402998648584
+      },
+      {
+        "component": "important_details",
+        "status": "fallback",
+        "reason": "Not enough free RAM for important_details: 1459 MB available; reserve at least 2048 MB",
+        "retryable": true,
+        "elapsed_seconds": 0.6072360000107437
+      },
+      {
+        "component": "detail_selection",
+        "status": "applied",
+        "method": "structure_only",
+        "region_count": 12,
+        "regions": [
+          {
+            "box": [
+              0.57421875,
+              0.4847250509164969,
+              0.6328125,
+              0.5763747454175153
+            ],
+            "score": 1.0,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.65625,
+              0.3604887983706721,
+              0.71484375,
+              0.45213849287169044
+            ],
+            "score": 0.92925,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.3033854166666667,
+              0.924643584521385,
+              0.3619791666666667,
+              1.0
+            ],
+            "score": 0.89203,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.4895833333333333,
+              0.1446028513238289,
+              0.5481770833333334,
+              0.23625254582484725
+            ],
+            "score": 0.88449,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.6302083333333334,
+              0.7433808553971487,
+              0.6888020833333334,
+              0.835030549898167
+            ],
+            "score": 0.83982,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.4518229166666667,
+              0.29938900203665986,
+              0.5104166666666666,
+              0.3910386965376782
+            ],
+            "score": 0.82238,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.5416666666666666,
+              0.25865580448065173,
+              0.6002604166666666,
+              0.35030549898167007
+            ],
+            "score": 0.82152,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.4713541666666667,
+              0.560081466395112,
+              0.5299479166666666,
+              0.6517311608961304
+            ],
+            "score": 0.81183,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.3645833333333333,
+              0.7739307535641547,
+              0.4231770833333333,
+              0.8655804480651731
+            ],
+            "score": 0.80323,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.3125,
+              0.639511201629328,
+              0.37109375,
+              0.7311608961303462
+            ],
+            "score": 0.80041,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.6380208333333334,
+              0.22606924643584522,
+              0.6966145833333334,
+              0.31771894093686354
+            ],
+            "score": 0.79671,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.4908854166666667,
+              0.7881873727087576,
+              0.5494791666666666,
+              0.879837067209776
+            ],
+            "score": 0.7886,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          }
+        ],
+        "importance_is_heuristic": true
+      }
+    ],
+    "physical_test_status": "NOT_RUN"
+  },
+  {
+    "case": "lizard",
+    "mode": "depth-white",
+    "geometry": "PASS",
+    "fidelity": "NOT_EVALUATED",
+    "source_structure_similarity": null,
+    "cut_sheets": 10,
+    "width_mm": 260.0,
+    "paper_colors_budget": 10,
+    "selected_generation_seconds": 6.5,
+    "manual_detail_boxes": [],
+    "custom_palette": null,
+    "photo_insert_in_comparison": false,
+    "ai_diagnostics": [
+      {
+        "component": "segmentation",
+        "status": "applied",
+        "model_id": "facebook/sam2.1-hiera-tiny",
+        "revision": "de431c4043854a71d8101e17995dfe596bf101a5",
+        "manifest_sha256": "3734c68087d9a71e13a2deca6fa6a8b439972fcc864675c35cc19861667b57ff",
+        "device": "cpu",
+        "inference_cache_hit": true,
+        "elapsed_seconds": 0.00059710000641644
+      },
+      {
+        "component": "face_features",
+        "status": "no_detection",
+        "model_id": "https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task",
+        "revision": "float16/1",
+        "manifest_sha256": "3bd3689ac73cf7826ab2920d5ce46d83e47667a56750da265a0d92b1d2d34e84",
+        "device": "cpu",
+        "inference_cache_hit": true,
+        "elapsed_seconds": 0.000273300101980567
+      },
+      {
+        "component": "depth",
+        "status": "applied",
+        "model_id": "depth-anything/Depth-Anything-V2-Small-hf",
+        "revision": "5426e4f0f36572d16453bbda7a8389317b1bef99",
+        "manifest_sha256": "1da671abbd464bdfe27d596c55800a7ad4763eaab83697567a6fdefeab67e7e5",
+        "device": "cpu",
+        "inference_cache_hit": true,
+        "elapsed_seconds": 0.0011207000352442265
+      },
+      {
+        "component": "important_details",
+        "status": "fallback",
+        "reason": "Not enough free RAM for important_details: 1381 MB available; reserve at least 2048 MB",
+        "retryable": true,
+        "elapsed_seconds": 0.5851963001769036
+      },
+      {
+        "component": "detail_selection",
+        "status": "applied",
+        "method": "structure_only",
+        "region_count": 12,
+        "regions": [
+          {
+            "box": [
+              0.57421875,
+              0.4847250509164969,
+              0.6328125,
+              0.5763747454175153
+            ],
+            "score": 1.0,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.65625,
+              0.3604887983706721,
+              0.71484375,
+              0.45213849287169044
+            ],
+            "score": 0.92925,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.3033854166666667,
+              0.924643584521385,
+              0.3619791666666667,
+              1.0
+            ],
+            "score": 0.89203,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.4895833333333333,
+              0.1446028513238289,
+              0.5481770833333334,
+              0.23625254582484725
+            ],
+            "score": 0.88449,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.6302083333333334,
+              0.7433808553971487,
+              0.6888020833333334,
+              0.835030549898167
+            ],
+            "score": 0.83982,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.4518229166666667,
+              0.29938900203665986,
+              0.5104166666666666,
+              0.3910386965376782
+            ],
+            "score": 0.82238,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.5416666666666666,
+              0.25865580448065173,
+              0.6002604166666666,
+              0.35030549898167007
+            ],
+            "score": 0.82152,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.4713541666666667,
+              0.560081466395112,
+              0.5299479166666666,
+              0.6517311608961304
+            ],
+            "score": 0.81183,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.3645833333333333,
+              0.7739307535641547,
+              0.4231770833333333,
+              0.8655804480651731
+            ],
+            "score": 0.80323,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.3125,
+              0.639511201629328,
+              0.37109375,
+              0.7311608961303462
+            ],
+            "score": 0.80041,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.6380208333333334,
+              0.22606924643584522,
+              0.6966145833333334,
+              0.31771894093686354
+            ],
+            "score": 0.79671,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          },
+          {
+            "box": [
+              0.4908854166666667,
+              0.7881873727087576,
+              0.5494791666666666,
+              0.879837067209776
+            ],
+            "score": 0.7886,
+            "label": "local structure",
+            "source": "structure",
+            "semantic_grounded": false
+          }
+        ],
+        "importance_is_heuristic": true
+      }
+    ],
+    "physical_test_status": "NOT_RUN"
+  }
+]

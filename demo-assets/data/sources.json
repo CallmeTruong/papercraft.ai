@@ -1,0 +1,26 @@
+[
+  {
+    "case": "kittens",
+    "original_filename": "hinh-thu-cung-cute-dep-nhat_014120300.jpg",
+    "source_sha256": "0455714780a14b0945e3c8aa70b7751c1b48d1b3899b98bbeb2df6be032fb4e6",
+    "provided_by": "User attachment",
+    "rights": "Unverified; review before public redistribution",
+    "presentation_file": "inputs/kittens.jpg"
+  },
+  {
+    "case": "puppy",
+    "original_filename": "anh-thu-cung-cute-de-thuong_014113010.jpg",
+    "source_sha256": "5d2e300b09f554c61381cea57637caef813e86c091cf6e17576e74eb83332876",
+    "provided_by": "User attachment",
+    "rights": "Unverified; review before public redistribution",
+    "presentation_file": "inputs/puppy.jpg"
+  },
+  {
+    "case": "lizard",
+    "original_filename": "bronchocela-cristatella-also-known-as-the-green-crested-lizard-generative-ai-free-photo.jpg",
+    "source_sha256": "2d28d901bdc3b9a71568bc9e7cf6452429ac2d0ad7a95bcfb40e29231417f698",
+    "provided_by": "User attachment",
+    "rights": "Unverified; review before public redistribution",
+    "presentation_file": "inputs/lizard.jpg"
+  }
+]

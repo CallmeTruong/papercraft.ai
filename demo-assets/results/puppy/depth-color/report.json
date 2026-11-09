@@ -1,0 +1,939 @@
+{
+  "status": "PASS",
+  "revision_id": "be5a1aca6a524946bc99055c198c5120",
+  "fingerprint": "daef37ced504f2eed8db1c189533daba7a0ec00ffdb67494a872ed057b1ffa81",
+  "checker_version": "frame-rooted-continuous-3",
+  "profile_hash": "cf245ff7dd8790c346d6aacf352e51e4f4144a604c304f5fe8bdf69dd837aff7",
+  "layers": [
+    {
+      "status": "PASS",
+      "findings": [],
+      "coverage": {
+        "checker_version": "frame-rooted-continuous-3",
+        "units": "mm",
+        "connectivity_method": "full-frame containment and positive-area polygon components",
+        "width_method": "continuous rooted inset core + geometric coverage",
+        "error_bound_mm": 0.01,
+        "required_feature_width_mm": 1.2,
+        "required_support_width_mm": 1.5,
+        "decorative_tip_policy": "bounded_convex",
+        "certified_convex_corners": [],
+        "physical_test_status": "NOT_RUN"
+      },
+      "metrics": {
+        "material_component_count": 1,
+        "missing_frame_area_mm2": 0.0,
+        "unsupported_island_count": 0,
+        "thin_feature_violation_count": 0,
+        "total_cut_length_mm": 2260.706090740151,
+        "cutting_path_count": 2,
+        "invalid_polygon_count": 0
+      },
+      "frame": {
+        "outer_width_mm": 300.0,
+        "outer_height_mm": 209.58333333333334,
+        "border_width_mm": 10.0
+      },
+      "important_features": [],
+      "layer_id": "layer-01"
+    },
+    {
+      "status": "PASS",
+      "findings": [],
+      "coverage": {
+        "checker_version": "frame-rooted-continuous-3",
+        "units": "mm",
+        "connectivity_method": "full-frame containment and positive-area polygon components",
+        "width_method": "continuous rooted inset core + geometric coverage",
+        "error_bound_mm": 0.01,
+        "required_feature_width_mm": 1.2,
+        "required_support_width_mm": 1.5,
+        "decorative_tip_policy": "bounded_convex",
+        "certified_convex_corners": [],
+        "physical_test_status": "NOT_RUN"
+      },
+      "metrics": {
+        "material_component_count": 1,
+        "missing_frame_area_mm2": 0.0,
+        "unsupported_island_count": 0,
+        "thin_feature_violation_count": 0,
+        "total_cut_length_mm": 2671.51593373756,
+        "cutting_path_count": 4,
+        "invalid_polygon_count": 0
+      },
+      "frame": {
+        "outer_width_mm": 300.0,
+        "outer_height_mm": 209.58333333333334,
+        "border_width_mm": 10.0
+      },
+      "important_features": [],
+      "layer_id": "layer-02"
+    },
+    {
+      "status": "PASS",
+      "findings": [],
+      "coverage": {
+        "checker_version": "frame-rooted-continuous-3",
+        "units": "mm",
+        "connectivity_method": "full-frame containment and positive-area polygon components",
+        "width_method": "continuous rooted inset core + geometric coverage",
+        "error_bound_mm": 0.01,
+        "required_feature_width_mm": 1.2,
+        "required_support_width_mm": 1.5,
+        "decorative_tip_policy": "bounded_convex",
+        "certified_convex_corners": [],
+        "physical_test_status": "NOT_RUN"
+      },
+      "metrics": {
+        "material_component_count": 1,
+        "missing_frame_area_mm2": 0.0,
+        "unsupported_island_count": 0,
+        "thin_feature_violation_count": 0,
+        "total_cut_length_mm": 2551.1078243237985,
+        "cutting_path_count": 3,
+        "invalid_polygon_count": 0
+      },
+      "frame": {
+        "outer_width_mm": 300.0,
+        "outer_height_mm": 209.58333333333334,
+        "border_width_mm": 10.0
+      },
+      "important_features": [],
+      "layer_id": "layer-03"
+    },
+    {
+      "status": "PASS",
+      "findings": [],
+      "coverage": {
+        "checker_version": "frame-rooted-continuous-3",
+        "units": "mm",
+        "connectivity_method": "full-frame containment and positive-area polygon components",
+        "width_method": "continuous rooted inset core + geometric coverage",
+        "error_bound_mm": 0.01,
+        "required_feature_width_mm": 1.2,
+        "required_support_width_mm": 1.5,
+        "decorative_tip_policy": "bounded_convex",
+        "certified_convex_corners": [],
+        "physical_test_status": "NOT_RUN"
+      },
+      "metrics": {
+        "material_component_count": 1,
+        "missing_frame_area_mm2": 0.0,
+        "unsupported_island_count": 0,
+        "thin_feature_violation_count": 0,
+        "total_cut_length_mm": 2949.413591529812,
+        "cutting_path_count": 8,
+        "invalid_polygon_count": 0
+      },
+      "frame": {
+        "outer_width_mm": 300.0,
+        "outer_height_mm": 209.58333333333334,
+        "border_width_mm": 10.0
+      },
+      "important_features": [],
+      "layer_id": "layer-04"
+    },
+    {
+      "status": "PASS",
+      "findings": [],
+      "coverage": {
+        "checker_version": "frame-rooted-continuous-3",
+        "units": "mm",
+        "connectivity_method": "full-frame containment and positive-area polygon components",
+        "width_method": "continuous rooted inset core + geometric coverage",
+        "error_bound_mm": 0.01,
+        "required_feature_width_mm": 1.2,
+        "required_support_width_mm": 1.5,
+        "decorative_tip_policy": "bounded_convex",
+        "certified_convex_corners": [],
+        "physical_test_status": "NOT_RUN"
+      },
+      "metrics": {
+        "material_component_count": 1,
+        "missing_frame_area_mm2": 0.0,
+        "unsupported_island_count": 0,
+        "thin_feature_violation_count": 0,
+        "total_cut_length_mm": 2791.651756120338,
+        "cutting_path_count": 6,
+        "invalid_polygon_count": 0
+      },
+      "frame": {
+        "outer_width_mm": 300.0,
+        "outer_height_mm": 209.58333333333334,
+        "border_width_mm": 10.0
+      },
+      "important_features": [],
+      "layer_id": "layer-05"
+    },
+    {
+      "status": "PASS",
+      "findings": [],
+      "coverage": {
+        "checker_version": "frame-rooted-continuous-3",
+        "units": "mm",
+        "connectivity_method": "full-frame containment and positive-area polygon components",
+        "width_method": "continuous rooted inset core + geometric coverage",
+        "error_bound_mm": 0.01,
+        "required_feature_width_mm": 1.2,
+        "required_support_width_mm": 1.5,
+        "decorative_tip_policy": "bounded_convex",
+        "certified_convex_corners": [],
+        "physical_test_status": "NOT_RUN"
+      },
+      "metrics": {
+        "material_component_count": 1,
+        "missing_frame_area_mm2": 0.0,
+        "unsupported_island_count": 0,
+        "thin_feature_violation_count": 0,
+        "total_cut_length_mm": 3737.4178986373063,
+        "cutting_path_count": 9,
+        "invalid_polygon_count": 0
+      },
+      "frame": {
+        "outer_width_mm": 300.0,
+        "outer_height_mm": 209.58333333333334,
+        "border_width_mm": 10.0
+      },
+      "important_features": [],
+      "layer_id": "layer-06"
+    },
+    {
+      "status": "PASS",
+      "findings": [],
+      "coverage": {
+        "checker_version": "frame-rooted-continuous-3",
+        "units": "mm",
+        "connectivity_method": "full-frame containment and positive-area polygon components",
+        "width_method": "continuous rooted inset core + geometric coverage",
+        "error_bound_mm": 0.01,
+        "required_feature_width_mm": 1.2,
+        "required_support_width_mm": 1.5,
+        "decorative_tip_policy": "bounded_convex",
+        "certified_convex_corners": [],
+        "physical_test_status": "NOT_RUN"
+      },
+      "metrics": {
+        "material_component_count": 1,
+        "missing_frame_area_mm2": 0.0,
+        "unsupported_island_count": 0,
+        "thin_feature_violation_count": 0,
+        "total_cut_length_mm": 3604.590077125852,
+        "cutting_path_count": 10,
+        "invalid_polygon_count": 0
+      },
+      "frame": {
+        "outer_width_mm": 300.0,
+        "outer_height_mm": 209.58333333333334,
+        "border_width_mm": 10.0
+      },
+      "important_features": [],
+      "layer_id": "layer-07"
+    },
+    {
+      "status": "PASS",
+      "findings": [],
+      "coverage": {
+        "checker_version": "frame-rooted-continuous-3",
+        "units": "mm",
+        "connectivity_method": "full-frame containment and positive-area polygon components",
+        "width_method": "continuous rooted inset core + geometric coverage",
+        "error_bound_mm": 0.01,
+        "required_feature_width_mm": 1.2,
+        "required_support_width_mm": 1.5,
+        "decorative_tip_policy": "bounded_convex",
+        "certified_convex_corners": [],
+        "physical_test_status": "NOT_RUN"
+      },
+      "metrics": {
+        "material_component_count": 1,
+        "missing_frame_area_mm2": 0.0,
+        "unsupported_island_count": 0,
+        "thin_feature_violation_count": 0,
+        "total_cut_length_mm": 3517.199104386764,
+        "cutting_path_count": 13,
+        "invalid_polygon_count": 0
+      },
+      "frame": {
+        "outer_width_mm": 300.0,
+        "outer_height_mm": 209.58333333333334,
+        "border_width_mm": 10.0
+      },
+      "important_features": [],
+      "layer_id": "layer-08"
+    },
+    {
+      "status": "PASS",
+      "findings": [],
+      "coverage": {
+        "checker_version": "frame-rooted-continuous-3",
+        "units": "mm",
+        "connectivity_method": "full-frame containment and positive-area polygon components",
+        "width_method": "continuous rooted inset core + geometric coverage",
+        "error_bound_mm": 0.01,
+        "required_feature_width_mm": 1.2,
+        "required_support_width_mm": 1.5,
+        "decorative_tip_policy": "bounded_convex",
+        "certified_convex_corners": [],
+        "physical_test_status": "NOT_RUN"
+      },
+      "metrics": {
+        "material_component_count": 1,
+        "missing_frame_area_mm2": 0.0,
+        "unsupported_island_count": 0,
+        "thin_feature_violation_count": 0,
+        "total_cut_length_mm": 3819.0203912506813,
+        "cutting_path_count": 17,
+        "invalid_polygon_count": 0
+      },
+      "frame": {
+        "outer_width_mm": 300.0,
+        "outer_height_mm": 209.58333333333334,
+        "border_width_mm": 10.0
+      },
+      "important_features": [],
+      "layer_id": "layer-09"
+    },
+    {
+      "status": "PASS",
+      "findings": [],
+      "coverage": {
+        "checker_version": "frame-rooted-continuous-3",
+        "units": "mm",
+        "connectivity_method": "full-frame containment and positive-area polygon components",
+        "width_method": "continuous rooted inset core + geometric coverage",
+        "error_bound_mm": 0.01,
+        "required_feature_width_mm": 1.2,
+        "required_support_width_mm": 1.5,
+        "decorative_tip_policy": "bounded_convex",
+        "certified_convex_corners": [],
+        "physical_test_status": "NOT_RUN"
+      },
+      "metrics": {
+        "material_component_count": 1,
+        "missing_frame_area_mm2": 0.0,
+        "unsupported_island_count": 0,
+        "thin_feature_violation_count": 0,
+        "total_cut_length_mm": 3697.6384827982397,
+        "cutting_path_count": 19,
+        "invalid_polygon_count": 0
+      },
+      "frame": {
+        "outer_width_mm": 300.0,
+        "outer_height_mm": 209.58333333333334,
+        "border_width_mm": 10.0
+      },
+      "important_features": [],
+      "layer_id": "layer-10"
+    },
+    {
+      "status": "PASS",
+      "findings": [],
+      "coverage": {
+        "checker_version": "frame-rooted-continuous-3",
+        "units": "mm",
+        "connectivity_method": "full-frame containment and positive-area polygon components",
+        "width_method": "continuous rooted inset core + geometric coverage",
+        "error_bound_mm": 0.01,
+        "required_feature_width_mm": 1.2,
+        "required_support_width_mm": 1.5,
+        "decorative_tip_policy": "bounded_convex",
+        "certified_convex_corners": [],
+        "physical_test_status": "NOT_RUN"
+      },
+      "metrics": {
+        "material_component_count": 1,
+        "missing_frame_area_mm2": 0.0,
+        "unsupported_island_count": 0,
+        "thin_feature_violation_count": 0,
+        "total_cut_length_mm": 3064.4731695538467,
+        "cutting_path_count": 17,
+        "invalid_polygon_count": 0
+      },
+      "frame": {
+        "outer_width_mm": 300.0,
+        "outer_height_mm": 209.58333333333334,
+        "border_width_mm": 10.0
+      },
+      "important_features": [],
+      "layer_id": "layer-11"
+    },
+    {
+      "status": "PASS",
+      "findings": [],
+      "coverage": {
+        "checker_version": "frame-rooted-continuous-3",
+        "units": "mm",
+        "connectivity_method": "full-frame containment and positive-area polygon components",
+        "width_method": "continuous rooted inset core + geometric coverage",
+        "error_bound_mm": 0.01,
+        "required_feature_width_mm": 1.2,
+        "required_support_width_mm": 1.5,
+        "decorative_tip_policy": "bounded_convex",
+        "certified_convex_corners": [],
+        "physical_test_status": "NOT_RUN"
+      },
+      "metrics": {
+        "material_component_count": 1,
+        "missing_frame_area_mm2": 0.0,
+        "unsupported_island_count": 0,
+        "thin_feature_violation_count": 0,
+        "total_cut_length_mm": 2789.245504972842,
+        "cutting_path_count": 18,
+        "invalid_polygon_count": 0
+      },
+      "frame": {
+        "outer_width_mm": 300.0,
+        "outer_height_mm": 209.58333333333334,
+        "border_width_mm": 10.0
+      },
+      "important_features": [],
+      "layer_id": "layer-12"
+    },
+    {
+      "status": "PASS",
+      "findings": [],
+      "coverage": {
+        "checker_version": "frame-rooted-continuous-3",
+        "units": "mm",
+        "connectivity_method": "full-frame containment and positive-area polygon components",
+        "width_method": "continuous rooted inset core + geometric coverage",
+        "error_bound_mm": 0.01,
+        "required_feature_width_mm": 1.2,
+        "required_support_width_mm": 1.5,
+        "decorative_tip_policy": "bounded_convex",
+        "certified_convex_corners": [],
+        "physical_test_status": "NOT_RUN"
+      },
+      "metrics": {
+        "material_component_count": 1,
+        "missing_frame_area_mm2": 0.0,
+        "unsupported_island_count": 0,
+        "thin_feature_violation_count": 0,
+        "total_cut_length_mm": 2704.638205159126,
+        "cutting_path_count": 19,
+        "invalid_polygon_count": 0
+      },
+      "frame": {
+        "outer_width_mm": 300.0,
+        "outer_height_mm": 209.58333333333334,
+        "border_width_mm": 10.0
+      },
+      "important_features": [],
+      "layer_id": "layer-13"
+    },
+    {
+      "status": "PASS",
+      "findings": [],
+      "coverage": {
+        "checker_version": "frame-rooted-continuous-3",
+        "units": "mm",
+        "connectivity_method": "full-frame containment and positive-area polygon components",
+        "width_method": "continuous rooted inset core + geometric coverage",
+        "error_bound_mm": 0.01,
+        "required_feature_width_mm": 1.2,
+        "required_support_width_mm": 1.5,
+        "decorative_tip_policy": "bounded_convex",
+        "certified_convex_corners": [],
+        "physical_test_status": "NOT_RUN"
+      },
+      "metrics": {
+        "material_component_count": 1,
+        "missing_frame_area_mm2": 0.0,
+        "unsupported_island_count": 0,
+        "thin_feature_violation_count": 0,
+        "total_cut_length_mm": 2514.4045025389614,
+        "cutting_path_count": 18,
+        "invalid_polygon_count": 0
+      },
+      "frame": {
+        "outer_width_mm": 300.0,
+        "outer_height_mm": 209.58333333333334,
+        "border_width_mm": 10.0
+      },
+      "important_features": [],
+      "layer_id": "layer-14"
+    },
+    {
+      "status": "PASS",
+      "findings": [],
+      "coverage": {
+        "checker_version": "frame-rooted-continuous-3",
+        "units": "mm",
+        "connectivity_method": "full-frame containment and positive-area polygon components",
+        "width_method": "continuous rooted inset core + geometric coverage",
+        "error_bound_mm": 0.01,
+        "required_feature_width_mm": 1.2,
+        "required_support_width_mm": 1.5,
+        "decorative_tip_policy": "bounded_convex",
+        "certified_convex_corners": [],
+        "physical_test_status": "NOT_RUN"
+      },
+      "metrics": {
+        "material_component_count": 1,
+        "missing_frame_area_mm2": 0.0,
+        "unsupported_island_count": 0,
+        "thin_feature_violation_count": 0,
+        "total_cut_length_mm": 2457.4075063105997,
+        "cutting_path_count": 18,
+        "invalid_polygon_count": 0
+      },
+      "frame": {
+        "outer_width_mm": 300.0,
+        "outer_height_mm": 209.58333333333334,
+        "border_width_mm": 10.0
+      },
+      "important_features": [],
+      "layer_id": "layer-15"
+    },
+    {
+      "status": "PASS",
+      "findings": [],
+      "coverage": {
+        "checker_version": "frame-rooted-continuous-3",
+        "units": "mm",
+        "connectivity_method": "full-frame containment and positive-area polygon components",
+        "width_method": "continuous rooted inset core + geometric coverage",
+        "error_bound_mm": 0.01,
+        "required_feature_width_mm": 1.2,
+        "required_support_width_mm": 1.5,
+        "decorative_tip_policy": "bounded_convex",
+        "certified_convex_corners": [],
+        "physical_test_status": "NOT_RUN"
+      },
+      "metrics": {
+        "material_component_count": 1,
+        "missing_frame_area_mm2": 0.0,
+        "unsupported_island_count": 0,
+        "thin_feature_violation_count": 0,
+        "total_cut_length_mm": 2366.0870635332717,
+        "cutting_path_count": 17,
+        "invalid_polygon_count": 0
+      },
+      "frame": {
+        "outer_width_mm": 300.0,
+        "outer_height_mm": 209.58333333333334,
+        "border_width_mm": 10.0
+      },
+      "important_features": [],
+      "layer_id": "layer-16"
+    },
+    {
+      "status": "PASS",
+      "findings": [],
+      "coverage": {
+        "checker_version": "frame-rooted-continuous-3",
+        "units": "mm",
+        "connectivity_method": "full-frame containment and positive-area polygon components",
+        "width_method": "continuous rooted inset core + geometric coverage",
+        "error_bound_mm": 0.01,
+        "required_feature_width_mm": 1.2,
+        "required_support_width_mm": 1.5,
+        "decorative_tip_policy": "bounded_convex",
+        "certified_convex_corners": [],
+        "physical_test_status": "NOT_RUN"
+      },
+      "metrics": {
+        "material_component_count": 1,
+        "missing_frame_area_mm2": 0.0,
+        "unsupported_island_count": 0,
+        "thin_feature_violation_count": 0,
+        "total_cut_length_mm": 2368.2282140231096,
+        "cutting_path_count": 18,
+        "invalid_polygon_count": 0
+      },
+      "frame": {
+        "outer_width_mm": 300.0,
+        "outer_height_mm": 209.58333333333334,
+        "border_width_mm": 10.0
+      },
+      "important_features": [],
+      "layer_id": "layer-17"
+    },
+    {
+      "status": "PASS",
+      "findings": [],
+      "coverage": {
+        "checker_version": "frame-rooted-continuous-3",
+        "units": "mm",
+        "connectivity_method": "full-frame containment and positive-area polygon components",
+        "width_method": "continuous rooted inset core + geometric coverage",
+        "error_bound_mm": 0.01,
+        "required_feature_width_mm": 1.2,
+        "required_support_width_mm": 1.5,
+        "decorative_tip_policy": "bounded_convex",
+        "certified_convex_corners": [],
+        "physical_test_status": "NOT_RUN"
+      },
+      "metrics": {
+        "material_component_count": 1,
+        "missing_frame_area_mm2": 0.0,
+        "unsupported_island_count": 0,
+        "thin_feature_violation_count": 0,
+        "total_cut_length_mm": 1838.8881467453925,
+        "cutting_path_count": 10,
+        "invalid_polygon_count": 0
+      },
+      "frame": {
+        "outer_width_mm": 300.0,
+        "outer_height_mm": 209.58333333333334,
+        "border_width_mm": 10.0
+      },
+      "important_features": [],
+      "layer_id": "layer-18"
+    },
+    {
+      "status": "PASS",
+      "findings": [],
+      "coverage": {
+        "checker_version": "frame-rooted-continuous-3",
+        "units": "mm",
+        "connectivity_method": "full-frame containment and positive-area polygon components",
+        "width_method": "continuous rooted inset core + geometric coverage",
+        "error_bound_mm": 0.01,
+        "required_feature_width_mm": 1.2,
+        "required_support_width_mm": 1.5,
+        "decorative_tip_policy": "bounded_convex",
+        "certified_convex_corners": [],
+        "physical_test_status": "NOT_RUN"
+      },
+      "metrics": {
+        "material_component_count": 1,
+        "missing_frame_area_mm2": 0.0,
+        "unsupported_island_count": 0,
+        "thin_feature_violation_count": 0,
+        "total_cut_length_mm": 1425.845952011447,
+        "cutting_path_count": 9,
+        "invalid_polygon_count": 0
+      },
+      "frame": {
+        "outer_width_mm": 300.0,
+        "outer_height_mm": 209.58333333333334,
+        "border_width_mm": 10.0
+      },
+      "important_features": [],
+      "layer_id": "layer-19"
+    },
+    {
+      "status": "PASS",
+      "findings": [],
+      "coverage": {
+        "checker_version": "frame-rooted-continuous-3",
+        "units": "mm",
+        "connectivity_method": "full-frame containment and positive-area polygon components",
+        "width_method": "continuous rooted inset core + geometric coverage",
+        "error_bound_mm": 0.01,
+        "required_feature_width_mm": 1.2,
+        "required_support_width_mm": 1.5,
+        "decorative_tip_policy": "bounded_convex",
+        "certified_convex_corners": [],
+        "physical_test_status": "NOT_RUN"
+      },
+      "metrics": {
+        "material_component_count": 1,
+        "missing_frame_area_mm2": 0.0,
+        "unsupported_island_count": 0,
+        "thin_feature_violation_count": 0,
+        "total_cut_length_mm": 1019.1666666666667,
+        "cutting_path_count": 1,
+        "invalid_polygon_count": 0
+      },
+      "frame": {
+        "outer_width_mm": 300.0,
+        "outer_height_mm": 209.58333333333334,
+        "border_width_mm": 10.0
+      },
+      "important_features": [],
+      "layer_id": "layer-20"
+    }
+  ],
+  "frame": {
+    "outer_width_mm": 300.0,
+    "outer_height_mm": 209.58333333333334,
+    "border_width_mm": 10.0
+  },
+  "art_review_status": "pending_review",
+  "image_fidelity": {
+    "status": "WARNING",
+    "target_color_agreement": 0.9811279375779122,
+    "source_structure_similarity": 0.8570065742256219,
+    "minimum_color_agreement": 0.94,
+    "minimum_source_similarity": 0.4,
+    "source_similarity_gate": true,
+    "detail_regions": [
+      {
+        "index": 1,
+        "color_agreement": 0.9545454545454546,
+        "minimum_agreement": 0.9,
+        "status": "PASS"
+      },
+      {
+        "index": 2,
+        "color_agreement": 0.8189473684210526,
+        "minimum_agreement": 0.9,
+        "status": "WARNING"
+      },
+      {
+        "index": 3,
+        "color_agreement": 0.9636062861869313,
+        "minimum_agreement": 0.9,
+        "status": "PASS"
+      },
+      {
+        "index": 4,
+        "color_agreement": 0.9640179910044977,
+        "minimum_agreement": 0.9,
+        "status": "PASS"
+      }
+    ],
+    "automatic_detail_regions": [
+      {
+        "index": 1,
+        "box": [
+          0.5911458333333334,
+          0.441233140655106,
+          0.65234375,
+          0.5317919075144508
+        ],
+        "label": "local structure",
+        "source": "structure",
+        "color_agreement": 0.8388429752066116,
+        "contrast_ratio": 1.0226867774758384,
+        "source_detail_similarity": 0.7131987863315813,
+        "status": "WARNING"
+      },
+      {
+        "index": 2,
+        "box": [
+          0.4479166666666667,
+          0.3371868978805395,
+          0.5091145833333334,
+          0.4277456647398844
+        ],
+        "label": "local structure",
+        "source": "structure",
+        "color_agreement": 0.9415584415584416,
+        "contrast_ratio": 1.0512068196436848,
+        "source_detail_similarity": 0.6872029939394221,
+        "status": "PASS"
+      },
+      {
+        "index": 3,
+        "box": [
+          0.3776041666666667,
+          0.6011560693641619,
+          0.4388020833333333,
+          0.6917148362235067
+        ],
+        "label": "local structure",
+        "source": "structure",
+        "color_agreement": 0.9653679653679653,
+        "contrast_ratio": 0.9007435792715507,
+        "source_detail_similarity": 0.656429512365137,
+        "status": "PASS"
+      },
+      {
+        "index": 4,
+        "box": [
+          0.5026041666666666,
+          0.6917148362235067,
+          0.5638020833333334,
+          0.7822736030828517
+        ],
+        "label": "local structure",
+        "source": "structure",
+        "color_agreement": 0.9276859504132231,
+        "contrast_ratio": 1.02461016430948,
+        "source_detail_similarity": 0.6429430737857437,
+        "status": "PASS"
+      },
+      {
+        "index": 5,
+        "box": [
+          0.6614583333333334,
+          0.5529865125240848,
+          0.72265625,
+          0.6435452793834296
+        ],
+        "label": "local structure",
+        "source": "structure",
+        "color_agreement": 0.890495867768595,
+        "contrast_ratio": 1.1977668147749136,
+        "source_detail_similarity": 0.6765067678834576,
+        "status": "WARNING"
+      },
+      {
+        "index": 6,
+        "box": [
+          0.5143229166666666,
+          0.535645472061657,
+          0.5755208333333334,
+          0.626204238921002
+        ],
+        "label": "local structure",
+        "source": "structure",
+        "color_agreement": 0.9400826446280992,
+        "contrast_ratio": 1.0035685279710453,
+        "source_detail_similarity": 0.6960262692387534,
+        "status": "PASS"
+      },
+      {
+        "index": 7,
+        "box": [
+          0.4322916666666667,
+          0.4701348747591522,
+          0.4934895833333333,
+          0.5606936416184971
+        ],
+        "label": "local structure",
+        "source": "structure",
+        "color_agreement": 0.9504132231404959,
+        "contrast_ratio": 1.0321652274403348,
+        "source_detail_similarity": 0.7297162880466338,
+        "status": "PASS"
+      },
+      {
+        "index": 8,
+        "box": [
+          0.6223958333333334,
+          0.6782273603082851,
+          0.68359375,
+          0.7687861271676301
+        ],
+        "label": "local structure",
+        "source": "structure",
+        "color_agreement": 0.9090909090909091,
+        "contrast_ratio": 1.061637123095255,
+        "source_detail_similarity": 0.750917642357971,
+        "status": "PASS"
+      },
+      {
+        "index": 9,
+        "box": [
+          0.55078125,
+          0.19653179190751446,
+          0.6119791666666666,
+          0.28709055876685935
+        ],
+        "label": "local structure",
+        "source": "structure",
+        "color_agreement": 0.9214876033057852,
+        "contrast_ratio": 1.0688787272192548,
+        "source_detail_similarity": 0.6919066375607604,
+        "status": "PASS"
+      },
+      {
+        "index": 10,
+        "box": [
+          0.6315104166666666,
+          0.2774566473988439,
+          0.6927083333333334,
+          0.36801541425818884
+        ],
+        "label": "local structure",
+        "source": "structure",
+        "color_agreement": 0.9731404958677686,
+        "contrast_ratio": 0.9979499709137212,
+        "source_detail_similarity": 0.8695194998025858,
+        "status": "PASS"
+      },
+      {
+        "index": 11,
+        "box": [
+          0.328125,
+          0.36416184971098264,
+          0.3893229166666667,
+          0.45472061657032753
+        ],
+        "label": "local structure",
+        "source": "structure",
+        "color_agreement": 0.9090909090909091,
+        "contrast_ratio": 1.089810953124245,
+        "source_detail_similarity": 0.7194614552420143,
+        "status": "PASS"
+      },
+      {
+        "index": 12,
+        "box": [
+          0.3997395833333333,
+          0.20423892100192678,
+          0.4609375,
+          0.2947976878612717
+        ],
+        "label": "local structure",
+        "source": "structure",
+        "color_agreement": 0.96900826446281,
+        "contrast_ratio": 1.1423075592452365,
+        "source_detail_similarity": 0.7226584449639876,
+        "status": "PASS"
+      },
+      {
+        "index": 13,
+        "box": [
+          0.4401041666666667,
+          0.3730769230769231,
+          0.515625,
+          0.4307692307692308
+        ],
+        "label": "Unverified landmark proposal",
+        "source": "landmark_priority",
+        "color_agreement": 0.9656084656084656,
+        "contrast_ratio": 1.0661231816073158,
+        "source_detail_similarity": 0.7120354761499984,
+        "status": "PASS"
+      },
+      {
+        "index": 14,
+        "box": [
+          0.4869791666666667,
+          0.4346153846153846,
+          0.5703125,
+          0.5923076923076923
+        ],
+        "label": "Unverified landmark proposal",
+        "source": "landmark_priority",
+        "color_agreement": 0.9675438596491228,
+        "contrast_ratio": 0.9974486924200802,
+        "source_detail_similarity": 0.8256497231357417,
+        "status": "PASS"
+      },
+      {
+        "index": 15,
+        "box": [
+          0.5963541666666666,
+          0.4807692307692308,
+          0.65625,
+          0.5384615384615384
+        ],
+        "label": "Unverified landmark proposal",
+        "source": "landmark_priority",
+        "color_agreement": 0.782312925170068,
+        "contrast_ratio": 1.007363556656752,
+        "source_detail_similarity": 0.4406666451281851,
+        "status": "WARNING"
+      },
+      {
+        "index": 16,
+        "box": [
+          0.4244791666666667,
+          0.5692307692307692,
+          0.5572916666666666,
+          0.7538461538461538
+        ],
+        "label": "Unverified landmark proposal",
+        "source": "landmark_priority",
+        "color_agreement": 0.9680555555555556,
+        "contrast_ratio": 1.0426878589866226,
+        "source_detail_similarity": 0.8594263959120091,
+        "status": "PASS"
+      }
+    ],
+    "recognition_review": "NOT_RUN",
+    "scope": "automated coarse appearance checks; not semantic eye/nose recognition",
+    "construction": "color-occlusion relief"
+  },
+  "light_path_ratio": null,
+  "material_policy": "opaque cut sheets; separate translucent diffuser for backlit assembly",
+  "light_plan": null,
+  "physical_test_status": "NOT_RUN",
+  "disclaimer": "PASS covers the declared continuous geometry checks; physical cutting has not been tested."
+}

@@ -1,0 +1,19 @@
+{
+  "geometry_reports_passed": 12,
+  "material_profile": "Default profile; thresholds unchanged",
+  "physical_cut_test": "NOT_RUN",
+  "python_tests_passed": 51,
+  "browser_tests_passed": 5,
+  "frontend_build": "PASS; existing chunk-size advisory remains",
+  "ruff": "PASS for changed Python code and demo scripts",
+  "portable_project_import": "Verified through Open project in the actual UI",
+  "cut_ready_download": "Verified through Download cut-ready in the actual UI",
+  "browser_page_errors": [],
+  "annotated_ui_guides": 9,
+  "source_images": 3,
+  "production_variants_per_image": 4,
+  "gallery": "Actual source and output canvases; photo insert OFF",
+  "gif": "Actual browser interactions with explanatory overlays and presentation crossfades",
+  "asset_checks": "ZIP integrity, PDF/SVG/DXF presence, current report fingerprints, image decoding, GIF frames and README links",
+  "quality_scope": "Geometry PASS is separate from fidelity. Colored modes retain local-detail warnings; stencil and white-paper fidelity is not evaluated by that metric."
+}

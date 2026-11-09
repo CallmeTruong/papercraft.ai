@@ -1,0 +1,253 @@
+{
+  "status": "PASS",
+  "seconds": 42.24,
+  "manual_detail_boxes": [
+    [
+      0.52,
+      0.19,
+      0.59,
+      0.26
+    ],
+    [
+      0.6,
+      0.39,
+      0.67,
+      0.46
+    ],
+    [
+      0.75,
+      0.38,
+      0.81,
+      0.45
+    ],
+    [
+      0.71,
+      0.44,
+      0.77,
+      0.5
+    ]
+  ],
+  "colors": 16,
+  "layers": 20,
+  "width_mm": 300,
+  "perception": "Reused recorded baseline perception; no new inference",
+  "fidelity": {
+    "status": "WARNING",
+    "target_color_agreement": 0.9668348203118485,
+    "source_structure_similarity": 0.6963386783285888,
+    "minimum_color_agreement": 0.94,
+    "minimum_source_similarity": 0.4,
+    "source_similarity_gate": true,
+    "detail_regions": [
+      {
+        "index": 1,
+        "color_agreement": 0.751578947368421,
+        "minimum_agreement": 0.9,
+        "status": "WARNING"
+      },
+      {
+        "index": 2,
+        "color_agreement": 0.9094736842105263,
+        "minimum_agreement": 0.9,
+        "status": "PASS"
+      },
+      {
+        "index": 3,
+        "color_agreement": 0.9047619047619048,
+        "minimum_agreement": 0.9,
+        "status": "PASS"
+      },
+      {
+        "index": 4,
+        "color_agreement": 0.9346590909090909,
+        "minimum_agreement": 0.9,
+        "status": "PASS"
+      }
+    ],
+    "automatic_detail_regions": [
+      {
+        "index": 1,
+        "box": [
+          0.0,
+          0.7743055555555556,
+          0.03515625,
+          0.8663194444444444
+        ],
+        "label": "local structure",
+        "source": "structure",
+        "color_agreement": 0.9201388888888888,
+        "contrast_ratio": 0.8280128444215809,
+        "source_detail_similarity": 0.2134687245364509,
+        "status": "WARNING"
+      },
+      {
+        "index": 2,
+        "box": [
+          0.59375,
+          0.13541666666666666,
+          0.6627604166666666,
+          0.22743055555555555
+        ],
+        "label": "local structure",
+        "source": "structure",
+        "color_agreement": 0.4716666666666667,
+        "contrast_ratio": 1.108347436025072,
+        "source_detail_similarity": 0.15837743581434663,
+        "status": "WARNING"
+      },
+      {
+        "index": 3,
+        "box": [
+          0.16276041666666666,
+          0.7534722222222222,
+          0.23177083333333334,
+          0.8454861111111112
+        ],
+        "label": "local structure",
+        "source": "structure",
+        "color_agreement": 0.9344,
+        "contrast_ratio": 0.919741031295951,
+        "source_detail_similarity": 0.38382457738700054,
+        "status": "WARNING"
+      },
+      {
+        "index": 4,
+        "box": [
+          0.8932291666666666,
+          0.7274305555555556,
+          0.9622395833333334,
+          0.8194444444444444
+        ],
+        "label": "local structure",
+        "source": "structure",
+        "color_agreement": 0.96,
+        "contrast_ratio": 0.5222720914541495,
+        "source_detail_similarity": 0.2767465744540694,
+        "status": "WARNING"
+      },
+      {
+        "index": 5,
+        "box": [
+          0.7473958333333334,
+          0.3506944444444444,
+          0.81640625,
+          0.4427083333333333
+        ],
+        "label": "local structure",
+        "source": "structure",
+        "color_agreement": 0.92,
+        "contrast_ratio": 1.1674696594146106,
+        "source_detail_similarity": 0.5430627996556215,
+        "status": "PASS"
+      },
+      {
+        "index": 6,
+        "box": [
+          0.37109375,
+          0.1371527777777778,
+          0.4401041666666667,
+          0.22916666666666666
+        ],
+        "label": "local structure",
+        "source": "structure",
+        "color_agreement": 0.82,
+        "contrast_ratio": 0.9839710369939678,
+        "source_detail_similarity": 0.5346947532026517,
+        "status": "WARNING"
+      },
+      {
+        "index": 7,
+        "box": [
+          0.6940104166666666,
+          0.7465277777777778,
+          0.7630208333333334,
+          0.8385416666666666
+        ],
+        "label": "local structure",
+        "source": "structure",
+        "color_agreement": 0.9183333333333333,
+        "contrast_ratio": 0.9159200250538666,
+        "source_detail_similarity": 0.4283602517855205,
+        "status": "WARNING"
+      },
+      {
+        "index": 8,
+        "box": [
+          0.4752604166666667,
+          0.06597222222222222,
+          0.5442708333333334,
+          0.1579861111111111
+        ],
+        "label": "local structure",
+        "source": "structure",
+        "color_agreement": 0.96,
+        "contrast_ratio": 1.0213558132195528,
+        "source_detail_similarity": 0.70600602434653,
+        "status": "PASS"
+      },
+      {
+        "index": 9,
+        "box": [
+          0.55859375,
+          0.3350694444444444,
+          0.6276041666666666,
+          0.4270833333333333
+        ],
+        "label": "local structure",
+        "source": "structure",
+        "color_agreement": 0.8533333333333334,
+        "contrast_ratio": 0.9271953230567983,
+        "source_detail_similarity": 0.7516232615723167,
+        "status": "WARNING"
+      },
+      {
+        "index": 10,
+        "box": [
+          0.78125,
+          0.21354166666666666,
+          0.8502604166666666,
+          0.3055555555555556
+        ],
+        "label": "local structure",
+        "source": "structure",
+        "color_agreement": 0.912,
+        "contrast_ratio": 1.147096777576942,
+        "source_detail_similarity": 0.6979251744875544,
+        "status": "PASS"
+      },
+      {
+        "index": 11,
+        "box": [
+          0.3697916666666667,
+          0.7395833333333334,
+          0.4388020833333333,
+          0.8315972222222222
+        ],
+        "label": "local structure",
+        "source": "structure",
+        "color_agreement": 0.9168,
+        "contrast_ratio": 0.9838190469095756,
+        "source_detail_similarity": 0.6435338138235965,
+        "status": "PASS"
+      },
+      {
+        "index": 12,
+        "box": [
+          0.2708333333333333,
+          0.2881944444444444,
+          0.33984375,
+          0.3802083333333333
+        ],
+        "label": "local structure",
+        "source": "structure",
+        "color_agreement": 0.9136,
+        "contrast_ratio": 1.1481455345825897,
+        "source_detail_similarity": 0.6737079570652805,
+        "status": "PASS"
+      }
+    ],
+    "recognition_review": "NOT_RUN",
+    "scope": "automated coarse appearance checks; not semantic eye/nose recognition",
+    "construction": "multicolor"
+  }
+}

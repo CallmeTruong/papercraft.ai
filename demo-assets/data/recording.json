@@ -1,0 +1,16 @@
+{
+  "frames": 97,
+  "fps": 5,
+  "errors": [],
+  "portable_project_ui_import": "verified",
+  "source": "Real local browser interactions; only explanatory overlays added",
+  "photo_insert": "OFF except the explicitly labelled insert segment",
+  "encoded_frames": 45,
+  "gif_dimensions": [
+    1120,
+    770
+  ],
+  "presentation": "Actual interactions, camera orbit, held explanations, highlight overlays and presentation crossfades; dead time omitted",
+  "presentation_frames": 121,
+  "duration_seconds": 25.8
+}

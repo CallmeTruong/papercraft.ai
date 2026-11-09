@@ -1,0 +1,970 @@
+{
+  "README.md": {
+    "bytes": 7555,
+    "sha256": "b4e3dde343a8dc27ee6515d9b56714eb1a0672ebc34ef3cd5be16d8b26dfcfab"
+  },
+  "animation/studio-tour-poster.png": {
+    "bytes": 180325,
+    "sha256": "31b433a4769531323f62c312c35f0ef0e90e2161141efa94296c70888cec3555"
+  },
+  "animation/studio-tour.gif": {
+    "bytes": 6275227,
+    "sha256": "05885445976c5c2f4a0c9fe36cb31c6e4caa970f4a83fb5695fdde07c7c3aea3"
+  },
+  "data/browser-errors.json": {
+    "bytes": 2,
+    "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  },
+  "data/crop-metadata.json": {
+    "bytes": 2172,
+    "sha256": "fecee63b726d0cd9479e7ed4e953e55eccf06f720bf7aa4bf1cb05a74156f6d7"
+  },
+  "data/final-summary.json": {
+    "bytes": 70908,
+    "sha256": "763f2e5a66807536a9035309a9badfe7bfeb98bcc1b909df0bb767870ef29001"
+  },
+  "data/light-preview-settings.json": {
+    "bytes": 338,
+    "sha256": "4fc207d0b0ca5ec1dd8c3ebfe4bec498cb27354c00de73219239d89a1a6eb49a"
+  },
+  "data/recording.json": {
+    "bytes": 524,
+    "sha256": "a7bd7750d023f0ef2ce9e83acd47353b382a8e2459d23354a0ea6c9618177401"
+  },
+  "data/runs.json": {
+    "bytes": 198695,
+    "sha256": "bbb39d5f17e31617b6305472973956fe4fc09fd034ae37403db4d22bfd12453d"
+  },
+  "data/sources.json": {
+    "bytes": 1091,
+    "sha256": "59014de2816482cf777133a2a734de1b654d3af94e956a69af37afdfe0c4fc81"
+  },
+  "data/ui-export-verified.zip": {
+    "bytes": 18641673,
+    "sha256": "5278c95b5ce2d1bfec64975d2d132e4bf25544e4f27c9ecf902edf6d277603f2"
+  },
+  "data/ui-projects.json": {
+    "bytes": 707,
+    "sha256": "28c2bfed6318de468567e7b9eb275a2e814da1fb91293ec4f45c21def54f6632"
+  },
+  "data/verification.json": {
+    "bytes": 1058,
+    "sha256": "0d498f49bd59325d1df076c05e14c1afb3a8e08f03aa2479da218c4fad709eab"
+  },
+  "data/visual-review.md": {
+    "bytes": 2391,
+    "sha256": "57411a2eb57960488293b520135df96f1bc96f15886f992e799bff30980d353e"
+  },
+  "gallery/all-modes.png": {
+    "bytes": 985785,
+    "sha256": "60d7e679157c5e7d7b64a207ee199195d58cb1ef2f547ac342ce12b2586c6249"
+  },
+  "gallery/index.html": {
+    "bytes": 5220,
+    "sha256": "1b8afc9334c7bd1656787b2546fc15a5d73b9ed950bacc762f5106594b68ab4d"
+  },
+  "gallery/kittens.html": {
+    "bytes": 2552,
+    "sha256": "2d16beb6b17264e733d57a3186480ce5b869ec1f9cbdf999d4e176e38b325d3b"
+  },
+  "gallery/kittens.png": {
+    "bytes": 363045,
+    "sha256": "2c0677c7cde365ba1fe48a11c90671966689bba0d264c293a2c7429d188ef170"
+  },
+  "gallery/lizard.html": {
+    "bytes": 2565,
+    "sha256": "33c449345d3f90255e2aa187b83cb5b5817a1b6ff8f422d9f11ee1fd098ffe70"
+  },
+  "gallery/lizard.png": {
+    "bytes": 317968,
+    "sha256": "31a12df254903c2086488ddf10f690a2b29b78291a74d5c7f3a0437fe2d6d9b8"
+  },
+  "gallery/puppy.html": {
+    "bytes": 2552,
+    "sha256": "ffe69bead22a15e5235afbe8b00691aee2b8a0ca96eb84e45f382312210d3c86"
+  },
+  "gallery/puppy.png": {
+    "bytes": 317198,
+    "sha256": "7ce89b119ce4554640ed3f685b7cf7e4339de83453a45d862a89a585c5ed8a67"
+  },
+  "inputs/kittens.jpg": {
+    "bytes": 242458,
+    "sha256": "ca21a56ee2ff7de53eb91fc5b75623503220a91d4cbcfba14919f2ceb6b8d686"
+  },
+  "inputs/lizard.jpg": {
+    "bytes": 363843,
+    "sha256": "e398c6deb45830299a51de5545fdeb8552287b3bd37678ce04a65044fc531bfe"
+  },
+  "inputs/puppy.jpg": {
+    "bytes": 118848,
+    "sha256": "d235332906afcf7068f1a3409a1b617e0f1a53a681fa9d621a1de351a42edfd7"
+  },
+  "ui/01-design-settings-annotated.png": {
+    "bytes": 222758,
+    "sha256": "08d955f03c1720af15693b306204beb088fea1a8a557d04712e8677c9fd3398f"
+  },
+  "ui/02-detail-regions-annotated.png": {
+    "bytes": 279481,
+    "sha256": "9b8756fff94349bf84a160b561484f91f1f59c6f3a6bae06bc7a66f13e696a51"
+  },
+  "ui/03-validation-annotated.png": {
+    "bytes": 223625,
+    "sha256": "bbde0b4444aa8ebdf989026ea3548388ad08a531de80f08442b61fcdabd8ab47"
+  },
+  "ui/04-cut-waste-annotated.png": {
+    "bytes": 320384,
+    "sha256": "f6a5de9e69a611bd8dfbed851c2aeefbfdf2ff9b0446bc66bae3ff26f1e3b1c3"
+  },
+  "ui/05-assembled-annotated.png": {
+    "bytes": 241765,
+    "sha256": "fe2a43d502a628f0f33ec4b4c747aa0f9f21f5fa4e8d8a0c9ecd9cc2d2ae1b37"
+  },
+  "ui/06-exploded-annotated.png": {
+    "bytes": 252849,
+    "sha256": "230f2c029be2e8cc41a5c2226533dbe7037356d3dfbca123f171a8a7e69d64fc"
+  },
+  "ui/07-light-controls-annotated.png": {
+    "bytes": 239775,
+    "sha256": "c68ff3319a4f08bbe657eee23307f4289f700345573aefdd60f4bd044b9fceb6"
+  },
+  "ui/08-photo-insert-annotated.png": {
+    "bytes": 245964,
+    "sha256": "1358d623c38ede67fe1d234d75af2d755b57e8d48a9ac07c535b3ff29ae0c20a"
+  },
+  "ui/09-export-annotated.png": {
+    "bytes": 208802,
+    "sha256": "794197c29397ed1e811c1e374ad6657092447d15399af5b934602b17408c371c"
+  },
+  "ui/kittens-depth-color-studio.png": {
+    "bytes": 353151,
+    "sha256": "4e42864ad9f32e58c62f263ffe3c53c9bceb72355df8f50807f84f9d58a4d25d"
+  },
+  "ui/kittens-depth-white-studio.png": {
+    "bytes": 338999,
+    "sha256": "cc0ef398c3cfa107f718022fff3d7285d8a3635223840a3b03015d663a6452ca"
+  },
+  "ui/kittens-multicolor-studio.png": {
+    "bytes": 239377,
+    "sha256": "28548a6286cd0a9bf310a3405cda817a00445b061dc3ad8b1b9657287e8e6946"
+  },
+  "ui/kittens-stencil-studio.png": {
+    "bytes": 325935,
+    "sha256": "678376516920e697d41ea4f15cc278108155c5ea2e7e41ddf10ddd14c9c2226b"
+  },
+  "ui/lizard-depth-color-studio.png": {
+    "bytes": 316144,
+    "sha256": "9adcbe01d4ec0d98f6e95dcd7cdde941143bbdf1bba7d83fa6ea61044e60bd37"
+  },
+  "ui/lizard-depth-white-studio.png": {
+    "bytes": 293173,
+    "sha256": "0063433044e80208c5234a9787f8a8fdcfd1a4df030c7df1607cf83e3af71ad1"
+  },
+  "ui/lizard-multicolor-studio.png": {
+    "bytes": 227627,
+    "sha256": "1bc4752c4b73fd4e595fc3b715add5f8336a023a5e4a6e12e57cc13da9ccee8b"
+  },
+  "ui/lizard-stencil-studio.png": {
+    "bytes": 214250,
+    "sha256": "dc83e1ec467e3383fdf0db62d9d73359872b22f74849f68abd2d1dc9edc66f55"
+  },
+  "ui/puppy-depth-color-studio.png": {
+    "bytes": 316966,
+    "sha256": "b49680d8766cf3fbb039e9fba71b2f92a801761feb0d099d9312b01138e6b604"
+  },
+  "ui/puppy-depth-white-studio.png": {
+    "bytes": 287245,
+    "sha256": "d9db2c109621fe4886120a462c856ff42065d3fe9778490c0666d0bf84fb4ef8"
+  },
+  "ui/puppy-multicolor-studio.png": {
+    "bytes": 218722,
+    "sha256": "4c1cc66c6febfe9093d9add1187fe87703c76ee475cac0042b395a47922c4054"
+  },
+  "ui/puppy-stencil-studio.png": {
+    "bytes": 303963,
+    "sha256": "2000c3638e84ce0e6d24044adf2ff064c5639124584d56cc24a7491cf43f0e78"
+  },
+  "workflow/papercraft-workflow.png": {
+    "bytes": 1600372,
+    "sha256": "dc6d04872a57a20547f1b4fa11c678e1639bc89c3c7fc65603e4828441f6e2f2"
+  },
+  "results/kittens/depth-color/assembled-art-crop.png": {
+    "bytes": 108437,
+    "sha256": "cefc0265c15e7963c8b3015039497cc8bceda993cc9fe458edc2f0ae387ac827"
+  },
+  "results/kittens/depth-color/assembled-art.png": {
+    "bytes": 115425,
+    "sha256": "9f2036fe435c5dd36734f49243e3beba29db235c51b96eb7bd234eb17c245cd2"
+  },
+  "results/kittens/depth-color/assembled-ui.png": {
+    "bytes": 126399,
+    "sha256": "21ea3e76391b07ed20ad3caffcdef0a40282070a14d2e09871fb0eefb17a6b82"
+  },
+  "results/kittens/depth-color/cut-composite.png": {
+    "bytes": 14065,
+    "sha256": "8843ac64e1a41675eb058f8c62f2ac76da1cae0bb2646373664a2a87c1b903b0"
+  },
+  "results/kittens/depth-color/cut-ready.zip": {
+    "bytes": 13509891,
+    "sha256": "760cc71cb152c226010197bc5a323350e25e81e66b79e024619eda02ecd1e1a0"
+  },
+  "results/kittens/depth-color/cut-stack.svg": {
+    "bytes": 2568961,
+    "sha256": "e59432a84e1cc6ea3e50b513aa2c97891b866e5c5bcb4699f1617191f143cd57"
+  },
+  "results/kittens/depth-color/exploded-art-crop.png": {
+    "bytes": 91579,
+    "sha256": "690ae0b7cd9424367924597095c79969d8fc6d24c3dbefd56043bc861926bcb3"
+  },
+  "results/kittens/depth-color/exploded-art.png": {
+    "bytes": 102846,
+    "sha256": "286b3e1331a111371db67f2b7dfff1555d1abfd35530b778ad19ec59fca07f80"
+  },
+  "results/kittens/depth-color/exploded-ui.png": {
+    "bytes": 113880,
+    "sha256": "457196e12e862e32b05214ef84c9e4312d16bf97ee2d88f4b65434fc3b0dba4a"
+  },
+  "results/kittens/depth-color/flat-ui.png": {
+    "bytes": 213242,
+    "sha256": "7d8bdd015f583a45bc6a51a7ffc6ae058552962d169a3caef3e08b75e0f9bb56"
+  },
+  "results/kittens/depth-color/light-no-insert-art-crop.png": {
+    "bytes": 59883,
+    "sha256": "85c3d36e11e35abc4da697e77dd9ee871707a199b36d79669b1695eaddc3a716"
+  },
+  "results/kittens/depth-color/light-no-insert-art.png": {
+    "bytes": 68478,
+    "sha256": "1147f3cec1ade10ac057d32e8db6c998623d5aedfee6d2b2e6128d43e544aba3"
+  },
+  "results/kittens/depth-color/light-no-insert-ui.png": {
+    "bytes": 102722,
+    "sha256": "906f4f4ee5d989fd0b26c7b3b22016c1ed5952c221cc422b0c62ef836c87606c"
+  },
+  "results/kittens/depth-color/project.json": {
+    "bytes": 5849695,
+    "sha256": "3a1d7bff831d85a24d10679bd10d443e95fac73f06aa9e89770984cd857949c7"
+  },
+  "results/kittens/depth-color/report.json": {
+    "bytes": 29248,
+    "sha256": "660823295ff40607cbabcfd151f54ec7d5a66c7c772d67f9ca79b3b7716b163b"
+  },
+  "results/kittens/depth-color/target.png": {
+    "bytes": 13008,
+    "sha256": "36fa5cb0956404c7f4755580a31cf71a2224b7301238a7301885da7a96e49b1f"
+  },
+  "results/kittens/depth-color/tuned.json": {
+    "bytes": 6707,
+    "sha256": "195b6626530b50e66824fceedae9068bf4b843f5d7f67f88742aff272709efb9"
+  },
+  "results/kittens/depth-white/assembled-art-crop.png": {
+    "bytes": 55414,
+    "sha256": "a7176aa69e5d7e9acee2345f1078eaa2f4402304f58c6d11c63fb8bc0c7c57d3"
+  },
+  "results/kittens/depth-white/assembled-art.png": {
+    "bytes": 59861,
+    "sha256": "002587166df0b3eb143c352f109d793b0fe5ba4a5a0e2631145abd212dfad7a6"
+  },
+  "results/kittens/depth-white/assembled-ui.png": {
+    "bytes": 71086,
+    "sha256": "26eefac34722bc273244414de26ccfa264c9e0ee6976fba459365c6c7581e5cc"
+  },
+  "results/kittens/depth-white/cut-composite.png": {
+    "bytes": 1119,
+    "sha256": "ac09aeab5334b7ff2ae87f3ce96cdf054a69dafd85bd3b1197bf99c9c89ad712"
+  },
+  "results/kittens/depth-white/cut-ready.zip": {
+    "bytes": 6414425,
+    "sha256": "7169dda5a521c0dde35380a927616295432d3569a64bb23a60a24d92217328e4"
+  },
+  "results/kittens/depth-white/cut-stack.svg": {
+    "bytes": 940144,
+    "sha256": "4af9337d28472f3260e1952a97d8c29d61e7ae8805ebaf063baccf28b0b7d2c6"
+  },
+  "results/kittens/depth-white/exploded-art-crop.png": {
+    "bytes": 57489,
+    "sha256": "3a349e414163f104b68bda6074ef1a97113223eacbd713c242fe375c123c6fd1"
+  },
+  "results/kittens/depth-white/exploded-art.png": {
+    "bytes": 68461,
+    "sha256": "0037d0229fe7aceb8f5284055f0f46d9f9eead9b05d6f4f0a2936fd9666f234f"
+  },
+  "results/kittens/depth-white/exploded-ui.png": {
+    "bytes": 80254,
+    "sha256": "98f72ad9bf480a120f43249253da9669b893d2c3804feadfd16df84de76ae6fe"
+  },
+  "results/kittens/depth-white/flat-ui.png": {
+    "bytes": 203868,
+    "sha256": "f0617f9950c19bfd2dd1867f3943d31f00fd5c20e3bf5653c2d39f22fa00105f"
+  },
+  "results/kittens/depth-white/light-no-insert-art-crop.png": {
+    "bytes": 86877,
+    "sha256": "852ebc80d1c8d727baa86983c4ba34461845e46b9f68bc56d5c43453d21ee187"
+  },
+  "results/kittens/depth-white/light-no-insert-art.png": {
+    "bytes": 95233,
+    "sha256": "309495e5f6eab1dc2f29f8a755692fab750b2060246821505c7271e5bc242fa5"
+  },
+  "results/kittens/depth-white/light-no-insert-ui.png": {
+    "bytes": 124843,
+    "sha256": "101604667cc72f2586d6cda3e5be6a6d2917b9d21e8ae547be97d299171d461a"
+  },
+  "results/kittens/depth-white/light-photo-insert-art-crop.png": {
+    "bytes": 100413,
+    "sha256": "90749383aab90a66d331bd077155b5dceacf077087a9893246d19a3b49eac264"
+  },
+  "results/kittens/depth-white/light-photo-insert-art.png": {
+    "bytes": 109732,
+    "sha256": "e9699190f512a46ed0ef09e57d523e37e40fb38093e05c4c384f40d424c75156"
+  },
+  "results/kittens/depth-white/light-photo-insert-ui.png": {
+    "bytes": 142062,
+    "sha256": "c2d46b81aef6027064ba3b4d984ede904b8cd6ba62211832cd60159d6cc351ad"
+  },
+  "results/kittens/depth-white/project.json": {
+    "bytes": 3402044,
+    "sha256": "ab897aa4c8cbb8e0ec72d39eca393ccbdfb1854f3addeaf909703498ee6ee46f"
+  },
+  "results/kittens/depth-white/report.json": {
+    "bytes": 14603,
+    "sha256": "dbad1260da675ae8b48efd2258f00d8090bc124a69a42c50a5f7a6dd08184af7"
+  },
+  "results/kittens/depth-white/target.png": {
+    "bytes": 10292,
+    "sha256": "37313e1a771c90bb8067c5903085e1916c19cc72a031d4ac47fbe5cfed3a2954"
+  },
+  "results/kittens/multicolor/cut-composite.png": {
+    "bytes": 14065,
+    "sha256": "8843ac64e1a41675eb058f8c62f2ac76da1cae0bb2646373664a2a87c1b903b0"
+  },
+  "results/kittens/multicolor/cut-ready.zip": {
+    "bytes": 13509394,
+    "sha256": "e5fac289ec1c7d0d67c2cf56e69a0b9caaa909b9207b8e2ea31b7b33d71fa586"
+  },
+  "results/kittens/multicolor/cut-stack.svg": {
+    "bytes": 2568961,
+    "sha256": "e59432a84e1cc6ea3e50b513aa2c97891b866e5c5bcb4699f1617191f143cd57"
+  },
+  "results/kittens/multicolor/flat-ui.png": {
+    "bytes": 102720,
+    "sha256": "e7f67fe48ccf524f188c25875d551fcf74367bb6850293470f842899c34f98fa"
+  },
+  "results/kittens/multicolor/project.json": {
+    "bytes": 5849185,
+    "sha256": "1bd3015836fc6e3841a62918fb8e7d824c2fdcde4255934a264b0d6c6f2a3459"
+  },
+  "results/kittens/multicolor/report.json": {
+    "bytes": 29236,
+    "sha256": "df0071085db15937c774aa5be51167cf761786d07c4a80f70b7ee1966fdd3107"
+  },
+  "results/kittens/multicolor/target.png": {
+    "bytes": 13008,
+    "sha256": "36fa5cb0956404c7f4755580a31cf71a2224b7301238a7301885da7a96e49b1f"
+  },
+  "results/kittens/multicolor/tuned.json": {
+    "bytes": 6695,
+    "sha256": "a0a8e30cb4586b522efbfa798aacfb508c8a4e15043137a458ae8d6c48d07783"
+  },
+  "results/kittens/stencil/cut-composite.png": {
+    "bytes": 4953,
+    "sha256": "60933494e4cca3d255747ca50229769ac0ba960222d5b929fb20c4e5720d776d"
+  },
+  "results/kittens/stencil/cut-ready.zip": {
+    "bytes": 6127889,
+    "sha256": "e626e82735ac8f6fbc7994ad63988d390a1b1218a0ce6a1e5e9ed54994b08ceb"
+  },
+  "results/kittens/stencil/cut-stack.svg": {
+    "bytes": 1352101,
+    "sha256": "cd86f7237e11b76146deab4a8c465c2ffd5adf18cdfdb4e70f6b11f7e549f8d2"
+  },
+  "results/kittens/stencil/flat-ui.png": {
+    "bytes": 188027,
+    "sha256": "76dea219b0b484ce10d25ed6441a335c0065c764fb3a2d292540307702424731"
+  },
+  "results/kittens/stencil/project.json": {
+    "bytes": 2792542,
+    "sha256": "4d4efa7963ffdcc509cd51db3fc5e6e106b6da7314bdd913d85eeaae16ec1521"
+  },
+  "results/kittens/stencil/report.json": {
+    "bytes": 2005,
+    "sha256": "9544f6acc250559642ef1bd005e8534d5e258b44f8a4d5353f3869ebc3795aec"
+  },
+  "results/kittens/stencil/target.png": {
+    "bytes": 16783,
+    "sha256": "c39e207d6a08f18491fb807623e683b284a0a472b7d8e5d0ee55b5c2a0de40f9"
+  },
+  "results/kittens/depth-color/baseline/cut-composite.png": {
+    "bytes": 10906,
+    "sha256": "7d41afc77624e4354ebeae2b4ac548e96d51a048c9305fed84c2c780c29acc4c"
+  },
+  "results/kittens/depth-color/baseline/cut-ready.zip": {
+    "bytes": 10836103,
+    "sha256": "6799c11dbaee5992777e7f27dc059f00b130f41fa7ff4332fe62ee2ac1ec6a99"
+  },
+  "results/kittens/depth-color/baseline/project.json": {
+    "bytes": 4739377,
+    "sha256": "6aafa8b6e81aa674b1e53922cbcba55d1e71ca41fbe777b5b89867a1fc1002e0"
+  },
+  "results/kittens/depth-color/baseline/report.json": {
+    "bytes": 21982,
+    "sha256": "0feb3bd0644fff77676306720814d9d961d99f78b1823d1baf56ac1e51f6978b"
+  },
+  "results/kittens/depth-color/baseline/target.png": {
+    "bytes": 10292,
+    "sha256": "37313e1a771c90bb8067c5903085e1916c19cc72a031d4ac47fbe5cfed3a2954"
+  },
+  "results/kittens/multicolor/baseline/cut-composite.png": {
+    "bytes": 10906,
+    "sha256": "7d41afc77624e4354ebeae2b4ac548e96d51a048c9305fed84c2c780c29acc4c"
+  },
+  "results/kittens/multicolor/baseline/cut-ready.zip": {
+    "bytes": 10835758,
+    "sha256": "e7c574df1fe375016cdd0d91225a738666958b732de8c07e05b9efff3e001c36"
+  },
+  "results/kittens/multicolor/baseline/project.json": {
+    "bytes": 4738945,
+    "sha256": "a4b1f7feea7dc83d7bd89ba5bd8daae9dbddde76b54fd0dd0b11fa553c1fa6fa"
+  },
+  "results/kittens/multicolor/baseline/report.json": {
+    "bytes": 21970,
+    "sha256": "09464836879d67ffd25d8899538a85d2fbe53c27cb0f0d3947364a52d680cf80"
+  },
+  "results/kittens/multicolor/baseline/target.png": {
+    "bytes": 10292,
+    "sha256": "37313e1a771c90bb8067c5903085e1916c19cc72a031d4ac47fbe5cfed3a2954"
+  },
+  "results/lizard/depth-color/assembled-art-crop.png": {
+    "bytes": 97955,
+    "sha256": "5c779b9186b5f1b7e351a1dc5bf7e1c709d52dfa6bcf806499a61a156c9b5a41"
+  },
+  "results/lizard/depth-color/assembled-art.png": {
+    "bytes": 103436,
+    "sha256": "456f76116cbb23b48b88eedbccb253f121f8a4f88f5280f6d1663e86692394f6"
+  },
+  "results/lizard/depth-color/assembled-ui.png": {
+    "bytes": 114478,
+    "sha256": "856fcd6a988ba6db3e06738861a2a8467dc071e95cabacbee95b5b8c3db3a7d0"
+  },
+  "results/lizard/depth-color/cut-composite.png": {
+    "bytes": 12652,
+    "sha256": "e3f070dd63e358639fdae3823ddffc2a2543967c48e429dcc0235a68b62b0a67"
+  },
+  "results/lizard/depth-color/cut-ready.zip": {
+    "bytes": 19476065,
+    "sha256": "811e8ad426369ecbdc38a7e17c82ef7906c7bb977995109e9aeb40c882902052"
+  },
+  "results/lizard/depth-color/cut-stack.svg": {
+    "bytes": 3554987,
+    "sha256": "f7fe4c35fb868c212b5404a5a747b9dc2802999079e1acf82ca3eb3c1706c031"
+  },
+  "results/lizard/depth-color/exploded-art-crop.png": {
+    "bytes": 96286,
+    "sha256": "060dd5eacc573816cc416b01979fdef55e4bc81cab75c5f8d30f322a752a6dac"
+  },
+  "results/lizard/depth-color/exploded-art.png": {
+    "bytes": 107725,
+    "sha256": "933ec7bda825fad9502ed446f52c82c48e246477e5910ce445f4aa94f9d1102a"
+  },
+  "results/lizard/depth-color/exploded-ui.png": {
+    "bytes": 119055,
+    "sha256": "adaec4a7b8d976512ebfd668a830b8e3193c1a75998479efe3c9701c52910b14"
+  },
+  "results/lizard/depth-color/flat-ui.png": {
+    "bytes": 182404,
+    "sha256": "74d86b9ec2ee90367a86d72a6ec060de0cc2b3239ce0b3e98b8414c4f194ac84"
+  },
+  "results/lizard/depth-color/light-no-insert-art-crop.png": {
+    "bytes": 45505,
+    "sha256": "e7dc3e7388a6081255d3af6588292aaee3270ebd6ce65f6c711b0848e87ba9ab"
+  },
+  "results/lizard/depth-color/light-no-insert-art.png": {
+    "bytes": 52774,
+    "sha256": "4b3f02493648a3ba0c09ff0ff01d31885b34503bd1e2b4808f5c8f82de5196d7"
+  },
+  "results/lizard/depth-color/light-no-insert-ui.png": {
+    "bytes": 84972,
+    "sha256": "c4652008c4e2ae76a7ba1779965d59226d695d84281afdfb901aeadec846e957"
+  },
+  "results/lizard/depth-color/palette-refined.json": {
+    "bytes": 482,
+    "sha256": "1311d056c4ae158bc220fbdb9f58f9d94290e8e664c0f01122ccc86b9a8ef64a"
+  },
+  "results/lizard/depth-color/project.json": {
+    "bytes": 9777366,
+    "sha256": "23c8f70b584b7bce3d4e9cb5a7e9bd5d81ca918ba5e7b5cbdf6ceacfc0f91ec8"
+  },
+  "results/lizard/depth-color/report.json": {
+    "bytes": 33574,
+    "sha256": "a9b3d846f9d689c9321bc753616e446ec12160024ccf4ca53cf17358ecea9555"
+  },
+  "results/lizard/depth-color/target.png": {
+    "bytes": 12180,
+    "sha256": "ceeb5179d0125d19f9056f5304b22c4652c305e98be5b5d9658bd7d8a3621b3d"
+  },
+  "results/lizard/depth-color/tuned.json": {
+    "bytes": 6379,
+    "sha256": "5db537ce7af807fe6a60d7f50a88c5f103c8f90acdd9650daa54d7ed09dcbdbc"
+  },
+  "results/lizard/depth-white/assembled-art-crop.png": {
+    "bytes": 47395,
+    "sha256": "de7d2777bcc366b5e2552c6165939777ee078e238a5ae243daa3865e3105af3f"
+  },
+  "results/lizard/depth-white/assembled-art.png": {
+    "bytes": 51559,
+    "sha256": "56b1e2e0b680cc86954dfabf23da6766be074d764c4d7ef9df653b377e68622e"
+  },
+  "results/lizard/depth-white/assembled-ui.png": {
+    "bytes": 62882,
+    "sha256": "aec1426180164f078d8a7c3eb6a7ab420915efb69777df1d4378b71fd0605b03"
+  },
+  "results/lizard/depth-white/cut-composite.png": {
+    "bytes": 986,
+    "sha256": "f23f7bc134c37111f8bb9c7b3237f464d2d5e29efff37872ee5e9e929d6748f9"
+  },
+  "results/lizard/depth-white/cut-ready.zip": {
+    "bytes": 5961242,
+    "sha256": "82ccee4d0fc4603010c7435b16d4ec4ca0faebad662a4e949959fa6d544af640"
+  },
+  "results/lizard/depth-white/cut-stack.svg": {
+    "bytes": 948736,
+    "sha256": "862004492e26e29c6abf11cb4515e00fb1cef29e49e55afbd61d99fb129a1477"
+  },
+  "results/lizard/depth-white/exploded-art-crop.png": {
+    "bytes": 45726,
+    "sha256": "73bbc4e758b2b05b21f2a03678ece050e84985007003a88a05b26032f959b82f"
+  },
+  "results/lizard/depth-white/exploded-art.png": {
+    "bytes": 55684,
+    "sha256": "1427acc9ce95059eea108332d9bd0021f2a27e83335716b491a50769b2f67459"
+  },
+  "results/lizard/depth-white/exploded-ui.png": {
+    "bytes": 67681,
+    "sha256": "72056bd0f130bca79bef9c2eec5ac626c54f04762fe1610ede800bdf4e2140c6"
+  },
+  "results/lizard/depth-white/flat-ui.png": {
+    "bytes": 159755,
+    "sha256": "41d53a44bab724d1b1374c9299b93976ebca4b34a7bfa0bec7e7dbb08d8613c3"
+  },
+  "results/lizard/depth-white/light-no-insert-art-crop.png": {
+    "bytes": 78013,
+    "sha256": "2876e5c94775ffaf69f3205d4395b8af95bf87f5078a9e486864683d55d235dc"
+  },
+  "results/lizard/depth-white/light-no-insert-art.png": {
+    "bytes": 87027,
+    "sha256": "ab14d1f807c7ad0eb3232679e9c133e82a00a1f03730fbc9dab7569aaf7aad43"
+  },
+  "results/lizard/depth-white/light-no-insert-ui.png": {
+    "bytes": 114920,
+    "sha256": "178abb1241920e9a41c351f7b8e33f617893b8388462ba9585de63f0951d8eac"
+  },
+  "results/lizard/depth-white/light-photo-insert-art-crop.png": {
+    "bytes": 82465,
+    "sha256": "0b56bb1472d659059268320b23d8f6557a4b24a8144157602d081db965be0877"
+  },
+  "results/lizard/depth-white/light-photo-insert-art.png": {
+    "bytes": 91435,
+    "sha256": "bd305c4247366c4c109645b008288941b9b87c8c05720c6271f4efa690894c4e"
+  },
+  "results/lizard/depth-white/light-photo-insert-ui.png": {
+    "bytes": 119775,
+    "sha256": "3308b923ddf8472246af36dea2e66df7b1ad02ffdc35cdbd7b811a34ad478f9b"
+  },
+  "results/lizard/depth-white/project.json": {
+    "bytes": 5596354,
+    "sha256": "7e0866647c74dda6a5ccd6d93e589658c9c5107db12d7af895821ccd3a4aa29c"
+  },
+  "results/lizard/depth-white/report.json": {
+    "bytes": 14569,
+    "sha256": "86465a89c50f4e27846f7a96214a00c5fcf7a63cdbbbae43c8cffee395520b05"
+  },
+  "results/lizard/depth-white/target.png": {
+    "bytes": 8672,
+    "sha256": "edc8aa1e6622bd872e7bf02a5a56b355caf70c26d526ccda00ec7a204727d09a"
+  },
+  "results/lizard/multicolor/cut-composite.png": {
+    "bytes": 12652,
+    "sha256": "e3f070dd63e358639fdae3823ddffc2a2543967c48e429dcc0235a68b62b0a67"
+  },
+  "results/lizard/multicolor/cut-ready.zip": {
+    "bytes": 18641660,
+    "sha256": "03f1283ac1de49265ce346e17cfbae382c85ed819b3c0438d80dcf2d6407e96f"
+  },
+  "results/lizard/multicolor/cut-stack.svg": {
+    "bytes": 3554987,
+    "sha256": "f7fe4c35fb868c212b5404a5a747b9dc2802999079e1acf82ca3eb3c1706c031"
+  },
+  "results/lizard/multicolor/flat-ui.png": {
+    "bytes": 95102,
+    "sha256": "1a9c5914c4e320588d9213d4cf764f4133f471ee35953122c83b537fb9ebec06"
+  },
+  "results/lizard/multicolor/palette-refined.json": {
+    "bytes": 482,
+    "sha256": "72398950ac5c573552a4a81c1065e8f8a13c21acb1daff33e829cca863b547d9"
+  },
+  "results/lizard/multicolor/project.json": {
+    "bytes": 7873639,
+    "sha256": "c55a03a04a352ab9729ed908a0c16ffdf913d580b950942462bdd57c3ab21c7d"
+  },
+  "results/lizard/multicolor/report.json": {
+    "bytes": 33562,
+    "sha256": "64a8a588182d9620e57ce25007230ea39279c9ae3af1123ffc47795307dcffe2"
+  },
+  "results/lizard/multicolor/target.png": {
+    "bytes": 12180,
+    "sha256": "ceeb5179d0125d19f9056f5304b22c4652c305e98be5b5d9658bd7d8a3621b3d"
+  },
+  "results/lizard/multicolor/tuned.json": {
+    "bytes": 6367,
+    "sha256": "586ce7c8a2c9ccabb41835d67bec3becce94dc087a1a9e2f310ab0392e01be91"
+  },
+  "results/lizard/stencil/cut-composite.png": {
+    "bytes": 4361,
+    "sha256": "ab14fcecba28eeafbe49b02b461df63167c348278be0ebeda76c36ddc1d10e5c"
+  },
+  "results/lizard/stencil/cut-ready.zip": {
+    "bytes": 1259331,
+    "sha256": "c90861505894341eca1a87a31dccfe73134fde223154b3671828fa19a3eb71f9"
+  },
+  "results/lizard/stencil/cut-stack.svg": {
+    "bytes": 178690,
+    "sha256": "0b5c86c0c30f39f6efdefb024aca261b16ba41a83cc623194f3f8964de9010d4"
+  },
+  "results/lizard/stencil/flat-ui.png": {
+    "bytes": 129613,
+    "sha256": "a9e1caaf8b010ffb2d4f65b55811575b3b946415619334c835d461b242fd5659"
+  },
+  "results/lizard/stencil/project.json": {
+    "bytes": 1499867,
+    "sha256": "04511f99631f0916252bb310dc142e8045b0ac556a9d32793ba140fdf6f92a2b"
+  },
+  "results/lizard/stencil/report.json": {
+    "bytes": 2008,
+    "sha256": "5efb2e7e6e1e4c57fc1fab485e4a5b1ce983da65216cc789ca25bcf59c2e8383"
+  },
+  "results/lizard/stencil/target.png": {
+    "bytes": 15879,
+    "sha256": "f1346e39481eb254eb2a0b405d213331ad1c8bee80002a62c85d82b2c0123b5d"
+  },
+  "results/lizard/depth-color/baseline/cut-composite.png": {
+    "bytes": 9387,
+    "sha256": "8f8a9bef23dd4626db1ac0758194fc36c876b40fca30e21eadaea616952ce4be"
+  },
+  "results/lizard/depth-color/baseline/cut-ready.zip": {
+    "bytes": 6440529,
+    "sha256": "84b5b25315f90d25d367a04488cbf66bae974f0ed58fa635e8ab2b7952dc2d5a"
+  },
+  "results/lizard/depth-color/baseline/project.json": {
+    "bytes": 5408144,
+    "sha256": "bf10b5eb054d3ca2abcc1f1dd9bd256894e0b0bd45e982001a37b56ba08dfca9"
+  },
+  "results/lizard/depth-color/baseline/report.json": {
+    "bytes": 22096,
+    "sha256": "ae2866c74c1cdf79ea7d5a3d95af633a21f27f2e4f03d64e9fc718bd585de2fd"
+  },
+  "results/lizard/depth-color/baseline/target.png": {
+    "bytes": 8672,
+    "sha256": "edc8aa1e6622bd872e7bf02a5a56b355caf70c26d526ccda00ec7a204727d09a"
+  },
+  "results/lizard/depth-color/first-tuning/cut-composite.png": {
+    "bytes": 9686,
+    "sha256": "d065c7df6ef1156584806f60a4aae4a9add25737db2e16b5f1de962be3f1a020"
+  },
+  "results/lizard/depth-color/first-tuning/cut-ready.zip": {
+    "bytes": 16338483,
+    "sha256": "520e665ccc83e629e5d18165337f318ab311f2e134db63071a38a3ca84d2eb80"
+  },
+  "results/lizard/depth-color/first-tuning/project.json": {
+    "bytes": 8683488,
+    "sha256": "6eb445208f3326271b3f36f9ad5556acccbeb36e4f275773aa66f8b403804aea"
+  },
+  "results/lizard/depth-color/first-tuning/report.json": {
+    "bytes": 29098,
+    "sha256": "406fb364bb680fc9fa24c1c2efa9be9ac2ee999df1b87f5d17d12d65f2bdfc4a"
+  },
+  "results/lizard/depth-color/first-tuning/target.png": {
+    "bytes": 9359,
+    "sha256": "1bd5cedd81fe7c08b37c6a74a85305daaabc05ad721b9c7fce6cf5e4e46b8c13"
+  },
+  "results/lizard/multicolor/baseline/cut-composite.png": {
+    "bytes": 9387,
+    "sha256": "8f8a9bef23dd4626db1ac0758194fc36c876b40fca30e21eadaea616952ce4be"
+  },
+  "results/lizard/multicolor/baseline/cut-ready.zip": {
+    "bytes": 5608155,
+    "sha256": "c3281657f838d4ad3ad0bbcbd75674d8fff944c5aeb1791eb8a7c23ce7e7bf6b"
+  },
+  "results/lizard/multicolor/baseline/project.json": {
+    "bytes": 3504547,
+    "sha256": "3c29c879003e691c1b9bba5e9bde64753f50d227603416a4b88d6dd92a2c5a62"
+  },
+  "results/lizard/multicolor/baseline/report.json": {
+    "bytes": 22084,
+    "sha256": "bc001c56bf93100d5752aa479215b517b4fe2521ad22bd02e3a7457ffdb64afb"
+  },
+  "results/lizard/multicolor/baseline/target.png": {
+    "bytes": 8672,
+    "sha256": "edc8aa1e6622bd872e7bf02a5a56b355caf70c26d526ccda00ec7a204727d09a"
+  },
+  "results/lizard/multicolor/first-tuning/cut-composite.png": {
+    "bytes": 9686,
+    "sha256": "d065c7df6ef1156584806f60a4aae4a9add25737db2e16b5f1de962be3f1a020"
+  },
+  "results/lizard/multicolor/first-tuning/cut-ready.zip": {
+    "bytes": 15505204,
+    "sha256": "9439f264510b68f4be3d32b333cb60df0fad9202fd4a0fbe7cab4f9f7bbe2596"
+  },
+  "results/lizard/multicolor/first-tuning/project.json": {
+    "bytes": 6779813,
+    "sha256": "ded44055ac21b75e5750b21ed2ad075e31a2d6a27c67ec6ed6d617fc2ddf85f7"
+  },
+  "results/lizard/multicolor/first-tuning/report.json": {
+    "bytes": 29086,
+    "sha256": "a7d6bfe30bf2a70fe6245db4c8ba07f167546415e9406d6520299610b5b47dd8"
+  },
+  "results/lizard/multicolor/first-tuning/target.png": {
+    "bytes": 9359,
+    "sha256": "1bd5cedd81fe7c08b37c6a74a85305daaabc05ad721b9c7fce6cf5e4e46b8c13"
+  },
+  "results/puppy/depth-color/assembled-art-crop.png": {
+    "bytes": 90683,
+    "sha256": "ce01fb4909aab872fbc605f4049700a848c83e351b5ad6a27c5e908acf4fa51e"
+  },
+  "results/puppy/depth-color/assembled-art.png": {
+    "bytes": 97595,
+    "sha256": "3facd900865cabda57a62b0b3dabfab0c15eb46963930d2a579f7c2ebe2fc95d"
+  },
+  "results/puppy/depth-color/assembled-ui.png": {
+    "bytes": 108012,
+    "sha256": "74cfa80a69a9c59015749764a9236b8e3adbc983f086545ecc3257016323867b"
+  },
+  "results/puppy/depth-color/cut-composite.png": {
+    "bytes": 10687,
+    "sha256": "48c7a58bc6cf3e6716d3a00dc0d137d786b8796d6022f56f19d96a39158609db"
+  },
+  "results/puppy/depth-color/cut-ready.zip": {
+    "bytes": 11868922,
+    "sha256": "37c570beb23a27069fa0752d6f2def38612ae2b79d7fb51edc72cc867bf980d4"
+  },
+  "results/puppy/depth-color/cut-stack.svg": {
+    "bytes": 2105945,
+    "sha256": "84f1f52604d397d36073ec099c921bd8acd2b06168dadb262a42dd58f57b50c6"
+  },
+  "results/puppy/depth-color/exploded-art-crop.png": {
+    "bytes": 78186,
+    "sha256": "ee21b4b2c8a6f2b79be55e4aedc0d5dae9e484ee450cbae83fff14484f184d1b"
+  },
+  "results/puppy/depth-color/exploded-art.png": {
+    "bytes": 90959,
+    "sha256": "905965009fcad2d2e45d05ba8b145f2d2854ade14cdf1d64f17b9847ce4f1e01"
+  },
+  "results/puppy/depth-color/exploded-ui.png": {
+    "bytes": 102185,
+    "sha256": "e93b66b787b631a5c70554bf9d211c68a547f35c567d713f8a96103f8246d797"
+  },
+  "results/puppy/depth-color/flat-ui.png": {
+    "bytes": 182446,
+    "sha256": "4445ad0a6708674bcc5e2c551f0ebb3c5e39a49481f38399d88cf5701b740994"
+  },
+  "results/puppy/depth-color/light-no-insert-art-crop.png": {
+    "bytes": 53291,
+    "sha256": "dff51004e38c90f7e7f06921b12571b8ee0a40bf872b88006cca7f48c0f519cc"
+  },
+  "results/puppy/depth-color/light-no-insert-art.png": {
+    "bytes": 61295,
+    "sha256": "e7c3345cb4336e8926d10e506ca4a218d2c763dad0e28dd461bc822303e978f8"
+  },
+  "results/puppy/depth-color/light-no-insert-ui.png": {
+    "bytes": 93873,
+    "sha256": "738464a41f2d8fed682c31a1da369ed0257fe1f8afb52bf30b6f1063a9a26b9d"
+  },
+  "results/puppy/depth-color/project.json": {
+    "bytes": 6663203,
+    "sha256": "89420a0ff8d60fce189598ff6def944abe282041f83d23decd003379bf3d43f1"
+  },
+  "results/puppy/depth-color/report.json": {
+    "bytes": 31456,
+    "sha256": "3f9cbaffe5f712472c39252f9b62164bea37c1f32d9f68d0ff9bbe0cff63ec28"
+  },
+  "results/puppy/depth-color/target.png": {
+    "bytes": 10776,
+    "sha256": "fd8e2c1d6c41a1922058742b813d993df6b80eb28cdda0e63d7baec8eac7d6f5"
+  },
+  "results/puppy/depth-color/tuned.json": {
+    "bytes": 8632,
+    "sha256": "4644e276dbf542896f1c16fa8fcdb99798780a50506ea100bf7372afcd8a8a98"
+  },
+  "results/puppy/depth-white/assembled-art-crop.png": {
+    "bytes": 47086,
+    "sha256": "135eb4c81a29288791625d84fd0f57ca41d010401aee209dbbb3f495a16d7d7f"
+  },
+  "results/puppy/depth-white/assembled-art.png": {
+    "bytes": 51132,
+    "sha256": "291f2090253ba4b35436aa7f3236c60a58492f4aee7d0eea8bbe870cf6a540ce"
+  },
+  "results/puppy/depth-white/assembled-ui.png": {
+    "bytes": 62532,
+    "sha256": "31ad0797ecdaf5f9e771f6054c3439316464ef4f00c5662649faefd4f0eb4e26"
+  },
+  "results/puppy/depth-white/cut-composite.png": {
+    "bytes": 1032,
+    "sha256": "6b2b0035d33c9eb2082f7214d0b68d0e7088408c65590ff429255c5850389225"
+  },
+  "results/puppy/depth-white/cut-ready.zip": {
+    "bytes": 6098325,
+    "sha256": "9eb6fbacaa2c7aacbbe6c0a4e685ed9eb06f5d0d30b7a3feb8a582a002630538"
+  },
+  "results/puppy/depth-white/cut-stack.svg": {
+    "bytes": 743452,
+    "sha256": "363fc794932350d2005f3de74527748811306d131f3ba6c4ad42ea2f9f09fe84"
+  },
+  "results/puppy/depth-white/exploded-art-crop.png": {
+    "bytes": 47908,
+    "sha256": "31c4852e4ffaf8f5e8ecb66e2159dd927d188d449ef70a5c21ab2fdd4a60ae5c"
+  },
+  "results/puppy/depth-white/exploded-art.png": {
+    "bytes": 57549,
+    "sha256": "cc8dddbe830b0356191b4dfd44b6968715d251dfa58fa66b6571523f43df1996"
+  },
+  "results/puppy/depth-white/exploded-ui.png": {
+    "bytes": 69395,
+    "sha256": "fbfbacf2944ce9a81fd7d2c75881a6fcea4ae9c02e30e2253d0781f14e3b6e2a"
+  },
+  "results/puppy/depth-white/flat-ui.png": {
+    "bytes": 156439,
+    "sha256": "0f0903aa26e60a7832ee3c6efc142261fb5ba73f79a2b42b24debb6ff44cbc36"
+  },
+  "results/puppy/depth-white/light-no-insert-art-crop.png": {
+    "bytes": 73911,
+    "sha256": "7da6b66bad4ba4377f299d22174873b9a59bea099abc94697628e808bf735b70"
+  },
+  "results/puppy/depth-white/light-no-insert-art.png": {
+    "bytes": 81982,
+    "sha256": "816dec5f1281ea1b5e8ce901bd3a1dfdd14410056ce6e3c27b2cba6d6ab895a2"
+  },
+  "results/puppy/depth-white/light-no-insert-ui.png": {
+    "bytes": 111705,
+    "sha256": "4b634453c0b88ac65b0262578ba9a87da931750ef9b552f6ca58ead439f54863"
+  },
+  "results/puppy/depth-white/light-photo-insert-art-crop.png": {
+    "bytes": 89129,
+    "sha256": "44d2ed822f0de3ce6d7b0fe64e927d0c1d0118ed674cd495b58946b65b37fb70"
+  },
+  "results/puppy/depth-white/light-photo-insert-art.png": {
+    "bytes": 97021,
+    "sha256": "bcf099e59d84f2bdd308851fe966d8245fbc8c9c30cc3874071dd05c0977d62b"
+  },
+  "results/puppy/depth-white/light-photo-insert-ui.png": {
+    "bytes": 127587,
+    "sha256": "13dbd9c3bef45302e48953098b217b279b2cfd6f2d0bf351f9b5131184383211"
+  },
+  "results/puppy/depth-white/project.json": {
+    "bytes": 4605209,
+    "sha256": "404f26b7007533ab1949805a21c0cbd55fa0adc1f44ad134d73b37077f4b029d"
+  },
+  "results/puppy/depth-white/report.json": {
+    "bytes": 14582,
+    "sha256": "deebc626dd877773e31d0b7909babe0e5b62da6cb6e7c0dcead13990ccc94f47"
+  },
+  "results/puppy/depth-white/target.png": {
+    "bytes": 7641,
+    "sha256": "6ad4d5b94819627e1dfedc357682b4a26f58933a55247229c487881a9d92b3a7"
+  },
+  "results/puppy/multicolor/cut-composite.png": {
+    "bytes": 10687,
+    "sha256": "48c7a58bc6cf3e6716d3a00dc0d137d786b8796d6022f56f19d96a39158609db"
+  },
+  "results/puppy/multicolor/cut-ready.zip": {
+    "bytes": 11059080,
+    "sha256": "5ebe4f5206e11f48c886d9675b6ac4a456470dbac05829d15cf08373a7f3b3c9"
+  },
+  "results/puppy/multicolor/cut-stack.svg": {
+    "bytes": 2105945,
+    "sha256": "84f1f52604d397d36073ec099c921bd8acd2b06168dadb262a42dd58f57b50c6"
+  },
+  "results/puppy/multicolor/flat-ui.png": {
+    "bytes": 86000,
+    "sha256": "4eede953b88dbe1b4a84cc08ff3cb10218361010ad380cb5913b5adcd93e37de"
+  },
+  "results/puppy/multicolor/project.json": {
+    "bytes": 4780429,
+    "sha256": "4569f74fe702cb119495bee4e7e7207d404ee3b27f9c3bc609affb2728a94a3b"
+  },
+  "results/puppy/multicolor/report.json": {
+    "bytes": 31444,
+    "sha256": "5b37108f56285246c581ac132700565860d533561851960fd42dbb68007adf63"
+  },
+  "results/puppy/multicolor/target.png": {
+    "bytes": 10776,
+    "sha256": "fd8e2c1d6c41a1922058742b813d993df6b80eb28cdda0e63d7baec8eac7d6f5"
+  },
+  "results/puppy/multicolor/tuned.json": {
+    "bytes": 8620,
+    "sha256": "471ee15032eeea3334134ba014dbc2d557f64032d8d2bcce6db95a8a46cf3ca4"
+  },
+  "results/puppy/stencil/cut-composite.png": {
+    "bytes": 3922,
+    "sha256": "10661d0bbf8d768a0b7cb37826aa3ba58273a31ce784096b661100a0b1270a20"
+  },
+  "results/puppy/stencil/cut-ready.zip": {
+    "bytes": 1102745,
+    "sha256": "99fb9926de6d25e3ad8a6770fd5f862dbfb30546852865d8090742852ddb2434"
+  },
+  "results/puppy/stencil/cut-stack.svg": {
+    "bytes": 141239,
+    "sha256": "70f3351c0fd9cb8e9a66d0a6aca0f724a9b95b9065659ba72eac42c3c9c58c87"
+  },
+  "results/puppy/stencil/flat-ui.png": {
+    "bytes": 181411,
+    "sha256": "96ea5fdeadeb03c0a065f729d8d3768b7d2ebf2a41f46e59d1ddd70cb5f1584e"
+  },
+  "results/puppy/stencil/project.json": {
+    "bytes": 554821,
+    "sha256": "c8f7cff0346ebd6d8dfcc5202b5d75aa86f3cee1101d82765695b28e4720ac15"
+  },
+  "results/puppy/stencil/report.json": {
+    "bytes": 1680,
+    "sha256": "acc9f9e9d61713626ac832864246cb3e5b9ea91574dbe8d812a6ee52283f29a8"
+  },
+  "results/puppy/stencil/target.png": {
+    "bytes": 11257,
+    "sha256": "0bca5e064646e666829854d9d1add721509f287b9d608925fba4ceaed0f4782d"
+  },
+  "results/puppy/depth-color/baseline/cut-composite.png": {
+    "bytes": 8100,
+    "sha256": "a43d1febd166fe2e9dc707379872ab04c494dea9ab11e0d33132353e764fb8f9"
+  },
+  "results/puppy/depth-color/baseline/cut-ready.zip": {
+    "bytes": 6998333,
+    "sha256": "a5d287a50936daa26494bf98e0cbdb9249c4ba4b0fc3850003da363d7117f92a"
+  },
+  "results/puppy/depth-color/baseline/project.json": {
+    "bytes": 5169452,
+    "sha256": "862929700749d94bc84374a29a1fe1cda457e4237d6d648c0edc92f313c2beb0"
+  },
+  "results/puppy/depth-color/baseline/report.json": {
+    "bytes": 23920,
+    "sha256": "7fbb8aaf36c0b47e89dc35b8f956b72b5f709e9da65745e10a6726736205b5d1"
+  },
+  "results/puppy/depth-color/baseline/target.png": {
+    "bytes": 7641,
+    "sha256": "6ad4d5b94819627e1dfedc357682b4a26f58933a55247229c487881a9d92b3a7"
+  },
+  "results/puppy/multicolor/baseline/cut-composite.png": {
+    "bytes": 8100,
+    "sha256": "a43d1febd166fe2e9dc707379872ab04c494dea9ab11e0d33132353e764fb8f9"
+  },
+  "results/puppy/multicolor/baseline/cut-ready.zip": {
+    "bytes": 6186903,
+    "sha256": "2105d4eaa4897621c4ac4abe6a18fc430ba3b16041d924e54a547d46dd2e6d54"
+  },
+  "results/puppy/multicolor/baseline/project.json": {
+    "bytes": 3286756,
+    "sha256": "fb9203e6cf8a607733bee0d6cc6ccdb54316c077b69f34c7217f0acf48f434ce"
+  },
+  "results/puppy/multicolor/baseline/report.json": {
+    "bytes": 23908,
+    "sha256": "85be06bb289bb77147a8cbd4d8ea39ff7811e436df81a2ceb2fca2a0cdeee33a"
+  },
+  "results/puppy/multicolor/baseline/target.png": {
+    "bytes": 7641,
+    "sha256": "6ad4d5b94819627e1dfedc357682b4a26f58933a55247229c487881a9d92b3a7"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "status": "PASS",
+  "seconds": 82.11,
+  "palette": [
+    "#3a4a1e",
+    "#664e3e",
+    "#5b7218",
+    "#514a0e",
+    "#362a1a",
+    "#661c1a",
+    "#979c25",
+    "#c6d62b",
+    "#b0be2f",
+    "#7c9134",
+    "#2e3c32",
+    "#dedfcd",
+    "#988337",
+    "#cfcf64",
+    "#d0d094",
+    "#8b211d",
+    "#101820",
+    "#f0e5c7"
+  ],
+  "width_mm": 360,
+  "layers": 24,
+  "note": "Curated paper palette with explicit dark and light slots; not a new detector"
+}
