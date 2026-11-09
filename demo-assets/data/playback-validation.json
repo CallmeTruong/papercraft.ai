@@ -1,0 +1,17 @@
+{
+  "mp4_decode": "PASS",
+  "mp4_frames": 1885,
+  "first_pts": 0.0,
+  "minimum_frame_interval": 0.03333299999999895,
+  "maximum_frame_interval": 0.03333400000000353,
+  "encoded_fps": 30.0,
+  "gif_frames": 1005,
+  "gif_seconds": 50.25,
+  "gif_loops": false,
+  "caption_layout": "PASS: dedicated opaque header; no app overlap",
+  "layout_assertions": 23,
+  "source_identity": "one verified source across all imported designs",
+  "edits": "Logged loading waits and labelled prepared-result transitions; native mode/paper actions stay in order",
+  "mode_flow": "PASS: Multicolor > Depth Scene > Colored paper > White paper; no Open project clicks",
+  "browser_tests_passed": 31
+}

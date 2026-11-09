@@ -2,13 +2,13 @@
   "kittens/multicolor": "9249bfebaf1d43b3be7eff5e739399fb",
   "kittens/stencil": "25d025f0207442ac96b435c0159597e2",
   "kittens/depth-color": "2a51b702f7084e368cdc9e3e53761150",
-  "kittens/depth-white": "34e4bfae898f44c1be17d88a67b821f6",
   "puppy/multicolor": "7a26d1b09fc14b5990091b26dc3c4c38",
   "puppy/stencil": "6f27c04e3aa24597a9e314d266344655",
   "puppy/depth-color": "b2d2cf82e5cc4c2786c44909eaeae014",
-  "puppy/depth-white": "3a433f1119ba4ba9ace7dd7ed4a72719",
   "lizard/multicolor": "4341f78b38a34a0a9219e4f3fa290b0f",
   "lizard/stencil": "068ff405457f46e2a5e8e8bf0648d5ea",
   "lizard/depth-color": "092ec09f92414da7baee164572063f83",
-  "lizard/depth-white": "56821048c9c246008cf99b208474fcd4"
+  "kittens/depth-white": "a12b1cc701394fb8a592ae5cce51314e",
+  "puppy/depth-white": "51b362cc01264ab0a4f1ad07e76d7940",
+  "lizard/depth-white": "ebd36c01ae284638a99781d4b506914e"
 }

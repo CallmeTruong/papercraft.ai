@@ -1,7 +1,7 @@
 {
   "status": "PASS",
-  "revision_id": "8259d8745ac7458c9318bd9dbb82afb0",
-  "fingerprint": "3454705f5c6ab0bf5f4ffeccc150685343db875a24324ee8df3032a13ad56a04",
+  "revision_id": "6eda918b6234424792f52be9aed7db8d",
+  "fingerprint": "3bca53befb0173304310d46b63ab313c35335a0b5aa8028bc9fa251f551b1548",
   "checker_version": "frame-rooted-continuous-3",
   "profile_hash": "cf245ff7dd8790c346d6aacf352e51e4f4144a604c304f5fe8bdf69dd837aff7",
   "layers": [
@@ -25,13 +25,13 @@
         "missing_frame_area_mm2": 0.0,
         "unsupported_island_count": 0,
         "thin_feature_violation_count": 0,
-        "total_cut_length_mm": 2942.810029359912,
-        "cutting_path_count": 3,
+        "total_cut_length_mm": 2515.9358828691966,
+        "cutting_path_count": 2,
         "invalid_polygon_count": 0
       },
       "frame": {
-        "outer_width_mm": 260.0,
-        "outer_height_mm": 200.0,
+        "outer_width_mm": 300.0,
+        "outer_height_mm": 230.0,
         "border_width_mm": 10.0
       },
       "important_features": [],
@@ -57,13 +57,13 @@
         "missing_frame_area_mm2": 0.0,
         "unsupported_island_count": 0,
         "thin_feature_violation_count": 0,
-        "total_cut_length_mm": 3016.9623371658045,
-        "cutting_path_count": 3,
+        "total_cut_length_mm": 3030.3001250852776,
+        "cutting_path_count": 2,
         "invalid_polygon_count": 0
       },
       "frame": {
-        "outer_width_mm": 260.0,
-        "outer_height_mm": 200.0,
+        "outer_width_mm": 300.0,
+        "outer_height_mm": 230.0,
         "border_width_mm": 10.0
       },
       "important_features": [],
@@ -89,13 +89,13 @@
         "missing_frame_area_mm2": 0.0,
         "unsupported_island_count": 0,
         "thin_feature_violation_count": 0,
-        "total_cut_length_mm": 3251.398080388069,
-        "cutting_path_count": 9,
+        "total_cut_length_mm": 3252.9616977736605,
+        "cutting_path_count": 4,
         "invalid_polygon_count": 0
       },
       "frame": {
-        "outer_width_mm": 260.0,
-        "outer_height_mm": 200.0,
+        "outer_width_mm": 300.0,
+        "outer_height_mm": 230.0,
         "border_width_mm": 10.0
       },
       "important_features": [],
@@ -121,13 +121,13 @@
         "missing_frame_area_mm2": 0.0,
         "unsupported_island_count": 0,
         "thin_feature_violation_count": 0,
-        "total_cut_length_mm": 2915.58829600477,
-        "cutting_path_count": 4,
+        "total_cut_length_mm": 3863.830565696303,
+        "cutting_path_count": 8,
         "invalid_polygon_count": 0
       },
       "frame": {
-        "outer_width_mm": 260.0,
-        "outer_height_mm": 200.0,
+        "outer_width_mm": 300.0,
+        "outer_height_mm": 230.0,
         "border_width_mm": 10.0
       },
       "important_features": [],
@@ -153,13 +153,13 @@
         "missing_frame_area_mm2": 0.0,
         "unsupported_island_count": 0,
         "thin_feature_violation_count": 0,
-        "total_cut_length_mm": 3460.379175886636,
-        "cutting_path_count": 7,
+        "total_cut_length_mm": 3715.186772543843,
+        "cutting_path_count": 8,
         "invalid_polygon_count": 0
       },
       "frame": {
-        "outer_width_mm": 260.0,
-        "outer_height_mm": 200.0,
+        "outer_width_mm": 300.0,
+        "outer_height_mm": 230.0,
         "border_width_mm": 10.0
       },
       "important_features": [],
@@ -185,13 +185,13 @@
         "missing_frame_area_mm2": 0.0,
         "unsupported_island_count": 0,
         "thin_feature_violation_count": 0,
-        "total_cut_length_mm": 3676.3421841721565,
-        "cutting_path_count": 11,
+        "total_cut_length_mm": 3188.5902757307963,
+        "cutting_path_count": 10,
         "invalid_polygon_count": 0
       },
       "frame": {
-        "outer_width_mm": 260.0,
-        "outer_height_mm": 200.0,
+        "outer_width_mm": 300.0,
+        "outer_height_mm": 230.0,
         "border_width_mm": 10.0
       },
       "important_features": [],
@@ -217,13 +217,13 @@
         "missing_frame_area_mm2": 0.0,
         "unsupported_island_count": 0,
         "thin_feature_violation_count": 0,
-        "total_cut_length_mm": 2649.137057234492,
-        "cutting_path_count": 7,
+        "total_cut_length_mm": 2640.52535045844,
+        "cutting_path_count": 20,
         "invalid_polygon_count": 0
       },
       "frame": {
-        "outer_width_mm": 260.0,
-        "outer_height_mm": 200.0,
+        "outer_width_mm": 300.0,
+        "outer_height_mm": 230.0,
         "border_width_mm": 10.0
       },
       "important_features": [],
@@ -249,86 +249,22 @@
         "missing_frame_area_mm2": 0.0,
         "unsupported_island_count": 0,
         "thin_feature_violation_count": 0,
-        "total_cut_length_mm": 3277.6777896265157,
-        "cutting_path_count": 20,
-        "invalid_polygon_count": 0
-      },
-      "frame": {
-        "outer_width_mm": 260.0,
-        "outer_height_mm": 200.0,
-        "border_width_mm": 10.0
-      },
-      "important_features": [],
-      "layer_id": "layer-08"
-    },
-    {
-      "status": "PASS",
-      "findings": [],
-      "coverage": {
-        "checker_version": "frame-rooted-continuous-3",
-        "units": "mm",
-        "connectivity_method": "full-frame containment and positive-area polygon components",
-        "width_method": "continuous rooted inset core + geometric coverage",
-        "error_bound_mm": 0.01,
-        "required_feature_width_mm": 1.2,
-        "required_support_width_mm": 1.5,
-        "decorative_tip_policy": "bounded_convex",
-        "certified_convex_corners": [],
-        "physical_test_status": "NOT_RUN"
-      },
-      "metrics": {
-        "material_component_count": 1,
-        "missing_frame_area_mm2": 0.0,
-        "unsupported_island_count": 0,
-        "thin_feature_violation_count": 0,
-        "total_cut_length_mm": 1596.4480752396369,
-        "cutting_path_count": 9,
-        "invalid_polygon_count": 0
-      },
-      "frame": {
-        "outer_width_mm": 260.0,
-        "outer_height_mm": 200.0,
-        "border_width_mm": 10.0
-      },
-      "important_features": [],
-      "layer_id": "layer-09"
-    },
-    {
-      "status": "PASS",
-      "findings": [],
-      "coverage": {
-        "checker_version": "frame-rooted-continuous-3",
-        "units": "mm",
-        "connectivity_method": "full-frame containment and positive-area polygon components",
-        "width_method": "continuous rooted inset core + geometric coverage",
-        "error_bound_mm": 0.01,
-        "required_feature_width_mm": 1.2,
-        "required_support_width_mm": 1.5,
-        "decorative_tip_policy": "bounded_convex",
-        "certified_convex_corners": [],
-        "physical_test_status": "NOT_RUN"
-      },
-      "metrics": {
-        "material_component_count": 1,
-        "missing_frame_area_mm2": 0.0,
-        "unsupported_island_count": 0,
-        "thin_feature_violation_count": 0,
-        "total_cut_length_mm": 920.0,
+        "total_cut_length_mm": 1060.0,
         "cutting_path_count": 1,
         "invalid_polygon_count": 0
       },
       "frame": {
-        "outer_width_mm": 260.0,
-        "outer_height_mm": 200.0,
+        "outer_width_mm": 300.0,
+        "outer_height_mm": 230.0,
         "border_width_mm": 10.0
       },
       "important_features": [],
-      "layer_id": "layer-10"
+      "layer_id": "layer-08"
     }
   ],
   "frame": {
-    "outer_width_mm": 260.0,
-    "outer_height_mm": 200.0,
+    "outer_width_mm": 300.0,
+    "outer_height_mm": 230.0,
     "border_width_mm": 10.0
   },
   "art_review_status": "pending_review",
@@ -337,9 +273,9 @@
     "reason": "Requires versioned ambient color construction"
   },
   "light_path_ratio": 0.0,
-  "material_policy": "translucent paper + neutral diffuser + separate broad color-source filter; uncalibrated transmission",
+  "material_policy": "translucent paper + neutral diffuser + uniform backlight; uncalibrated transmission",
   "light_plan": {
-    "mode": "source_color_filter",
+    "mode": "uniform_transmission",
     "source_grid_sha256": "85e8d73a25736ad1ef0fac321b2a0a5015d33bbb6eba045439491d931f9bc023",
     "paper": "white translucent paper",
     "paper_transmittance_assumption": 0.55,
@@ -348,70 +284,19 @@
     "diffuser_pdf": "light/source-color-diffuser.pdf",
     "light_source": "uniform white backlight",
     "optical_validation_status": "NOT_RUN",
-    "model": "five broad Gaussian color zones; bounded NNLS strengths; angular Gaussian spread and per-gap transmission approximation",
+    "model": "uniform white panel; linear RGB transmission through retained sheets and gaps",
     "requires": [
-      "color printing on a translucent broad-area source filter",
-      "a separate neutral diffuser in front of the source filter",
       "translucent paper for cut sheets",
-      "physical color/transmittance calibration"
+      "neutral diffuser",
+      "physical transmittance calibration"
     ],
     "planning_version": 2,
-    "zones": [
-      {
-        "id": "zone-01",
-        "color": "#e2d672",
-        "x_mm": 62.101063829787236,
-        "y_mm": 36.46941489361702,
-        "sigma_x_mm": 39.93780797121314,
-        "sigma_y_mm": 21.599999999999998,
-        "intensity": 0.18000004306870937
-      },
-      {
-        "id": "zone-02",
-        "color": "#dfff8e",
-        "x_mm": 204.60227272727272,
-        "y_mm": 133.7286931818182,
-        "sigma_x_mm": 35.45215234038124,
-        "sigma_y_mm": 45.11752552750505,
-        "intensity": 0.8418262160375544
-      },
-      {
-        "id": "zone-03",
-        "color": "#fff9ab",
-        "x_mm": 182.27459016393442,
-        "y_mm": 40.99897540983606,
-        "sigma_x_mm": 45.41044406514317,
-        "sigma_y_mm": 22.283179877688045,
-        "intensity": 0.2598476019311419
-      },
-      {
-        "id": "zone-04",
-        "color": "#dfff8e",
-        "x_mm": 108.74027237354085,
-        "y_mm": 111.91755836575877,
-        "sigma_x_mm": 39.460639349674196,
-        "sigma_y_mm": 36.76018733986463,
-        "intensity": 0.3352734186439361
-      },
-      {
-        "id": "zone-05",
-        "color": "#dfff8e",
-        "x_mm": 50.537709497206706,
-        "y_mm": 143.50733240223462,
-        "sigma_x_mm": 40.794840822306185,
-        "sigma_y_mm": 43.642460193569654,
-        "intensity": 0.8188350075233272
-      }
-    ],
-    "palette": [
-      "#e2d672",
-      "#dfff8e",
-      "#fff9ab"
-    ],
+    "zones": [],
+    "palette": [],
     "source_distance_mm": 25.0,
     "spread_angle_degrees": 35.0,
     "placement_plane": "effective color-source plane behind rear diffuser",
-    "source_filter": "broad printed translucent color filter behind neutral diffuser"
+    "source_filter": null
   },
   "physical_test_status": "NOT_RUN",
   "disclaimer": "PASS covers the declared continuous geometry checks; physical cutting has not been tested."

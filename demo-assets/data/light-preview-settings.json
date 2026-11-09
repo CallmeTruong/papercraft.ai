@@ -1,7 +1,7 @@
 {
-  "source": "Image color zones",
+  "source": "Warm light (uniform #ffe0a3); main white-paper comparison",
   "source_gain": 2,
-  "paper_transmittance": 0.8,
+  "paper_transmittance": 0.55,
   "source_distance_mm": 25,
   "diffusion_mm": 6,
   "comparison_photo_insert": false,

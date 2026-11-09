@@ -1,0 +1,179 @@
+[
+  {
+    "case": "kittens",
+    "source_sha256": "0455714780a14b0945e3c8aa70b7751c1b48d1b3899b98bbeb2df6be032fb4e6",
+    "white_policy": "optical_density_v1",
+    "cut_sheets": 8,
+    "geometry_status": "PASS",
+    "illumination": "Spatially constant warm emitter",
+    "photo_insert": false,
+    "overlap": {
+      "min_sheets": 1,
+      "colored_upper_bound": false,
+      "max_sheets": 8,
+      "bins": [
+        {
+          "sheet_count": 1,
+          "area_ratio": 0.13790010386176943,
+          "direct_transmission": 0.55
+        },
+        {
+          "sheet_count": 2,
+          "area_ratio": 0.313568123878765,
+          "direct_transmission": 0.30250000000000005
+        },
+        {
+          "sheet_count": 3,
+          "area_ratio": 0.11472004532149939,
+          "direct_transmission": 0.16637500000000005
+        },
+        {
+          "sheet_count": 4,
+          "area_ratio": 0.19575583042205646,
+          "direct_transmission": 0.09150625000000003
+        },
+        {
+          "sheet_count": 5,
+          "area_ratio": 0.10310641110376735,
+          "direct_transmission": 0.05032843750000002
+        },
+        {
+          "sheet_count": 6,
+          "area_ratio": 0.08653573789066188,
+          "direct_transmission": 0.027680640625000013
+        },
+        {
+          "sheet_count": 7,
+          "area_ratio": 0.01694835237465773,
+          "direct_transmission": 0.01522435234375001
+        },
+        {
+          "sheet_count": 8,
+          "area_ratio": 0.031465395146822776,
+          "direct_transmission": 0.008373393789062506
+        }
+      ],
+      "model": "normal-axis retained-sheet intersections; t^n excludes diffusion/ambient reflection"
+    },
+    "ideal_direct_transmission_ratio": 65.68423913353043,
+    "scope": "Normal-axis software model, before display/ambient terms; not measured cardstock or identity certification"
+  },
+  {
+    "case": "puppy",
+    "source_sha256": "5d2e300b09f554c61381cea57637caef813e86c091cf6e17576e74eb83332876",
+    "white_policy": "optical_density_v1",
+    "cut_sheets": 8,
+    "geometry_status": "PASS",
+    "illumination": "Spatially constant warm emitter",
+    "photo_insert": false,
+    "overlap": {
+      "min_sheets": 1,
+      "colored_upper_bound": false,
+      "max_sheets": 8,
+      "bins": [
+        {
+          "sheet_count": 1,
+          "area_ratio": 0.17748838665901143,
+          "direct_transmission": 0.55
+        },
+        {
+          "sheet_count": 2,
+          "area_ratio": 0.13025210084033614,
+          "direct_transmission": 0.30250000000000005
+        },
+        {
+          "sheet_count": 3,
+          "area_ratio": 0.2716738869460828,
+          "direct_transmission": 0.16637500000000005
+        },
+        {
+          "sheet_count": 4,
+          "area_ratio": 0.21767837569810533,
+          "direct_transmission": 0.09150625000000003
+        },
+        {
+          "sheet_count": 5,
+          "area_ratio": 0.10733858760895662,
+          "direct_transmission": 0.05032843750000002
+        },
+        {
+          "sheet_count": 6,
+          "area_ratio": 0.06012839918576126,
+          "direct_transmission": 0.027680640625000013
+        },
+        {
+          "sheet_count": 7,
+          "area_ratio": 0.01085651651965134,
+          "direct_transmission": 0.01522435234375001
+        },
+        {
+          "sheet_count": 8,
+          "area_ratio": 0.024583746542095098,
+          "direct_transmission": 0.008373393789062506
+        }
+      ],
+      "model": "normal-axis retained-sheet intersections; t^n excludes diffusion/ambient reflection"
+    },
+    "ideal_direct_transmission_ratio": 65.68423913353043,
+    "scope": "Normal-axis software model, before display/ambient terms; not measured cardstock or identity certification"
+  },
+  {
+    "case": "lizard",
+    "source_sha256": "2d28d901bdc3b9a71568bc9e7cf6452429ac2d0ad7a95bcfb40e29231417f698",
+    "white_policy": "optical_density_v1",
+    "cut_sheets": 8,
+    "geometry_status": "PASS",
+    "illumination": "Spatially constant warm emitter",
+    "photo_insert": false,
+    "overlap": {
+      "min_sheets": 1,
+      "colored_upper_bound": false,
+      "max_sheets": 8,
+      "bins": [
+        {
+          "sheet_count": 1,
+          "area_ratio": 0.08120501199680086,
+          "direct_transmission": 0.55
+        },
+        {
+          "sheet_count": 2,
+          "area_ratio": 0.08429752066115702,
+          "direct_transmission": 0.30250000000000005
+        },
+        {
+          "sheet_count": 3,
+          "area_ratio": 0.1656891495601173,
+          "direct_transmission": 0.16637500000000005
+        },
+        {
+          "sheet_count": 4,
+          "area_ratio": 0.2725406558251133,
+          "direct_transmission": 0.09150625000000003
+        },
+        {
+          "sheet_count": 5,
+          "area_ratio": 0.14214876033057852,
+          "direct_transmission": 0.05032843750000002
+        },
+        {
+          "sheet_count": 6,
+          "area_ratio": 0.2147960543854972,
+          "direct_transmission": 0.027680640625000013
+        },
+        {
+          "sheet_count": 7,
+          "area_ratio": 0.020474540122633965,
+          "direct_transmission": 0.01522435234375001
+        },
+        {
+          "sheet_count": 8,
+          "area_ratio": 0.01884830711810184,
+          "direct_transmission": 0.008373393789062506
+        }
+      ],
+      "model": "normal-axis retained-sheet intersections; t^n excludes diffusion/ambient reflection"
+    },
+    "ideal_direct_transmission_ratio": 65.68423913353043,
+    "scope": "Normal-axis software model, before display/ambient terms; not measured cardstock or identity certification"
+  }
+]

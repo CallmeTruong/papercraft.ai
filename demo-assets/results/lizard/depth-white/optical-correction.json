@@ -1,0 +1,26 @@
+{
+  "status": "PASS",
+  "seconds": 21.3,
+  "source_sha256": "2d28d901bdc3b9a71568bc9e7cf6452429ac2d0ad7a95bcfb40e29231417f698",
+  "width_mm": 360.0,
+  "layers": 8,
+  "colors": 18,
+  "manual_detail_boxes": [
+    [
+      0.54,
+      0.14,
+      0.62,
+      0.24
+    ],
+    [
+      0.66,
+      0.19,
+      0.78,
+      0.31
+    ]
+  ],
+  "reference_transmittance": 0.55,
+  "source": "uniform warm light; photo insert OFF",
+  "image_abstraction": "Same color-mode target and recorded perception; no new inference",
+  "spatial_depth_reconstruction": false
+}

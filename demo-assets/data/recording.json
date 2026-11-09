@@ -1,16 +1,359 @@
 {
-  "frames": 97,
-  "fps": 5,
-  "errors": [],
-  "portable_project_ui_import": "verified",
-  "source": "Real local browser interactions; only explanatory overlays added",
-  "photo_insert": "OFF except the explicitly labelled insert segment",
-  "encoded_frames": 45,
-  "gif_dimensions": [
-    1120,
-    770
+  "version": 4,
+  "capture_dimensions": [
+    1600,
+    1408
   ],
-  "presentation": "Actual interactions, camera orbit, held explanations, highlight overlays and presentation crossfades; dead time omitted",
-  "presentation_frames": 121,
-  "duration_seconds": 25.8
+  "caption_layout": "Dedicated opaque 128px header outside the app iframe; opacity-only text fades",
+  "layout_checks": [
+    {
+      "stage": "Multicolor",
+      "header_bottom": 128,
+      "app_top": 128,
+      "clear": true
+    },
+    {
+      "stage": "01-design-settings-annotated",
+      "header_bottom": 128,
+      "app_top": 128,
+      "clear": true
+    },
+    {
+      "stage": "One source. One artwork frame.",
+      "header_bottom": 128,
+      "app_top": 128,
+      "clear": true
+    },
+    {
+      "stage": "00-original-reference",
+      "header_bottom": 128,
+      "app_top": 128,
+      "clear": true
+    },
+    {
+      "stage": "00-cut-reference",
+      "header_bottom": 128,
+      "app_top": 128,
+      "clear": true
+    },
+    {
+      "stage": "Keep the important regions",
+      "header_bottom": 128,
+      "app_top": 128,
+      "clear": true
+    },
+    {
+      "stage": "02-detail-regions-annotated",
+      "header_bottom": 128,
+      "app_top": 128,
+      "clear": true
+    },
+    {
+      "stage": "Checked geometry",
+      "header_bottom": 128,
+      "app_top": 128,
+      "clear": true
+    },
+    {
+      "stage": "03-validation-annotated",
+      "header_bottom": 128,
+      "app_top": 128,
+      "clear": true
+    },
+    {
+      "stage": "Inspect what you will cut",
+      "header_bottom": 128,
+      "app_top": 128,
+      "clear": true
+    },
+    {
+      "stage": "04-cut-waste-annotated",
+      "header_bottom": 128,
+      "app_top": 128,
+      "clear": true
+    },
+    {
+      "stage": "See the paper in depth",
+      "header_bottom": 128,
+      "app_top": 128,
+      "clear": true
+    },
+    {
+      "stage": "05-assembled-annotated",
+      "header_bottom": 128,
+      "app_top": 128,
+      "clear": true
+    },
+    {
+      "stage": "06-exploded-annotated",
+      "header_bottom": 128,
+      "app_top": 128,
+      "clear": true
+    },
+    {
+      "stage": "Light comes through the layers",
+      "header_bottom": 128,
+      "app_top": 128,
+      "clear": true
+    },
+    {
+      "stage": "Warm light",
+      "header_bottom": 128,
+      "app_top": 128,
+      "clear": true
+    },
+    {
+      "stage": "07-light-controls-annotated",
+      "header_bottom": 128,
+      "app_top": 128,
+      "clear": true
+    },
+    {
+      "stage": "Colored light",
+      "header_bottom": 128,
+      "app_top": 128,
+      "clear": true
+    },
+    {
+      "stage": "00-colored-lighting",
+      "header_bottom": 128,
+      "app_top": 128,
+      "clear": true
+    },
+    {
+      "stage": "An optional original-image insert",
+      "header_bottom": 128,
+      "app_top": 128,
+      "clear": true
+    },
+    {
+      "stage": "08-photo-insert-annotated",
+      "header_bottom": 128,
+      "app_top": 128,
+      "clear": true
+    },
+    {
+      "stage": "Export the checked geometry",
+      "header_bottom": 128,
+      "app_top": 128,
+      "clear": true
+    },
+    {
+      "stage": "09-export-annotated",
+      "header_bottom": 128,
+      "app_top": 128,
+      "clear": true
+    }
+  ],
+  "mode_actions": [
+    {
+      "control": "Design type",
+      "value": "Multicolor",
+      "at_seconds": 2.13
+    },
+    {
+      "control": "Design type",
+      "value": "Depth Scene",
+      "at_seconds": 26.246
+    },
+    {
+      "control": "Depth Scene paper",
+      "value": "multicolor",
+      "at_seconds": 28.301
+    },
+    {
+      "control": "Depth Scene paper",
+      "value": "white",
+      "at_seconds": 50.735
+    }
+  ],
+  "mode_results": "Prepared real workflow results, preloaded via API before recording; native mode/paper clicks followed by labelled result transitions. No generation-speed claim.",
+  "open_project_actions_in_video": 0,
+  "source": "Continuous Playwright browser video; real UI actions and animated pointer/caption overlays",
+  "raw_video": ".papercraft\\demo-live\\1794246694735\\source.webm",
+  "wall_duration_seconds": 93.984,
+  "trim_start_seconds": 7.2509999999999994,
+  "trim_end_seconds": 93.568,
+  "portable_project_ui_import": "Previously verified; not an action in this mode-focused take",
+  "errors": [],
+  "integrity": [
+    {
+      "key": "lizard/multicolor",
+      "source_sha256": "2d28d901bdc3b9a71568bc9e7cf6452429ac2d0ad7a95bcfb40e29231417f698",
+      "fingerprint": "03ec3f3a8c01cf390cac9e20cb5b60a01f537929b719556eda4dea256c1c46fc",
+      "project_id": "f23c83cfe14c4dad9995e9cee8943b13"
+    },
+    {
+      "key": "lizard/depth-color",
+      "source_sha256": "2d28d901bdc3b9a71568bc9e7cf6452429ac2d0ad7a95bcfb40e29231417f698",
+      "fingerprint": "5c8a3d6306f7e7ad1bac69e640681b0916c59952ecfdc3dbf185ffcda844075c",
+      "project_id": "5e4f1aa9991649b48a7dd9a5c0aac297"
+    },
+    {
+      "key": "lizard/depth-white",
+      "source_sha256": "2d28d901bdc3b9a71568bc9e7cf6452429ac2d0ad7a95bcfb40e29231417f698",
+      "fingerprint": "668cdb6f473131a9f7a72b1fec2f2195c2f93e4d77a954c3d909271f12d38c41",
+      "project_id": "1bf7c6519ad04b85a0ebcf45b3a05465"
+    }
+  ],
+  "events": [
+    {
+      "title": "Multicolor",
+      "at_seconds": 0.001
+    },
+    {
+      "title": "One source. One artwork frame.",
+      "at_seconds": 4.243
+    },
+    {
+      "title": "Keep the important regions",
+      "at_seconds": 12.271
+    },
+    {
+      "title": "Checked geometry",
+      "at_seconds": 16.505
+    },
+    {
+      "title": "Inspect what you will cut",
+      "at_seconds": 18.471
+    },
+    {
+      "title": "See the paper in depth",
+      "at_seconds": 23.727
+    },
+    {
+      "title": "Light comes through the layers",
+      "at_seconds": 46.934
+    },
+    {
+      "title": "Warm light",
+      "at_seconds": 58.863
+    },
+    {
+      "title": "Colored light",
+      "at_seconds": 61.85
+    },
+    {
+      "title": "An optional original-image insert",
+      "at_seconds": 72.195
+    },
+    {
+      "title": "Export the checked geometry",
+      "at_seconds": 81.418
+    }
+  ],
+  "waits": [
+    {
+      "start_seconds": 29.001,
+      "end_seconds": 31.146,
+      "reason": "Show prepared mode result (generation wait omitted)"
+    },
+    {
+      "start_seconds": 35.133,
+      "end_seconds": 39.285,
+      "reason": "Assembly view"
+    },
+    {
+      "start_seconds": 42.706,
+      "end_seconds": 45.323,
+      "reason": "Exploded view"
+    },
+    {
+      "start_seconds": 51.447,
+      "end_seconds": 52.334,
+      "reason": "Show prepared mode result (generation wait omitted)"
+    },
+    {
+      "start_seconds": 54.6,
+      "end_seconds": 57.401,
+      "reason": "Light preview"
+    },
+    {
+      "start_seconds": 63.903,
+      "end_seconds": 66.533,
+      "reason": "Update light fields"
+    },
+    {
+      "start_seconds": 69.296,
+      "end_seconds": 71.683,
+      "reason": "Update light fields"
+    },
+    {
+      "start_seconds": 74.072,
+      "end_seconds": 76.3,
+      "reason": "Enable optional insert"
+    },
+    {
+      "start_seconds": 78.751,
+      "end_seconds": 81.418,
+      "reason": "Disable optional insert"
+    }
+  ],
+  "pre_roll_seconds": 0.15,
+  "photo_insert": "OFF except the explicitly labelled optional insert segment",
+  "cut_ready_download": "Previously verified; this take shows the export controls without adding export wait time",
+  "presentation": "One continuous source take. Output may remove only logged loading intervals, including explicitly labelled transitions to prepared mode results; no still-image chapters, screen flashes, frame reordering or image morphs.",
+  "source_fps": 25.0,
+  "encoded_fps": 30.0,
+  "video_dimensions": [
+    1600,
+    1408
+  ],
+  "duration_seconds": 62.83,
+  "encoded_frames": 1885,
+  "compositor_clock_offset_seconds": 2.4639999999999986,
+  "source_trim_seconds": [
+    4.787000000000001,
+    91.104
+  ],
+  "retained_segments_seconds": [
+    [
+      0.0,
+      29.131
+    ],
+    [
+      31.375999999999998,
+      35.263
+    ],
+    [
+      39.51499999999999,
+      42.836
+    ],
+    [
+      45.553,
+      51.577
+    ],
+    [
+      52.564,
+      54.73
+    ],
+    [
+      57.631,
+      64.033
+    ],
+    [
+      66.763,
+      69.42600000000002
+    ],
+    [
+      71.91300000000001,
+      74.20200000000001
+    ],
+    [
+      76.53,
+      78.88100000000001
+    ],
+    [
+      81.64800000000001,
+      86.317
+    ]
+  ],
+  "removed_loading_seconds": 23.41399999999998,
+  "edits": "Only logged loading intervals removed as matched action/result cuts. All cursor motion and action order retained; no image morphs, fades or screenshot chapters.",
+  "gif_frames": 1005,
+  "gif_duration_seconds": 50.25,
+  "gif_speed": 1.25,
+  "gif_loop": false,
+  "mp4_bytes": 4816621,
+  "gif_bytes": 10650529
 }

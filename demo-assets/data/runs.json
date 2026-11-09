@@ -1918,7 +1918,45 @@
         ],
         "source_sha256": "0455714780a14b0945e3c8aa70b7751c1b48d1b3899b98bbeb2df6be032fb4e6"
       }
-    ]
+    ],
+    "optical_correction": {
+      "status": "PASS",
+      "seconds": 13.1,
+      "source_sha256": "0455714780a14b0945e3c8aa70b7751c1b48d1b3899b98bbeb2df6be032fb4e6",
+      "width_mm": 300.0,
+      "layers": 8,
+      "colors": 16,
+      "manual_detail_boxes": [
+        [
+          0.52,
+          0.19,
+          0.59,
+          0.26
+        ],
+        [
+          0.6,
+          0.39,
+          0.67,
+          0.46
+        ],
+        [
+          0.75,
+          0.38,
+          0.81,
+          0.45
+        ],
+        [
+          0.71,
+          0.44,
+          0.77,
+          0.5
+        ]
+      ],
+      "reference_transmittance": 0.55,
+      "source": "uniform warm light; photo insert OFF",
+      "image_abstraction": "Same color-mode target and recorded perception; no new inference",
+      "spatial_depth_reconstruction": false
+    }
   },
   {
     "case": "puppy",
@@ -4011,7 +4049,45 @@
         ],
         "source_sha256": "5d2e300b09f554c61381cea57637caef813e86c091cf6e17576e74eb83332876"
       }
-    ]
+    ],
+    "optical_correction": {
+      "status": "PASS",
+      "seconds": 8.43,
+      "source_sha256": "5d2e300b09f554c61381cea57637caef813e86c091cf6e17576e74eb83332876",
+      "width_mm": 300.0,
+      "layers": 8,
+      "colors": 16,
+      "manual_detail_boxes": [
+        [
+          0.43,
+          0.34,
+          0.5,
+          0.43
+        ],
+        [
+          0.6,
+          0.45,
+          0.67,
+          0.53
+        ],
+        [
+          0.43,
+          0.47,
+          0.54,
+          0.6
+        ],
+        [
+          0.39,
+          0.65,
+          0.52,
+          0.77
+        ]
+      ],
+      "reference_transmittance": 0.55,
+      "source": "uniform warm light; photo insert OFF",
+      "image_abstraction": "Same color-mode target and recorded perception; no new inference",
+      "spatial_depth_reconstruction": false
+    }
   },
   {
     "case": "lizard",
@@ -5959,6 +6035,32 @@
         ],
         "source_sha256": "2d28d901bdc3b9a71568bc9e7cf6452429ac2d0ad7a95bcfb40e29231417f698"
       }
-    ]
+    ],
+    "optical_correction": {
+      "status": "PASS",
+      "seconds": 21.3,
+      "source_sha256": "2d28d901bdc3b9a71568bc9e7cf6452429ac2d0ad7a95bcfb40e29231417f698",
+      "width_mm": 360.0,
+      "layers": 8,
+      "colors": 18,
+      "manual_detail_boxes": [
+        [
+          0.54,
+          0.14,
+          0.62,
+          0.24
+        ],
+        [
+          0.66,
+          0.19,
+          0.78,
+          0.31
+        ]
+      ],
+      "reference_transmittance": 0.55,
+      "source": "uniform warm light; photo insert OFF",
+      "image_abstraction": "Same color-mode target and recorded perception; no new inference",
+      "spatial_depth_reconstruction": false
+    }
   }
 ]
