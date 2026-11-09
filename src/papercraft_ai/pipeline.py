@@ -51,6 +51,7 @@ def cached_abstraction(source, config, perception=None):
             "perception": perception if perception is not None else cache_identity(config.ai),
             **({"depth_family": settings(config).family} if config.ai and config.ai.depth else {}),
             "source": hashlib.sha256(source).hexdigest(),
+            "detail_boxes": config.detail_boxes,
             "physical_abstraction": [
                 config.manufacturing_width_mm,
                 config.width_mm,
@@ -132,6 +133,9 @@ class Design:
             {
                 "config": self.config.model_dump(
                     exclude=({"ai"} if self.config.ai is None else set())
+                    | ({"depth_paper"} if self.config.depth_paper is None else set())
+                    | ({"detail_boxes"} if not self.config.detail_boxes else set())
+                    | ({"detail_policy"} if self.config.detail_policy == "prefer" else set())
                     | (
                         {"manufacturing_width_mm"}
                         if self.config.manufacturing_width_mm is None
@@ -563,6 +567,7 @@ def generate_design(
         and scene_plan is None
         and wf.family in ("multicolor", "depth_scene")
         and wf.lighting == "ambient"
+        and not (wf.family == "depth_scene" and config.depth_paper == "white")
         and (wf.style == "colorblock" or (wf.family == "depth_scene" and depths is None))
     )
     if not eligible:
@@ -706,6 +711,8 @@ def _generate_candidate(
                 if config.manufacturing_width_mm is not None
                 else 0
             )
+            if config.detail_boxes:
+                contour_tolerance = min(contour_tolerance, profile.cut_tolerance_mm)
             geometries.append(
                 material_from_mask(layer.mask, frame, abstraction_tolerance_mm=contour_tolerance)
             )
@@ -715,6 +722,9 @@ def _generate_candidate(
         config, profile, abstraction, layers, geometries, config.width_mm, height, source
     )
     design.scene_plan = scene_plan
+    if wf.family == "depth_scene" and config.depth_paper == "white":
+        for layer in design.layers:
+            layer.color = "#ffffff"
     from .ai.features import feature_constraints
 
     design.feature_constraints = feature_constraints(design)
@@ -746,7 +756,10 @@ def _generate_candidate(
 
         before_composite = design.composite()
         occluded = Polygon()
-        hidden_support = wf.lighting == "ambient" and wf.family in ("multicolor", "depth_scene")
+        hidden_support = wf.lighting == "ambient" and (
+            wf.family == "multicolor"
+            or (wf.family == "depth_scene" and config.depth_paper != "white")
+        )
         for index, (layer, geometry) in enumerate(zip(design.layers, design.geometries)):
             progress(f"fabricate:{layer.id}", 0.61 + 0.27 * index / len(design.layers))
             scene_layer = scene_index(design.scene_plan, layer.id)

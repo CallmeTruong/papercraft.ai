@@ -55,6 +55,18 @@ class DesignConfig(BaseModel):
     ai: AISettings | None = None
     # Persisted physical abstraction scale; absent on legacy projects.
     manufacturing_width_mm: float | None = Field(default=None, gt=0, le=2000)
+    depth_paper: Literal["white", "multicolor"] | None = None
+    detail_policy: Literal["prefer", "strict"] = "prefer"
+    detail_boxes: list[tuple[float, float, float, float]] = Field(
+        default_factory=list, max_length=16
+    )
+
+    @field_validator("detail_boxes")
+    @classmethod
+    def valid_detail_boxes(cls, boxes):
+        if any(not (0 <= x0 < x1 <= 1 and 0 <= y0 < y1 <= 1) for x0, y0, x1, y1 in boxes):
+            raise ValueError("Detail boxes must be normalized rectangles on the fitted artwork")
+        return boxes
 
     @field_validator("backing")
     @classmethod
@@ -114,7 +126,13 @@ class SnapshotLayer(BaseModel):
     region_ids: list[int]
     attachment: str | None
     depth_source: (
-        Literal["manual", "heuristic_vertical_position", "model_relative_depth", "color_occlusion"]
+        Literal[
+            "manual",
+            "heuristic_vertical_position",
+            "model_relative_depth",
+            "color_occlusion",
+            "tonal_relief",
+        ]
         | None
     )
     geometry: dict

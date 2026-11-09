@@ -61,7 +61,11 @@ def construct_layers(
     groups = []
     color_depth = (
         settings(config).family == "depth_scene"
-        and settings(config).lighting == "ambient"
+        and (
+            config.depth_paper == "multicolor"
+            or (config.depth_paper is None and settings(config).lighting == "ambient")
+        )
+        and config.depth_paper != "white"
         and config.manufacturing_width_mm is not None
         and depths is None
     )
@@ -104,13 +108,24 @@ def construct_layers(
     else:
         count = config.layers
         model_depths = None
-        if depths is None:
+        if depths is None and config.depth_paper == "white":
+            # Ordered tone silhouettes preserve internal shapes in neutral paper;
+            # this is explicitly tonal relief, not recovered object depth.
+            brightness = result.palette.astype(float) @ np.array([0.2126, 0.7152, 0.0722])
+            ranks = {int(c): i for i, c in enumerate(np.argsort(brightness, kind="stable"))}
+            model_depths = {
+                r["id"]: round(ranks[r["color_index"]] * (count - 1) / max(1, len(ranks) - 1))
+                for r in result.region_info
+            }
+        elif depths is None:
             from .ai.perception import propose_depths
 
             model_depths = propose_depths(result, count)
         if model_depths is not None:
             depths = model_depths
-            depth_source = "model_relative_depth"
+            depth_source = (
+                "tonal_relief" if config.depth_paper == "white" else "model_relative_depth"
+            )
         elif depths is None:
             # Explicitly labeled heuristic, not a claimed physical depth estimate.
             depths = {}
@@ -130,8 +145,31 @@ def construct_layers(
             depth_source = "manual"
         for depth in sorted(set(depths.values())):
             ids = sorted(k for k, value in depths.items() if value == depth)
-            groups.append((np.isin(result.regions, ids), ids, "#f4eedf", depth_source))
-    if config.manufacturing_width_mm is not None and settings(config).lighting == "ambient":
+            if config.depth_paper == "multicolor":
+                for color in sorted({result.region_info[i]["color_index"] for i in ids}):
+                    selected = [i for i in ids if result.region_info[i]["color_index"] == color]
+                    groups.append(
+                        (
+                            np.isin(result.regions, selected),
+                            selected,
+                            hex_color(result.palette[color]),
+                            depth_source,
+                        )
+                    )
+                continue
+            groups.append(
+                (
+                    np.isin(result.regions, ids),
+                    ids,
+                    "#ffffff" if config.depth_paper == "white" else "#f4eedf",
+                    depth_source,
+                )
+            )
+    if (
+        config.manufacturing_width_mm is not None
+        and settings(config).lighting == "ambient"
+        and (settings(config).family != "depth_scene" or color_depth)
+    ):
         # Put frame-rooted portions in front, and postpone isolated same-color
         # details behind intervening colors. E.g. green leaves and green irises
         # need not share one exposed support tree across the face.

@@ -32,7 +32,7 @@ def feature_constraints(design):
                     "feature_id": feature,
                     "roi": mapping(roi),
                     "retained": mapping(unary_union(polygon_parts(geometry.intersection(roi)))),
-                    "max_change": design.config.ai.max_feature_change,
+                    "max_change": design.config.ai.max_feature_change if design.config.ai else 0.10,
                 }
             )
     return constraints

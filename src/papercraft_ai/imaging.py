@@ -67,9 +67,12 @@ def nearest_colors(lab, centers):
 
 
 def quantize(image, config, features=None):
+    original = image
     if config.manufacturing_width_mm is not None:
         # Flatten texture before palette fitting; preserve the original for quality metrics.
         image = cv2.pyrMeanShiftFiltering(image, sp=5 + 5 * (1 - config.detail), sr=25)
+        if config.detail_boxes and features is not None and features.any():
+            image[features] = original[features]
     # A tiny spatial kernel avoids erasing one-pixel details at detail=1.
     smooth = (
         image.copy()
@@ -150,7 +153,9 @@ def adjacency_graph(regions):
     return {key: sorted(value) for key, value in adjacency.items()}
 
 
-def merge_small_regions(labels, palette, detail, superpixels=None, perception=None):
+def merge_small_regions(
+    labels, palette, detail, superpixels=None, perception=None, protected_features=None
+):
     labels = labels.copy()
     min_area = max(1, int(labels.size * 0.002 * (1 - detail) ** 2))
     if min_area <= 1:
@@ -167,6 +172,8 @@ def merge_small_regions(labels, palette, detail, superpixels=None, perception=No
         sx = slice(max(0, sx.start - 1), min(labels.shape[1], sx.stop + 1))
         local = labels[sy, sx]
         mask = regions[sy, sx] == region_id
+        if protected_features is not None and np.any(protected_features[sy, sx] & mask):
+            continue
         if perception is not None and np.any(perception.features[sy, sx] & mask):
             continue
         border = ndi.binary_dilation(mask) & ~mask
@@ -247,15 +254,16 @@ def abstract_image(
                     },
                 ],
             )
-    palette, color_labels = quantize(
-        original, config, perception.features if perception is not None else None
-    )
-    if perception is not None and perception.features.any():
+    from .fabrication.abstraction import detail_mask
+
+    features = detail_mask(original.shape[:2], config, perception)
+    palette, color_labels = quantize(original, config, features)
+    if features.any():
         # Avoid bilateral smoothing of protected features; retain the same finite paper palette.
         raw_lab = cv2.cvtColor(original.astype(np.float32) / 255, cv2.COLOR_RGB2LAB)
         centers = cv2.cvtColor(palette[None].astype(np.float32) / 255, cv2.COLOR_RGB2LAB)[0]
         raw_labels = nearest_colors(raw_lab, centers)
-        color_labels[perception.features] = raw_labels[perception.features]
+        color_labels[features] = raw_labels[features]
     h, w = original.shape[:2]
     superpixels = slic(
         original,
@@ -268,7 +276,7 @@ def abstract_image(
     # Merge on the region-adjacency graph, using SLIC continuity as a spatial prior.
     # Keep quantized boundaries rather than replacing a whole superpixel with one color.
     color_labels = merge_small_regions(
-        color_labels, palette, config.detail, superpixels, perception
+        color_labels, palette, config.detail, superpixels, perception, features
     )
     from .fabrication.abstraction import manufacturable_labels
 

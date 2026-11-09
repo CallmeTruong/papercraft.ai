@@ -27,7 +27,9 @@ class SourceLightPlan(BaseModel):
     model_config = ConfigDict(extra="forbid", frozen=True, allow_inf_nan=False)
     mode: Literal["source_color_filter", "uniform_transmission"] = "source_color_filter"
     source_grid_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
-    paper: Literal["white translucent paper"] = "white translucent paper"
+    paper: Literal["white translucent paper", "colored translucent paper"] = (
+        "white translucent paper"
+    )
     paper_transmittance_assumption: float = Field(gt=0, le=1)
     diffusion_mm_assumption: float = Field(ge=0, le=30)
     diffuser: Literal["color-printed translucent diffuser", "neutral translucent diffuser"] = (
@@ -70,7 +72,9 @@ def lighting_plan(design, *, transmittance=0.55, source_distance_mm=25, diffusio
             "spread_angle_degrees": 35,
             "placement_plane": "effective color-source plane behind rear diffuser",
             "source_grid_sha256": design.abstraction.source_hash,
-            "paper": "white translucent paper",
+            "paper": "colored translucent paper"
+            if design.config.depth_paper == "multicolor"
+            else "white translucent paper",
             "paper_transmittance_assumption": transmittance,
             "diffusion_mm_assumption": diffusion_mm,
             "diffuser": "neutral translucent diffuser",
@@ -104,6 +108,9 @@ def resolved_light_plan(design):
 def uniform_lighting_plan(design, *, transmittance=0.55):
     return SourceLightPlan(
         mode="uniform_transmission",
+        paper="colored translucent paper"
+        if design.config.depth_paper == "multicolor"
+        else "white translucent paper",
         planning_version=2,
         source_distance_mm=25.0,
         spread_angle_degrees=35.0,
@@ -138,6 +145,7 @@ def overlap_profile(design, *, transmittance=0.55, visible=None):
     counts, areas = np.unique(density[window], return_counts=True)
     return {
         "min_sheets": int(counts.min()),
+        "colored_upper_bound": design.config.depth_paper == "multicolor",
         "max_sheets": int(counts.max()),
         "bins": [
             {
@@ -159,6 +167,7 @@ def full_sheet_source(
     source_distance_mm=None,
     diffusion_mm=None,
     emitter_plane=False,
+    linear_output=False,
 ):
     # high_resolution controls the rendered zone field size, never photographic sampling.
     plan = resolved_light_plan(design)
@@ -198,8 +207,8 @@ def full_sheet_source(
         & (ys[:, None] >= border)
         & (ys[:, None] < h - border)
     )
-    result = encode(field)
-    result[~inside] = 255
+    result = np.clip(field, 0, 1) if linear_output else encode(field)
+    result[~inside] = 1 if linear_output else 255
     return result
 
 
@@ -211,9 +220,12 @@ def source_light_fields(
     source_distance_mm=None,
     diffusion_mm=None,
     uniform_color=None,
+    source_gain=1.0,
 ):
     if not 0 < transmittance <= 1:
         raise DesignError("Paper transmittance must be within (0,1]")
+    if not math.isfinite(source_gain) or not 0.01 <= source_gain <= 4096:
+        raise DesignError("Source gain must be within0.01..4096")
     ids = {layer.id for layer in design.layers}
     active = ids if visible is None else set(visible)
     if not active <= ids:
@@ -232,26 +244,37 @@ def source_light_fields(
         )
         source = np.empty((*shape, 3), np.uint8)
         source[:] = rgb(DesignConfig.color(uniform_color))
+        linear = linear_rgb(source)
     else:
-        source = full_sheet_source(
+        linear = full_sheet_source(
             design,
             max_side=min(design.config.max_side, 512),
             source_distance_mm=source_distance_mm,
             diffusion_mm=diffusion_mm,
+            linear_output=True,
         )
-    linear = linear_rgb(source)
-    fields = {"diffuser": source}
+    fields = {"diffuser": encode(linear * source_gain)}
     for layer, geometry in reversed(list(zip(design.layers, design.geometries))):
         # Spatial propagation between sheets, followed by local paper attenuation.
-        sigma_y = max(0, layer.spacing_mm) * 0.18 * source.shape[0] / design.height_mm
-        sigma_x = max(0, layer.spacing_mm) * 0.18 * source.shape[1] / design.width_mm
+        sigma_y = max(0, layer.spacing_mm) * 0.18 * linear.shape[0] / design.height_mm
+        sigma_x = max(0, layer.spacing_mm) * 0.18 * linear.shape[1] / design.width_mm
         if sigma_x or sigma_y:
             linear = gaussian_filter(linear, sigma=(sigma_y, sigma_x, 0))
         if layer.id not in active:
             continue
         mask = geometry_to_mask(geometry, linear.shape[:2], design.width_mm, design.height_mm)
-        linear *= np.where(mask, transmittance, 1)[..., None]
-        fields[layer.id] = encode(linear)
+        if design.config.depth_paper == "multicolor":
+            from ..models import rgb
+
+            # Color increases optical density; it is not a fixed brightness
+            # multiplier that survives even at100% nominal transmission.
+            density = 1 + 2 * (1 - linear_rgb(np.asarray(rgb(layer.color), dtype=np.uint8)))
+            linear *= np.where(mask[..., None], transmittance**density, 1)
+        else:
+            linear *= np.where(mask, transmittance, 1)[..., None]
+        # Apply source power before8-bit encoding. Multiplying an already black
+        # texture in the renderer cannot recover weak transmitted light.
+        fields[layer.id] = encode(linear * source_gain)
     return fields
 
 
@@ -263,13 +286,15 @@ def cached_light_fields(
     source_distance_mm=None,
     diffusion_mm=None,
     uniform_color=None,
+    source_gain=1.0,
 ):
     key = (
-        "light-zones-v2",
+        "light-zones-v3",
         design.fingerprint(),
         source_distance_mm,
         diffusion_mm,
         uniform_color,
+        source_gain,
         transmittance,
         tuple(sorted(visible)) if visible is not None else None,
     )
@@ -282,6 +307,7 @@ def cached_light_fields(
                 source_distance_mm=source_distance_mm,
                 diffusion_mm=diffusion_mm,
                 uniform_color=uniform_color,
+                source_gain=source_gain,
             )
         _CACHE.move_to_end(key)
         while len(_CACHE) > 3:

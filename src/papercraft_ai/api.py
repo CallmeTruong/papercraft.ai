@@ -77,7 +77,11 @@ def create_app(storage: Path | str = ".papercraft"):
 
     @app.get("/api/capabilities")
     def supported_capabilities():
-        return capabilities()
+        return {
+            **capabilities(),
+            "config_fields": sorted(DesignConfig.model_fields),
+            "light_preview_version": 3,
+        }
 
     @app.get("/api/models")
     def model_status():
@@ -419,6 +423,7 @@ def create_app(storage: Path | str = ".papercraft"):
         source_distance_mm: float | None = None,
         diffusion_mm: float | None = None,
         uniform_color: str | None = None,
+        source_gain: float = 1.0,
     ):
         project = get_project(project_id)
         if revision_id:
@@ -435,6 +440,7 @@ def create_app(storage: Path | str = ".papercraft"):
             source_distance_mm=source_distance_mm,
             diffusion_mm=diffusion_mm,
             uniform_color=uniform_color,
+            source_gain=source_gain,
         )
         if layer_id not in fields:
             raise DesignError("Unknown or hidden lighting layer")
