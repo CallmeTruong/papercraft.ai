@@ -42,8 +42,6 @@ cd ..
 uv run papercraft-ai serve
 ```
 
-Open [the design studio](http://127.0.0.1:8000).
-
 ## Create a design
 
 1. **Upload an image.** The initial design starts automatically.
